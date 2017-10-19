@@ -2,5 +2,6 @@
 
 rm -rf public
 hugo
-aws s3 cp ./public s3://www.notaboutcode.com/ --recursive
 
+export AWS_PROFILE=notaboutcode
+aws s3 cp ./public s3://www.notaboutcode.com/ --recursive
