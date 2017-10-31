@@ -9,11 +9,13 @@ categories: ["Scalability"]
 
 
 
-![Photo by Jake Hills, from Unsplash.com](/img/covers/career-01.jpg)
+![Photo by Denys Nevozhai, from Unsplash.com](/img/covers/traffic-01.jpg)
 
 ใครที่เคยใช้ Load Balancer (LB) คงจะเคยได้ยินคำว่า Sticky Session (หรือ Session Affinity) กันมาบ้าง
 
 ไอเดียคือ หากเรามีเซอร์เวอร์ 3 ตัว ชื่อว่า S1, S2, และ S3 วางอยู่ข้างหลัง LB  แล้วมีผู้ใช้ส่ง Request เข้ามายังเว็บเรา
+
+{{% imgcenter src="/img/diagrams/loadbalancer.png" caption="Load Balancer with 3 servers" %}}
 
 ในครั้งแรก Request อาจถูกส่งไปให้ S1 แต่พอผู้ใช้ไปหน้าถัดไป หรือดึงข้อมูลครั้งถัดๆไป LB อาจส่ง Request นั้นไปยัง S2 หรือ S3 แทน
 
@@ -23,7 +25,7 @@ categories: ["Scalability"]
 
 <!--more-->
 
-# Sticky Session ทำงานอย่างไร
+# การทำงานของ Sticky Session 
 
 สมมติว่าเราเป็น LB เราจะรู้ได้อย่างไรว่า Request นี้มาจากผู้ใช้คนไหน?
 
