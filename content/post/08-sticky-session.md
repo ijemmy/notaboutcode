@@ -2,7 +2,7 @@
 title: "ปัญหาของ Sticky Session"
 date: 2017-10-24T12:04:02+07:00
 lastmod: 2017-10-24T12:04:02+07:00
-draft: false
+draft: true
 tags: ["scalability", "loadbalancer", "sticky session", "design"]
 categories: ["Scalability"]
 ---
