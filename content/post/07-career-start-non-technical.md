@@ -7,7 +7,7 @@ tags: ["career", "learning"]
 categories: ["Career"]
 ---
 
-![Photo by Nick Morris, from Unsplash.com](/img/covers/spiral-stairs-01.jpg)
+![Photo by Olu Eletu, from Unsplash.com](/img/covers/career-02.jpg)
 
 ใน[ภาคแรก]({{< relref "post/06-career-start.md" >}})เราคุยกันในเรื่องของ Technical Skills ทีเป็นพื้นฐานไว้ใช้ในระยะยาว
 
