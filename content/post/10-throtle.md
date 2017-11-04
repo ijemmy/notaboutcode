@@ -3,7 +3,7 @@ title: "ปกป้องเซอร์วิซด้วย Throttling"
 date: 2017-11-10T12:04:02+07:00
 lastmod: 2017-11-10T12:04:02+07:00
 draft: true
-tags: ["reliability", "design", "bulkhead"]
+tags: ["reliability", "design", "throttling", "rate limit"]
 categories: ["reliability"]
 ---
 
