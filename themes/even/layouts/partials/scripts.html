@@ -26,9 +26,24 @@
 {{- end }}
 
 <!-- Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{- .Site.GoogleAnalytics -}}"></script>
 {{- if .Site.GoogleAnalytics -}}
-  {{ template "_internal/google_analytics_async.html" . }}
+  <script>
+    var host = window.location.hostname;
+    if(host !== "localhost"){
+      var tag ={{- .Site.GoogleAnalytics -}};
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', tag);
+    }else{
+      console.log("We are in localhost. So Google Analytic is not initialized.");
+    }
+  </script>
+
 {{- end -}}
+
+
 
 {{- with .Site.Params.baidu_analytics -}}
 <script id="baidu_analytics">
