@@ -68,11 +68,6 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
 
   contentCopyright = '<a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a>'
 
-  changyanAppid = ""        # Changyan app id             # 畅言
-  changyanAppkey = ""       # Changyan app key
-  baidu_push = false        # baidu push                  # 百度
-  baidu_analytics = ""      # Baidu Analytics
-  baidu_verification = ""   # Baidu Verification
   google_verification = ""  # Google_Verification         # 谷歌
 
   customCssFiles = ['/css/custom.css']
