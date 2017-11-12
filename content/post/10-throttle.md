@@ -11,7 +11,6 @@ categories: ["reliability"]
  ![Photo by Ksenia Kudelkina, from Unsplash.com](/img/covers/limit-01.jpg)
 
 
-
 ลองนึกภาพว่าเรามีระบบที่ถูกออกแบบเป็น Service-Oriented Architecture (SOA)
 
 ในบรรดาเซอร์วิซทั้งหมด จะมีบางเซอร์วิซทีเป็น Dependency ของเซอร์วิซอื่นๆ ผมจะเรียกเซอร์วิซนี้ว่าเซอร์วิซ A
