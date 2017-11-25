@@ -2,7 +2,7 @@
 title: "ปัญหาในการสัมภาษณ์งานโปรแกรมเมอร์"
 date: 2017-11-18T12:04:02+07:00
 lastmod: 2017-11-18T12:04:02+07:00
-draft: true
+draft: false
 tags: ["interview", "recruitment", "process", "pitfalls"]
 categories: ["leadership"]
 ---
