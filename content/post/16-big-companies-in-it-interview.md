@@ -9,7 +9,7 @@ categories: ["career"]
 
  ![Photo by Alejandro Escamilla on Unsplash](/img/covers/meeting-02.jpg)
 
-โอเคครับ
+จะได้เขียนไหมเนี่ย
 <!--more-->
 
 # ทำไมถึงเขียนบทความนี้
