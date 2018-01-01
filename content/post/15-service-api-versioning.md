@@ -1,7 +1,7 @@
 ---
 title: "การออกแบบ Service API ให้ Backward-Compatible"
 date: 2017-12-15T12:04:02+07:00
-lastmod: 2017-15-06T12:04:02+07:00
+lastmod: 2017-12-15T12:04:02+07:00
 draft: false
 tags: ["api", "design", "web service"]
 categories: ["design"]
