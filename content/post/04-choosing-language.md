@@ -4,7 +4,7 @@ date: 2017-10-13T12:04:02+07:00
 lastmod: 2017-10-13T12:04:02+07:00
 draft: false
 tags: ["Language"]
-categories: ["Technical Leadership"]
+categories: ["leadership"]
 ---
 
 ![Photo by Nick Morris, from Unsplash.com](/img/covers/new-project-01.jpg)

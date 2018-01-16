@@ -4,7 +4,7 @@ date: 2017-11-02T12:04:02+07:00
 lastmod: 2017-11-02T12:04:02+07:00
 draft: false
 tags: ["scalability", "loadbalancer", "sticky session", "design"]
-categories: ["Scalability"]
+categories: ["design"]
 ---
 
 
