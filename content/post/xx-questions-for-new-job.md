@@ -2,7 +2,7 @@
 title: "มีคำถามอะไรไหมครับ?"
 date: 2018-01-28T12:04:02+07:00
 lastmod: 2018-01-28T12:04:02+07:00
-draft: false
+draft: true
 tags: ["career", "personal development"]
 categories: ["Career"]
 ---
