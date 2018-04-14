@@ -25,3 +25,86 @@ Backend version| 1.3 | 1.2 | 1.1
 อันนี้เป็นปัญหาที่ผมคิดไม่ตกอยู่ เพราะดูแล้วคงจะเลี่ยงการทำให้ Frontend เป็น Backward-Compatible ไม่ได้
 
 หากจะเลี่ยงปัญหานี้จริงๆ อาจจะต้องบังคับให้ Frontend กับ Backend อยู่ทีมเดียวกัน เป็น Cross-Functional team เพื่อลด Effort ในการประสานงานกัน เช่น แทนที่จะไปทำเวอร์ชั่น 1.5 ล่วงหน้า ก็มาช่วยกันทำ Backend ให้เสร็จก่อนไปต่อ
+
+------
+
+
+# Component Test: No clear standard in Boundary (mixing API level with higher-order Component)
+
+# End-to-End Test: ไม่แยก Business Layer ให้ชัดเจน (ex. page object)
+# End-to-End Test: มี Side effect (ไม่เคลียร์ค่าก่อนรัน Integration tests)
+# End-to-End Test: คิดว่าทุกอย่างเกิดขึ้นทันทีใน UI Test
+# End-to-End Test: ไม่รีบแก้ Flaky Tests
+# End-to-End Test: Do all permutations
+# End-to-End Test: Unstable dependencies
+
+
+# Type of Tests
+
+# Unit Test
+
+class, method, function?
+
+ข้อดี เร็ว รู้ว่าพังตรงไหนชัดเจน
+ข้อเสีย ไม่ได้ควบคุมอะไรเลย
+
+Test public behavior เพื่อไม่ให้ Brittle
+
+TDD เป็นการออกแบบว่าต้องเขียนเทสต์
+
+ควรจะเป็น 100% ไหม?
+
+## Test double
+stub mock, etc.
+
+
+
+# Component Test
+
+isolate component, stub & driver
+
+granularity    (one API, one high-order Component)
+
+BE or Frontend?
+
+Putting permutation at the lowest layer
+
+which level will you mock? (Don't mix it w/ unit test)
+
+# Integration
+
+horrible naming - Integral between component we own? or integrate with 3rd party system?
+
+It might be stub/mock, unclear
+
+Set up clear testing?
+
+# System testing
+Usually more than one component? what is system?
+
+which is stub?
+
+# End2End
+Staging against which?
+
+flaky, fricking slow
+
+# Regression Testing
+how can we ensure?
+
+at higher level?
+
+on stage or on prod?
+
+# (User) Acceptance Testing
+Enduser involved
+
+สัญลักษณ์ของ Silo
+
+bad smell
+
+verification of requirement?
+
+prototyping?
+
+# เทสต์ยิ่งสูง ยิ่งมีคุณค่า แต่ราคายิ่งแพง

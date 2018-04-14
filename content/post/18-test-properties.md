@@ -3,7 +3,7 @@ title: "คุณสมบัติของเทสต์ในการกำ
 date: 2018-01-12T12:04:02+07:00
 lastmod: 2018-01-12T12:04:02+07:00
 draft: false
-tags: ["CI", "CD"]
+tags: ["CI", "CD", "Testing"]
 categories: ["Continuous Delivery"]
 ---
 
