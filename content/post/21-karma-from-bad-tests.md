@@ -1,7 +1,7 @@
 ---
 title: "เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับ Unit/Component Tests)"
-date: 2018-02-24T12:04:02+07:00
-lastmod: 2018-02-24T12:04:02+07:00
+date: 2018-04-14T12:04:02+07:00
+lastmod: 2018-04-14T12:04:02+07:00
 draft: true
 tags: ["CI", "CD", "Testing"]
 categories: ["Continuous Delivery"]
