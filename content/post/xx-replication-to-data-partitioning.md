@@ -4,7 +4,7 @@ date: 2018-01-09T12:04:02+07:00
 lastmod: 2018-01-09T12:04:02+07:00
 draft: true
 tags: ["scalability", "design"]
-categories: ["design"]
+categories: ["System Design"]
 ---
 
 ![Photo by Joanna Kosinska on Unsplash](/img/covers/photo-01.jpg)

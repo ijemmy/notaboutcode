@@ -4,7 +4,7 @@ date: 2017-10-19T12:04:02+07:00
 lastmod: 2017-10-19T12:04:02+07:00
 draft: false
 tags: ["career", "learning"]
-categories: ["Career"]
+categories: ["Career "]
 ---
 
 ![Photo by Jake Hills, from Unsplash.com](/img/covers/career-01.jpg)

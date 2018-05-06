@@ -4,7 +4,7 @@ date: 2018-04-29T12:04:02+07:00
 lastmod: 2018-04-09T12:04:02+07:00
 draft: false
 tags: ["system design", "architecture"]
-categories: ["design"]
+categories: ["System Design"]
 ---
 
 ![Photo by Immo Wegmann on Unsplash](/img/covers/scale-01.jpg)

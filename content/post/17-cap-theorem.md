@@ -4,7 +4,7 @@ date: 2018-01-07T12:04:02+07:00
 lastmod: 2018-01-07T12:04:02+07:00
 draft: false
 tags: ["distributed system", "design"]
-categories: ["design"]
+categories: ["System Design"]
 ---
 
 ![Photo by Joanna Kosinska on Unsplash](/img/covers/photo-01.jpg)

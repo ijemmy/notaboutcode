@@ -4,7 +4,7 @@ date: 2018-03-25T12:04:02+07:00
 lastmod: 2018-03-25T12:04:02+07:00
 draft: false
 tags: ["Equality", "Leadership", "Gender Bias"]
-categories: ["leadership"]
+categories: ["Technical Leadership"]
 ---
 
 ![Photo by Brandon Day on Unsplash](/img/covers/child-02.jpg)

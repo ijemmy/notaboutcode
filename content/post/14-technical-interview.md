@@ -4,7 +4,7 @@ date: 2017-12-09T12:04:02+07:00
 lastmod: 2017-12-09T12:04:02+07:00
 draft: false
 tags: ["interview", "recruitment", "technical"]
-categories: ["leadership"]
+categories: ["Technical Leadership"]
 ---
 
 ใน[บทความที่แล้ว]({{< relref "post/13-behavioral-interview.md" >}}) เราคุยกันในเรื่อง Soft skill ของผู้สมัครด้วย Behavioral Interview

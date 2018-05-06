@@ -4,7 +4,7 @@ date: 2017-10-14T12:04:02+07:00
 lastmod: 2017-10-14T12:04:02+07:00
 draft: false
 tags: ["reliability", "availability", "retry", "throttling", "design", "microservice", "soa" ]
-categories: ["Reliability"]
+categories: ["System Design"]
 ---
 
 ![Photo by Nick Morris, from Unsplash.com](/img/covers/spiral-stairs-01.jpg)

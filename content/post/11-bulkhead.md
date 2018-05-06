@@ -4,7 +4,7 @@ date: 2017-11-12T12:04:02+07:00
 lastmod: 2017-11-12T12:04:02+07:00
 draft: false
 tags: ["reliability", "design", "bulkhead"]
-categories: ["reliability"]
+categories: ["System Design"]
 ---
 
  ![Photo by Abraham Wiebe, from Unsplash.com](/img/covers/ship-01.jpg)
