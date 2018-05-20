@@ -11,7 +11,7 @@ categories: ["Continuous Delivery"]
 
 จากประสบการณ์ส่วนตัว End-to-End(E2E) Tests เป็นตัวที่สร้างความปวดหัวให้กับผมอันดับที่หนึ่งเลย รองลงมาก็ System Integration Tests ตอนเขียนบทความนี้ฉบับแรก เลยตัดสินใจแยกเทสต์สองประเภทนี้ออกมาเขียนแยกออกมา จะได้ลงรายละเอียดได้
 
-บทความนี้ก็เหมมือนบทความที่แล้วครับ คือทำผิดมาเยอะ จนพอจะสรุปข้อผิดพลาดที่เคยทำไว้มาแชร์กัน ผู้อ่านจะได้หลบเลี่ยงกันได้
+บทความนี้ก็เหมือนบทความที่แล้วครับ คือทำผิดมาเยอะ จนพอจะสรุปข้อผิดพลาดที่เคยทำไว้มาแชร์กัน ผู้อ่านจะได้หลบเลี่ยงกันได้
 
 <!--more-->
 
@@ -38,7 +38,7 @@ categories: ["Continuous Delivery"]
 
 ถ้าไปค้นวิกิดู จะได้นิยามว่า
 
-> Integration testing is the phase in software testing in which individual **software modules** are combined and tested as a group
+> Integration testing is the phase in software testing in which individual **software modules** are combined and tested as a group -- Wikipedia
 
 ซึ่งปัญหาของคำนี้ มันอยู่ที่คำว่า Module นี่แหละครับ เราจะมองว่า Class แต่ละคลาสเป็นหนึ่ง Module ก็ได้ หรือจะมองว่าคลาสหลายๆคลาสรวมกันเป็น หนึ่ง Module (เหมือน Package ใน Java) หรือมองว่าทุกๆอย่างรวมกันในหนึ่งเซอร์วิซเป็นหนึ่ง Module ก็ได้เหมือนกัน
 
