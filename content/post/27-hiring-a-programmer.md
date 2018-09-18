@@ -7,7 +7,7 @@ tags: ["interview", "recruitment"]
 categories: ["Technical Leadership"]
 ---
 
-![Photo by Nicolas J Leclercq on Unsplash](/img/covers/aurora-01.jpg)
+![Photo by rawpixel on Unsplash](/img/covers/interview-01.jpg)
 
 เมื่อวันก่อนมีน้องที่เป็น Project Manager  โทรมาขอคำแนะนำเรื่องจะจ้างโปรแกรมเมอร์ใหม่เข้าทีม
 
