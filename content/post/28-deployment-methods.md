@@ -7,7 +7,7 @@ tags: ["deployment"]
 categories: ["DevOps", "Deployment"]
 ---
 
-![Photo by rawpixel on Unsplash](/img/covers/interview-01.jpg)
+![Photo by rawpixel on Unsplash](/img/covers/cars-01.jpg)
 
 สำหรับวีดีโอนี้ เราจะมาคุยกันเรื่องการ Deploy ระบบแบบให้มี High Availability คือผู้ใช้จะต้องสามารถใช้งานระบบของเราได้ตลอด และไม่ได้รับผลกระทบใดๆ เช่น ระบบช้าผิดปกติ หรือบาง Request ผิดพลาด
 
