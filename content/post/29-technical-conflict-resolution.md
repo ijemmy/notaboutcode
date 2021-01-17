@@ -2,7 +2,7 @@
 title: "เถียงเรื่อง Technical Design กันไม่จบซักที ทำไงดี?"
 date: 2020-06-11T12:04:02+07:00
 lastmod: 2020-06-11T12:04:02+07:00
-draft: true
+draft: false
 tags: ["conflict", "technical", "meeting", "design"]
 categories: ["Technical Leadership"]
 ---
