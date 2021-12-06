@@ -22,15 +22,15 @@
 แต่ก่อนจะเข้าเรื่องเขียนเทสต์ให้ดี ผมขอยกปัญหาจากการไม่เขียนเทสต์ก่อนครับ
 "><meta name=keywords content="Hugo,theme,even">
 <meta name=generator content="Hugo 0.89.4 with theme even">
-<link rel=canonical href=http://www.notaboutcode.com/post/21-karma-from-bad-tests/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=manifest href=/manifest.json>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=canonical href=https://ijemmy.github.io/notaboutcode/post/21-karma-from-bad-tests/>
+<link rel=apple-touch-icon sizes=180x180 href=/notaboutcode/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/notaboutcode/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/notaboutcode/favicon-16x16.png>
+<link rel=manifest href=/notaboutcode/manifest.json>
+<link rel=mask-icon href=/notaboutcode/safari-pinned-tab.svg color=#5bbad5>
+<link href=/notaboutcode/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
 <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
-<link rel=stylesheet href=/css/../notaboutcode/css/custom.css>
+<link rel=stylesheet href=/notaboutcode/css/custom.css>
 <meta property="og:title" content="เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับ Unit/Component Tests)">
 <meta property="og:description" content="
 ปกติผมไม่ค่อยเชื่อเรื่องบาปบุญเท่าไร แต่เวลาเห็นโปรเจ็คไม่เขียนเทสต์ หรือเขียนเทสต์ไม่ดี ผมพูดเรื่องบาปบุญขึ้นมาทันที
@@ -47,7 +47,7 @@ Writing code without tests (or low-quality tests) is like having one-night stand
 บทความนี้จะเล่าสู่กันฟังเรื่องตัวอย่างการเขียนเทสต์ที่ไม่ดีครับ ผู้อ่านจะได้หลีกเลี่ยงกัน โดยบทความนี้จะเน้นไปในส่วนของ Unit/Component Test เป็นหลัก
 แต่ก่อนจะเข้าเรื่องเขียนเทสต์ให้ดี ผมขอยกปัญหาจากการไม่เขียนเทสต์ก่อนครับ">
 <meta property="og:type" content="article">
-<meta property="og:url" content="http://www.notaboutcode.com/post/21-karma-from-bad-tests/"><meta property="article:section" content="post">
+<meta property="og:url" content="https://ijemmy.github.io/notaboutcode/post/21-karma-from-bad-tests/"><meta property="article:section" content="post">
 <meta property="article:published_time" content="2018-04-14T12:04:02+07:00">
 <meta property="article:modified_time" content="2018-04-14T12:04:02+07:00">
 <meta itemprop=name content="เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับ Unit/Component Tests)">
@@ -88,7 +88,7 @@ Writing code without tests (or low-quality tests) is like having one-night stand
 <body>
 <div id=mobile-navbar class=mobile-navbar>
 <div class=mobile-header-logo>
-<a href=/ class=logo>Not About Code</a>
+<a href=/notaboutcode/ class=logo>Not About Code</a>
 </div>
 <div class=mobile-navbar-icon>
 <span></span>
@@ -98,15 +98,15 @@ Writing code without tests (or low-quality tests) is like having one-night stand
 </div>
 <nav id=mobile-menu class="mobile-menu slideout-menu">
 <ul class=mobile-menu-list>
-<a href=/>
+<a href=/notaboutcode/>
 <li class=mobile-menu-item>Home</li>
-</a><a href=/post/>
+</a><a href=/notaboutcode/post/>
 <li class=mobile-menu-item>Archives</li>
-</a><a href=/tags/>
+</a><a href=/notaboutcode/tags/>
 <li class=mobile-menu-item>Tags</li>
-</a><a href=/categories/>
+</a><a href=/notaboutcode/categories/>
 <li class=mobile-menu-item>Categories</li>
-</a><a href=/about/>
+</a><a href=/notaboutcode/about/>
 <li class=mobile-menu-item>About</li>
 </a>
 </ul>
@@ -114,20 +114,20 @@ Writing code without tests (or low-quality tests) is like having one-night stand
 <div class=container id=mobile-panel>
 <header id=header class=header>
 <div class=logo-wrapper>
-<a href=/ class=logo>Not About Code</a>
+<a href=/notaboutcode/ class=logo>Not About Code</a>
 </div>
 <nav class=site-navbar>
 <ul id=menu class=menu>
 <li class=menu-item>
-<a class=menu-item-link href=/>Home</a>
+<a class=menu-item-link href=/notaboutcode/>Home</a>
 </li><li class=menu-item>
-<a class=menu-item-link href=/post/>Archives</a>
+<a class=menu-item-link href=/notaboutcode/post/>Archives</a>
 </li><li class=menu-item>
-<a class=menu-item-link href=/tags/>Tags</a>
+<a class=menu-item-link href=/notaboutcode/tags/>Tags</a>
 </li><li class=menu-item>
-<a class=menu-item-link href=/categories/>Categories</a>
+<a class=menu-item-link href=/notaboutcode/categories/>Categories</a>
 </li><li class=menu-item>
-<a class=menu-item-link href=/about/>About</a>
+<a class=menu-item-link href=/notaboutcode/about/>About</a>
 </li>
 </ul>
 </nav>
@@ -141,7 +141,7 @@ Writing code without tests (or low-quality tests) is like having one-night stand
 <div class=post-meta>
 <span class=post-time> 2018-04-14 </span>
 <div class=post-category>
-<a href=/categories/continuous-delivery/> Continuous Delivery </a>
+<a href=/notaboutcode/categories/continuous-delivery/> Continuous Delivery </a>
 </div>
 </div>
 </header>
@@ -201,7 +201,7 @@ Writing code without tests (or low-quality tests) is like having one-night stand
 <p>ถ้าเขียนเทสต์ไว้ไม่ดี ตอนแรกๆอาจจะไม่มีอะไรมากครับ แต่พอโปรเจ็คเลย 1-2 ปี บาปกรรมก็ตามทันอยู่ดี</p>
 <p>ที่กล้าพูดเพราะเคยชดใช้กรรมมาแล้ว</p>
 <p>เราจะมานั่งดูแบบละเอียดกัน ว่าการเขียนเทสต์แบบไหนบ้างที่ไม่ดี ผมคงยกตัวอย่างได้ไม่ครบหมด แต่เนื้อหาน่าจะพอทำให้ผู้อ่านเห็นภาพมากขึ้น</p>
-<p>เพื่อไม่ให้บทความยาวเกินไป เราจะมาดูแค่ปัญหาใน Unit/Component Test (ใครไม่เข้าใจนิยามของ Component Test ลองอ่านใน<a href=/post/18-test-properties/>บทความเรื่องคุณสมบัติของเทสต์</a>ดูก่อนนะครับ) ส่วน Integration/E2E Test นี่ผมขอยกยอดไปก่อน</p>
+<p>เพื่อไม่ให้บทความยาวเกินไป เราจะมาดูแค่ปัญหาใน Unit/Component Test (ใครไม่เข้าใจนิยามของ Component Test ลองอ่านใน<a href=/notaboutcode/post/18-test-properties/>บทความเรื่องคุณสมบัติของเทสต์</a>ดูก่อนนะครับ) ส่วน Integration/E2E Test นี่ผมขอยกยอดไปก่อน</p>
 <h2 id=1-ไม-mock-dependency-ใหด>1. ไม่ Mock Dependency ให้ดี</h2>
 <p>เวลาเราเทสต์แต่ละ Unit หรือ Component เราไม่ควรจะให้ส่วนอื่นๆนอกเหนือจากส่วนที่เราเขียนอยู่ มาทำให้เทสต์พังได้</p>
 <p>วิธีการป้องกันปัญหานี้ ก็คือการ Mock Dependency ที่เราจะต้องเรียกใช้ลงไป ผมขอยกตัวอย่างให้เห็นภาพกัน</p>
@@ -373,17 +373,17 @@ Writing code without tests (or low-quality tests) is like having one-night stand
 </div>
 <footer class=post-footer>
 <div class=post-tags>
-<a href=/tags/ci/>CI</a>
-<a href=/tags/cd/>CD</a>
-<a href=/tags/testing/>Testing</a>
+<a href=/notaboutcode/tags/ci/>CI</a>
+<a href=/notaboutcode/tags/cd/>CD</a>
+<a href=/notaboutcode/tags/testing/>Testing</a>
 </div>
 <nav class=post-nav>
-<a class=prev href=/post/22-design-to-scale/>
+<a class=prev href=/notaboutcode/post/22-design-to-scale/>
 <i class="iconfont icon-left"></i>
 <span class="prev-text nav-default">การออกแบบระบบให้รับ Request เยอะๆ</span>
 <span class="prev-text nav-mobile">Prev</span>
 </a>
-<a class=next href=/post/20-gender-bias/>
+<a class=next href=/notaboutcode/post/20-gender-bias/>
 <span class="next-text nav-default">Gender Bias ในวงการโปรแกรมเมอร์</span>
 <span class="next-text nav-mobile">Next</span>
 <i class="iconfont icon-right"></i>
@@ -397,7 +397,7 @@ Writing code without tests (or low-quality tests) is like having one-night stand
 <footer id=footer class=footer>
 <div class=social-links>
 <a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
-<a href=http://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+<a href=https://ijemmy.github.io/notaboutcode/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
 </div>
 <div class=copyright>
 <span class=power-by>
@@ -422,7 +422,7 @@ Theme -
 <script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
-<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=text/javascript src=/notaboutcode/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
 <script async src=https://www.google-analytics.com/analytics.js></script>
 </body>
