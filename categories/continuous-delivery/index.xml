@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Continuous Delivery on Not About Code - Technical Leadership</title><link>http://www.notaboutcode.com/categories/continuous-delivery/</link><description>Recent content in Continuous Delivery on Not About Code - Technical Leadership</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 05 May 2018 12:04:02 +0700</lastBuildDate><atom:link href="http://www.notaboutcode.com/categories/continuous-delivery/index.xml" rel="self" type="application/rss+xml"/><item><title>เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับที่ 2 System Integration Tests/End-to-End Tests)</title><link>http://www.notaboutcode.com/post/23-karma-from-bad-tests2/</link><pubDate>Sat, 05 May 2018 12:04:02 +0700</pubDate><guid>http://www.notaboutcode.com/post/23-karma-from-bad-tests2/</guid><description>&lt;p>&lt;img src="http://www.notaboutcode.com/img/covers/test-01.jpg" alt="Photo by Chris Liverani on Unsplash">&lt;/p>
+&lt;p>จากประสบการณ์ส่วนตัว End-to-End(E2E) Tests เป็นตัวที่สร้างความปวดหัวให้กับผมอันดับที่หนึ่งเลย รองลงมาก็ System Integration Tests ตอนเขียนบทความนี้ฉบับแรก เลยตัดสินใจแยกเทสต์สองประเภทนี้ออกมาเขียนแยกออกมา จะได้ลงรายละเอียดได้&lt;/p>
+&lt;p>บทความนี้ก็เหมือนบทความที่แล้วครับ คือทำผิดมาเยอะ จนพอจะสรุปข้อผิดพลาดที่เคยทำไว้มาแชร์กัน ผู้อ่านจะได้หลบเลี่ยงกันได้&lt;/p></description></item><item><title>เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับ Unit/Component Tests)</title><link>http://www.notaboutcode.com/post/21-karma-from-bad-tests/</link><pubDate>Sat, 14 Apr 2018 12:04:02 +0700</pubDate><guid>http://www.notaboutcode.com/post/21-karma-from-bad-tests/</guid><description>&lt;p>&lt;img src="http://www.notaboutcode.com/img/covers/candle-01.jpg" alt="Photo by Sharon McCutcheon on Unsplash">&lt;/p>
+&lt;p>ปกติผมไม่ค่อยเชื่อเรื่องบาปบุญเท่าไร แต่เวลาเห็นโปรเจ็คไม่เขียนเทสต์ หรือเขียนเทสต์ไม่ดี ผมพูดเรื่องบาปบุญขึ้นมาทันที&lt;/p>
+&lt;blockquote>
+&lt;p>การไม่เขียนเทสต์ (หรือเขียนเทสต์ไม่ดี)เป็นบาปอย่างหนึ่ง เป็นเวรกรรมจะตามทันทีมในระยะเวลาไม่เกิน 3 เดือน&lt;/p>
+&lt;/blockquote>
+&lt;p>เวลาทำงานกับชาวต่างชาติที่ไม่เข้าใจคอนเซ็บเรื่องบาปบุญ ผมชอบอธิบายให้เค้าฟังแบบนี้&lt;/p>
+&lt;blockquote>
+&lt;p>Writing code without tests (or low-quality tests) is like having one-night stand everyday without protection. You will eventually regret it.&lt;/p>
+&lt;/blockquote>
+&lt;p>เน้นนิดนึงว่าไม่ใช่แค่เรื่องไม่เขียนเทสต์ แต่รวมถึงกรณีเขียนเทสต์ไม่มีคุณภาพด้วย&lt;/p>
+&lt;p>บางทีมอาจจะบอกว่าเขียนแล้ว มี Coverage ครบ 100% เลยด้วย บาปเบิบอะไรไม่มีหรอก&lt;/p>
+&lt;p>แต่ก่อนคนเขียนก็คิดงี้ครับ จนกระทั่งได้มาเจอกับสถานการณ์ &amp;ldquo;เทสต์ท่วมหัว เอาตัวไม่รอด&amp;rdquo;&lt;/p>
+&lt;p>บทความนี้จะเล่าสู่กันฟังเรื่องตัวอย่างการเขียนเทสต์ที่ไม่ดีครับ ผู้อ่านจะได้หลีกเลี่ยงกัน โดยบทความนี้จะเน้นไปในส่วนของ Unit/Component Test เป็นหลัก&lt;/p>
+&lt;p>แต่ก่อนจะเข้าเรื่องเขียนเทสต์ให้ดี ผมขอยกปัญหาจากการไม่เขียนเทสต์ก่อนครับ&lt;/p></description></item><item><title>จะ Deploy Frontend หรือ Backend ก่อนดี</title><link>http://www.notaboutcode.com/post/19-deploy-order/</link><pubDate>Sun, 18 Feb 2018 12:04:02 +0700</pubDate><guid>http://www.notaboutcode.com/post/19-deploy-order/</guid><description>&lt;p>&lt;img src="http://www.notaboutcode.com/img/covers/child-01.jpg" alt="Photo by Jelleke Vanooteghem on Unsplash">&lt;/p>
+&lt;p>ความน่ารักของ Web Developer สมัยนี้คือมีการแยก Frontend กับ Backend ออกอย่างชัดเจน ถ้าใครย้อนกลับไปสมัยสิบปีก่อน เราไม่มีตำแหน่ง Frontend Developer ด้วยซ้ำ มีแต่เรียกรวมๆว่า Web Developer&lt;/p>
+&lt;p>การแยกกันของโค้ดสองส่วน ทำให้การ Deployment ทำแยกกันด้วย คำถามที่เกิดขึ้นคือ เวลาจะ Deploy เราจะเอา Frontend ขึ้นก่อน หรือ Backend ขึ้นก่อนดี&lt;/p>
+&lt;p>แม้จะเป็นคำถามง่ายๆ แต่รายละเอียดข้างในนั้นค่อนข้างเยอะ ถ้าไม่คิดให้ถี่ถ้วน อาจจะเจออาการเว็บพังขณะ Deploy เป็นประจำ&lt;/p>
+&lt;p>บทความนี้จะมาวิเคราะห์เจาะลึกกันในเรื่องนี้&lt;/p></description></item><item><title>คุณสมบัติของเทสต์ในการกำหนด Testing Strategy</title><link>http://www.notaboutcode.com/post/18-test-properties/</link><pubDate>Fri, 12 Jan 2018 12:04:02 +0700</pubDate><guid>http://www.notaboutcode.com/post/18-test-properties/</guid><description>&lt;p>&lt;img src="http://www.notaboutcode.com/img/covers/bug-01.jpg" alt="Photo by Michel Bosma on Unsplash">&lt;/p>
+&lt;p>ช่วงนี้ทีมขึ้นโปรเจ็คใหม่ ผมต้องคุยกับ QA Engineer เกี่ยวกับเรื่อง Testing Strategy บ่อยๆ&lt;/p>
+&lt;p>โดยเนื้อหาที่คุยหลักๆคือ&lt;/p>
+&lt;ol>
+&lt;li>จะเทสต์อะไรบ้าง&lt;/li>
+&lt;li>จะเทสต์ด้วยเทสต์ชนิดไหน (ex. Unit, Component, Integration)&lt;/li>
+&lt;li>เราจะใช้เทสต์แต่ละชนิดในกรณีไหนบ้าง&lt;/li>
+&lt;/ol>
+&lt;p>พอคุยกันเรื่องนี้เยอะๆ ก็ค้นพบหัวข้อที่ 3 เป็นเรื่องที่ซับซ้อนพอควร หนึ่งในเรื่องที่ตกผลึกก็คือคุณสมบัติของเทสต์แต่ละชนิด ซึ่งเป็นเรื่องที่จะนำมาเล่าในบทความนี้&lt;/p></description></item><item><title>การนำ Static Code Analysis มาใช้ในทีม</title><link>http://www.notaboutcode.com/post/02-inside-ci-static-check/</link><pubDate>Sat, 07 Oct 2017 16:28:41 +0700</pubDate><guid>http://www.notaboutcode.com/post/02-inside-ci-static-check/</guid><description>&lt;p>&lt;img src="http://www.notaboutcode.com/img/covers/code-01.jpg" alt="Photo by Ilya Pavlov, from Unsplash.com">&lt;/p>
+&lt;p>สืบเนื่องจาก&lt;a href="http://www.notaboutcode.com/post/01-ci-journey/">บันทึกที่แล้ว&lt;/a> ผมได้อธิบายไว้ ว่าหลังจากทีมเริ่มมี CI Server แล้ว ทีมก็มักจะเริ่มใส่เครื่องมือหลายๆอย่างลงไปเพื่อทำการ Automation และควบคุมคุณภาพของโค้ด&lt;/p>
+&lt;p>ในบันทึกฉบับนี้ ผมจะแนะนำเครื่องมือจำพวก Static code analysis ครับ (จากนี้ไปจะเรียกย่อๆว่า SCA)&lt;/p></description></item><item><title>การเดินทางสู่ CI (Continuous Integration)</title><link>http://www.notaboutcode.com/post/01-ci-journey/</link><pubDate>Mon, 02 Oct 2017 16:28:41 +0700</pubDate><guid>http://www.notaboutcode.com/post/01-ci-journey/</guid><description>&lt;p>&lt;img src="http://www.notaboutcode.com/img/covers/walk-desert-01.jpg" alt="Photo by Jeremy Cai, from Unsplash">&lt;/p>
+&lt;p>ผมเคยคิดว่าการทำ CI เป็นเรื่องง่ายๆ และเป็นเบสิคของทุกทีมที่ต้องปฏิบัติกัน แต่ในความเป็นจริง น้อยทีมมากที่จะทำออกมาได้ดี เพราะมันมีรายละเอียดยุ่บยั่บที่มากกว่าแค่เรื่องทางเทคนิค&lt;/p>
+&lt;p>ในบันทึกฉบับนี้ เราจะมาดูรายละเอียดยุ่บยั่บเหล่านี้กัน โดยผมจะนำเสนอด้วยวิธีการเล่าเรื่อง ตั้งแต่ทีมเริ่มต้นทำ CI ง่ายๆ ไปจนถึงจุดทีเป็น CI ที่สมบูรณ์มากขึ้น&lt;/p>
+&lt;p>โดยเราสมมติว่ามีทีมทีมหนึ่ง เริ่มต้นจากที่ไม่มีอะไรนอกจากเลยนอกจาก Version Control แล้วลองผิดลองถูก ทำการปรับปรุงกระบวนการ เรื่อยๆ จนมาถึงจุดที่เป็น CI ที่สมบูรณ์มากขึ้น&lt;/p></description></item></channel></rss>

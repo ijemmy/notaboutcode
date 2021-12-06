@@ -1,0 +1,486 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>การออกแบบระบบให้รับ Request เยอะๆ - Not About Code - Technical Leadership</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="ijemmy"><meta name=description content="เมื่อเดือนที่แล้ว มีโอกาสกลับไปเป็น Guest Speaker ที่ภาค ในวิชา System Analysis and Design
+อาจารย์ให้อิสระในเรื่องของหัวข้อ เลยตัดสินใจว่าอยากเล่าเรื่องที่มันสนุกๆ เผื่อน้องๆจะสนใจสาย Technical กันมากขึ้น หลังจากคิดอยู่หลายวัน ก็มาจบลงที่เรื่องนี้
+ด้วยเวลาที่จำกัด รู้สึกว่าถ่ายทอดเนื้อหาได้ไม่ครบเท่าที่ควร เลยเอาเนื้อหามาเขียนเป็นบทความซะเลย จะได้ไม่ค้างคาใจ
+เราจะเริ่มตั้งแต่การรับ Requirement การกะปริมาณ Load ของระบบ ไล่ไปจนถึงเทคนิคเบื้องที่ใช้ในการออกแบบให้รับ Request ได้เยอะขึ้น และสามารถโตตามปริมาณคนใช้ในอนาคตได้
+"><meta name=keywords content="Hugo,theme,even">
+<meta name=generator content="Hugo 0.89.4 with theme even">
+<link rel=canonical href=http://www.notaboutcode.com/post/22-design-to-scale/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<link rel=stylesheet href=/css//css/custom.css>
+<meta property="og:title" content="การออกแบบระบบให้รับ Request เยอะๆ">
+<meta property="og:description" content="
+เมื่อเดือนที่แล้ว มีโอกาสกลับไปเป็น Guest Speaker ที่ภาค ในวิชา System Analysis and Design
+อาจารย์ให้อิสระในเรื่องของหัวข้อ เลยตัดสินใจว่าอยากเล่าเรื่องที่มันสนุกๆ เผื่อน้องๆจะสนใจสาย Technical กันมากขึ้น หลังจากคิดอยู่หลายวัน ก็มาจบลงที่เรื่องนี้
+ด้วยเวลาที่จำกัด รู้สึกว่าถ่ายทอดเนื้อหาได้ไม่ครบเท่าที่ควร เลยเอาเนื้อหามาเขียนเป็นบทความซะเลย จะได้ไม่ค้างคาใจ
+เราจะเริ่มตั้งแต่การรับ Requirement การกะปริมาณ Load ของระบบ ไล่ไปจนถึงเทคนิคเบื้องที่ใช้ในการออกแบบให้รับ Request ได้เยอะขึ้น และสามารถโตตามปริมาณคนใช้ในอนาคตได้">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://www.notaboutcode.com/post/22-design-to-scale/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2018-04-29T12:04:02+07:00">
+<meta property="article:modified_time" content="2018-04-09T12:04:02+07:00">
+<meta itemprop=name content="การออกแบบระบบให้รับ Request เยอะๆ">
+<meta itemprop=description content="
+เมื่อเดือนที่แล้ว มีโอกาสกลับไปเป็น Guest Speaker ที่ภาค ในวิชา System Analysis and Design
+อาจารย์ให้อิสระในเรื่องของหัวข้อ เลยตัดสินใจว่าอยากเล่าเรื่องที่มันสนุกๆ เผื่อน้องๆจะสนใจสาย Technical กันมากขึ้น หลังจากคิดอยู่หลายวัน ก็มาจบลงที่เรื่องนี้
+ด้วยเวลาที่จำกัด รู้สึกว่าถ่ายทอดเนื้อหาได้ไม่ครบเท่าที่ควร เลยเอาเนื้อหามาเขียนเป็นบทความซะเลย จะได้ไม่ค้างคาใจ
+เราจะเริ่มตั้งแต่การรับ Requirement การกะปริมาณ Load ของระบบ ไล่ไปจนถึงเทคนิคเบื้องที่ใช้ในการออกแบบให้รับ Request ได้เยอะขึ้น และสามารถโตตามปริมาณคนใช้ในอนาคตได้"><meta itemprop=datePublished content="2018-04-29T12:04:02+07:00">
+<meta itemprop=dateModified content="2018-04-09T12:04:02+07:00">
+<meta itemprop=wordCount content="1123">
+<meta itemprop=keywords content="system design,architecture,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="การออกแบบระบบให้รับ Request เยอะๆ">
+<meta name=twitter:description content="
+เมื่อเดือนที่แล้ว มีโอกาสกลับไปเป็น Guest Speaker ที่ภาค ในวิชา System Analysis and Design
+อาจารย์ให้อิสระในเรื่องของหัวข้อ เลยตัดสินใจว่าอยากเล่าเรื่องที่มันสนุกๆ เผื่อน้องๆจะสนใจสาย Technical กันมากขึ้น หลังจากคิดอยู่หลายวัน ก็มาจบลงที่เรื่องนี้
+ด้วยเวลาที่จำกัด รู้สึกว่าถ่ายทอดเนื้อหาได้ไม่ครบเท่าที่ควร เลยเอาเนื้อหามาเขียนเป็นบทความซะเลย จะได้ไม่ค้างคาใจ
+เราจะเริ่มตั้งแต่การรับ Requirement การกะปริมาณ Load ของระบบ ไล่ไปจนถึงเทคนิคเบื้องที่ใช้ในการออกแบบให้รับ Request ได้เยอะขึ้น และสามารถโตตามปริมาณคนใช้ในอนาคตได้"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>การออกแบบระบบให้รับ Request เยอะๆ</h1>
+<div class=post-meta>
+<span class=post-time> 2018-04-29 </span>
+<div class=post-category>
+<a href=/categories/system-design/> System Design </a>
+</div>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>Contents</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#ระบบลงทะเบยนเรยน>ระบบลงทะเบียนเรียน</a>
+<ul>
+<li><a href=#1-ทจงหวะ-peak-load-ชวงทแยงกนลงทะเบยนเรยน-จะมผใชทงหมดประมาณกคน>1. ที่จังหวะ Peak Load (ช่วงที่แย่งกันลงทะเบียนเรียน) จะมีผู้ใช้ทั้งหมดประมาณกี่คน</a></li>
+<li><a href=#2-ผใชแตละคนจะสง-request-เทาไร>2. ผู้ใช้แต่ละคนจะส่ง Request เท่าไร</a></li>
+<li><a href=#3-แตละ-request-หนก-แคไหน>3. แต่ละ Request &ldquo;หนัก&rdquo; แค่ไหน</a></li>
+</ul>
+</li>
+<li><a href=#bottleneck>Bottleneck</a></li>
+<li><a href=#เทคนคการออกแบบระบบใหรบ-request-ไดมากขน>เทคนิคการออกแบบระบบให้รับ Request ได้มากขึ้น</a>
+<ul>
+<li><a href=#1-scaling-vertically-vs-horizontally>1. Scaling Vertically vs Horizontally</a></li>
+<li><a href=#2-read-replica>2. Read Replica</a></li>
+<li><a href=#3-caching>3. Caching</a></li>
+<li><a href=#4-data-partitioning>4. Data Partitioning</a></li>
+</ul>
+</li>
+<li><a href=#สรป>สรุป</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p><img src=/img/covers/scale-01.jpg alt="Photo by Immo Wegmann on Unsplash"></p>
+<p>เมื่อเดือนที่แล้ว มีโอกาสกลับไปเป็น Guest Speaker ที่ภาค ในวิชา System Analysis and Design</p>
+<p>อาจารย์ให้อิสระในเรื่องของหัวข้อ เลยตัดสินใจว่าอยากเล่าเรื่องที่มันสนุกๆ เผื่อน้องๆจะสนใจสาย Technical กันมากขึ้น หลังจากคิดอยู่หลายวัน ก็มาจบลงที่เรื่องนี้</p>
+<p>ด้วยเวลาที่จำกัด รู้สึกว่าถ่ายทอดเนื้อหาได้ไม่ครบเท่าที่ควร เลยเอาเนื้อหามาเขียนเป็นบทความซะเลย จะได้ไม่ค้างคาใจ</p>
+<p>เราจะเริ่มตั้งแต่การรับ Requirement การกะปริมาณ Load ของระบบ ไล่ไปจนถึงเทคนิคเบื้องที่ใช้ในการออกแบบให้รับ Request ได้เยอะขึ้น และสามารถโตตามปริมาณคนใช้ในอนาคตได้</p>
+<h1 id=ระบบลงทะเบยนเรยน>ระบบลงทะเบียนเรียน</h1>
+<p>เพื่อให้ง่ายต่อการอธิบาย เราจะใช้ระบบลงทะเบียนเรียนของมหาวิทยาลัยเป็นตัวอย่าง เรื่องมีอยู่ว่า</p>
+<blockquote>
+<p>ทุกๆเทอมมหาวิทยาลัยจะเปิดให้นิสิตลงทะเบียนเรียน"พร้อมกัน" ผ่านทางเว็บไซต์<br>
+<br>
+ก่อนการลงทะเบียนเรียน แต่ละคณะและภาควิชา จะส่งรหัสวิชา, ชื่อวิชา, และจำนวนนักเรียนที่รับได้ในรายวิชานั้นๆ ข้อมูลเหล่านี้จะถูกบันทึกลงในฐานข้อมูลพร้อมแล้ว</p>
+<br>
+ปัญหาหลักของระบบปัจจุบันคือ เมื่อถึงเวลาเปิดให้ลงทะเบียน เว็บจะล่มเป็นประจำ เพราะการลงทะเบียนเป็นแบบ First-come, first-serve ใครลงได้สำเร็จก่อนภายในจำนวนที่รับได้ในวิชานั้นๆก็จะได้เรียน ส่วนคนที่ลงไม่ทันก็อด ผู้ใช้จึงจะนั่ง Refresh หน้าเพจรอก่อนเวลาเปิดลงทะเบียน และแข่งกันลงทะเบียนให้ได้เร็วที่สุด
+<br>
+ทางฝ่ายทะเบียนจึงอยากให้เรามาช่วยออกแบบระบบให้ใหม่ เพื่อแก้ปัญหาเรื่องนี้
+</blockquote>
+<p>จริงๆแล้วตัวระบบลงทะเบียนจริงไม่ได้มีฟังก์ชั่นแค่การลงทะเบียนเรียนอย่างเดียว และความซับซ้อนค่อนข้างเยอะ ในบทความนี้เราจะคิดง่ายๆว่าระบบนี้เอาไว้ใช้ลงทะเบียนเรียนอย่างเดียวพอ</p>
+<p>ก่อนจะไปถึงเทคนิค เรามาเริ่มต้นด้วยสถาปัตยกรรมปัจจุบันของระบบ ที่เป็น 3-Tier Architecture คือแยก Server ออกมาไว้รับ Request และแยก Database ออกมาเพื่อทำ ตามรูปข้างล่าง</p>
+<figure class=center>
+<img src=/img/diagrams/22-design-to-scale/01-3-tier-architecture.png alt="Basic Three-Tier Architecture">
+<figcaption>
+Basic Three-Tier Architecture
+</figcaption>
+</figure>
+<p>เพื่อความเรียบง่าย ผมจะถือว่าฝั่ง Server เป็น Stateless นะครับ คือไม่มีการเก็บข้อมูลใดๆอยู่ในนั้น ทุกอย่างลง Database หมด</p>
+<p>จากนั้นเราจะทำการ Sizing คือการประเมิน Workload ของระบบแบบคร่าวๆ ข้อมูลสำคัญ 3 อย่างที่เราควรรู้คือ</p>
+<ol>
+<li>ที่จังหวะ Peak Load (ช่วงที่แย่งกันลงทะเบียนเรียน) จะมีผู้ใช้ทั้งหมดประมาณกี่คน</li>
+<li>ผู้ใช้แต่ละคนจะส่ง Request เท่าไร</li>
+<li>แต่ละ Request &ldquo;หนัก&rdquo; แค่ไหน</li>
+</ol>
+<h2 id=1-ทจงหวะ-peak-load-ชวงทแยงกนลงทะเบยนเรยน-จะมผใชทงหมดประมาณกคน>1. ที่จังหวะ Peak Load (ช่วงที่แย่งกันลงทะเบียนเรียน) จะมีผู้ใช้ทั้งหมดประมาณกี่คน</h2>
+<p>กรณีระบบลงทะเบียนเรียน เราสามารถหาข้อมูลนี้ได้จากสำนักงานทะเบียน ว่าปัจจุบันมีนิสิตนักศึกษาทั้งหมดกี่คน</p>
+<p>สมมติว่ามหาวิทยาลัยมีนิสิตนักศึกษาป.ตรีทั้งหมด 25,000 คน เราอาจจะกะง่ายๆว่า จะมี Peak Load อยู่ที่ประมาณ 80% ของป.ตรี เพราะอีก 20% อาจจะไม่ต้องลงเรียนวิชาที่มีคนแย่งกันมาก หรือไม่แคร์ว่าจะลงได้หรือไม่ได้ (ตัด ป.โท กับป.เอก ออก เพราะไม่ต้องแย่งกันลงเหมือนป.ตรี)</p>
+<p>เราก็จะได้ข้อมูลคร่าวๆว่า 80% x 25,000 = 20,000 คน</p>
+<p>เอาเข้าจริง ระบบนี้อาจจะต้องใช้งานต่อไปอีกสักสิบปี จำนวนผู้ใช้ก็คงจะโตขึ้นตามอัตราส่วน ถ้าคุยกับทางมหาวิทยาลัย เราอาจจะเดาได้ว่าตัวเลขประมาณการณ์จริงๆน่าจะสักประมาณเท่าไร เช่น จากสถิติย้อนหลัง เราอาจจะพอเดาได้ว่าปริมาณนิสิตจะเพิ่มขึ้นปีละประมาณ 5% ถ้าเราจะออกแบบระบบให้รองรับคนได้ใน 10 ปีข้างหน้า เราก็ต้องเอาข้อมูลนี้มาคำนวนด้วย หรือหากเราทราบว่ามหาวิทยาลัยอาจจะมีการเปิดสาขาใหม่ในอีกปีสองปีข้างหน้า จำนวนนิสิตอาจจะพรุ่งพรวดขึ้นมาเลยก็ได้</p>
+<p>ส่วนตัวเลข 80% ถ้าเรารู้พฤติกรรมของผู้ใช้มากขึ้น ผ่านการสุ่มตัวอย่างสัมภาษณ์ หรือมีข้อมูลสถิติการใช้งานจากระบบเก่า ก็จะทำให้เรากะได้แม่นยำขึ้น</p>
+<p>อย่างไรก็ตาม อย่าลืมว่าการประเมินนี้เป็นแบบ"คร่าวๆ" ยังไงเราก็ไม่สามารถทำให้เป๊ะได้ จึงไม่ควรใช้เวลากับมันเยอะเกินไป</p>
+<p>ในทางปฏิบัติ ระบบที่ทำส่วนใหญ่จะเป็นระบบใหม่ที่ยังไม่มีคนเคยใช้ เราอาจจะต้องเดินไปถามฝ่ายการตลาดว่าขนาดตลาดโดยรวมของผู้ใช้มีประมาณกี่คน ทีมตั้งเป้าว่าจะได้ส่วนแบ่งทางการตลาดกี่เปอร์เซ็นต์ พฤติกรรมการใช้งานน่าจะเป็นยังไง มีการเข้าเว็บไซต์เราบ่อยแค่ไหน แล้วค่อยเอาตัวเลขมากะ Peak Load เอา ถ้าฝ่ายการตลาดตอบพวกนี้ไม่ได้ อันนี้แปลว่า Product ไม่ได้ทำ Market Research มาดีพอ แนะนำว่าให้ไล่บี้ต่อนิดนึงให้เค้าทำการบ้านให้ดี ไม่งั้นระบบนี้อาจได้ทำฟรีไม่มีคนใช้ หรือไม่ก็ทำแล้วรับ Scale ได้คนละเรื่องกับจำนวนจริง</p>
+<p>สำหรับระบบจำลองของเรานี้ เราสรุปเอาง่ายๆละกันว่ามหาวิทยาลัยคงไม่ได้รับนิสิตนักศึกษาเพิ่ม Peak Load ก็น่าจะอยู่ที่ 20,000 คนโดยประมาณ</p>
+<h2 id=2-ผใชแตละคนจะสง-request-เทาไร>2. ผู้ใช้แต่ละคนจะส่ง Request เท่าไร</h2>
+<p>ข้อนี้เราก็ต้องมาดู User Interaction ว่าหากผู้ใช้คนหนึ่งลงทะเบียนเข้าเรียน จะต้องมีการโต้ตอบอะไรกับระบบบ้าง</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>ขั้นที่</th>
+<th style=text-align:left>ผู้ใช้</th>
+<th style=text-align:left>ระบบ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>1</td>
+<td style=text-align:left>เข้าสู่ระบบ</td>
+<td style=text-align:left>ตรวจสอบ Username และ Password ว่าถูกต้อง</td>
+</tr>
+<tr>
+<td style=text-align:left>2</td>
+<td style=text-align:left>คลิ๊กที่ลิ้งก์ &ldquo;ลงทะเบียนเรียน&rdquo;</td>
+<td style=text-align:left>ส่งหน้าเว็บเพจสำหรับลงทะเบียนเรียนให้กับผู้ใช้</td>
+</tr>
+<tr>
+<td style=text-align:left>3</td>
+<td style=text-align:left>ผู้ใช้กรอกรหัสวิชา<strong>ทุกวิชา</strong> และกด Submit</td>
+<td style=text-align:left>ตรวจสอบแต่ละวิชากับฐานข้อมูลว่าเต็มแล้วหรือยัง ถ้ายัง ให้บันทึกการลงทะเบียนวิชานั้นๆ แต่หากเต็มแล้ว ก็ไม่ทำการลงทะเบียนให้ หลังจากตรวจสอบครบทุกวิชา ให้แสดงผลรหัสวิชาที่ลงทะเบียนเรียนสำเร็จ และไม่สำเร็จกลับไปยังผู้ใช้</td>
+</tr>
+<tr>
+<td style=text-align:left>4</td>
+<td style=text-align:left>ผู้ใช้เลือกจบการลงทะเบียน หรือส่งรหัสวิชาอื่นๆที่อยากลงทะเบียนเพิ่มเติม</td>
+<td style=text-align:left>ย้อนกลับไปข้อ 3 หรือจบการทำงาน</td>
+</tr>
+</tbody>
+</table>
+<p>สมมติคร่าวๆว่า ผู้ใช้ส่วนใหญ่จะลงทะเบียนไม่ทัน ต้องทำ ขั้นที่ 4 ซ้ำอีก 2 ครั้ง โดยเฉลี่ย ผู้ใช้จะต้องส่ง Request มาโดยเฉลี่ยประมาณ 6 ครั้ง (4 ขั้น + 2 ครั้ง) กว่าจะจบการลงทะเบียน</p>
+<blockquote>
+<p>ตรงนี้การวาง Interaction Flow จะมีผลมาก เช่น เราอยากจะมี Typeahead ให้กับการกรอกหมายเลขวิชา ก็จะมีปริมาณ Request เพิ่มอีกเยอะมาก ซึ่งอาจจะทำให้ระบบที่ออกแบบเปลี่ยนไปอีกเยอะเลย คนที่จะต้องมานั่งทำ Trade-off กับเราก็จะเป็นฝั่ง UX Designer</p>
+</blockquote>
+<p>เรื่องจำนวน Request นี่่ก็จะมีกรณีแปลกๆ เช่น มีคนเปิดบอทไว้ใช้ลงทะเบียนเรียน ซึ่งถ้าเราไม่ทำการ Throttling อาจจะทำให้จำนวน Request พุ่งขึ้นทะลุยอดได้ง่ายๆ อันนี้เพื่อความง่าย จะขอตัดกรณีแปลกๆพวกนี้ไป</p>
+<p>ด้วยข้อมูลนี้ ในช่วงเวลาหนึ่งนาที เราจะมี Request เข้ามา 20,000 คน x 6 ครั้ง = 120,000 Request ในหนึ่งนาที เฉลี่ยๆแล้วระบบต้องรับโหลดได้ประมาณ 2,000 Request/second</p>
+<p>ถ้าถามว่า 2,000 Request/second นี่มันเยอะรึเปล่า อันนี้ตอบยาก เพราะเรายังมีข้อที่ 3 อยู่</p>
+<h2 id=3-แตละ-request-หนก-แคไหน>3. แต่ละ Request &ldquo;หนัก&rdquo; แค่ไหน</h2>
+<p>อย่างหนึ่งที่มองข้ามไม่ได้ คือแต่ละ Request มีความ"หนัก" ต่อแต่ละส่วนของระบบไม่เท่ากัน เช่น Request แต่ละชนิดมีการประมวลผลบนเซอร์เวอร์มากน้อยไม่เท่ากัน หรือมีการเรียก Read/Write Database ไม่เท่ากัน</p>
+<p>ในกรณีนี้ เรามาวิเคราะห์ส่วนของ Database Read/Write กัน</p>
+<p>ขั้นที่ 1 นั้นจะต้องมีการอ่านข้อมูล(Read)จาก Database เพื่อตรวจสอบว่ารหัสผ่านถูกต้องหนึ่งครั้ง</p>
+<p>ขั้นที่ 2 เซอร์เวอร์สามารถส่งหน้าเว็บเพจกลับได้เลย ถ้าหน้านี้ไม่ได้มีข้อมูลแบบ Dynamic เราก็ไม่ต้องอ่านข้อมูลจาก Database จึงถือว่า"เบา" มาก</p>
+<p>ขั้นที่ 3 จะมีทั้งการ Read และ Write ใน Database หลายครั้ง (สำหรับแต่ละวิชา) โดยต้อง Read มาดูว่าเต็มรึเปล่าก่อน ถ้าเฉลี่ยแล้วนิสิตลงทะเบียนกันคนละประมาณ 6 วิชา จะต้องมีการอ่าน Database 6 ครั้ง (เว้นแต่เราจะทำการ Optimize Query) และทำการ Write ประมาณ 1-6 ครั้ง</p>
+<p>ขั้นที่ 4 จะมีจำนวนการ Read ตามปริมาณการลงทะเบียนที่ไม่สำเร็จ สมมติว่าให้เฉลี่ยอยู่ที่ 2 ครั้ง แต่ขั้นตอนนี้จะถูกทำซ้ำรวม 3 ครั้ง</p>
+<p>จะเห็นได้ว่า ส่วนที่หนักที่สุดต่อ Database คือขั้นตอนที่ 3 หากใช้วิธีการคำนวนคร่าวๆแบบด้านบน เราก็จะสามารถคำนวนจำนวน Read/Write per second โดยเฉลี่ยออกมาคร่าวๆได้ ซึ่งหากเราพบว่าต้องมีการติดต่อ Database เยอะ อันนี้ก็จะเป็นสัญญาณให้ระวังว่าส่วนที่ล่มก่อน จะเป็น Database ไม่ใช่ Server</p>
+<p>เมื่อรวมข้อมูลทั้งหมดมา เราจะกะได้คร่าวๆว่าในแต่ละ Session จะมีการ</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>ขั้นที่</th>
+<th style=text-align:left>DB Read</th>
+<th style=text-align:left>DB Write</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>1</td>
+<td style=text-align:left>1</td>
+<td style=text-align:left>0</td>
+</tr>
+<tr>
+<td style=text-align:left>2</td>
+<td style=text-align:left>0</td>
+<td style=text-align:left>0</td>
+</tr>
+<tr>
+<td style=text-align:left>3</td>
+<td style=text-align:left>6</td>
+<td style=text-align:left>&lt;=6</td>
+</tr>
+<tr>
+<td style=text-align:left>4</td>
+<td style=text-align:left>2*3</td>
+<td style=text-align:left>&lt;=6</td>
+</tr>
+</tbody>
+</table>
+<p>เฉลี่ย จะมี Read อยู่ที่ประมาณ 13 ครั้ง , Write 6 ครั้ง (จะ Write แค่เฉพาะวิชาที่ลงทะเบียนเรียนได้) สำหรับผู้ใช้ 1 คน ตลอด Session</p>
+<p>ถ้าให้ผู้ใช้ทำการลงทะเบียนทั้งหมดเสร็จใน 1 นาที
+Read = 13 ครั้งต่อคน * 20,000 คน / 60 วินาที = 4,333 ครั้ง/วินาที
+Write = 6 ครั้งต่อคน * 20,000 คน / 60 วินาที = 2,000 ครั้ง/วินาที</p>
+<p>อันนี้ผมตอบได้เลยว่าเยอะ ถ้าเขียนอ่านลง Database ตรงๆทั้งหมด โอกาสล่มค่อนข้างชัวร์</p>
+<p>ในทางปฏิบัติจริง ถ้าทำออกแบบ Database Table, ทำ Indexing, และเขียน SQL Query ดีๆ น่าจะลดปริมาณ Read/Write ลงไปได้เยอะมาก แต่หัวข้อนี้อยู่นอกสโคปของบทความ ขอไว้พูดถึงในโอกาสหน้านะครับ</p>
+<h1 id=bottleneck>Bottleneck</h1>
+<p>ในระบบลงทะเบียนเรียน ระบบจะต้องจัดการปริมาณในช่วงลงทะเบียน (Peak Load) ได้ โดยไม่ล่ม</p>
+<p>โดยปกติแล้ว ระบบที่รับ Request ไม่ไหวจนล่มเพราะทรัพยากรไม่เพียงพอ มักจะล่มอยู่ที่ทรัพยากรเหล่านี้</p>
+<ol>
+<li>CPU</li>
+<li>Memory</li>
+<li>Disk I/O (Read/Write)</li>
+<li>Network</li>
+</ol>
+<p>เราเรียกทรัพยากรเหล่านี้ว่าคอขวด (Bottleneck) ตัวอย่างเช่น ในระบบที่มี Request มากๆ แต่ละ Request ไม่มีการอ่านข้อมูลจาก Database ระบบมักจะมีคอขวดอยู่ที่ CPU หรือ RAM ของเซอร์เวอร์ แต่หากมีการอ่านเขียนข้อมูลจาก Database แล้ว Thread/Process ต้องรอผล Bottleneck ก็น่าจะไปอยู่ที่ I/O แทน</p>
+<p>ในขณะที่ระบบที่ต้องมีการอัพเดตข้อมูลต่อเนื่องกันเร็วๆ อย่างระบบลงทะเบียนของเรา หรือระบบจองตั๋ว อันนี้คอขวดมักจะอยู่ที่ Disk I/O หรือ RAM ของ Database</p>
+<p>กรณีที่เราสามารถสร้างระบบจำลองขึ้นมาทำ Load Test ได้ อันนี้จะหาค่าเหล่านี้ได้ใกล้เคียงมากที่สุด โดยเราสามารถทดลองยิง Request ใส่เข้าไปในระบบ แล้วเพิ่มจำนวนของ Request ขึ้นเรื่อยๆ จนถึงจุดที่ระบบไม่สามารถรับได้ (หรือรับได้แต่ Latency สูงเกิน) ณ จุดนั้น เราก็เข้าไปเช็คดูว่า Resource ตัวไหนที่หมดก่อน</p>
+<p>ซึ่งถ้าลองทำ Load Test แล้วระบบสามารถรับจำนวนที่เราคำนวนก่อนหน้านี้ได้ เราก็สามารถปรับลดทรัพยากรของเครื่องให้อยู่ในเกณฑ์ที่เหมาะสมได้</p>
+<p>หรือหากมีระบบเก่าอยู่แล้ว เราอาจจะใส่ Monitoring Tool เพื่อดูพฤติกรรมของระบบตอนที่มีคนใช้เยอะๆ ว่าทรัพยากรไหนมีแนวโน้มที่จะเป็น Bottleneck</p>
+<p>กรณีที่เราไม่มีระบบอยู่ (หรือมีแต่ระบบจริงที่ทำสองวิธีข้างบนไม่ได้) อันนี้ก็ต้องนั่งเทียนเอา อาจจะต้องไปเช็ค Benchmark ของเทคโนโลยีที่เราใช้แล้วกะๆเอา ซึ่งจากประสบการณ์ ส่วนใหญ่จะหาข้อมูลที่ใช้จริงได้ยากมาก เช่น <a href=https://www.nginx.com/blog/testing-the-performance-of-nginx-and-nginx-plus-web-servers/>บทความใน NGINX request/second</a> ก็มีตัวแปรเรื่อง Hardware, Request size, SSL เข้ามาเกี่ยวข้องอยู่ดี</p>
+<p>แม้่ Hardware, Server, Request size, Technology Stack ตรงกันเป๊ะๆ แต่ผู้ใช้ดันมาจากคนละ Region ทำให้ Network Latency ไม่เท่ากัน จำนวน Concurrent Request ที่ค้างอยู่ในระบบก็จะไม่เท่ากันด้วย ทำให้กะได้ค่อนข้างยาก</p>
+<p>โดยส่วนตัว ผมแนะนำว่าให้เผื่อไว้ดีกว่าขาด ถ้าใช้ Cloud ก็ออกแบบให้มัน Scale ขึ้นลงได้ง่ายๆ ใส่ Monitoring Tool เอาไว้ แล้วพอเห็นว่าจำนวนผู้ใช้จริงประมาณเท่าไร แล้วค่อยมาปรับจำนวนเอา</p>
+<p>หรืออีกเทคนิคนึงที่เห็นก็คือการเอาระบบใหม่เข้าไปใส่เป็น Shadow ของระบบเก่า เพื่อให้รับโหลดจริงๆ (แต่ผลลัพธ์ที่ผู้ใช้ได้ยังคงอยู่ในระบบเก่าทั้งหมด) แล้วมา Monitor ดูว่าไหวรึเปล่า</p>
+<h1 id=เทคนคการออกแบบระบบใหรบ-request-ไดมากขน>เทคนิคการออกแบบระบบให้รับ Request ได้มากขึ้น</h1>
+<p>หลังจากได้ข้อมูลทั้งหมดแล้ว เราจะมาออกแบบระบบกัน !! (ในที่สุด&mldr;) โดยเราจะปรับปรุงจาก Three-Tier Architecture ที่เรามีไว้ตอนแรก</p>
+<figure class=center>
+<img src=/img/diagrams/22-design-to-scale/01-3-tier-architecture.png alt="Basic Three-Tier Architecture">
+<figcaption>
+Basic Three-Tier Architecture
+</figcaption>
+</figure>
+<h2 id=1-scaling-vertically-vs-horizontally>1. Scaling Vertically vs Horizontally</h2>
+<p>จริงๆวิธีการแก้ปัญหาที่ง่ายที่สุด คือการอัดทรัพยากรเข้าไปเพิ่ม</p>
+<p>ถ้า CPU ไม่พอ ก็เพิ่ม CPU ถ้า Memory ไม่พอ ก็เพิ่ม Memory เข้าไป</p>
+<p>โดยสมัยก่อน การเพิ่มแบบนี้จะเป็นการอัพเกรดเครื่อง หรือย้ายไปเครื่องใหม่ที่มีเสป็คแรงขึ้น วิธีนี้เราอาจมองได้ว่าเป็นการทำให้เครื่องใหญ่ขึ้น ศัพท์เฉพาะหรูๆของการ Scale แบบนี้คือ Vertical Scaling (ขยายแนวตั้ง)</p>
+<figure class=center>
+<img src=/img/diagrams/22-design-to-scale/02-scale-vertically.png alt="ถ้าเครื่องมันแรงไม่พอ ก็ซื้อเครื่องใหญ่มาใช้แทนสิ">
+<figcaption>
+ถ้าเครื่องมันแรงไม่พอ ก็ซื้อเครื่องใหญ่มาใช้แทนสิ
+</figcaption>
+</figure>
+<p>การเพิ่มแบบแนวตั้งนี้มีปัญหาหลายอย่าง ได้แก่</p>
+<ol>
+<li><strong>เราจะไม่สามารถขยายเครื่องใหญ่ขึ้นได้ตลอดไป</strong> หลังจากขยายขนาดเครื่องไปเรื่อยๆ ราคาจะแพงขึ้นในแบบ Exponential คุณไม่มีทางเอาเครื่องๆเดียวรับคำสั่งค้นหา Google ทั้งโลกได้ (แม้จะสร้างได้ในทางทฤษฏี แต่ในทางปฏิบัติ เครื่องน่าจะใหญ่มากจนไม่สามารถก่อสร้างได้ในราคาที่เราสามารถจ่ายได้)</li>
+<li><strong>มี Downtime ในการอัพเกรด</strong> ณ จุดหนึ่งที่เมนบอร์ดใส่แรมครบแล้ว เราก็ต้องอัพเกรดโดยการเปลี่ยนไปยังเครื่องใหม่ โดยการเปลี่ยนไปยังเครื่องใหม่นี้จะต้องมี Downtime (ช่วงเวลาที่ต้องปิดปรับปรุงระบบ) ซึ่งอาจจะกินเวลาเป็นวัน</li>
+<li><strong>เราต้องมีทรัพยากรเกินความจำเป็นตลอด</strong> เช่นในระบบลงทะเบียนเรียนข้างต้น เราต้องวางระบบให้รองรับ 2,000 Request/วินาที ซึ่งปริมาณ Load ขนาดนี้จะเกิดขึ้นแค่เทอมละครั้ง แต่เราต้องมีเครื่องที่รับปริมาณ Request ที่สูงมากๆอยู่ตลอดเวลา ส่วนเวลาอื่นๆ เครื่องก็ทำงานโดยไม่ได้ใช้ประสิทธิภาพเต็มที่</li>
+</ol>
+<p>ดังนั้น การออกแบบสมัยใหม่เลยเน้นไปที่การเพิ่มแบบ Horizontally หรือแนวนอน</p>
+<p>การเพิ่มแบบแนวนอนคือการใส่เซอร์เวอร์ใหม่เพิ่มเข้าไป โดยไม่ต้องแตะเซอร์เวอร์เก่า เวลามี Request จากฝั่งผู้ใช้ พวก Request นี้ก็จะโดนกระจายไปตามเซอร์เวอร์ต่างๆ</p>
+<figure class=center>
+<img src=/img/diagrams/22-design-to-scale/03-scale-horizontally.png alt="ถ้าเครื่องมันแรงไม่พอ ก็อัดเครื่องเพิ่มเข้าไปเยอะๆสิ">
+<figcaption>
+ถ้าเครื่องมันแรงไม่พอ ก็อัดเครื่องเพิ่มเข้าไปเยอะๆสิ
+</figcaption>
+</figure>
+<p>หากออกแบบมาดี การ Scale Horizontally นั้นจะช่วยลดปัญหาข้อที่ 1 และ 2 ได้</p>
+<p>ส่วนข้อ 3 ถ้าหากใช้ระบบ Cloud ที่สามารถปรับปริมาณทรัพยากรที่ใช้แบบอัตโนมัติได้ เช่น ปกติเราอาจจะรันระบบด้วยเซอร์เวอร์แค่สองตัว แต่พอเข้าสู่ช่วงลงทะเบียนเรียน เราจะเพิ่มปริมาณเซอร์เวอร์เป็นสิบตัวในวันแรกๆของการลงทะเบียน ทำให้ลดค่าใช้จ่ายได้</p>
+<h2 id=2-read-replica>2. Read Replica</h2>
+<p>ตัวอย่างการ Scale ข้างต้นนั้นอยู่ในส่วนของเซอร์เวอร์ แต่ถ้าส่วนที่เป็นคอขวดจริงๆคือส่วนของ Disk I/O ของ Database ล่ะ?</p>
+<p>ปัญหานี้มีสามารถแก้ได้หลายทาง วิธีแรกที่จะคุยกันคือการทำ Read Replica</p>
+<p>วิธีนี้อาจจะคล้ายๆกับ Scaling Horizontally โดยเราจะทำการก็อบข้อมูลของ Database ทั้งหมด แยกมาไว้ในอีก Database หนึ่ง แล้วให้คำสั่งอ่าน (Read) วิ่งไป Database นี้แทน</p>
+<figure class=center>
+<img src=/img/diagrams/22-design-to-scale/04-read-replica.png alt="ถ้า Database เครื่องเดียวไม่พอ ก็อบข้อมูลทั้งหมดไว้อีกเครื่องนึงให้อ่านเพิ่มสิ">
+<figcaption>
+ถ้า Database เครื่องเดียวไม่พอ ก็อบข้อมูลทั้งหมดไว้อีกเครื่องนึงให้อ่านเพิ่มสิ
+</figcaption>
+</figure>
+<p>หากมีการเขียน เราก็จะส่งไปที่ Database หลัก (เราจะเรียกกันว่า Master) แล้วตัว Master ก็จะทำการก็อบข้อมูลไปยัง Read Replica แบบ Asynchronous</p>
+<p>วิธีนี้ดูผิวเผินอาจจะช่วยใช้แก้ปัญหาได้ แต่จริงๆแล้วจะมี Trade-off ที่สำคัญมากๆ เพราะการก็อบข้อมูลเป็นแบบ Asynchronous ที่เราควบคุมไม่ได้ว่าจะเสร็จเมื่อไร</p>
+<p>ยกตัวอย่างเช่น หากเรามีวิชาที่คนแย่งกันลงทะเบียนมากๆ ณ จุดหนึ่ง Replica อาจจะมีคนลงทะเบียนที่ 80 จาก 100 คน (80/100)</p>
+<p>ทันใดนั้น มีคนลงทะเบียนเข้ามาพรวดเดียวอีก 20 คน ทำให้ข้อมูลที่ตัว Master นั้นเต็มแล้ว (100/100) แต่ยังไม่ได้ทำการก็อบข้อมูลไปยัง Replica</p>
+<p>ณ จุดนี้ หากมีคนลงทะเบียนเพิ่ม เวลาเซอร์เวอร์อ่านข้อมูลจาก Read Replica ซึ่งยังเป็น (80/100) เซอร์เวอร์ก็จะคิดว่าเรายังลงทะเบียนได้อยู่ ทำให้เกิดการลงทะเบียนเกิน (101/100)</p>
+<p>บางคนอาจจะได้ไอเดียว่า ถ้า Asynchronous มันมีปัญหา ก็ทำแบบ Synchronous สิ คือทุกครั้งที่ Write ให้ทำการอัพเดต Replica ให้เสร็จก่อน เวลาเกิดการ Read ครั้งถัดไป เราจะได้มั่นใจว่าการ Read ทุกครั้งได้ข้อมูลที่ตรงกัน (Consistency)</p>
+<p>วิธีนี้แก้ปัญหาได้ แต่ค่าใช้จ่ายที่จะตามมาก็คือการเขียนจะต้องใช้เวลานานขึ้น (เพราะต้องเขียนทั้งสอง Database) และมีความซับซ้อนมากขึ้นเพราะต้องจัดการกรณีที่การเขียนลง Replica ไม่สำเร็จ (แต่ดันเขียนลง Master ไปแล้ว) พอจะ Scale ให้มีจำนวน Read Replica มากขึ้น เพื่อรับโหลดเพิ่ม ปัญหานี้จะทวีความรุนแรงมากขึ้นเรื่อยๆ ทำให้จัดการยากมาก</p>
+<p>ดังนั้น หากใครคิดจะใช้ Read Replica ให้พิจารณาให้ดีว่าเรายอมรับกรณีที่การอ่านข้อมูลหลังจากการเขียนช้าไปนิดนึงได้ไหม ซึ่งถ้ารับ Trade-off ตรงนี้ได้ วิธีนี้ก็จะสะดวกมากทีเดียว เพราะ Database ส่วนใหญ่นั้นมักจะมีฟีเจอร์นี้ให้อยู่แล้ว</p>
+<h2 id=3-caching>3. Caching</h2>
+<p>อีกหนึ่งทางเลือกคือการทำ Caching ข้อมูลที่ต้องใช้บ่อยๆ ไว้ใน Memory แทนที่จะเป็น Disk</p>
+<p>ตัวอย่างเช่น หากเราค้นพบว่า Bottleneck คือ Database ของข้อมูลที่เราต้องใช้บ่อยมากในขั้นที่ 4 นั่นคือ จำนวนคนที่ลงทะเบียนเรียนไปแล้ว ในแต่ละรายวิชา</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>รหัสวิชา</th>
+<th style=text-align:left>จำนวนคนที่ลงทะเบียนไปแล้ว</th>
+<th style=text-align:left>รับทั้งหมด</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>2110332</td>
+<td style=text-align:left>30</td>
+<td style=text-align:left>120</td>
+</tr>
+<tr>
+<td style=text-align:left>3800250</td>
+<td style=text-align:left>50</td>
+<td style=text-align:left>50</td>
+</tr>
+<tr>
+<td style=text-align:left>2300150</td>
+<td style=text-align:left>55</td>
+<td style=text-align:left>60</td>
+</tr>
+</tbody>
+</table>
+<p>ทางเลือกหนึ่งคือเราอาจเก็บข้อมูลส่วนนี้แยกไว้ใน Memory ของเซอร์เวอร์ ​(กรณีที่เรามั่นใจว่ามีเซอร์เวอร์แค่ตัวเดียว)</p>
+<figure class=center>
+<img src=/img/diagrams/22-design-to-scale/05-caching-on-server.png alt="เก็บข้อมูลที่ต้องอ่านบ่อยๆไว้บน Server แทนที่จะต้องไปอ่านจาก Database ทุกครั้ง">
+<figcaption>
+เก็บข้อมูลที่ต้องอ่านบ่อยๆไว้บน Server แทนที่จะต้องไปอ่านจาก Database ทุกครั้ง
+</figcaption>
+</figure>
+<p>กรณีที่เรามีเซอร์เวอร์หลายตัว การ Synchornize ค่าตารางนี้ในแต่ละเซอร์เวอร์จะวุ่นวายมาก วิธีที่เหมาะสมกว่าคือเก็บไว้ใน In-Memory Database (Redis, Memcached) ในกรณีที่เรามี Server หลายตัว</p>
+<figure class=center>
+<img src=/img/diagrams/22-design-to-scale/06-caching-on-memory-db.png alt="เก็บข้อมูลที่ต้องอ่านบ่อยๆไว้บน Redis แทนที่จะต้องไปอ่านจาก Database ทุกครั้ง">
+<figcaption>
+เก็บข้อมูลที่ต้องอ่านบ่อยๆไว้บน Redis แทนที่จะต้องไปอ่านจาก Database ทุกครั้ง
+</figcaption>
+</figure>
+<p>วิธีนี้ทำให้เราสามารถอ่านข้อมูลได้อย่างรวดเร็วกว่า แทนที่จะต้องติดต่อ Database ทุกครั้งว่ายังลงทะเบียนเพิ่มได้หรือเปล่า เราก็สามารถตรวจจากข้อมูลใน Memory ได้เลย ซึ่งจะเร็วกว่าเป็นพันเท่า (<a href=https://gist.github.com/jboner/2841832>การดึงข้อมูลใน Memory ใช้เวลาประมาณ 100 ns ในขณะท่ี Disk Read อยู่ที่ 150,000 ns</a>)</p>
+<p>ความซับซ้อนที่เพิ่มขึ้นมา คือเวลาเราจะต้องเก็บข้อมูลอยู่สองที่ หากเกิดอะไรขึ้นระหว่างการเขียนข้อมูล อาจจะทำให้ข้อมูล Inconsistent ได้ อันนี้ตัวโปรแกรมจะต้องจัดการให้ดี ว่าในกรณีที่เกิด Exception หรือ Error หลังจากเขียนข้อมูลลงไปใน Cache แล้ว เราจะทำการ Restore ค่ากลับอย่างไร</p>
+<h2 id=4-data-partitioning>4. Data Partitioning</h2>
+<p>หากเรามองปัญหาในอีกมุมหนึ่ง เราสามารถออกแบบข้อมูลของ Database ให้กระจายไปอยู่หลายๆเครื่องได้ เช่น</p>
+<ol>
+<li>ข้อมูลวิชาบังคับของแต่ละภาค</li>
+<li>ข้อมูลวิชาเลือก (Free Elective) ของทุกภาควิชา</li>
+</ol>
+<p>เราอาจจะค้นพบว่า วิชาที่เกิดการแย่งลงมากๆ (มีการ Read/Write) เยอะๆ คือพวกวิชา Free Elective ซึ่งมีแค่ประมาณ​ 10% ของวิชาทั้งหมด</p>
+<p>เราอาจจะแยกวิชาพวกนี้เข้าไปเก็บใน Database หนึ่งโดยเฉพาะ แล้วให้เซอร์เวอร์ติดต่อ Database นี้แยกต่างหาก เวลาต้องการเช็คการลงทะเบียนเรียนเกี่ยวกับ Free Elect</p>
+<figure class=center>
+<img src=/img/diagrams/22-design-to-scale/07-data-partitioning.png alt="แบ่งวิชาจำนวน 10% ที่มีคนแย่งกันลงทะเบียนมากที่สุด แยกไปอีก Database นึง">
+<figcaption>
+แบ่งวิชาจำนวน 10% ที่มีคนแย่งกันลงทะเบียนมากที่สุด แยกไปอีก Database นึง
+</figcaption>
+</figure>
+<p>วิธีนี้เป็นการกระจาย Load ในระบบด้วยความรู้ใน Domain ของระบบ ตัวอย่างอื่นๆก็เช่น เฟสบุ้ครู้ว่าเรามักจะค้นคนที่อยู่ประเทศเดียวกัน เฟสบุ้คก็อาจจะกระจายการเก็บข้อมูลให้คนในประเทศเดียวกันเก็บข้อมูลใน Database เดียวกัน (หรืออยู่ใน Data center เดียวกัน) ก็จะได้ดึงข้อมูลได้เร็ว</p>
+<p>กรณีที่เราไม่รู้อะไรเลย (ไม่รู้ว่าวิชาไหนคนแย่งกันมากๆ) ก็อาจจะทำการสุ่มกระจายข้อมูลเท่าๆกันลงบนทุก Database</p>
+<p>ในทางปฏิบัติ วิธีนี้มีปัญหาตรงที่โค้ดในฝั่งเซอร์เวอร์นั้นจะต้องมาคอยรับรู้ว่าข้อมูลมีการกระจายยังไง และถ้าเราต้องการดึงข้อมูลการลงทะเบียนเรียนของผู้ใช้คนหนึ่งออกมา ก็ต้องดึงจากสองข้อมูล ถ้าคนดูแลโค้ดพวกนี้ทั้งหมดเป็นทีมเดียวกันก็อาจจะไม่ใช่ปัญหามาก แต่หากมีหลายทีม การปล่อยให้ Implementation Details (วิธีการเก็บข้อมูล) หลุดไปในฝั่ง Server นั้นถือว่าเป็น Bad practice ที่จะทำให้ทีมทำงานได้ช้า เพราะต้องมารอกัน</p>
+<p>ดังนั้น เราควรจะแยกการลงทะเบียนเรียนออกมาเป็น Service ของตัวเองเลย ฝั่ง Server ก็จะได้ไม่ต้องรับรู้ว่าข้อมูลถูกเก็บยังไง แค่ไปเรียก API เพื่อทำการอ่าน/เขียนข้อมูลแทน</p>
+<figure class=center>
+<img src=/img/diagrams/22-design-to-scale/08-microservice.png alt="ซ่อน Implementaiton Details ไว้หลัง API">
+<figcaption>
+ซ่อน Implementaiton Details ไว้หลัง API
+</figcaption>
+</figure>
+<h1 id=สรป>สรุป</h1>
+<p>เราเริ่มต้นด้วยโจทย์ว่าจะทำอย่างไรให้ระบบลงทะเบียนเรียนไม่ล่มเวลามีคนใช้เยอะๆ</p>
+<p>จากโจทย์ เราพยายามหาข้อมูล เพื่อประมาณจำนวน Peak Load แบบคร่าวๆ การรู้ Peak Load ตัวนี้จะทำให้เรากะปริมาณ Hardware เพื่อให้ทรัพยากรที่เป็นคอขวด (Bottleneck) มีเพียงพอ</p>
+<p>ในการออกแบบระบบ หาก Bottleneck อยู่ที่เซอร์เวอร์ เราสามารถใช้วิธี Scale แบบ Horizontal (ใส่เครื่องเพิ่ม) ได้ง่ายๆ</p>
+<p>แต่หากคอขวดอยู่ที่ฝั่ง Database การเพิ่มจำนวน Database แบบตรงๆจะไม่ทำให้ประสิทธิภาพเพิ่มตามจำนวน เพราะการเขียนทุกครั้ง เราจะต้องเขียนลงบน Database ทุกตัวเพื่อให้ข้อมูลตรงกัน ทำให้ไม่สามารถรองรับปริมาณ Request ได้เพิ่มไปจากเดิม</p>
+<p>ดังนั้น เราจึงต้องใช้วิธีอื่นๆในฝั่ง Database เช่น Read Replica, Caching, Data partitioning</p>
+<p>ในบทความนี้ก็จะอธิบายเทคนิคแต่ละแบบคร่าวๆที่ใช้กันบ่อยและไม่ซับซ้อนมาก ในทางปฏิบัติ หากระบบมีขนาดใหญ่มากๆ อาจจะต้องใช้เทคนิคอื่นๆที่มี Multi-master เช่น Two-Phase commit, Quorum หรือ Partitioning แบบที่ซับซ้อนกว่านี้</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>Author</span>
+<span class=item-content>ijemmy</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>LastMod</span>
+<span class=item-content>
+2018-04-09
+</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>License</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/system-design/>system design</a>
+<a href=/tags/architecture/>architecture</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/23-karma-from-bad-tests2/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับที่ 2 System Integration Tests/End-to-End Tests)</span>
+<span class="prev-text nav-mobile">Prev</span>
+</a>
+<a class=next href=/post/21-karma-from-bad-tests/>
+<span class="next-text nav-default">เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับ Unit/Component Tests)</span>
+<span class="next-text nav-mobile">Next</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
+<a href=http://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+Powered by <a class=hexo-link href=https://gohugo.io>Hugo</a>
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+Theme -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<span class=copyright-year>
+&copy;
+2017 -
+2021<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

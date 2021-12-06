@@ -1,0 +1,285 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>ขึ้นโปรเจ็คใหม่ ใช้ภาษาอะไรดี - Not About Code - Technical Leadership</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="ijemmy"><meta name=description content="เมื่อวันก่อน นั่งคุยกับน้องคนหนึ่งที่กำลังจะขึ้นโปรเจ็คใหม่ แต่ลังเลว่าจะใช้ภาษาอะไรดี
+เป็นเรื่องน่าปวดหัวของโปรแกรมเมอร์สมัยใหม่ครับ เพราะมีตัวเลือกเยอะไป สมัยก่อน ตัวเลือกไม่เยอะ อย่างเก่งก็แค่ C#, Java, PHP, C แต่เดี๋ยวโผล่มาพรึ่บพรั่บกันหมด
+พอคุยๆกันกับน้องเค้าไปสักพัก ก็มีชื่อ Python + Django, Ruby on Rail, JavaScript + NodeJS, Go, Kotlin, Scala, TypeScript, Closure อะไรไม่รู้เต็มไปหมด
+ตัวผมเอง เคยเขียนแค่สี่ห้าภาษา แถมยังไม่ได้ลงลึกด้วย ก็พอแต่แนะนำไกด์ไลน์ไปคร่าวๆ ว่าภาษาไหนมีจุดเด่นอะไร
+"><meta name=keywords content="Hugo,theme,even">
+<meta name=generator content="Hugo 0.89.4 with theme even">
+<link rel=canonical href=http://www.notaboutcode.com/post/04-choosing-language/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<link rel=stylesheet href=/css//css/custom.css>
+<meta property="og:title" content="ขึ้นโปรเจ็คใหม่ ใช้ภาษาอะไรดี">
+<meta property="og:description" content="
+เมื่อวันก่อน นั่งคุยกับน้องคนหนึ่งที่กำลังจะขึ้นโปรเจ็คใหม่ แต่ลังเลว่าจะใช้ภาษาอะไรดี
+เป็นเรื่องน่าปวดหัวของโปรแกรมเมอร์สมัยใหม่ครับ เพราะมีตัวเลือกเยอะไป สมัยก่อน ตัวเลือกไม่เยอะ อย่างเก่งก็แค่ C#, Java, PHP, C แต่เดี๋ยวโผล่มาพรึ่บพรั่บกันหมด
+พอคุยๆกันกับน้องเค้าไปสักพัก ก็มีชื่อ Python + Django, Ruby on Rail, JavaScript + NodeJS, Go, Kotlin, Scala, TypeScript, Closure อะไรไม่รู้เต็มไปหมด
+ตัวผมเอง เคยเขียนแค่สี่ห้าภาษา แถมยังไม่ได้ลงลึกด้วย ก็พอแต่แนะนำไกด์ไลน์ไปคร่าวๆ ว่าภาษาไหนมีจุดเด่นอะไร">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://www.notaboutcode.com/post/04-choosing-language/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2017-10-13T12:04:02+07:00">
+<meta property="article:modified_time" content="2017-10-13T12:04:02+07:00">
+<meta itemprop=name content="ขึ้นโปรเจ็คใหม่ ใช้ภาษาอะไรดี">
+<meta itemprop=description content="
+เมื่อวันก่อน นั่งคุยกับน้องคนหนึ่งที่กำลังจะขึ้นโปรเจ็คใหม่ แต่ลังเลว่าจะใช้ภาษาอะไรดี
+เป็นเรื่องน่าปวดหัวของโปรแกรมเมอร์สมัยใหม่ครับ เพราะมีตัวเลือกเยอะไป สมัยก่อน ตัวเลือกไม่เยอะ อย่างเก่งก็แค่ C#, Java, PHP, C แต่เดี๋ยวโผล่มาพรึ่บพรั่บกันหมด
+พอคุยๆกันกับน้องเค้าไปสักพัก ก็มีชื่อ Python + Django, Ruby on Rail, JavaScript + NodeJS, Go, Kotlin, Scala, TypeScript, Closure อะไรไม่รู้เต็มไปหมด
+ตัวผมเอง เคยเขียนแค่สี่ห้าภาษา แถมยังไม่ได้ลงลึกด้วย ก็พอแต่แนะนำไกด์ไลน์ไปคร่าวๆ ว่าภาษาไหนมีจุดเด่นอะไร"><meta itemprop=datePublished content="2017-10-13T12:04:02+07:00">
+<meta itemprop=dateModified content="2017-10-13T12:04:02+07:00">
+<meta itemprop=wordCount content="445">
+<meta itemprop=keywords content="Language,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="ขึ้นโปรเจ็คใหม่ ใช้ภาษาอะไรดี">
+<meta name=twitter:description content="
+เมื่อวันก่อน นั่งคุยกับน้องคนหนึ่งที่กำลังจะขึ้นโปรเจ็คใหม่ แต่ลังเลว่าจะใช้ภาษาอะไรดี
+เป็นเรื่องน่าปวดหัวของโปรแกรมเมอร์สมัยใหม่ครับ เพราะมีตัวเลือกเยอะไป สมัยก่อน ตัวเลือกไม่เยอะ อย่างเก่งก็แค่ C#, Java, PHP, C แต่เดี๋ยวโผล่มาพรึ่บพรั่บกันหมด
+พอคุยๆกันกับน้องเค้าไปสักพัก ก็มีชื่อ Python + Django, Ruby on Rail, JavaScript + NodeJS, Go, Kotlin, Scala, TypeScript, Closure อะไรไม่รู้เต็มไปหมด
+ตัวผมเอง เคยเขียนแค่สี่ห้าภาษา แถมยังไม่ได้ลงลึกด้วย ก็พอแต่แนะนำไกด์ไลน์ไปคร่าวๆ ว่าภาษาไหนมีจุดเด่นอะไร"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>ขึ้นโปรเจ็คใหม่ ใช้ภาษาอะไรดี</h1>
+<div class=post-meta>
+<span class=post-time> 2017-10-13 </span>
+<div class=post-category>
+<a href=/categories/technical-leadership/> Technical Leadership </a>
+</div>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>Contents</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#1-ความเรวของระบบกบประสทธภาพ-vs-ความเรวในการพฒนา>1. ความเร็วของระบบกับประสิทธิภาพ vs ความเร็วในการพัฒนา</a></li>
+<li><a href=#2-ภาษามาพรอมกบ-frameworklibrary>2. ภาษามาพร้อมกับ Framework/Library</a></li>
+<li><a href=#3-อยาดถกความลกซงของภาษา>3. อย่าดูถูกความลึกซึ้งของภาษา</a></li>
+<li><a href=#4-ในทมมคนเขยนภาษาframeworklibrary-นคลองรเปลา>4. ในทีมมีคนเขียนภาษา/Framework/Library นี้คล่องรึเปล่า?</a></li>
+<li><a href=#5-ในอนาคต-จะมคนเขยนภาษาframeworklibrary-ใหจางรเปลา>5. ในอนาคต จะมีคนเขียนภาษา/Framework/Library ให้จ้างรึเปล่า?</a></li>
+<li><a href=#6-เลอกภาษาทในบรษทมคนทำ-tool-ใหใชแลว>6. เลือกภาษาที่ในบริษัทมีคนทำ Tool ให้ใช้แล้ว</a></li>
+<li><a href=#สรป-ไอภาษาทดกวา-จรงๆมนใหประโยชนกบคณแคไหน>สรุป: ไอ้ภาษาที่ดีกว่า จริงๆมันให้ประโยชน์กับคุณแค่ไหน</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p><img src=/img/covers/new-project-01.jpg alt="Photo by Nick Morris, from Unsplash.com"></p>
+<p>เมื่อวันก่อน นั่งคุยกับน้องคนหนึ่งที่กำลังจะขึ้นโปรเจ็คใหม่ แต่ลังเลว่าจะใช้ภาษาอะไรดี</p>
+<p>เป็นเรื่องน่าปวดหัวของโปรแกรมเมอร์สมัยใหม่ครับ เพราะมีตัวเลือกเยอะไป สมัยก่อน ตัวเลือกไม่เยอะ อย่างเก่งก็แค่ C#, Java, PHP, C แต่เดี๋ยวโผล่มาพรึ่บพรั่บกันหมด</p>
+<p>พอคุยๆกันกับน้องเค้าไปสักพัก ก็มีชื่อ Python + Django, Ruby on Rail, JavaScript + NodeJS, Go, Kotlin, Scala, TypeScript, Closure อะไรไม่รู้เต็มไปหมด</p>
+<p>ตัวผมเอง เคยเขียนแค่สี่ห้าภาษา แถมยังไม่ได้ลงลึกด้วย ก็พอแต่แนะนำไกด์ไลน์ไปคร่าวๆ ว่าภาษาไหนมีจุดเด่นอะไร</p>
+<p>พอมีเวลากลับมานั่งคิดดูอีกครั้ง จริงๆแล้วการบอกว่าแต่ละภาษาใช้ทำอะไร เหมาะหรือไม่ มันเหมือนกับการหยิบปลาให้น้องมากกว่า เราควรสอนวิธีให้น้องหาวิธีหาปลาเอง</p>
+<p>ก็เลยเป็นที่มาของบันทึกฉบับนี้ครับ</p>
+<p>โดยบันทึกฉบับนี้ เราจะมาเรียนรู้วิธีหาปลา(ภาษา)กัน แต่ผมจะไม่มานั่งไล่บอกว่า C กับ Go เนี่ยมันเร็วยังไง หรือ Scala มันเทพกว่า Java ยังไง</p>
+<p>แต่เราจะมาออกจากความเป็นโปรแกรมเมอร์สุดกี้คมานิดนึง มามองการพัฒนาโปรแกรมด้วยเลนส์ของการจัดการกันบ้าง</p>
+<h1 id=1-ความเรวของระบบกบประสทธภาพ-vs-ความเรวในการพฒนา>1. ความเร็วของระบบกับประสิทธิภาพ vs ความเร็วในการพัฒนา</h1>
+<p>โปรแกรมเมอร์เรามักจะไปเน้นเรื่อง<strong>ความเร็ว และประสิทธิภาพกัน</strong>จนบางทีลืมมองภาพรวมครับ</p>
+<p>ว่าจริงๆแล้ว เราไม่ต้องไปแคร์เรื่องพวกนั้นจนกระทั่งเรามีคนใช้เยอะๆ (ซึ่งก็ไม่รู้ว่าเมื่อไร)</p>
+<p>มันจำเป็นจริงๆรึเปล่าที่เราต้องให้ Backend เราทำงานเสร็จใน 50 ms หรือจริงๆ 300 ms ก็โอเคแล้ว</p>
+<p>ส่วนเรื่องประสิทธิภาพในการเสกล จริงๆแล้วมันสำคัญที่การออกแบบระบบ มากกว่าการเลือกภาษา และเอาเข้าจริงใช้วิธีอัดเครื่องเพิ่มเข้าไปอาจจะคุ้มกว่าที่จะต้องไปนั่งเขียนภาษาที่ประสิทธิภาพโหดๆ แต่ใช้เวลาการพัฒนานานๆ</p>
+<p>ถ้าออกแบบระบบมาดี ภาษาอะไรก็สเกลได้ในระดับหนึ่งครับ พอถึงจุดนั้นค่อยมานั่ง ​Optimize คอขวด (Bottleneck) กัน เฟสบุ้คเองก็เริ่มเขียนด้วย PHP (ซึ่ง Scale/Performance บัดซบมาก) แล้วค่อยๆ Optimize ขึ้นมาตามจำนวนผู้ใช้ครับ</p>
+<p>หรือถ้าออกแบบเป็นเซอร์วิซ เราสามารถเขียนอีกภาษาหนึ่งให้ Optimized กว่า แล้วสลับแทนในภายหลังได้ อาจจะไม่ง่ายเหมือนเขียนใหม่แต่แรก แต่อย่างน้อย เราก็สามารถส่งโปรดักต์เราออกไปให้กับลูกค้าได้เร็วกว่ามาก พอฮิตแล้วค่อยมาดูว่ามันต้องเขียนใหม่จริงรึเปล่าก็ยังไม่สาย แต่ถ้าไม่ฮิต ก็จะได้ไม่ต้องเสียเวลา ไปทำโปรดักต์ใหม่เลย</p>
+<p>ในทางตรงกันข้าม <strong>ความเร็วในการพัฒนา</strong>งานให้เสร็จ เป็นอะไรที่ต่อรองได้ยาก</p>
+<p>อย่างสตาร์ทอัพที่ต้องการความเร็ว ต้องไปไว แล้วทดลองไอเดียใหม่ๆ รับฟีดแบ็คจากผู้ใช้ ทิ้งไอเดียที่ไม่เวิร์ค แล้วทำใหม่ให้ไว สร้าง Volume ให้ได้ อันนี้ความเร็วในการพัฒนานี่คือความเป็นความตายของบริษัทเลย</p>
+<p>ดังนั้น แทนที่จะไปมองเรื่องประสิทธิภาพ ลองมองดูว่า <strong>ตัวเลือกไหนที่จะทำโปรดักต์ที่พร้อมใช้ให้เร็วที่สุด</strong> ซึ่งอาจจะสำคัญกว่าในกรณีของโปรเจ็คคุณ</p>
+<h1 id=2-ภาษามาพรอมกบ-frameworklibrary>2. ภาษามาพร้อมกับ Framework/Library</h1>
+<p>คราวนี้ พอเราเลือกภาษา เอาเข้าจริง เราไม่ได้เลือกแค่ภาษาครับ ตัวอย่างเช่น ถ้าจะทำเว็บแอพเนี่ย เราก็มาพร้อมกับเฟรมเวิร์คแน่นอน ตัวเลือกก็มี</p>
+<ol>
+<li>Python + Django</li>
+<li>PHP + Laravel/Cake</li>
+<li>Java + Spring</li>
+<li>Ruby on Rail</li>
+<li>JavaScript + NodeJS</li>
+</ol>
+<p>หรือในกรณี บางทีคุณอาจจะพบว่าคุณเลือก PHP เพราะ Wordpress มีทุกสิ่งให้คุณเลือกสรร ไม่ต้องโค้ดก็ได้</p>
+<p>หรือถ้าจะทำ Big Data คนก็อาจจะเลือก Scala เพราะ Spark พอทำ Machine Learning คนอาจจะเลือก Python เพราะ Scikit-learn</p>
+<p>สังเกตดูว่า เพราะเราต้องการพัฒนาให้เร็ว เราจึงไม่อยากเขียนอะไรทุกอย่างเองหมด จำต้องใช้เฟรมเวิร์คไปโดยปริยาย</p>
+<p>หลายๆครั้ง คนมองแค่ภาษา แต่ไม่ได้มองเฟรมเวิร์คกับไลบรารี่ครับ เขียนเสร็จแล้ว พึ่งมาค้นพบว่า จริงๆอีกภาษานึงมีคนทำไว้เสร็จแล้ว เรียกทีเดียวจบ</p>
+<p>ดังนั้น <strong>เวลาศึกษาว่าใช้ภาษาไหนดี ศึกษาเฟรมเวิร์คกับไลบรารี่ไปด้วยนะครับ มันต้องไปด้วยกัน</strong></p>
+<p>ในเรื่องนี้ อีกจุดหนึ่งที่น่าสนใจคือ แม้ภาษาใหม่ๆมักจะมีข้อดีที่ได้รับการปรับปรุงมาจากภาษาเก่าๆ แต่ก็จะมีข้อด้อยตรงที่มี เฟรมเวิร์คกับไลบรารี่ที่ไม่ค่อย Mature เท่าไร</p>
+<p>ผลที่ตามมาเวลาพัฒนาจริงคือ</p>
+<ol>
+<li>ได้เจอบั้กเป็นคนแรก (เพียบเลยด้วย)</li>
+<li>เวลาหาอะไรใน StackOverflow ก็ไม่เจอ</li>
+<li>ไปถามใน Github issue ก็รอนาน</li>
+<li>Document ก็ไม่มี</li>
+</ol>
+<p>ซักพักนึงจะเริ่มอยาก Contribute เข้าโปรเจ็คเองเลย</p>
+<p>ซึ่งมันก็ดีนะครับ คนรุ่นหลังก็ได้รับอานิสงส์ไปด้วย</p>
+<p>แต่จริงๆแล้วเราอยากทำอะไรกันแน่? ทำงานเราให้เสร็จ หรือไป Contribute ให้ Opensource</p>
+<h1 id=3-อยาดถกความลกซงของภาษา>3. อย่าดูถูกความลึกซึ้งของภาษา</h1>
+<p>อย่าดูถูกความลึกซึ้งของภาษานะครับ</p>
+<p>ตอนผมเขียนเป็นสักสองสามภาษา ผมเคยคิดว่าภาษาพวก Procedural คล้ายๆกันหมด เรียนภาษาใหม่ไม่ยากหรอก แต่นั่นคือแค่เรื่องของ Syntax เวลาเขียนโค้ดจริงลงระบบจริงนี่คนละเรื่องเลย</p>
+<p>แต่ละภาษามันมีรายละเอียดยิบย่อย (Subtlety) ของมันมาก ซึ่งถ้าจะเขียนให้ดี มันต้องเข้าใจ</p>
+<p>อย่างผมเองเขียน Java มาเป็นภาษาแรก สอบเซอร์ผ่านแบบชิลๆ คิดว่าตัวเองเข้าใจ Java เป็นอย่างดี พอไปอ่าน <a href=https://www.amazon.com/Effective-Java-2nd-Joshua-Bloch/dp/0321356683>Effective Java</a> ของ Joshua Bloch ถึงค้นพบว่า ผมแม่งไม่เข้าใจภาษานี้เลยนี่หว่า</p>
+<p>ส่วน JavaScript เอง คนส่วนใหญ่มักจะคิดว่ามันคล้าย Java ให้ลองเอา <a href=https://www.amazon.com/JavaScript-Good-Parts-Douglas-Crockford/dp/0596517742>JavaScript: The Good Parts</a> ของ Crockford ไปอ่านดูครับ แล้วจะค้นพบว่ามันเป็นสัตว์คนละสปีชี่กับ Java เลย</p>
+<p>ส่วนใครเขียน C/C++ ผมคงไม่ต้องสาธยายให้ฟัง</p>
+<p>แม้แต่ภาษาที่ออกแบบมาให้เขียนง่ายอย่าง Python ผมเคยเจอเคสที่คนเขียนไม่เข้าใจวิธีการจัดการ String วนลูปสร้างใหม่จนเมมเกือบหมดเซอร์เวอร์มาแล้ว</p>
+<p>บางคนจะมีความเชื่อว่าโปรแกรมเมอร์ที่ดีจะเขียนภาษาอะไรก็ได้ ซึ่งมันก็จริงนะครับ แต่มันไม่ได้แปลว่าไม่ใช้เวลา โดยส่วนตัว <strong>ต่อให้เป็นโปรแกรมเมอร์ที่เก่ง การเข้าถึงภาษา แล้วสามารถเขียนโค้ดที่สวย ดูแลง่าย ผมว่าใช้เวลาไม่ต่ำกว่าหกเดือน หรืออาจจะหลายปีด้วยซ้ำ</strong></p>
+<p>ซึ่งเวลาที่ใช้เรียนรู้ เราต้องมาจ่ายเอาในโปรเจ็คครับ แทนที่จะทำเสร็จแล้ว ก็ต้องเสียเวลาให้กับการลองผิดลองถูกไป</p>
+<p>ยิ่งเดี๋ยวนี้ฮิตไมโครเซอร์วิซ (MicroService) กัน บางคนเอาไปใช้เป็นแหล่งทดลองภาษาใหม่</p>
+<p>ผมเคยเห็นทีมเดียวซัด Backend เข้าไปสี่ภาษา เวลาเขียนเสร็จแล้วต้องมาเมนเทนนี่มีแต่อ้วกกับอ้วกครับ ดีบั้ก PHP ด้วย XDebug อยู่ดีๆ ต้องสลับไปใช้ Java ต่อผ่าน JMX สักพักนึงรีเควสเข้า Python ละ เซ็ตดีบั้กเกอร์เสร็จ ลืมไปแล้วว่าตอนแรกจะแก้บั้กอะไร</p>
+<h1 id=4-ในทมมคนเขยนภาษาframeworklibrary-นคลองรเปลา>4. ในทีมมีคนเขียนภาษา/Framework/Library นี้คล่องรึเปล่า?</h1>
+<p>สืบเนื่องจากข้อที่แล้ว หากจะเลือกภาษาใดภาษาหนึ่ง ควรจะมีคนในทีมที่คล่องภาษานี้อย่างน้อย 1-2 คนครับ</p>
+<p>ถ้าจะให้ดีควรจะ 2 เพราะตลาดงานสมัยนี้ คนเปลี่ยนงานกันบ่อย</p>
+<p>คนที่เขียนคล่องจะต้องถ่ายทอด Best Practices ผ่านช่องทางต่างๆ ไม่ว่าจะเป็น Code Review, Pair programing, หรือ Workshop ให้กับคนในทีม</p>
+<p>ซึ่งจะ<strong>ช่วยลดระยะเวลาที่ต้องเสียไปกับการลองผิดลองถูก</strong>ไปได้มาก</p>
+<p>โดยส่วนตัวแล้ว ผมมองว่าการเลือกภาษาใหม่ โดยไม่มีคนในทีมที่เก่งภาษานั้นเลย ผิดตั้งแต่เริ่มแล้ว เพราะเราไม่ได้รู้จักภาษานั้นๆดีพอที่จะใช้ตัดสินใจเลือกด้วยซ้ำ</p>
+<h1 id=5-ในอนาคต-จะมคนเขยนภาษาframeworklibrary-ใหจางรเปลา>5. ในอนาคต จะมีคนเขียนภาษา/Framework/Library ให้จ้างรึเปล่า?</h1>
+<p>ในโปรดักต์ที่คิดว่าจะอยู่กันยาว อยากให้นึกถึงเรื่องนี้กันด้วยครับ</p>
+<p>เราอาจค้นพบว่า โปรดักต์เราใช้ภาษา ZungkaZy นี่โคตรเหมาะ เพอร์ฟอร์มานซ์นี่สูสีกับ C ไลบรารี่เพรียบพร้อมอย่างกับ Java ภาษาสวยและเจ้าของภาษาเท่อย่างกับ Python เฟรมเวิร์คนี่เนี้ยบยังกับใช้ Rail</p>
+<p>ผ่านไป 2 ปี คนในทีมเปลี่ยนงานกัน <strong>เราจะหาคนมาเขียน ZungkaZy แทนได้รึเปล่า?</strong> ถ้าคนใหม่ไม่เคยเขียน ก็ต้องเสียเวลาเทรนกันใหม่ แล้วถ้าเกิดโปรแกรมเมอร์ที่เก่งภาษานี้ในทีม พร้อมใจกันออกขึ้นมาล่ะ จะไปหาซีเนียร์ที่ไหน</p>
+<p>ถ้าเกิดภาษา ZungkaZy ไม่บูมอย่างที่คิด จำนวนคนเขียนในตลาดก็จะน้อยลงเรื่อยๆ ยิ่งโปรดักต์เรามีชีวิตอยู่นาน ก็ยิ่งหาคนเขียนยากเรื่อยๆ</p>
+<p>ไอ้ไลบรารี่ที่เพรียบพร้อมก็โดนคนทำเทซะงั้น ไม่เมนเทนต่อแล้ว</p>
+<p>ตกอับนะครับ</p>
+<h1 id=6-เลอกภาษาทในบรษทมคนทำ-tool-ใหใชแลว>6. เลือกภาษาที่ในบริษัทมีคนทำ Tool ให้ใช้แล้ว</h1>
+<p>ข้อนี้สำหรับบริษัทใหญ่ครับ บริษัทที่ Mature มากๆแล้ว มักจะมีเครื่องมือที่ใช้กันในบริษัท (Internal Tool) ในการทำ Continuous Delivery ไว้เรียบร้อยแล้ว เช่น Package Management, Configuration Management, Monitoring (metric + logging), A/B Testing, etc.</p>
+<p>สังเกตว่ามันเยอะมาก การทำ Critical System สเกลใหญ่ๆ เครื่องมือพวกนี้สำคัญมากนะครับ</p>
+<p>ซึ่งพวกเครื่องมือเหล่านี้ มักจะรองรับแค่ภาษาเดียวหรือไม่กี่ภาษาครับ ถ้าคนในบริษัทส่วนใหญ่ใช้ Java แต่เราเลือกใช้ Python การใช้เครื่องมือที่มีคนทำไว้แล้วก็จะยาก</p>
+<p><strong>ดีไม่ดีต้องมาทำเองใหม่หมด ซึ่งเสียเวลามาก</strong> เวลามีปัญหาข้ามทีม แทนที่อีกทีมจะช่วยได้ง่ายๆเพราะใช้ Stack เดียวกัน ก็ช่วยกันไม่ได้อีก</p>
+<h1 id=สรป-ไอภาษาทดกวา-จรงๆมนใหประโยชนกบคณแคไหน>สรุป: ไอ้ภาษาที่ดีกว่า จริงๆมันให้ประโยชน์กับคุณแค่ไหน</h1>
+<p>อ่านมาถึงตรงนี้ ผมหวังว่าขึ้นโปรเจ็คใหม่ครั้งหน้า จะได้มองในมุมอื่นๆเพิ่มขึ้นนะครับ</p>
+<p>บางคนอาจจะบอกว่า สรุปคือผมแนะนำให้ใช้ภาษาเดิมที่ทำอยู่สินะ จะให้ดักดานอยู่ที่ภาษาเดิมใช่ไหม?</p>
+<p>อันนี้ก็จริงส่วนนึงครับ</p>
+<p>แต่<strong>ถ้าคุณหาเหตุผลที่เหมาะสม และหาข้อประโยชน์ที่ชัดเจนหักล้างประเด็นข้างต้นไม่ได้ การตัดสินใจเลือกใช้ภาษาเดิมก็ถูกต้องแล้วครับ</strong></p>
+<p>คุณจะเปลี่ยนภาษาทำไม ถ้าภาษาเดิมมันทำทุกอย่างได้อยู่แล้ว</p>
+<p>ถ้าจะเปลี่ยน ก็แปลว่ามันต้องดีกว่า หรือมีประโยชน์คุ้มค่ากับความเสี่ยงในการให้ทีมต้องใช้ภาษาใหม่ครับ</p>
+<p>หรือจริงๆแล้ว การให้ทีมได้ทดลองภาษาใหม่ มันมีประโยชน์ในเชิงจิตใจ ที่คุ้มค่ากับความเสี่ยงและเวลาที่ต้องใช้ในการเรียนรู้ ซึ่งผมมองว่าอันนี้ก็แฟร์นะครับ</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>Author</span>
+<span class=item-content>ijemmy</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>LastMod</span>
+<span class=item-content>
+2017-10-13
+</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>License</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/language/>Language</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/05-retry/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">Retry ยังไงให้ปลอดภัย</span>
+<span class="prev-text nav-mobile">Prev</span>
+</a>
+<a class=next href=/post/02-inside-ci-static-check/>
+<span class="next-text nav-default">การนำ Static Code Analysis มาใช้ในทีม</span>
+<span class="next-text nav-mobile">Next</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
+<a href=http://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+Powered by <a class=hexo-link href=https://gohugo.io>Hugo</a>
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+Theme -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<span class=copyright-year>
+&copy;
+2017 -
+2021<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

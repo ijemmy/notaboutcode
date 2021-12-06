@@ -1,0 +1,318 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>เถียงเรื่อง Technical Design กันไม่จบซักที ทำไงดี? - Not About Code - Technical Leadership</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="ijemmy"><meta name=description content="เคยตกอยู่ในสถานการณ์ที่คนในห้องประชุมเถียงเรื่องเดียวกันติดต่อเป็นระยะเวลา 30 นาทีแล้วไม่ไปไหนไหมครับ?
+ส่วนใหญ่ที่ผมเจอ มักจะเป็นเรื่องของ Technical Design ว่าจะไปในทิศทางไหนดี ซึ่งเราก็รู้กันว่าการ Design มันเป็นเรื่องของการ Trade-off หลายๆครั้งมันยากมากที่จะตอบว่าแบบไหนดีกว่า
+การตัดสินใจเรื่องนี้ส่งผลกระทบในระยะยาว จึงต้องพิจารณาให้รอบคอบ แต่บางครั้ง เราก็จะเจอสถานการที่คนสองคน(หรือทีมแตกเป็นสองฝ่าย)เถียงกันไม่จบเสียที วนกลับมาประเด็นเดิมซ้ำๆ แย้งกันไปมา ไม่ไปไหน
+ยิ่งถ้าประชุมก่อนพักเที่ยง ผมจะหิวข้าว ไปกินข้าวสายนี่ไม่โอเคเลย เรื่องกินเรื่องใหญ่
+วันนี้ผมมีวิธีมานำเสนอ ไม่รับประกันว่าได้ผลตลอด แต่เท่าที่ใช้มานี่ได้ผลดีมาก ช่วยให้ผมไม่ต้องไปกินข้าวสายได้หลายครั้ง
+"><meta name=keywords content="Hugo,theme,even">
+<meta name=generator content="Hugo 0.89.4 with theme even">
+<link rel=canonical href=http://www.notaboutcode.com/post/29-technical-conflict-resolution/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<link rel=stylesheet href=/css//css/custom.css>
+<meta property="og:title" content="เถียงเรื่อง Technical Design กันไม่จบซักที ทำไงดี?">
+<meta property="og:description" content="
+เคยตกอยู่ในสถานการณ์ที่คนในห้องประชุมเถียงเรื่องเดียวกันติดต่อเป็นระยะเวลา 30 นาทีแล้วไม่ไปไหนไหมครับ?
+ส่วนใหญ่ที่ผมเจอ มักจะเป็นเรื่องของ Technical Design ว่าจะไปในทิศทางไหนดี ซึ่งเราก็รู้กันว่าการ Design มันเป็นเรื่องของการ Trade-off หลายๆครั้งมันยากมากที่จะตอบว่าแบบไหนดีกว่า
+การตัดสินใจเรื่องนี้ส่งผลกระทบในระยะยาว จึงต้องพิจารณาให้รอบคอบ แต่บางครั้ง เราก็จะเจอสถานการที่คนสองคน(หรือทีมแตกเป็นสองฝ่าย)เถียงกันไม่จบเสียที วนกลับมาประเด็นเดิมซ้ำๆ แย้งกันไปมา ไม่ไปไหน
+ยิ่งถ้าประชุมก่อนพักเที่ยง ผมจะหิวข้าว ไปกินข้าวสายนี่ไม่โอเคเลย เรื่องกินเรื่องใหญ่
+วันนี้ผมมีวิธีมานำเสนอ ไม่รับประกันว่าได้ผลตลอด แต่เท่าที่ใช้มานี่ได้ผลดีมาก ช่วยให้ผมไม่ต้องไปกินข้าวสายได้หลายครั้ง">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://www.notaboutcode.com/post/29-technical-conflict-resolution/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2020-06-11T12:04:02+07:00">
+<meta property="article:modified_time" content="2020-06-11T12:04:02+07:00">
+<meta itemprop=name content="เถียงเรื่อง Technical Design กันไม่จบซักที ทำไงดี?">
+<meta itemprop=description content="
+เคยตกอยู่ในสถานการณ์ที่คนในห้องประชุมเถียงเรื่องเดียวกันติดต่อเป็นระยะเวลา 30 นาทีแล้วไม่ไปไหนไหมครับ?
+ส่วนใหญ่ที่ผมเจอ มักจะเป็นเรื่องของ Technical Design ว่าจะไปในทิศทางไหนดี ซึ่งเราก็รู้กันว่าการ Design มันเป็นเรื่องของการ Trade-off หลายๆครั้งมันยากมากที่จะตอบว่าแบบไหนดีกว่า
+การตัดสินใจเรื่องนี้ส่งผลกระทบในระยะยาว จึงต้องพิจารณาให้รอบคอบ แต่บางครั้ง เราก็จะเจอสถานการที่คนสองคน(หรือทีมแตกเป็นสองฝ่าย)เถียงกันไม่จบเสียที วนกลับมาประเด็นเดิมซ้ำๆ แย้งกันไปมา ไม่ไปไหน
+ยิ่งถ้าประชุมก่อนพักเที่ยง ผมจะหิวข้าว ไปกินข้าวสายนี่ไม่โอเคเลย เรื่องกินเรื่องใหญ่
+วันนี้ผมมีวิธีมานำเสนอ ไม่รับประกันว่าได้ผลตลอด แต่เท่าที่ใช้มานี่ได้ผลดีมาก ช่วยให้ผมไม่ต้องไปกินข้าวสายได้หลายครั้ง"><meta itemprop=datePublished content="2020-06-11T12:04:02+07:00">
+<meta itemprop=dateModified content="2020-06-11T12:04:02+07:00">
+<meta itemprop=wordCount content="305">
+<meta itemprop=keywords content="conflict,technical,meeting,design,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="เถียงเรื่อง Technical Design กันไม่จบซักที ทำไงดี?">
+<meta name=twitter:description content="
+เคยตกอยู่ในสถานการณ์ที่คนในห้องประชุมเถียงเรื่องเดียวกันติดต่อเป็นระยะเวลา 30 นาทีแล้วไม่ไปไหนไหมครับ?
+ส่วนใหญ่ที่ผมเจอ มักจะเป็นเรื่องของ Technical Design ว่าจะไปในทิศทางไหนดี ซึ่งเราก็รู้กันว่าการ Design มันเป็นเรื่องของการ Trade-off หลายๆครั้งมันยากมากที่จะตอบว่าแบบไหนดีกว่า
+การตัดสินใจเรื่องนี้ส่งผลกระทบในระยะยาว จึงต้องพิจารณาให้รอบคอบ แต่บางครั้ง เราก็จะเจอสถานการที่คนสองคน(หรือทีมแตกเป็นสองฝ่าย)เถียงกันไม่จบเสียที วนกลับมาประเด็นเดิมซ้ำๆ แย้งกันไปมา ไม่ไปไหน
+ยิ่งถ้าประชุมก่อนพักเที่ยง ผมจะหิวข้าว ไปกินข้าวสายนี่ไม่โอเคเลย เรื่องกินเรื่องใหญ่
+วันนี้ผมมีวิธีมานำเสนอ ไม่รับประกันว่าได้ผลตลอด แต่เท่าที่ใช้มานี่ได้ผลดีมาก ช่วยให้ผมไม่ต้องไปกินข้าวสายได้หลายครั้ง"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>เถียงเรื่อง Technical Design กันไม่จบซักที ทำไงดี?</h1>
+<div class=post-meta>
+<span class=post-time> 2020-06-11 </span>
+<div class=post-category>
+<a href=/categories/technical-leadership/> Technical Leadership </a>
+</div>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>Contents</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#0-นใชประเดนทควรจะเถยงกนตอนนไหม>0. นี่ใช่ประเด็นที่ควรจะเถียงกันตอนนี้ไหม</a></li>
+<li><a href=#1-หยดพด-และเรมจดสรปประเดน>1. หยุดพูด และเริ่มจดสรุปประเด็น</a></li>
+<li><a href=#2-หยดการโตเถยงทางวาจา-และสรปประเดนเปนตวอกษร>2. หยุดการโต้เถียงทางวาจา และสรุปประเด็นเป็นตัวอักษร</a></li>
+<li><a href=#3-วเคราะหทละประเดน>3. วิเคราะห์ทีละประเด็น</a></li>
+<li><a href=#4เราไมมทางตดสนใจไดอยางมนใจ-100>4.เราไม่มีทางตัดสินใจได้อย่างมั่นใจ 100%</a></li>
+<li><a href=#สรปสงทาย>สรุปส่งท้าย</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p><img src=/img/covers/fight-01.png alt="Photo by rawpixel on Unsplash"></p>
+<p>เคยตกอยู่ในสถานการณ์ที่คนในห้องประชุมเถียงเรื่องเดียวกันติดต่อเป็นระยะเวลา 30 นาทีแล้วไม่ไปไหนไหมครับ?</p>
+<p>ส่วนใหญ่ที่ผมเจอ มักจะเป็นเรื่องของ Technical Design ว่าจะไปในทิศทางไหนดี ซึ่งเราก็รู้กันว่าการ Design มันเป็นเรื่องของการ Trade-off หลายๆครั้งมันยากมากที่จะตอบว่าแบบไหนดีกว่า</p>
+<p>การตัดสินใจเรื่องนี้ส่งผลกระทบในระยะยาว จึงต้องพิจารณาให้รอบคอบ แต่บางครั้ง เราก็จะเจอสถานการที่คนสองคน(หรือทีมแตกเป็นสองฝ่าย)เถียงกันไม่จบเสียที วนกลับมาประเด็นเดิมซ้ำๆ แย้งกันไปมา ไม่ไปไหน</p>
+<p>ยิ่งถ้าประชุมก่อนพักเที่ยง ผมจะหิวข้าว ไปกินข้าวสายนี่ไม่โอเคเลย เรื่องกินเรื่องใหญ่</p>
+<p>วันนี้ผมมีวิธีมานำเสนอ ไม่รับประกันว่าได้ผลตลอด แต่เท่าที่ใช้มานี่ได้ผลดีมาก ช่วยให้ผมไม่ต้องไปกินข้าวสายได้หลายครั้ง</p>
+<h1 id=0-นใชประเดนทควรจะเถยงกนตอนนไหม>0. นี่ใช่ประเด็นที่ควรจะเถียงกันตอนนี้ไหม</h1>
+<p>ก่อนจะเริ่ม อยากให้เช็คก่อนว่าประเด็นที่เถียงกันอยู่เนี่ย ควรค่าแก่การเถียงหรือเปล่า ลองถามคำถามเหล่านี้ดู</p>
+<ol>
+<li>ประเด็นที่ตัดสินใจนั้นคุ้มค่ากับเวลาที่เสียไปของทุกคนรึเปล่า? เป็นเรื่องที่สำคัญจริง หรือแค่เรื่องหยุมหยิม</li>
+<li>ถ้าการตัดสินใจในประเด็นนี้ไม่ได้จำเป็นต้องมีทุกคนในห้อง ให้คนบางส่วนแยกออกไปคุยกันนอกรอบให้เรียบร้อยก่อน แล้วค่อยมาสรุปให้ทุกคนฟังอีกที</li>
+<li>ถ้ารู้สึกว่าเรายังมีข้อมูลไม่พอตัดสินใจ เหตุผลดูเป็นการเดามากกว่าข้อมูลจริง เลื่อนหัวข้อการประชุมไปรอบถัดไป และให้คนไปหาข้อมูลมาประกอบการตัดสินใจมานำเสนอ</li>
+</ol>
+<p>ถ้าผ่านสามข้อข้างต้น แต่การถกเถียงดูไม่มีประสิทธิภาพ ประเด็นก็วนไปวนมา ไม่ไปไหน ถึงค่อยใช้วิธีนี้ครับ</p>
+<h1 id=1-หยดพด-และเรมจดสรปประเดน>1. หยุดพูด และเริ่มจดสรุปประเด็น</h1>
+<blockquote>
+<p>เวลาเราที่เถียงกับคนอื่น เราจะไม่สามารถตั้งใจฟังเขาจริงได้อย่างถี่ถ้วน แค่อีกฝ่ายเริ่มพูด เราก็จะมีเสียงในหัวมาพูดแทรกเพื่อขัดเขาแล้ว</p>
+</blockquote>
+<p>เวลาเถียงกันจริงๆ มันจะเละเทะนัวเนียไปหมด ไม่ได้มีโครงสร้างชัดเจน ใครคิดอะไรเข้าข้างตัวเองได้ก็ยัดเข้าไป รีบพูดแบบไม่ฟังกันเพราะกลัวลืม</p>
+<p>เวลามีเถียงกันแบบนี้ เราต้องนิ่ง ตั้งใจฟัง และจดเป็นประเด็นเป็นหัวข้อๆไป ถ้าเราคิดว่ามีเหตุผลที่ดี อย่าพึ่งไปร่วมวงด้วย อย่าพึ่งพูด จดไปก่อน</p>
+<p>เพราะถ้าเราเริ่มเข้าวงด้วย เราจะตั้งใจฟังได้น้อยลง เวลาคนเถียงกัน เรามักไม่ได้ถูกขับดันด้วยตรรกกะครับ แต่ใช้อารมณ์มากกว่า</p>
+<p>เรามักจะคิดว่าโปรแกรมเมอร์นั้นใช้ตรรกกะในการถกเถียง แต่เชื่อผมเถอะครับ ไม่มีใครหนีความเป็นคนพ้นหรอก เวลาผมเถียงกับคนอื่น ผมก็ไม่ค่อยฟังเค้าเหมือนกัน ยิ่งเรามีประสบการณ์มากเท่าไร อีโก้เราก็โตตามไปด้วย</p>
+<h1 id=2-หยดการโตเถยงทางวาจา-และสรปประเดนเปนตวอกษร>2. หยุดการโต้เถียงทางวาจา และสรุปประเด็นเป็นตัวอักษร</h1>
+<p>หนึ่งในสาเหตุที่คนไม่ค่อยยอมฟังคนอื่น เพราะเรารู้สึกว่าเค้าไม่ได้ฟังเรา และไม่เข้าใจมุมมองของเรา</p>
+<blockquote>
+<p>คนส่วนใหญ่ไม่ได้หงุดหงิดเวลาคนอื่นเห็นต่าง แต่หงุดหงิดเวลารู้สึกว่าคนอื่นไม่ตั้งใจฟังเขา</p>
+</blockquote>
+<p>ดังนั้น เราต้องหยุดทุกคนจากโหมด"พ่น" ให้เป็นโหมดฟังก่อน แต่ถ้าบอกตรงๆว่าให้หุบปากแล้วฟัง อันนี้อาจจะเป็นราดน้ำมันบนกองเพลิง ลองพูดแนวนี้ดูครับ</p>
+<blockquote>
+<p>&ldquo;ผมชอบประเด็นที่ทุกคนยกมามากเลย อย่างเช่นที่สุธีบอกว่าการเขียน End-to-end Testing อาจจะยุ่งยากขึ้นถ้าเราใช้ ​Microservice หรือที่อรุชมองว่าเราสามารถ Release แยกกันได้ ทำให้อัพเดตฟีเจอร์ได้เร็ว&mldr;&rdquo;</p>
+</blockquote>
+<p>สังเกตดูนะครับ ประโยคนี้ใช้วิธีการเรียกชื่อคนที่กำลังถกเถียงกันอยู่ แล้วสรุปให้เค้ารู้สึกว่า &ldquo;ใครไม่ฟัง ผมฟังอยู่&rdquo; และผมไม่ได้ฟังธรรมดา ผมจดไว้ด้วย</p>
+<blockquote>
+<p>&ldquo;&mldr;ผมพยายามจดประเด็นข้อดีของทั้งสองทางเลือก ผมอยากจะสรุปลงกระดาน เพื่อเราจะได้เห็นภาพรวม และไม่พลาดประเด็นไหนในการตัดสินใจ&rdquo;</p>
+</blockquote>
+<p>เสร็จแล้วถ้ามี Whiteboard ก็เอาที่สรุปไว้ไปเขียนเลย หรือตอนนี้ต้องประชุมออนไลน์ ก็ใช้วิธีแชร์หน้าจอเอา</p>
+<p>ทำให้สั้นๆและอ่านง่ายหน่อย (แนะนำให้ใช้มาร์กเกอร์สีดำ) เช่นกรณีเถียงกันว่าจะขึ้นระบบใหม่เป็น Microservices ดีหรือทำแบบ ​Monolith โดยแยก Package ก็สรุปเป็น 2 คอลัมน์ ประมาณนี้</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>ข้อดีของ Microservices</th>
+<th style=text-align:left>ข้อดีของ Monolith แยก Package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>เพิ่มเซอร์เวอร์แยกกันได้</td>
+<td style=text-align:left></td>
+</tr>
+<tr>
+<td style=text-align:left>ใช้ได้หลายภาษา</td>
+<td style=text-align:left></td>
+</tr>
+<tr>
+<td style=text-align:left></td>
+<td style=text-align:left>เขียน End-to-End Testing ง่าย</td>
+</tr>
+<tr>
+<td style=text-align:left></td>
+<td style=text-align:left>แชร์ Common code ง่าย</td>
+</tr>
+<tr>
+<td style=text-align:left>Blast Radius เล็กกว่า</td>
+<td style=text-align:left></td>
+</tr>
+<tr>
+<td style=text-align:left>&mldr;</td>
+<td style=text-align:left>&mldr;</td>
+</tr>
+</tbody>
+</table>
+<p>เขียนเสร็จแล้ว ขอให้ทุกคนหยุดพูดแล้วอ่าน</p>
+<blockquote>
+<p>&ldquo;อยากให้ทุกคนช่วยเช็คด้วย ว่าผมพลาดประเด็นไหนไปรึเปล่า&rdquo;</p>
+</blockquote>
+<p>ซึ่งถ้าคุณฟังมาดี จดมาดี ไม่มีพลาดหรอกครับ แต่บางคนอาจจะมีประเด็นใหม่โผล่ขึ้นมา เราก็ฟัง แล้วก็จดใส่เข้าไปให้ครบ อย่าลืมว่าทุกคนต้องการให้มีคนฟังความเห็นของตัวเอง อาจจะกินเวลาเพิ่มหน่อยอีกไม่กี่นาที แต่คุณต้องทำให้ทุกคนรู้สึกว่าคุณฟังทุกคน เราจดครบทุกประเด็นแล้ว</p>
+<h1 id=3-วเคราะหทละประเดน>3. วิเคราะห์ทีละประเด็น</h1>
+<p>การเขียนทุกอย่างลงบนกระดานจะช่วยแยกไอเดียหรือประเด็นการโต้เถียงออกจากตัวบุคคล</p>
+<blockquote>
+<p>เรามักจะผูกอีโก้ไว้กับความเห็นของตัวเอง เวลาที่มีคนไม่เห็นด้วย เราจะรู้สึกว่าคนไม่เห็นด้วยกับเรา ทั้งๆที่เค้าแค่ไม่เห็นด้วยกับ"ความเห็น"ของเรา</p>
+</blockquote>
+<p>ถึงจุดนี้ ทุกคนจะเริ่ม"ฟัง"อย่างจริงจังผ่านการอ่าน ประเด็นที่วิ่งวุ่นในหัวจะได้รับการจัดโครงสร้างชัดเจน ภาพรวมก็จะชัดขึ้น</p>
+<p>ถ้ายังตัดสินใจไม่ได้ง่ายๆ เพราะข้อดีของแต่ละฝั่งมันเปรียบเทียบกันตรงๆไม่ได้ บางอย่างอาจจะมีน้ำหนักมาก น้ำหนักน้อย แล้วแต่สายตาของแต่ละคน</p>
+<p>หลังจากทุกคนอ่านแล้ว ให้พยายามวิเคราะห์แต่ละประเด็นแยกกัน อันนี้ก็แล้วแต่คนเลยว่าจะวิเคราะห์กันยังไง ผมขอยกตัวอย่างการใช้ Quantify & Context</p>
+<p>Quantify คือพยายามทำทุกอย่างให้เป็นตัวเลข เช่น ไอ้เขียน End-to-End Testing ง่ายกว่าเนี่ย มันใช้เวลาเร็วกว่ากี่เปอร์เซ็นต์เมื่อเทียบกับอีกทางเลือก</p>
+<p>Context คือชี้ให้เห็นว่าเรากำลังเอาดีไซน์นี้ใช้กับสถานการณ์ของเรา ไม่ใช่สถานการทั่วๆไป เช่น คิดว่าเราจะมีเซอร์วิสไหนบ้างที่ต้องใช้ Go เพื่อให้ได้ประสิทธิภาพที่ดีขึ้น โปรดักต์ของเราต้องใช้เวลากี่เดือนกว่าจะถึงจุดที่ต้อง Scale เสร็จแล้วอย่าลืม Quantify ด้วยว่าเร็วขึ้นซักเท่าไร ถ้าเร็วขึ้นเท่าตัว ยัดเซอร์เวอร์เข้าไปอีกตัวนึงเพื่อนใช้เงินแลกเวลาจะคุ้มกว่าไหม</p>
+<p>ในแต่ละหัวข้อหยิบมาร์คเกอร์สีเขียวมา เขียนข้อความเติมลงไป เก็บสรุปของแต่ละประเด็นไว้บนกระดาน ไม่งั้นคนจะลืม</p>
+<p>ตรงจุดนี้ พยายามระวังการใช้สรรพนาม และคุมอารมณ์ให้ดี ให้แย้งที่ประเด็น เน้นที่เนื้อหา อย่าให้มีอารมณ์เข้าไปเกี่ยว เช่น</p>
+<blockquote>
+<p>&ldquo;ที่อรุชบอกว่าใช้ได้หลายภาษา แต่เราจะมีเวลาเขียน Go กันเหรอ ถ้ามันช้าจริง ใส่เครื่องเพิ่มหรือ Optimize ด้วยวิธีอื่นก็ได้&rdquo;</p>
+</blockquote>
+<p>เปลี่ยนเป็น</p>
+<blockquote>
+<p>&ldquo;ถึงเราจะเลือกภาษาอื่นเพื่อปรับปรุง Bottleneck แต่ด้วยสถานการณ์ของเราที่ลักษณะโปรดักต์ยังไม่แน่นอน และมีทีมพัฒนาแค่ไม่กี่คนที่เขียน Go ได้ ผมเลยรู้สึกว่าข้อดีนี้มีน้ำหนักน้อยกว่าข้ออื่น&rdquo;</p>
+</blockquote>
+<h1 id=4เราไมมทางตดสนใจไดอยางมนใจ-100>4.เราไม่มีทางตัดสินใจได้อย่างมั่นใจ 100%</h1>
+<p>หลังจากพิจารณาครบทุกประเด็น ชี้ให้ทุกคนเห็นว่า เราไม่มีทางตัดสินใจได้อย่างมั่นใจ 100%</p>
+<blockquote>
+<p>เราคุยกันเรื่องนี้มาเกิน 30 นาทีแล้ว เรามีกัน 7 คน รวมเป็น 210 นาที ผมคิดว่าทั้งสองทางเลือกเป็นทางที่ดี แต่เราไม่มีทางรู้หรอกว่าทางไหนดีกว่า จนกระทั่งเราได้ทำจริงๆทั้งสองทาง ซึ่งนั่นก็เป็นไปไม่ได้</p>
+<p>แต่ผมคิดว่าพวกเราได้คิดครอบคลุมกันมากที่สุดแล้ว ต่อให้เราคุยกันนานกว่านี้ เราก็ไม่สามารถทำให้การตัดสินใจดีกว่านี้ได้ ทุกคนเห็นด้วยไหม</p>
+</blockquote>
+<p>จบประโยคนี้ ถ้าไม่มีใครคัดค้าน คุณทำสำเร็จแล้ว จะเสนอให้เลือกทางไหนก็ตามสไตล์ของทีมเลย</p>
+<p>จะโหวตกันก็ได้ (ส่วนตัวผมคิดว่าวิธีนี้ไม่เวิร์ค) หรือให้คนที่มีประสบการณ์ในด้านนี้มากสุดตัดสินใจ หรือให้คนที่ต้องนำโปรเจ็คนี้ตัดสินใจ หรือจะบอกไปว่าคุณขอตัดสินใจ ถ้าทุกคนรู้สึกว่าคุณเป็นกลางพอ</p>
+<h1 id=สรปสงทาย>สรุปส่งท้าย</h1>
+<p>นี่เป็นวิธีที่จะทำให้การประชุมรวดรัดขึ้นได้โดยเรายังได้ข้อสรุป(ที่น่าจะ)ดีที่สุด อย่าก็อบไปใช้เป้ะๆนะครับ ดึงแนวคิดหลักๆ และนำไปปรับใช้กับสถานการณ์</p>
+<p>ปัญหาหลักของการเถียงกันไม่จบ ส่วนใหญ่ไม่ใช่ปัญหาเรื่องตรรกกะ แต่เป็นปัญหาเรื่องคน ทุกคนหนีความจริง 3 ข้อนี้ไม่พ้น แค่เป็นมากเป็นน้อยกันเท่านั้น</p>
+<blockquote>
+<ol>
+<li>เวลาเราที่เถียงกับคนอื่น เราจะไม่สามารถตั้งใจฟังเขาจริงได้อย่างถี่ถ้วน แค่อีกฝ่ายเริ่มพูด เราก็จะมีเสียงในหัวมาพูดแทรกเพื่อขัดเขาแล้ว</li>
+<li>คนส่วนใหญ่ไม่ได้หงุดหงิดเวลาคนอื่นเห็นต่าง แต่หงุดหงิดเวลารู้สึกว่าคนอื่นไม่ตั้งใจฟังเขา</li>
+<li>เรามักจะผูกอีโก้ไว้กับความเห็นของตัวเอง เวลาที่มีคนไม่เห็นด้วย เราจะรู้สึกว่าคนไม่เห็นด้วยกับเรา ทั้งๆที่เค้าแค่ไม่เห็นด้วยกับ"ความเห็น"ของเรา</li>
+</ol>
+</blockquote>
+<p>คุณอาจจะเถียงจนเอาชนะอีกฝ่ายได้ แต่ถ้าอีกฝ่ายไม่รู้สึกตกลงด้วยอย่างแท้จริง พอทำงานไปสักพัก ก็จะมีปัญหางอกออกมาอยู่ดี เช่น ไม่ทำตามที่ตกลงกันไว้ หรือทำแบบขอไปที ดังนั้น พยายามคิดเรื่องความรู้สึกของคนในทีมให้มากขึ้น เวลาถกเถียงกันเรื่องพวกนี้</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>Author</span>
+<span class=item-content>ijemmy</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>LastMod</span>
+<span class=item-content>
+2020-06-11
+</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>License</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/conflict/>conflict</a>
+<a href=/tags/technical/>technical</a>
+<a href=/tags/meeting/>meeting</a>
+<a href=/tags/design/>design</a>
+</div>
+<nav class=post-nav>
+<a class=next href=/post/28-deployment-methods/>
+<span class="next-text nav-default">Deploy ระบบอย่างไรไม่ให้ล่ม</span>
+<span class="next-text nav-mobile">Next</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
+<a href=http://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+Powered by <a class=hexo-link href=https://gohugo.io>Hugo</a>
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+Theme -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<span class=copyright-year>
+&copy;
+2017 -
+2021<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

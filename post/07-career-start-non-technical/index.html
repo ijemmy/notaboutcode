@@ -1,0 +1,318 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี (ภาค 2) - Not About Code - Technical Leadership</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="ijemmy"><meta name=description content="ในภาคแรกเราคุยกันในเรื่องของ Technical Skills ทีเป็นพื้นฐานไว้ใช้ในระยะยาว
+สำหรับภาคนี้ เราจะมาโฟกัสในส่วนของ Non-technical กันบ้าง ซึ่งเป็นครอบคลุมค่อนข้างหลากหลายเรื่อง โดยผมคัดเฉพาะหัวข้อที่ผมคิดว่าสำคัญๆ เพื่อไม่ให้ยาวเกินไป
+บทความนี้มีความคิดเห็นส่วนตัวเยอะมาก ผมเลยแยกออกมาจากภาคแรก
+ใครที่มีความเห็นแตกต่าง หรืออ่านแล้วรู้สึกจี้ด ไม่เห็นด้วยมากๆ ลองมาแลกเปลี่ยนความเห็นกันในเฟสบุ้คเพจได้ครับ เผื่อบทความนี้อาจจะมีภาค3 ผมเองก็อยากเก็บรายละเอียด ให้ได้มากที่สุด เพราะบล็อคนี้ตั้งใจจะเขียนทิ้งไว้นาน
+สำหรับโปรแกรมเมอร์มือใหม่ที่ยังไม่มีความคิดเห็น อ่านแล้วก็ฟังหูไว้หู ใช้เป็นแนวทางแต่อย่ายึดมั่นกับมันมาก ยังมีคนที่เก่งกว่าผมอีกมากที่ใช้แนวทางอื่นในการพัฒนาตนเอง
+"><meta name=keywords content="Hugo,theme,even">
+<meta name=generator content="Hugo 0.89.4 with theme even">
+<link rel=canonical href=http://www.notaboutcode.com/post/07-career-start-non-technical/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<link rel=stylesheet href=/css//css/custom.css>
+<meta property="og:title" content="โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี (ภาค 2)">
+<meta property="og:description" content="
+ในภาคแรกเราคุยกันในเรื่องของ Technical Skills ทีเป็นพื้นฐานไว้ใช้ในระยะยาว
+สำหรับภาคนี้ เราจะมาโฟกัสในส่วนของ Non-technical กันบ้าง ซึ่งเป็นครอบคลุมค่อนข้างหลากหลายเรื่อง โดยผมคัดเฉพาะหัวข้อที่ผมคิดว่าสำคัญๆ เพื่อไม่ให้ยาวเกินไป
+บทความนี้มีความคิดเห็นส่วนตัวเยอะมาก ผมเลยแยกออกมาจากภาคแรก
+ใครที่มีความเห็นแตกต่าง หรืออ่านแล้วรู้สึกจี้ด ไม่เห็นด้วยมากๆ ลองมาแลกเปลี่ยนความเห็นกันในเฟสบุ้คเพจได้ครับ เผื่อบทความนี้อาจจะมีภาค3 ผมเองก็อยากเก็บรายละเอียด ให้ได้มากที่สุด เพราะบล็อคนี้ตั้งใจจะเขียนทิ้งไว้นาน
+สำหรับโปรแกรมเมอร์มือใหม่ที่ยังไม่มีความคิดเห็น อ่านแล้วก็ฟังหูไว้หู ใช้เป็นแนวทางแต่อย่ายึดมั่นกับมันมาก ยังมีคนที่เก่งกว่าผมอีกมากที่ใช้แนวทางอื่นในการพัฒนาตนเอง">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://www.notaboutcode.com/post/07-career-start-non-technical/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2017-10-31T12:04:02+07:00">
+<meta property="article:modified_time" content="2017-10-31T12:04:02+07:00">
+<meta itemprop=name content="โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี (ภาค 2)">
+<meta itemprop=description content="
+ในภาคแรกเราคุยกันในเรื่องของ Technical Skills ทีเป็นพื้นฐานไว้ใช้ในระยะยาว
+สำหรับภาคนี้ เราจะมาโฟกัสในส่วนของ Non-technical กันบ้าง ซึ่งเป็นครอบคลุมค่อนข้างหลากหลายเรื่อง โดยผมคัดเฉพาะหัวข้อที่ผมคิดว่าสำคัญๆ เพื่อไม่ให้ยาวเกินไป
+บทความนี้มีความคิดเห็นส่วนตัวเยอะมาก ผมเลยแยกออกมาจากภาคแรก
+ใครที่มีความเห็นแตกต่าง หรืออ่านแล้วรู้สึกจี้ด ไม่เห็นด้วยมากๆ ลองมาแลกเปลี่ยนความเห็นกันในเฟสบุ้คเพจได้ครับ เผื่อบทความนี้อาจจะมีภาค3 ผมเองก็อยากเก็บรายละเอียด ให้ได้มากที่สุด เพราะบล็อคนี้ตั้งใจจะเขียนทิ้งไว้นาน
+สำหรับโปรแกรมเมอร์มือใหม่ที่ยังไม่มีความคิดเห็น อ่านแล้วก็ฟังหูไว้หู ใช้เป็นแนวทางแต่อย่ายึดมั่นกับมันมาก ยังมีคนที่เก่งกว่าผมอีกมากที่ใช้แนวทางอื่นในการพัฒนาตนเอง"><meta itemprop=datePublished content="2017-10-31T12:04:02+07:00">
+<meta itemprop=dateModified content="2017-10-31T12:04:02+07:00">
+<meta itemprop=wordCount content="565">
+<meta itemprop=keywords content="career,learning,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี (ภาค 2)">
+<meta name=twitter:description content="
+ในภาคแรกเราคุยกันในเรื่องของ Technical Skills ทีเป็นพื้นฐานไว้ใช้ในระยะยาว
+สำหรับภาคนี้ เราจะมาโฟกัสในส่วนของ Non-technical กันบ้าง ซึ่งเป็นครอบคลุมค่อนข้างหลากหลายเรื่อง โดยผมคัดเฉพาะหัวข้อที่ผมคิดว่าสำคัญๆ เพื่อไม่ให้ยาวเกินไป
+บทความนี้มีความคิดเห็นส่วนตัวเยอะมาก ผมเลยแยกออกมาจากภาคแรก
+ใครที่มีความเห็นแตกต่าง หรืออ่านแล้วรู้สึกจี้ด ไม่เห็นด้วยมากๆ ลองมาแลกเปลี่ยนความเห็นกันในเฟสบุ้คเพจได้ครับ เผื่อบทความนี้อาจจะมีภาค3 ผมเองก็อยากเก็บรายละเอียด ให้ได้มากที่สุด เพราะบล็อคนี้ตั้งใจจะเขียนทิ้งไว้นาน
+สำหรับโปรแกรมเมอร์มือใหม่ที่ยังไม่มีความคิดเห็น อ่านแล้วก็ฟังหูไว้หู ใช้เป็นแนวทางแต่อย่ายึดมั่นกับมันมาก ยังมีคนที่เก่งกว่าผมอีกมากที่ใช้แนวทางอื่นในการพัฒนาตนเอง"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี (ภาค 2)</h1>
+<div class=post-meta>
+<span class=post-time> 2017-10-31 </span>
+<div class=post-category>
+<a href=/categories/career/> Career </a>
+</div>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>Contents</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#growth-mindset-ในการเรยนร>Growth Mindset ในการเรียนรู้</a></li>
+<li><a href=#ภาษาองกฤษ>ภาษาอังกฤษ</a></li>
+<li><a href=#อยาเนนทปรมาณภาษา-เนนทวธการเขยนโปรแกรม>อย่าเน้นที่ปริมาณภาษา เน้นที่วิธีการเขียนโปรแกรม</a></li>
+<li><a href=#เรยนรสาขาตางๆแบบตว-t>เรียนรู้สาขาต่างๆแบบตัว T</a></li>
+<li><a href=#การทำงานรวมกบผอน>การทำงานร่วมกับผู้อื่น</a></li>
+<li><a href=#การดแลสขภาพ>การดูแลสุขภาพ</a></li>
+<li><a href=#สรป>สรุป</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p><img src=/img/covers/career-02.jpg alt="Photo by Olu Eletu, from Unsplash.com"></p>
+<p>ใน<a href=/post/06-career-start/>ภาคแรก</a>เราคุยกันในเรื่องของ Technical Skills ทีเป็นพื้นฐานไว้ใช้ในระยะยาว</p>
+<p>สำหรับภาคนี้ เราจะมาโฟกัสในส่วนของ Non-technical กันบ้าง ซึ่งเป็นครอบคลุมค่อนข้างหลากหลายเรื่อง โดยผมคัดเฉพาะหัวข้อที่ผมคิดว่าสำคัญๆ เพื่อไม่ให้ยาวเกินไป</p>
+<p>บทความนี้มีความคิดเห็นส่วนตัวเยอะมาก ผมเลยแยกออกมาจากภาคแรก</p>
+<p>ใครที่มีความเห็นแตกต่าง หรืออ่านแล้วรู้สึกจี้ด ไม่เห็นด้วยมากๆ ลองมาแลกเปลี่ยนความเห็นกันใน<a href=https://www.facebook.com/notaboutcode/>เฟสบุ้คเพจ</a>ได้ครับ เผื่อบทความนี้อาจจะมีภาค3 ผมเองก็อยากเก็บรายละเอียด ให้ได้มากที่สุด เพราะบล็อคนี้ตั้งใจจะเขียนทิ้งไว้นาน</p>
+<p>สำหรับโปรแกรมเมอร์มือใหม่ที่ยังไม่มีความคิดเห็น อ่านแล้วก็ฟังหูไว้หู ใช้เป็นแนวทางแต่อย่ายึดมั่นกับมันมาก ยังมีคนที่เก่งกว่าผมอีกมากที่ใช้แนวทางอื่นในการพัฒนาตนเอง</p>
+<h1 id=growth-mindset-ในการเรยนร>Growth Mindset ในการเรียนรู้</h1>
+<p>ถ้าให้ผมเลือกคุณสมบัติที่สำคัญที่สุดของโปรแกรมเมอร์เก่งๆ ผมมองว่า Mindset ในการเรียนรู้เป็นเรื่องสำคัญที่สุด</p>
+<p>คำว่า Mindset ผมหาคำแปลตรงตัวไม่ได้ แต่คำที่ใกล้เคียงที่สุดน่าจะเป็น"ทัศนคติ"</p>
+<p>ส่วน Growth Mindset นั้น เป็นทัศนคติที่เชื่อว่าทุกอย่างเปลี่ยนแปลง และพัฒนาได้ ตัวอย่างเช่น ผมไปสัมภาษณ์งานแล้วไม่ผ่าน ถ้าคนที่ไม่มี Growth Mindset ก็อาจจะคิดว่าเรามันไม่มีความสามารถ ชาตินี้ทำไงก็คงไม่ผ่านหรอก</p>
+<p>ในทางกลับกันคนที่มี Growth Mindset จะมองว่า รอบนี้เราคงทำได้ไม่ดี มาทบทวนดูว่าทำตรงไหนได้ไม่ดีบ้างแล้วลองพัฒนาตัวเองดู คราวหน้าจะได้ทำได้ดีกว่านี้</p>
+<p>โปรแกรมเมอร์เก่งๆที่ผมรู้จักทุกคนเชื่อมั่นในศักยภาพของตัวเอง ว่าเค้าเก่งกว่านี้ได้ และเรื่องไหนที่ไม่เก่ง ถ้าให้เวลาฝึกหรือลองเรียนรู้ ก็สามารถเก่งได้</p>
+<p>ในทางตรงกันข้าม มีคนจำนวนมากที่พูดอยู่ตลอดว่าตัวเองโง่เรื่องนั้น ไม่มีพรสวรรค์เรื่องนี้ ยังไงก็ทำไม่่ได้ ไม่ต้องลองพยายามหรอก กรณีนี้เรียกว่า Fixed Mindset คือปักใจเชื่อและแปะป้ายให้ตัวเองเรียบร้อยแล้ว</p>
+<p>ซึ่งผมการันตีได้เลย ว่าถ้าคุณมี Fixed Mindset ว่า &ldquo;ฉันเป็นโปรแกรมเมอร์ที่ไม่เก่ง ไม่มีทางเก่งได้หรอก&rdquo; ยังไงก็ไม่มีทางเก่ง เพราะตัวคุณเองจะพยายามทำตัวให้ไม่เก่ง เพื่อที่จะได้ยืนยันว่าตัวเองคิดถูก ทำลายความสามารถตัวเองทางอ้อม</p>
+<p>ดังนั้น สำหรับโปรแกรมเมอร์มือใหม่ ผมยกเรื่องนี้ให้เป็นเรื่องแรก ทุกคนมีศักยภาพเยอะมาก คุณอาจจะทำอะไรผิดพลาดบ้าง อาจเคยเป็นที่โหล่ในชั้นเรียน แต่ไมไ่ด้หมายความว่าคุณจะเป็นเช่นนั้นไปตลอด เชื่อมั่นในตัวเองหน่อย</p>
+<p>และผมการันตีได้ว่า ไม่มีใครที่เขียนโปรแกรมได้ดีโดยเคยไม่ทำเรื่องผิดพลาด(แบบโง่บัดซบ)มาก่อน ทุกคนต้องเรียนรู้กันทั้งนั้น คุณแค่ไม่เห็นตอนเค้าทำอะไรโง่ๆเท่านั้นแหละ</p>
+<p>จริงๆแล้วเรื่อง Growth Mindset นั้นมีรายละเอียดเยอะกว่านี้ (เช่น ถ้าผมมี Fixed Mindset ว่าตัวเองเป็นอัจฉริยะด้านการเขียนโปรแกรมล่ะ? จะมีปัญหาอะไรรึเปล่า) ใครอยากอ่านเรื่องนี้ต่อ ผมแนะนำ:</p>
+<ul>
+<li><a href=https://www.amazon.com/dp/B000FCKPHG/>Mindset: The New Psychology of Success</a> เป็นหนังสือต้นฉบับของคนที่เผยแพร่เรื่องนี้ หนังสือจะพูดในมุมที่กว้างกว่า โดยยกตัวอย่างของการใช้ Growth Mindset ในด้านอื่นๆของชีวิตนอกเหนือจากการทำงานด้วย</li>
+<li><a href="https://nuuneoi.com/blog/blog.php?read_id=905">บล็อคพี่เนย</a> อธิบายเรื่องนี้ไว้ในภาษาไทยได้ดีมาก</li>
+</ul>
+<h1 id=ภาษาองกฤษ>ภาษาอังกฤษ</h1>
+<p>จริงๆโปรแกรมเมอร์คนไทยมีศักยภาพพอไปยืนอยู่ในระดับโลกเยอะมาก แต่ไม่สามารถไปได้ไกลเพราะภาษาอังกฤษไม่ดีพอ</p>
+<p>ภาษาอังกฤษมีผลกระทบต่อชีวิตของโปรแกรมเมอร์มาก หลักๆคือ</p>
+<ol>
+<li><strong>เนื้อหาที่ต้องเรียนรู้</strong> เทคโนโลยีไปไวมาก ถ้าจะรอให้ทุกอย่างเป็นภาษาไทย เราต้องทำใจว่าจะตามหลังโลก 1-3 ปีเป็นอย่างน้อย (เฟรมเวิร์คหรือไลบรารี่อาจจะแค่ไม่กี่เดือน แต่เรื่อง Software Engineering Practices, Machine Learning, etc. เนื้อหาในไทยจะช้ากว่ามาก) ถ้าคุณสามารถอ่านภาษาอังกฤษได้ คุณจะสามารถเข้าถึงเนื้อหาอีก 99% ในปัจจุบันได้ทันที</li>
+<li><strong>ความเร็วในการเรียนรู้</strong> จริงๆหลายๆคนฟัง/อ่านภาษาอังกฤษได้ แต่ไม่คล่อง บางคนคิดว่าความเร็วนี้เหมือนจะไม่ใช่เรื่องใหญ่ แค่อ่านได้ก็พอแล้ว แต่ลองนึกภาพคนที่อ่านภาษาอังกฤษได้แค่ 200 คำต่อนาที กับคนที่อ่านได้ด้วยความเร็ว 400 คำต่อนาที ต่างกันเท่าตัว ถ้าสองคนนี้ใช้เวลาอ่านหนังสือเท่าๆกัน หลังจาก 5 ปี สองคนนี้จะเก่งต่างกันแค่ไหน?</li>
+<li><strong>การโตในหน้าที่การงาน</strong> ประเทศไทยมีบริษัทที่ทำไอทีจริงๆน้อยมาก ลองนับบริษัทไอทีจริงๆในตลาดหุ้นไทยดู แล้วเทียบกับตลาดหุ้นสหรัฐ <a href=http://dogsofthedow.com/largest-companies-by-market-cap.htm>TOP 5 บริษัทที่ใหญ่ที่สุด</a>ดู การพูดภาษาอังกฤษได้ ทำให้เรามีตัวเลือกมากกว่า มีโอกาสอยู่ในบริษัทที่แข็งแกร่งกว่า ที่มีสิ่งแวดล้อมและคนเก่งมากกว่า และแน่นอน ค่าตอบแทนดีกว่า</li>
+</ol>
+<p>ภาษาอังกฤษเหมือนตัวคูณครับ คนที่มีความสามารถกับความสนใจทางด้านนี้ หากภาษาอังกฤษดีด้วย จะเหมือนคูณ 1.5 แต่หากติดข้อจำกัดทางภาษา อาจจะโดนคูณ 0.5 แทน</p>
+<p>ถ้าคิดว่าตัวเองภาษาอังกฤษไม่แข็งแรงพอ เริ่มใช้เวลากับมันวันละนิดวันละหน่อยดู ฝึกทั้งการฟัง พูด อ่าน เขียน ให้ครบ</p>
+<p>และถ้าใครบอกว่า &ldquo;ผมโง่ภาษาอังกฤษ พูดไม่ได้หรอก&rdquo; ให้กลับไปอ่านเรื่อง Growth Mindset ข้างบนซ้ำอีกครั้งครับ</p>
+<h1 id=อยาเนนทปรมาณภาษา-เนนทวธการเขยนโปรแกรม>อย่าเน้นที่ปริมาณภาษา เน้นที่วิธีการเขียนโปรแกรม</h1>
+<p>เวลาผมคุยกับโปรแกรมเมอร์ช่วงสองปีแรก น้องๆมักจะถามว่า</p>
+<ul>
+<li>เขียน Java ดีเปล่า</li>
+<li>ลอง Go ดีไหม</li>
+<li>Elixir จะเป็นไง</li>
+<li>Elm เทพมากเลย</li>
+</ul>
+<p>คำตอบแบบซื่อๆคือ ผมก็ไม่มีลูกแก้ววิเศษครับ ไม่รู้เหมือนกัน ทุกวันนี้ก็อยากจะลองใช้ Elm ดู แต่มันอยู่ล่างสุดในรายการที่กะเรียนรู้</p>
+<p>ในอดีตผมใช้เวลาผิด ศึกษาหลายเทคโนโลยีที่ปัจจุบันไม่มีที่ให้ใช้แล้ว เรียกได้ว่าเสียเวลาไปเยอะพอควร</p>
+<p>ดังนั้น ผมแนะนำว่าสองปีแรก ให้เลือกภาษา"ยอดนิยม" ที่ทำ OOP ได้หนึ่งภาษา (C++, C#, Java) เอาภาษาเดียวก็พอ แต่เอาให้ลึกกว่า ถ้าทำเว็บที่ต้องแตะ Frontend ก็เพิ่ม JavaScript เข้าไปอีกหนึ่งภาษา</p>
+<p>แค่นั้นพอ&mldr;</p>
+<p>เสร็จแล้วแทนที่จะไปลองภาษาใหม่ๆ เอาเวลาไปศึกษาหัวข้อพวกนี้ครับ</p>
+<ol>
+<li>Code readability & maintainability (ex. OOP, Refactoring, Design Pattern)</li>
+<li>Operation (ex. Metric monitoring & alerting system, Linux, Bash scripting, CLI, Web server etc. )</li>
+<li>Software Development Practices and Process (ex. Agile, CI, TDD, A/B Testing, etc.)</li>
+<li>System Design (ex. API design, CAP Theorem, Security, Reliability, Scalability, etc.)</li>
+</ol>
+<p>หัวข้อพวกนี้จะเป็นสิ่งที่ทำให้เราใช้ภาษาได้แตกฉาน และเอาไปประยุกต์ใช้กับภาษาอื่นได้</p>
+<p>ทั้งนี้ทั้งนั้น ไม่ได้แปลว่าไม่แนะนำให้เรียนภาษาใหม่นะครับ แต่อย่าให้น้ำหนักกับมันมาก ไม่ใช่เขียนเป็นทั้ง C/C++/Java/Go/Elixer/Elm/JavaScript/ES6/Python/PHP/Closure/Haskell/Cobol แต่เขียนได้แค่ Todo Application แต่เขียนให้ดีไม่ได้สักภาษาเลย</p>
+<p>ถ้าจะเรียนภาษาเพิ่ม เอาเป็นงานอดิเรกพอ ยึดเรื่องข้างบนพวกนี้เป็นหลักครับ</p>
+<p>นี่อาจจะเป็นคำแนะนำที่อาจจะขัดต่อความคิดของหลายๆคน ซึ่งผมอาจจะผิดก็ได้ แต่ผมขอให้เหตุผลแนบไว้ดังนี้ครับ</p>
+<ol>
+<li>หลังเลยช่วง Junior ไปแล้ว ความรู้ในหัวข้อพวกนี้สำคัญมากในการขยับไปยัง Mid-Level หรือ Senior ครับ</li>
+<li>ภาษาใหม่ๆอาจจะตาย หรือเสียความนิยมไปได้ แต่หัวข้อข้างบนยังไงก็อยู่ไม่ต่ำกว่าสิบปีครับ</li>
+<li>เนื้อหาพวกนี้ เราสามารถเอาไปประยุกต์ในงานจริง โปรเจ็คจริงได้ ไม่ว่าจะใช้ภาษาหรือเฟรมเวิร์คอะไรอยู่ การประยุกต์ใช้เป็นวิธีการเรียนรู้ที่ดีที่สุด เมื่อเทียบกับการเรียนภาษาใหม่ที่เรียนไปแต่ไม่ได้ใช้เป็นประจำ ความรู้จะอยู่คงทนกว่า</li>
+</ol>
+<p>ชี้แจงอีกอย่าง คือหัวข้อพวกนี้ แต่ละหัวข้อใช้เวลาเป็นปีๆยังไม่แน่เลยว่าจะเชี่ยวชาญ ตัวผมเองก็เชี่ยวชาญได้แค่ไม่กี่หัวข้อ ดังนั้น สำหรับโปรแกรมเมอร์มือใหม่ ไม่ต้องลงลึกครับ แต่อย่างน้อย ถ้ามีคนถาม ก็ควรอธิบายได้ว่าหัวข้อนั้นๆหมายถึงอะไร มีความสำคัญในการพัฒนาซอฟท์แวร์ยังไง</p>
+<h1 id=เรยนรสาขาตางๆแบบตว-t>เรียนรู้สาขาต่างๆแบบตัว T</h1>
+<p>สืบเนื่องจากหัวข้อที่แล้ว ผมเชียร์ให้คนเรียนรู้สิ่งต่างๆแบบตัว T</p>
+<blockquote>
+<p>การเรียนรู้แบบตัว T หมายถึง ให้ลงลึกในสาขาหนึ่ง (เหมือนแกนของตัว T) ส่วนสาขาอื่นๆรอบข้าง ไม่ต้องลงลึกมาก แต่ต้องพอรู้ (เหมือนหัวตัว T ที่กว้างแต่บาง)</p>
+</blockquote>
+<p>สาเหตุที่แนะนำแบบนี้เพราะ</p>
+<ol>
+<li>หลังผ่านช่วง 2-3 ปีแรก เราจะหลุดพ้นจากการเป็น Junior หากไม่มีสาขาที่เราเชี่ยวชาญลึกพอ จะทำให้ต่อรองเงินเดือนในตลาดงานได้ยาก</li>
+<li>การศึกษาสาขาอื่นๆ เผื่อเราค้นพบว่านี่ไม่ใช่สาขาที่ใช่ เราจะรู้ว่ามีสาขาอะไรให้เราไปได้บ้าง</li>
+<li>การศึกษาสาขาอื่นๆ แม้จะเพียงตื้นๆ จะช่วยให้เราค้นพบว่า &ldquo;เรายังไม่รู้อะไรบ้าง&rdquo; การรู้ว่าตัวเองไม่รู้อะไรบ้้างนี่สำคัญมากในการพัฒนาตนเองครับ</li>
+<li>การศึกษาสาขาอื่นๆ ทำให้เราทำงานร่วมกับคนสาขาอื่นได้ดีขึ้น</li>
+</ol>
+<p>สังเกตว่าผมเน้นคำว่า &ldquo;สาขา&rdquo; ไม่ใช่ &ldquo;ภาษา&rdquo;</p>
+<p>สาขาในที่นี้เป็นนิยามที่หลวมมาก ตัวอย่างเช่น Frontend อาจจะถือเป็นสาขาหนึ่ง ซึ่งครอบคลุมทั้งตัวภาษา (JavaScript, ES6, HTML5, CSS), เทคโนโลยี (Webpack, SCSS/LESS, Chrome Dev Tool), และเฟรมเวิร์คต่างๆ (jQuery, React, Vue, Angular, Jasmine/Mocha/Jest)</p>
+<p>บางคนอาจจะมองว่า Java เป็นสาขาหนึ่งก็ได้ เพราะรายละเอียดของภาษามีเยอะอยู่แล้ว และถ้าจะเขียนให้ดีจริงๆก็ต้องเข้าใจ JVM ว่าทำงานยังไง, ใช้ Framework อย่าง Spring เป็น, สามารถทำ Performance optimization ได้, เขียน Multi-thread ได้, เข้าใจว่า API แต่ละตัวมีอาการอะไรแปลกๆซ่อนอยู่บ้าง</p>
+<p>บางคนอาจจะมองว่า Operation เป็นสาขาหนึ่ง ซึ่งต้องรู้ทั้ง Linux, VM, Network, Containerization, Shell Script/Python, CI/CD, Monitoring tool อันนี้ก็แล้วแต่นิยาม DevOps ของแต่ละคน</p>
+<h1 id=การทำงานรวมกบผอน>การทำงานร่วมกับผู้อื่น</h1>
+<p>ถ้าให้เลือกระหว่างโปรแกรมเมอร์ที่เก่งกลางๆ แต่ทำงานร่วมกับคนอื่นได้ดี กับโปรแกรมเมอร์ที่เก่งมาก เทพสุดๆ แต่ทำงานร่วมกับคนอื่นไม่ได้ ผมเลือกคนแรกเข้าทีมครับ ไม่ต้องคิดมากเลย</p>
+<p>เพราะการเขียนโปรแกรมในปัจจุบัน ส่วนใหญ่ทำคนเดียวไม่ได้ ต้องทำกันเป็นทีม คนที่ทำงานร่วมกับคนอื่นไม่ได้นี่อันตรายมาก หากเอามาไว้ในทีม ดีไม่ดีจะทำให้คนอื่นลาออกกันหมดอีก</p>
+<p>นี่เป็นหัวข้อที่ยากมากในการเรียนรู้ แต่อย่างตามคอนเซ็บของ Growth Mindset ครับ ทุกอย่างเรียนรู้ได้</p>
+<p>เทคนิคที่ผมทำคือ</p>
+<ol>
+<li>พยายามทบทวนในช่วงท้ายวัน ว่าวันนี้เราสื่อสารอะไรกับใครบ้าง สื่อสารอย่างไร ได้ผลหรือไม่ได้ผลยังไง จะทำยังไงให้ได้ดีกว่านี้</li>
+<li>ขอ Feedback จากคนที่ทำงานด้วยว่าเราทำงานเป็นยังไง เพราะบางครั้งเราทำ หรือพูดอะไรที่รบกวนจิตใจคนอื่นโดยไม่รู้ตัว ครึ่งปีก็ขอคุยด้วยเป็นส่วนตัวสักครึ่งช.ม. ไล่เช็คดูว่าเค้ารู้สึกยังไงในการทำงานกับเรา อย่างผมเองเคยโดน Feedback ว่าเป็นคนที่รุนแรงเกินไป พูดอะไรไม่คิดถึงจิตใจคนอื่น พอผ่านไปหลายปี กลับมาโดน Feedback ว่าใครพูดอะไรก็ไม่ขัด เออออไปหมด ทุกวันนี้ก็ต้องพยายามปรับและเช็คตลอดเวลา</li>
+<li>ฝึกทักษะด้านการพูดต่อหน้าคนอื่นเอาไว้ บังคับตัวเองให้ต้องพูดต่อหน้าคนเยอะๆเป็นประจำ</li>
+</ol>
+<h1 id=การดแลสขภาพ>การดูแลสุขภาพ</h1>
+<p>ครับ ผรู้ว่าเรื่องนี้โคตรไม่ตรงคอนเซ็บบล็อคเลย</p>
+<p>แต่เรื่องแบบนี้ไม่เห็นโลงศพไม่หลั่งน้ำตา ตอนอายุ 20 ก็ไม่ค่อยแคร์กันหรอก (ผมนี่แหละคนนึง) แต่ผมการันตีได้เลยว่าพอเลย 30 แล้ว โปรแกรมเมอร์ป่วยกันเยอะมาก ป่วยแบบเรื้อรังรักษาไม่หายขาดด้วย เพราะพฤติกรรมเรื้อรังที่สะสมมาเป็นสิบปี</p>
+<p>หลักๆเลยก็พวก Office Syndrome พวกเจ็บข้อมือ ปวดหลัง ปวดเอว ปวดคอ นิ้วล็อค</p>
+<p>ผมคิดว่าโปรแกรมเมอร์ (หรือคนทำงานนั่งโต๊ะ) ควรจะรู้เรื่อง:</p>
+<ul>
+<li><strong>Ergonomic</strong> (การจัดโต้ะทำงาน, ท่านั่ง/ยืนใช้คอมพิวเตอร์)</li>
+<li><strong>โภชนาการ</strong> (เรื่องอาหารห้าหมู่นี่แหละ, โปรตีนควรกินวันละเท่าไร ไขมันชนิดไหนกินมากไม่ดี, ควรกินผักผลไม้กี่กรัมต่อวัน)</li>
+<li><strong>การออกกำลังกาย</strong> (เข้าใจว่า Cardio/Strength Training ต่างกันยังไง, มีวินัยในการออกกำลังกายสม่ำเสมอ)</li>
+<li><strong>การพักผ่อน</strong> (จัดห้องนอนให้ดี นอนให้สนิทตลอดคืน, เข้าใจ Cycle ในการหลับ, เลี่ยง Blue light ก่อนนอน, นอนและตื่นให้เป็นเวลา, ไม่กด Snooze, ไม่พึ่งคาเฟอีนในการทำงาน)</li>
+</ul>
+<p>ใครยังรู้สึกว่าไม่ใช่เรื่อง ลองไปถามพี่ๆในทีมดูว่าสุขภาพเป็นไงบ้าง เอาพวกที่เก่งๆ ใช้เวลากับคอมนานๆแบบลืมเวลา ปั่นโปรเจ็คกันแบบหามรุ่งหามค่ำ ส่วนใหญ่อาการน่าจะออกกันแล้ว</p>
+<p>นั่นล่ะ อนาคตเราเลย</p>
+<p>นี่เลยเป็นเรื่องที่อยากบอกโปรแกรมเมอร์มือใหม่ไว้ รักษาสภาพร่างกายตัวเองไว้ให้ดีตั้งแต่เนิ่นๆนะครับ ยังต้องอยู่กับมันไปอีกยาว</p>
+<p>ใครทีชอบอ่าน ผมแนะนำหนังสือเล่มนี้ครับ จริงๆเค้าก็เขียนเรื่องเบสิคทั้งหมดแหละ แต่เขียนเฉพาะเจาะจงกับกรณีของโปรแกรมเมอร์</p>
+<ul>
+<li>[The Healthy Programmer] (<a href=https://www.goodreads.com/book/show/17229509-the-healthy-programmer>https://www.goodreads.com/book/show/17229509-the-healthy-programmer</a>)</li>
+</ul>
+<h1 id=สรป>สรุป</h1>
+<p>ผมว่าทักษะการเรียนรู้เป็นสิ่งที่สำคัญที่สุดสำหรับโปรแกรมเมอร์ครับ</p>
+<p>ส่วนใหญ่ พอพูดถึงเรื่องการเรียนรู้ของโปรแกรมเมอร์ เรามักจะคิดถึงเรื่องเทคโนโลยีหรือภาษาโปรแกรมต่างๆ ในบทความนี้ ผมเลยอยากชี้ให้เห็นว่าการเป็นโปรแกรมเมอร์ที่ดีนั้น ต้องเรียนรู้ทักษะอย่างอื่นด้วย</p>
+<p>อย่างที่บอกตอนต้นครับ บทความนี้เป็นความเห็นส่วนตัวเสียเยอะ ฟังหูไว้หู แต่อย่างน้อยก็เอาไปพิจารณากันนะครับ</p>
+<p>สำหรับคนที่เลยจุดที่เป็นโปรแกรมเมอร์มือใหม่ไปแล้ว ถ้าเห็นด้วยกับบทความ เริ่มต้นตอนนี้ก็ไม่สายครับ อย่าใช้อายุงานเป็นข้ออ้างสำหรับ Fixed Mindset</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>Author</span>
+<span class=item-content>ijemmy</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>LastMod</span>
+<span class=item-content>
+2017-10-31
+</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>License</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/career/>career</a>
+<a href=/tags/learning/>learning</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/08-sticky-session/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">ปัญหาของ Sticky Session</span>
+<span class="prev-text nav-mobile">Prev</span>
+</a>
+<a class=next href=/post/06-career-start/>
+<span class="next-text nav-default">โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี ภาค 1</span>
+<span class="next-text nav-mobile">Next</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
+<a href=http://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+Powered by <a class=hexo-link href=https://gohugo.io>Hugo</a>
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+Theme -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<span class=copyright-year>
+&copy;
+2017 -
+2021<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

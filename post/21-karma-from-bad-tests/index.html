@@ -1,0 +1,429 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับ Unit/Component Tests) - Not About Code - Technical Leadership</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="ijemmy"><meta name=description content="ปกติผมไม่ค่อยเชื่อเรื่องบาปบุญเท่าไร แต่เวลาเห็นโปรเจ็คไม่เขียนเทสต์ หรือเขียนเทสต์ไม่ดี ผมพูดเรื่องบาปบุญขึ้นมาทันที
+ การไม่เขียนเทสต์ (หรือเขียนเทสต์ไม่ดี)เป็นบาปอย่างหนึ่ง เป็นเวรกรรมจะตามทันทีมในระยะเวลาไม่เกิน 3 เดือน
+ เวลาทำงานกับชาวต่างชาติที่ไม่เข้าใจคอนเซ็บเรื่องบาปบุญ ผมชอบอธิบายให้เค้าฟังแบบนี้
+ Writing code without tests (or low-quality tests) is like having one-night stand everyday without protection. You will eventually regret it.
+ เน้นนิดนึงว่าไม่ใช่แค่เรื่องไม่เขียนเทสต์ แต่รวมถึงกรณีเขียนเทสต์ไม่มีคุณภาพด้วย
+บางทีมอาจจะบอกว่าเขียนแล้ว มี Coverage ครบ 100% เลยด้วย บาปเบิบอะไรไม่มีหรอก
+แต่ก่อนคนเขียนก็คิดงี้ครับ จนกระทั่งได้มาเจอกับสถานการณ์ &amp;ldquo;เทสต์ท่วมหัว เอาตัวไม่รอด&amp;rdquo;
+บทความนี้จะเล่าสู่กันฟังเรื่องตัวอย่างการเขียนเทสต์ที่ไม่ดีครับ ผู้อ่านจะได้หลีกเลี่ยงกัน โดยบทความนี้จะเน้นไปในส่วนของ Unit/Component Test เป็นหลัก
+แต่ก่อนจะเข้าเรื่องเขียนเทสต์ให้ดี ผมขอยกปัญหาจากการไม่เขียนเทสต์ก่อนครับ
+"><meta name=keywords content="Hugo,theme,even">
+<meta name=generator content="Hugo 0.89.4 with theme even">
+<link rel=canonical href=http://www.notaboutcode.com/post/21-karma-from-bad-tests/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<link rel=stylesheet href=/css//css/custom.css>
+<meta property="og:title" content="เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับ Unit/Component Tests)">
+<meta property="og:description" content="
+ปกติผมไม่ค่อยเชื่อเรื่องบาปบุญเท่าไร แต่เวลาเห็นโปรเจ็คไม่เขียนเทสต์ หรือเขียนเทสต์ไม่ดี ผมพูดเรื่องบาปบุญขึ้นมาทันที
+
+การไม่เขียนเทสต์ (หรือเขียนเทสต์ไม่ดี)เป็นบาปอย่างหนึ่ง เป็นเวรกรรมจะตามทันทีมในระยะเวลาไม่เกิน 3 เดือน
+
+เวลาทำงานกับชาวต่างชาติที่ไม่เข้าใจคอนเซ็บเรื่องบาปบุญ ผมชอบอธิบายให้เค้าฟังแบบนี้
+
+Writing code without tests (or low-quality tests) is like having one-night stand everyday without protection. You will eventually regret it.
+
+เน้นนิดนึงว่าไม่ใช่แค่เรื่องไม่เขียนเทสต์ แต่รวมถึงกรณีเขียนเทสต์ไม่มีคุณภาพด้วย
+บางทีมอาจจะบอกว่าเขียนแล้ว มี Coverage ครบ 100% เลยด้วย บาปเบิบอะไรไม่มีหรอก
+แต่ก่อนคนเขียนก็คิดงี้ครับ จนกระทั่งได้มาเจอกับสถานการณ์ &ldquo;เทสต์ท่วมหัว เอาตัวไม่รอด&rdquo;
+บทความนี้จะเล่าสู่กันฟังเรื่องตัวอย่างการเขียนเทสต์ที่ไม่ดีครับ ผู้อ่านจะได้หลีกเลี่ยงกัน โดยบทความนี้จะเน้นไปในส่วนของ Unit/Component Test เป็นหลัก
+แต่ก่อนจะเข้าเรื่องเขียนเทสต์ให้ดี ผมขอยกปัญหาจากการไม่เขียนเทสต์ก่อนครับ">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://www.notaboutcode.com/post/21-karma-from-bad-tests/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2018-04-14T12:04:02+07:00">
+<meta property="article:modified_time" content="2018-04-14T12:04:02+07:00">
+<meta itemprop=name content="เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับ Unit/Component Tests)">
+<meta itemprop=description content="
+ปกติผมไม่ค่อยเชื่อเรื่องบาปบุญเท่าไร แต่เวลาเห็นโปรเจ็คไม่เขียนเทสต์ หรือเขียนเทสต์ไม่ดี ผมพูดเรื่องบาปบุญขึ้นมาทันที
+
+การไม่เขียนเทสต์ (หรือเขียนเทสต์ไม่ดี)เป็นบาปอย่างหนึ่ง เป็นเวรกรรมจะตามทันทีมในระยะเวลาไม่เกิน 3 เดือน
+
+เวลาทำงานกับชาวต่างชาติที่ไม่เข้าใจคอนเซ็บเรื่องบาปบุญ ผมชอบอธิบายให้เค้าฟังแบบนี้
+
+Writing code without tests (or low-quality tests) is like having one-night stand everyday without protection. You will eventually regret it.
+
+เน้นนิดนึงว่าไม่ใช่แค่เรื่องไม่เขียนเทสต์ แต่รวมถึงกรณีเขียนเทสต์ไม่มีคุณภาพด้วย
+บางทีมอาจจะบอกว่าเขียนแล้ว มี Coverage ครบ 100% เลยด้วย บาปเบิบอะไรไม่มีหรอก
+แต่ก่อนคนเขียนก็คิดงี้ครับ จนกระทั่งได้มาเจอกับสถานการณ์ &ldquo;เทสต์ท่วมหัว เอาตัวไม่รอด&rdquo;
+บทความนี้จะเล่าสู่กันฟังเรื่องตัวอย่างการเขียนเทสต์ที่ไม่ดีครับ ผู้อ่านจะได้หลีกเลี่ยงกัน โดยบทความนี้จะเน้นไปในส่วนของ Unit/Component Test เป็นหลัก
+แต่ก่อนจะเข้าเรื่องเขียนเทสต์ให้ดี ผมขอยกปัญหาจากการไม่เขียนเทสต์ก่อนครับ"><meta itemprop=datePublished content="2018-04-14T12:04:02+07:00">
+<meta itemprop=dateModified content="2018-04-14T12:04:02+07:00">
+<meta itemprop=wordCount content="884">
+<meta itemprop=keywords content="CI,CD,Testing,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับ Unit/Component Tests)">
+<meta name=twitter:description content="
+ปกติผมไม่ค่อยเชื่อเรื่องบาปบุญเท่าไร แต่เวลาเห็นโปรเจ็คไม่เขียนเทสต์ หรือเขียนเทสต์ไม่ดี ผมพูดเรื่องบาปบุญขึ้นมาทันที
+
+การไม่เขียนเทสต์ (หรือเขียนเทสต์ไม่ดี)เป็นบาปอย่างหนึ่ง เป็นเวรกรรมจะตามทันทีมในระยะเวลาไม่เกิน 3 เดือน
+
+เวลาทำงานกับชาวต่างชาติที่ไม่เข้าใจคอนเซ็บเรื่องบาปบุญ ผมชอบอธิบายให้เค้าฟังแบบนี้
+
+Writing code without tests (or low-quality tests) is like having one-night stand everyday without protection. You will eventually regret it.
+
+เน้นนิดนึงว่าไม่ใช่แค่เรื่องไม่เขียนเทสต์ แต่รวมถึงกรณีเขียนเทสต์ไม่มีคุณภาพด้วย
+บางทีมอาจจะบอกว่าเขียนแล้ว มี Coverage ครบ 100% เลยด้วย บาปเบิบอะไรไม่มีหรอก
+แต่ก่อนคนเขียนก็คิดงี้ครับ จนกระทั่งได้มาเจอกับสถานการณ์ &ldquo;เทสต์ท่วมหัว เอาตัวไม่รอด&rdquo;
+บทความนี้จะเล่าสู่กันฟังเรื่องตัวอย่างการเขียนเทสต์ที่ไม่ดีครับ ผู้อ่านจะได้หลีกเลี่ยงกัน โดยบทความนี้จะเน้นไปในส่วนของ Unit/Component Test เป็นหลัก
+แต่ก่อนจะเข้าเรื่องเขียนเทสต์ให้ดี ผมขอยกปัญหาจากการไม่เขียนเทสต์ก่อนครับ"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับ Unit/Component Tests)</h1>
+<div class=post-meta>
+<span class=post-time> 2018-04-14 </span>
+<div class=post-category>
+<a href=/categories/continuous-delivery/> Continuous Delivery </a>
+</div>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>Contents</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#ขออางอนดบ-1-เขยนเทสตแลวชา-เสยเวลานานกวาเขยนโคดอก>ข้ออ้างอันดับ 1 &ldquo;เขียนเทสต์แล้วช้า เสียเวลานานกว่าเขียนโค้ดอีก&rdquo;</a></li>
+<li><a href=#แลวถาเขยนเทสตไวแตไมดละ>แล้วถ้าเขียนเทสต์ไว้แต่ไม่ดีล่ะ?</a>
+<ul>
+<li><a href=#1-ไม-mock-dependency-ใหด>1. ไม่ Mock Dependency ให้ดี</a></li>
+<li><a href=#2-สราง-object-ใหมในโคด>2. สร้าง Object ใหม่ในโค้ด</a></li>
+<li><a href=#3-ไสในรว-leaking-implementation-details>3. ไส้ในรั่ว (Leaking Implementation Details)</a></li>
+<li><a href=#4-เทสตม-side-effect-หรอตองพง-side-effect-จากเทสตขางๆ>4. เทสต์มี Side effect หรือต้องพึ่ง Side Effect จากเทสต์ข้างๆ</a></li>
+<li><a href=#5-เทสตหลายอยางใน-method-เดยว>5. เทสต์หลายอย่างใน Method เดียว</a></li>
+<li><a href=#6-ปฏบตกบเทสตแบบลกเมยนอย>6. ปฏิบัติกับเทสต์แบบลูกเมียน้อย</a></li>
+<li><a href=#7-ไมม-standard-ในการเขยนภายในทม>7. ไม่มี Standard ในการเขียนภายในทีม</a></li>
+</ul>
+</li>
+<li><a href=#สรป--การเอาไปใชในชวตจรง>สรุป + การเอาไปใช้ในชีวิตจริง</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p><img src=/img/covers/candle-01.jpg alt="Photo by Sharon McCutcheon on Unsplash"></p>
+<p>ปกติผมไม่ค่อยเชื่อเรื่องบาปบุญเท่าไร แต่เวลาเห็นโปรเจ็คไม่เขียนเทสต์ หรือเขียนเทสต์ไม่ดี ผมพูดเรื่องบาปบุญขึ้นมาทันที</p>
+<blockquote>
+<p>การไม่เขียนเทสต์ (หรือเขียนเทสต์ไม่ดี)เป็นบาปอย่างหนึ่ง เป็นเวรกรรมจะตามทันทีมในระยะเวลาไม่เกิน 3 เดือน</p>
+</blockquote>
+<p>เวลาทำงานกับชาวต่างชาติที่ไม่เข้าใจคอนเซ็บเรื่องบาปบุญ ผมชอบอธิบายให้เค้าฟังแบบนี้</p>
+<blockquote>
+<p>Writing code without tests (or low-quality tests) is like having one-night stand everyday without protection. You will eventually regret it.</p>
+</blockquote>
+<p>เน้นนิดนึงว่าไม่ใช่แค่เรื่องไม่เขียนเทสต์ แต่รวมถึงกรณีเขียนเทสต์ไม่มีคุณภาพด้วย</p>
+<p>บางทีมอาจจะบอกว่าเขียนแล้ว มี Coverage ครบ 100% เลยด้วย บาปเบิบอะไรไม่มีหรอก</p>
+<p>แต่ก่อนคนเขียนก็คิดงี้ครับ จนกระทั่งได้มาเจอกับสถานการณ์ &ldquo;เทสต์ท่วมหัว เอาตัวไม่รอด&rdquo;</p>
+<p>บทความนี้จะเล่าสู่กันฟังเรื่องตัวอย่างการเขียนเทสต์ที่ไม่ดีครับ ผู้อ่านจะได้หลีกเลี่ยงกัน โดยบทความนี้จะเน้นไปในส่วนของ Unit/Component Test เป็นหลัก</p>
+<p>แต่ก่อนจะเข้าเรื่องเขียนเทสต์ให้ดี ผมขอยกปัญหาจากการไม่เขียนเทสต์ก่อนครับ</p>
+<h1 id=ขออางอนดบ-1-เขยนเทสตแลวชา-เสยเวลานานกวาเขยนโคดอก>ข้ออ้างอันดับ 1 &ldquo;เขียนเทสต์แล้วช้า เสียเวลานานกว่าเขียนโค้ดอีก&rdquo;</h1>
+<p>อันนี้ผมไม่ปฏิเสธครับ เพราะการเขียนเทสต์ดีๆไม่ใช่เรื่องง่ายเลย</p>
+<p>เอากันจริงๆ ผมเองขี้เกียจเขียนเทสต์มาก แต่ก็ต้องเขียน เพราะไม่อยากให้ความขี้เกียจสร้างความพินาศให้กับโปรเจ็ค</p>
+<p>พินาศยังไง? สมมติว่าทีมของเราเขียนโค้ดโดยไม่เขียนเทสต์ วันหนึ่ง เขียนได้ประมาณ 100 บรรทัด ทีมของเรามี 5 คน รวม 500 บรรทัดต่อวัน</p>
+<p>หนึ่งเดือนทำงาน 20 วัน เราจะได้โค้ดประมาณ 10,000 บรรทัดต่อเดือน</p>
+<p>ตอนแรกๆก็เขียนกันเร็วอยู่หรอกครับ แต่ปัญหาจะเริ่มเมื่อเวลาผ่านไป</p>
+<p>สมมติว่าเข้าเดือนที่ 3 และมีโค้ดสัก 30,000 บรรทัด จะเริ่มเกิดอาการ &ldquo;แก้ตรงนั้น พังตรงนี้&rdquo; อย่างหลีกเลี่ยงไม่ได้</p>
+<p>นึกภาพนะครับ โค้ดตั้ง 30,000 บรรทัด จะตรวจกันยังไงว่าแก้ตรงนี้แล้วไม่พังที่อื่น</p>
+<p>เราอาจจะโบ้ยว่าสาเหตุมาจากการออกแบบไม่ดี ทำให้มีผลกระทบข้ามส่วนกัน แต่เอาเข้าจริง ไม่มีใครดีไซน์โค้ดให้เพอร์เฟ็คได้ตั้งแต่แรกหรอกครับ (Requirement ยังไม่ชัดด้วยซ้ำ) ดีไซน์ในระดับโค้ดต้องมีการเปลี่ยนไปเรื่อยๆ (Refactoring) ซึ่งจะทำได้ยากมาก ถ้าไม่มี Automated Test มาคอยเช็คว่าเราเปลี่ยนแล้วจะแก้ตรงไหนได้บ้าง</p>
+<p>ยิ่งปริมาณโค้ดเยอะขึ้น เวลาพังแต่ละที การหาบั๊กก็ใช้เวลานานขึ้น แปรผันตามจำนวนโค้ด การใส่ Feature ใหม่จะใช้เวลานานขึ้นเรื่อยๆ และวันดีคืนดีก็จะมีบั้กที่หลุด Manual Testing ขึ้น Production มาให้แก้กันให้ตื่นเต้นเล่น</p>
+<p>ถึงจุดหนึ่ง โปรเจ็คจะอยู่สถานะที่เวลาใส่ Feature ใหม่ๆ ต้องใช้เวลาแก้บั๊กที่งอกขึ้นมา นานกว่าตัวFeatureเอง</p>
+<p>จุดนั้นคือโปรเจ็คล้มละลาย Technical Debt เรียบร้อยแล้ว</p>
+<p>พินาศสิครับ</p>
+<h1 id=แลวถาเขยนเทสตไวแตไมดละ>แล้วถ้าเขียนเทสต์ไว้แต่ไม่ดีล่ะ?</h1>
+<p>ทีมที่มีประสบการณ์มากขึ้น จะเริ่มทำการเขียนเทสต์ ไปจนถึงขั้นเขียนแบบไม่บันยะบันยัง เพื่อให้ Coverage Test แตะ 100% ให้ได้ (หรือเพราะหัวหน้าสั่งมา)</p>
+<p>ปัญหาที่จะตามมาแทนคือเรื่องคุณภาพของเทสต์</p>
+<p>ถ้าเขียนเทสต์ไว้ไม่ดี ตอนแรกๆอาจจะไม่มีอะไรมากครับ แต่พอโปรเจ็คเลย 1-2 ปี บาปกรรมก็ตามทันอยู่ดี</p>
+<p>ที่กล้าพูดเพราะเคยชดใช้กรรมมาแล้ว</p>
+<p>เราจะมานั่งดูแบบละเอียดกัน ว่าการเขียนเทสต์แบบไหนบ้างที่ไม่ดี ผมคงยกตัวอย่างได้ไม่ครบหมด แต่เนื้อหาน่าจะพอทำให้ผู้อ่านเห็นภาพมากขึ้น</p>
+<p>เพื่อไม่ให้บทความยาวเกินไป เราจะมาดูแค่ปัญหาใน Unit/Component Test (ใครไม่เข้าใจนิยามของ Component Test ลองอ่านใน<a href=/post/18-test-properties/>บทความเรื่องคุณสมบัติของเทสต์</a>ดูก่อนนะครับ) ส่วน Integration/E2E Test นี่ผมขอยกยอดไปก่อน</p>
+<h2 id=1-ไม-mock-dependency-ใหด>1. ไม่ Mock Dependency ให้ดี</h2>
+<p>เวลาเราเทสต์แต่ละ Unit หรือ Component เราไม่ควรจะให้ส่วนอื่นๆนอกเหนือจากส่วนที่เราเขียนอยู่ มาทำให้เทสต์พังได้</p>
+<p>วิธีการป้องกันปัญหานี้ ก็คือการ Mock Dependency ที่เราจะต้องเรียกใช้ลงไป ผมขอยกตัวอย่างให้เห็นภาพกัน</p>
+<p>1.หากเรากำลัง Unit Test Class A อยู่ แล้วคลาส A ต้องใช้ Object จากคลาส B เราก็ควรจะทำการ Mock คลาส B ปลอมๆขึ้นมา โดยข้างในไม่ได้มีการทำงานอะไร แค่เรียกใช้ Method แล้วก็รีเทิร์นค่าที่ถูกต้องกลับมา</p>
+<p>หากเราไม่ทำแบบนี้ วันดีคืนดีแก้คลาส B เทสต์ของคลาส A ก็พังทั้งๆที่ไม่ได้ก็พังทั้งๆที่ไม่ได้ไปทำอะไรกับมัน**</p>
+<p>2.หาก Class A ต้องเรียก Database หรือเรียกใช้ 3rd-party service แทนที่จะเรียกจริงๆ เราก็ทำการ Mock method ที่เรียกซะ แล้วกำหนดให้ส่งค่าที่ถูกต้องคืนทันที</p>
+<p>หากเราไม่ทำแบบนี้ เทสต์รันจะใช้เวลานานมาก เพราะ Network call ยังไงก็เกิน 10ms ในขณะที่ <a href=https://gist.github.com/jboner/2841832>Memory Access ไม่เกิน 100ns</a> ที่แย่กว่าคือ ถ้าวันดีคืนดีฝั่งที่ถูกเรียกพังขึ้นมา เทสต์ของเราก็จะพังด้วย ทำให้สับสนว่าเราเขียนโค้ดเรามีบั๊ก หรือ 3rd-party service เพี้ยนชั่วคราวเฉยๆ เสียเวลามางมหาสาเหตุฟรีๆ</p>
+<p>Unit/Component Test ที่ดีควรจะรันได้เองโดยไม่ต้องพึ่งอะไรภายนอกครับ และควรจะรันได้เร็วมากๆด้วย ดังนั้น การ Mock Dependency จึงเป็นสิ่งที่จำเป็นมาก</p>
+<h2 id=2-สราง-object-ใหมในโคด>2. สร้าง Object ใหม่ในโค้ด</h2>
+<p>เมื่อใดก็ตามที่โค้ดของคุณมีการสร้าง Object ใหม่ขึ้นมา ให้ระวังตัวไว้เลย ว่ามันจะเทสต์ยาก</p>
+<p>ยกตัวอย่างโค้ดข้างล่าง</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-Java data-lang=Java><span class=kd>public</span> <span class=kd>class</span> <span class=nc>A</span> <span class=o>{</span>
+  <span class=kd>private</span> <span class=n>B</span> <span class=n>b</span><span class=o>;</span>
+  <span class=kd>public</span> <span class=nf>A</span><span class=o>()</span> <span class=o>{</span>
+    <span class=n>b</span> <span class=o>=</span> <span class=k>new</span> <span class=n>B</span><span class=o>();</span>
+  <span class=o>}</span>
+
+  <span class=kd>public</span> <span class=nf>doSomethingWithB</span><span class=o>()</span> <span class=o>{</span>
+    <span class=c1>//use this.b here
+</span><span class=c1></span>  <span class=o>}</span>
+<span class=o>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>จากข้อที่แล้ว ผมแนะนำว่าให้หลีกเลี่ยงการใช้ Object B จริงๆเวลารันเทสต์ เพราะเวลาแก้ B อาจจะทำให้เทสต์ของ A พังได้</p>
+<p>แต่กรณีนี้ ตัวโค้ดของ A ดันผูกติดกับ B เรียบร้อย ด้วยการสร้าง new B() แล้วเราจะ Mock B ได้ยังไง?</p>
+<p>อันนี้แต่ละภาษา จะมีวิธีการแทรก new B() ที่แตกต่างกันไปครับ (ใครใช้ JavaScript คงจะนึกวิธีน่าเกลียดๆออก) แต่เรามาทำสิ่งที่ถือว่าเป็น Best practice ในปัจจุบันดีกว่า คือการใช้ Dependency injection</p>
+<p>ชื่อฟังดูโหด แต่จริงๆแล้ว แนวคิดหลักคือการไม่สร้าง Object B เอง แล้วให้คลาสอื่นใส่ B (Inject dependency) ลงไปแทน</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-Java data-lang=Java><span class=kd>public</span> <span class=kd>class</span> <span class=nc>A</span> <span class=o>{</span>
+  <span class=kd>private</span> <span class=n>B</span> <span class=n>b</span><span class=o>;</span>
+  <span class=kd>public</span> <span class=nf>A</span><span class=o>(</span><span class=n>B</span> <span class=n>b</span><span class=o>)</span> <span class=o>{</span>
+    <span class=k>this</span><span class=o>.</span><span class=na>b</span> <span class=o>=</span> <span class=n>b</span><span class=o>;</span>
+  <span class=o>}</span>
+  <span class=c1>// The rest is the same
+</span><span class=c1></span><span class=o>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>สังเกตว่าเวลาเทสต์ เราสามารถสร้าง Mock จากในเทสต์แล้วยัด B ลงไปได้ ประมาณนี้</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-Java data-lang=Java><span class=kd>public</span> <span class=kd>class</span> <span class=nc>TestA</span> <span class=o>{</span>
+  <span class=n>testA</span><span class=o>()</span> <span class=o>{</span>
+    <span class=n>B</span> <span class=n>fakeB</span> <span class=o>=</span> <span class=n>createMockB</span><span class=o>();</span>
+    <span class=n>A</span> <span class=n>a</span> <span class=o>=</span> <span class=k>new</span> <span class=n>A</span><span class=o>(</span><span class=n>fakeB</span><span class=o>);</span>
+  <span class=o>}</span>
+<span class=o>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>ในบางภาษา เราอาจจะต้องเปลี่ยน B ให้เป็น Interface แทนคลาส หรืออาจจะใช้ library เฉพาะเพื่อสร้าง <code>fakeB</code> แทนการเรียก <code>createMockB()</code></p>
+<p>ส่วนเวลาตัวโค้ดจริงๆจะเรียกใช้ A ก็จะต้องสร้าง B ขึ้นมาก่อน อันนี้แต่ละภาษามักจะมีเฟรมเวิร์คที่ใช้ทำ Dependency Injection อยู่แล้ว อันนี้ต้องยกให้ผู้อ่านไปศึกษาภาษาที่ตนใช้อยู่</p>
+<p>แต่หลักใหญ่ใจความของข้อนี้คือ <strong>อย่าสร้าง Object ใหม่ใน Code</strong> เพราะมันจะทำให้ Mock Depedency ในการเทสต์ยาก</p>
+<h2 id=3-ไสในรว-leaking-implementation-details>3. ไส้ในรั่ว (Leaking Implementation Details)</h2>
+<p>เทสต์ที่ดี เวลาแก้โค้ดในอนาคต ถ้าเราไม่ได้เปลี่ยน Public interface (ex. public method ใน java) เทสต์ไม่ควรจะพังครับ เวลา Refactor โค้ดก็จะง่าย และไม่เสียเวลามานั่งแก้เทสต์</p>
+<p>ส่วนใหญ่ การที่เทสต์พังทั้งๆที่ไม่ได้มีการแก้ Public method จะเกิดจากการที่เทสต์ไปรับรู้"ไส้ใน" หรือ Implementation Details</p>
+<p>คราวนี้ แทนที่เทสต์จะทดสอบแค่ข้อกำหนดที่ตกลงกันไว้ใน Public interface เราดันไปเทสต์ไอ้ Implement details เพิ่มเข้าไปอีก ด้วยความหวังดี อยากเทสต์ให้ละเอียด</p>
+<p>ประเด็นคือ Implementation Details นี่มันอาจจะเปลี่ยนเมื่อไรก็ได้ อาจจะโดน Refactor หรือ อาจจะเปลี่ยนไป Implement ด้วยวิธีอื่น ซึ่งพอแก้ที เทสต์ก็จะพังไปด้วย ต้องเขียนใหม่อีก</p>
+<p>คนที่ทำ TDD จะไม่ค่อยมีปัญหานี้ เพราะส่วนใหญ่จะกำหนด Interface ไว้ค่อนข้างชัดเจนตั้งแต่เขียนเทสต์ ที่เจอบ่อยคือกรณีที่มีโค้ดอยู่แล้ว (โดยเฉพาะอย่างยิ่ง Legacy Code) แล้วเรามาเขียนเทสต์คร่อมทีหลัง</p>
+<p>ตรงนี้ต้องมีสติเวลาเขียนเทสต์หน่อย ว่าไอ้ที่เช็คอยู่นี่มันเป็น Public interface ที่คนใช้ควรจะรู้รึเปล่า ไม่ใช่เอาแต่ Assert รัวๆทุกอย่างที่ขวางหน้า ถ้าที่ทีมมีการทำ Code Review ก็ใส่จุดนี้ไปใน Check List ด้วย จะช่วยเตือนสติกันได้</p>
+<h2 id=4-เทสตม-side-effect-หรอตองพง-side-effect-จากเทสตขางๆ>4. เทสต์มี Side effect หรือต้องพึ่ง Side Effect จากเทสต์ข้างๆ</h2>
+<p>เวลาเขียนเทสต์เสร็จ (และเป็นสีเขียวแล้ว) ก่อนจะดี๊ด๊า Push โค้ดแล้วไปเดินเล่น ให้มองคร่าวๆว่าเทสต์ของเราทิ้ง Side Effect อะไรไว้รึเปล่า</p>
+<p>ตัวอย่างเช่น</p>
+<ol>
+<li>หาก Mock อะไรขึ้นมา (Method, Class, API Call, Date object etc.) แล้วเฟรมเวิร์คที่ใช้อยู่ไม่ได้เคลียร์ค่าให้อัตโนมัติ เราจัดการเคลียร์เรียบร้อยแล้วหรือยัง</li>
+<li>กรณีที่เทสต์ต้องใช้แก้ค่าจาก Singleton, Database หรือ Data Access Layer ค่าพวกนี้เคลียร์เสร็จแล้วหรือเปล่า</li>
+</ol>
+<p>การทิ้ง Side Effect ไว้ บางทีอาจจะไม่พังวันนี้ แต่มันจะพังวันหน้า บางทีแค่สลับลำดับเทสต์ก็พังแล้ว</p>
+<p>ทุกครั้งที่เขียนเทสต์ แต่ละ Test ควรจะเป็นอิสระต่อกัน (Independent) ไม่ว่าเทสต์ไหนรันก่อนหลัง ก็ควรจะผ่านหมด แม้ว่าเทสต์อยู่ในไฟล์เดียวกัน ก็ไม่ควรจะมีสมมติฐานว่าต้องรันเทสต์ข้างบนก่อน เทสต์ข้างล่างถึงจะผ่าน</p>
+<p>ถ้าโชคดีหน่อย พอ Push code แล้วรันใน CI Server แล้วพังทันที อันนี้ก็จะหาไม่ยาก เพราะรู้ว่าพึ่งแก้อะไรไป</p>
+<p>ที่บัดซบมากๆคือกรณีที่วันดีคืนดีก็พังขึ้นมา แล้วก็พังบ้างไม่พังบ้าง (Flaky) โดยหาสาเหตุไม่เจอชัดเจน สมมติว่ามีเทสต์สักพันตัว อันนี้หากันอ้วกเลย ว่าเทสต์ไหนเป็นตัวสร้าง Side Effect แล้วไอ้เทสต์ที่พังนี่ไปพึ่ง Side Effect อะไรบ้าง</p>
+<p>อันนี้ส่วนใหญ่หนีไม่รอด เพราะพอถึงจุดที่เทสต์เยอะมากๆ เวลารันเทสต์จะนานเกินไป ทำให้เราอาจจะต้องเปลี่ยนวิธีการรันเทสต์แบบ Sequential เป็น Parallel เพื่อประหยัดเวลา อันนี้เราอาจจะการันตีลำดับในการรันไม่ได้เลย ขึ้นอยู่กับวิธีการกระจายเทสต์ของเฟรมเวิร์ค</p>
+<p>คนที่เขียนเทสต์ในเลเยอร์สูงๆ (Component, Integration, E2E Test) จะเจอปัญหานี้บ่อยกว่า เพราะต้องเซ็ตอัพนู่นนี่เยอะ โอกาสทิ้ง Side effect ไว้ก็จะมากกว่า</p>
+<p>ในทางปฏิบัติ เราจะพึ่ง Best Intention ของ Developer ไม่ได้ เพราะทุกคนเป็นมนุษย์ ยังไงก็ลืมหรือพลาดกันได้ วิธีการที่ดีกว่า คือการ Enforce กฏบางอย่างที่ป้องกัน หรือตรวจสอบการรั่วของ Side Effect ให้เจอเร็วที่สุด เช่น</p>
+<ol>
+<li>เซ็ตค่าให้ Framework รันเทสต์แบบ Parallel แบบสุ่มตั้งแต่เริ่มโปรเจ็คเลย (อย่างน้อยก็ 2 กลุ่มแยกกัน) เวลามี Side Effect จะได้ตรวจเจอเร็วๆ</li>
+<li>ทุกครั้งที่เริ่มเทสต์ จะต้องมีการ Initialize ค่าที่เราต้องใช้ให้ครบ ไม่อนุมานว่าค่า Default จะยังอยู่ เพราะเทสต์อื่นอาจแก้แล้วลืมทิ้งไว้ให้เรา</li>
+<li>ถ้าคลาสส่วนใหญ่ต้องทำอะไรแบบเดียวกันซ้ำๆ เราอาจจะสร้าง Utility Class ที่ไว้ใช้ตอน SetUp/TearDown ให้ครบเลย เพื่อเลี่ยงไม่ให้ Developer ลืม Initialize หรือเคลียร์ค่าบางค่า</li>
+</ol>
+<h2 id=5-เทสตหลายอยางใน-method-เดยว>5. เทสต์หลายอย่างใน Method เดียว</h2>
+<p>สำหรับผม ถ้า Component/Unit Test Method เกิดยาวเกินสัก 50 Lines นี่คือเริ่มทะแม่งๆแล้ว</p>
+<p>การที่ Method เดียว ทำการเทสต์หลายอย่าง จะมีข้อเสียตรงที่ แต่ละส่วนของการเทสต์ต้องพึ่งส่วนที่มาก่อนด้านบน ทำให้เวลาเทสต์พัง จะไล่หายากว่ามันพังจริงๆตั้งแต่ตรงไหน เพราะการพังที่ Line 40 อาจจะมาจากข้อผิดพลาดตั้งแต่ Line 3 ก็ได้</p>
+<p>เรามักจะประมาทความซับซ้อนในการไล่โค้ด เพราะตอนเขียนใหม่ๆเสร็จใหม่ๆ ทุกอย่างดูเข้าใจง่าย</p>
+<p>แต่ในทางปฏิบัติ คนที่ต้องมาไล่โค้ดจริงๆอาจจะไม่ใช่เรา หรืออาจจะเป็นเราในอีก 6 เดือนข้างหน้าซึ่งลืมไปแล้วว่าเขียนอะไรเอาไว้</p>
+<p>ส่วนตัว ผมจะมีสัญญาณเตือนว่า</p>
+<ol>
+<li>เวลาตั้งชื่อเทสต์ ถ้ามีคำว่า &ldquo;and&rdquo;</li>
+<li>หลัง Assertion ครั้งแรกแล้วต้องทำอะไรเพิ่มแล้ว Assert อีกที</li>
+</ol>
+<p>แปลว่าเราเทสต์มากกว่าหนึ่งอย่างแล้ว ควรจะแตกไปแยกไว้ใน Method อื่น ถ้าแตกแล้วมันมีโค้ดซ้ำกันมาก ก็แยกออกมาเป็น Method ให้ทั้งสองเทสต์เรียกใช้ร่วมกันซะ</p>
+<h2 id=6-ปฏบตกบเทสตแบบลกเมยนอย>6. ปฏิบัติกับเทสต์แบบลูกเมียน้อย</h2>
+<p>สารภาพกันมา ทุกคนเคยก็อบแปะโค้ดจาก Test Method ข้างบน แล้วมาแก้แค่บางค่ากันใช่ไหม?</p>
+<p>อันนี้เป็นสัญญาณว่าเรามี Duplicated Code ที่เราสามารถ Extract Method ออกมาใช้ซ้ำได้</p>
+<p>แต่พอเจอแบบนี้ บางทีก็จะคิดว่า &ldquo;นี่แค่เทสต์โค้ดเอง ซ้ำๆหน่อยก็ไม่เห็นเป็นอะไรเลย&rdquo;</p>
+<p>อยากให้จำไว้ว่า</p>
+<blockquote>
+<p>Test code มีศักดิ์ศรีเท่ากัน Production Code คุณต้อง Refactor และดูแลมันให้ดี อย่าให้เป็นลูกเมียน้อย</p>
+</blockquote>
+<p>เพราะเวลาเทสต์พังขึ้นมา คุณก็เอาโค้ดขึ้น Production ไม่ได้เหมือนกัน</p>
+<p>เวลาเขียนเทสต์(หรือโค้ด) ส่วนตัว ผมจะพยายามทำทุกอย่างให้อ่านง่ายครับ ไม่ต้องฉลาดมาก พอโค้ดอ่านง่าย อนาคตจะกลับมาแก้หรือดีบั๊กก็จะใช้เวลาน้อยกว่า</p>
+<h2 id=7-ไมม-standard-ในการเขยนภายในทม>7. ไม่มี Standard ในการเขียนภายในทีม</h2>
+<p>หลายๆทีมมี Coding Convention ที่ดี แต่ไม่มี Test Code Convention เลยด้วย</p>
+<p>ตัวอย่างเช่นการตั้งชื่อเทสต์ คนนึงเขียนอาจจะเป็น</p>
+<p><code>testProductPurchaseAction_IfStockIsZero_RendersOutOfStockView()</code></p>
+<p>อีกคนอาจจะเป็น</p>
+<p><code>testPurchaseOutOfStock()</code></p>
+<p>และไม่ได้มีแค่สองแบบ พอเปิดดูคลาสอื่นๆ มีจำนวนแบบตามจำนวนคนในทีมเลย</p>
+<p>ถามว่าแบบไหนดีกว่า อันนี้ผมตอบไม่ได้ เพราะเป็นเรื่องของรสนิยมซะเยอะ แต่ถ้ามันมีมากกว่าหนึ่งแบบ อันนี้ตอบได้ ว่าไม่ดีแน่ๆ เวลามาเปิดไล่โค้ดดูจะอ่านยาก ยิ่งถ้าต้องดูหลายๆคลาสพร้อมกันแล้วใช้ Standard คนละแบบกัน อันนี้จะยิ่งสับสน</p>
+<p>เรื่องนี้ไม่ใช่แค่ชื่อเทสต์ แต่รวมไปถึงเรื่องพวกการจัดวางโค้ด การ SetUp/TearDown การจัด Folder Structure ฯลฯ</p>
+<p>คือจะให้เหมือนกันเป๊ะคงยาก แต่อย่างน้อย ก็ไม่ถึงขั้นว่าเปิดไฟล์ข้างๆแล้วยังกับอยู่อีกโปรเจ็คนึง ใครอยากจะทำอะไรก็ทำตามใจ</p>
+<p>ระยะยาว พอมีเทสต์เป็นร้อยเป็นพันแล้วจะดูแลยากครับ</p>
+<h1 id=สรป--การเอาไปใชในชวตจรง>สรุป + การเอาไปใช้ในชีวิตจริง</h1>
+<p>การไม่เขียนเทสต์เป็นบาปติดจรวด สามเดือนก็เห็นผล</p>
+<p>แต่การเขียนเทสต์ไม่ดี บาปจะมาช้าหน่อย แต่จะหนักหน่วงไม่แพ้กัน เพราะเราจะต้องใช้เวลาดูแลรักษาเทสต์ (Maintenance) เยอะมาก ซึ่งจะมาจาก</p>
+<ol>
+<li><strong>เทสต์เชื่อถือไม่ได้ (Flaky)</strong> เพราะพังบ้างไม่พังบ้างแบบสุ่มๆ หาสาเหตุไม่เจอ พอเป็นบ่อยๆเข้า มีเทสต์หรือไม่มีเทสต์ก็ไม่ต่างกัน เพราะต่อให้เทสต์พังก็ต้องเอาขึ้น Production อยู่ดี กรณีนี้จะเกิดขึ้นจากการที่ไม่ Mock Dependency ให้ดี (ข้อ 1) หรือ เทสต์มี Side Effect (ข้อ 4)</li>
+<li><strong>เทสต์เปราะ (ฺBrittleness)</strong> การเขียนเทสต์หรือแก้โค้ดทำได้ยาก เพราะแก้ตรงนี้ก็จะพังตรงนู้น ทำให้ทีมรู้สึกว่าการเขียนเทสต์นั้นมีค่าใช้จ่ายมากกว่าประโยชน์ที่ได้รับ กรณีนี้เกิดจากการออกแบบเทสต์กับโค้ดไม่ดี (ข้อ 2 และ 3)</li>
+<li><strong>หาสาเหตุที่พังยาก (Failure Isolation)</strong> หาเจอยากว่ามันพังตรงจุดไหน สาเหตุอาจจะมาจากความซับซ้อนของเทสต์ (ข้อ 5, 6) เทสต์โค้ดอ่านยาก (ข้อ 7) หรือเพราะมันมี Side Effect แปลกๆที่มาจากเทสต์อื่นๆ (ข้อ 4)</li>
+</ol>
+<p>และนำไปสู่จุดที่ทีมจะบ่นว่า &ldquo;อย่าเขียนเทสต์ดีกว่า&rdquo; แล้วก็เข้าลูปบาปติดจรวดใหม่</p>
+<p>ใครที่ในทีมกำลังเริ่มเขียนเทสต์ อยากแนะนำให้ส่งบทความนี้ให้เพื่อนร่วมทีมอ่าน แล้วคอยหมั่นตรวจสอบโค้ดของตัวเองว่าเข้าข่ายข้างต้นรึเปล่า การป้องกันไว้ง่ายกว่าการแก้ไขครับ</p>
+<p>ส่วนใครที่เจอปัญหาพวกนี้แล้ว การแก้ไขต้องค่อยเป็นค่อยไป ใช้เวลา ต้องใจเย็นแล้วค่อยๆแก้ไปทีละจุด เริ่มจากดูก่อนว่าปัญหาที่กระทบเรามากสุดเป็นปัญหาไหน (Flaky, Brittleness, หรือ Failure Isolation) หาต้นตอของปัญหาให้เจอ (ซึ่งอาจจะเป็นสาเหตุอื่นที่บทความนี้ไม่ได้พูดถึงก็ได้) แล้วไปแก้ที่ต้นตอครับ</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>Author</span>
+<span class=item-content>ijemmy</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>LastMod</span>
+<span class=item-content>
+2018-04-14
+</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>License</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/ci/>CI</a>
+<a href=/tags/cd/>CD</a>
+<a href=/tags/testing/>Testing</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/22-design-to-scale/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">การออกแบบระบบให้รับ Request เยอะๆ</span>
+<span class="prev-text nav-mobile">Prev</span>
+</a>
+<a class=next href=/post/20-gender-bias/>
+<span class="next-text nav-default">Gender Bias ในวงการโปรแกรมเมอร์</span>
+<span class="next-text nav-mobile">Next</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
+<a href=http://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+Powered by <a class=hexo-link href=https://gohugo.io>Hugo</a>
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+Theme -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<span class=copyright-year>
+&copy;
+2017 -
+2021<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

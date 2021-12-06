@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>soa on Not About Code - Technical Leadership</title><link>http://www.notaboutcode.com/tags/soa/</link><description>Recent content in soa on Not About Code - Technical Leadership</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 14 Oct 2017 12:04:02 +0700</lastBuildDate><atom:link href="http://www.notaboutcode.com/tags/soa/index.xml" rel="self" type="application/rss+xml"/><item><title>Retry ยังไงให้ปลอดภัย</title><link>http://www.notaboutcode.com/post/05-retry/</link><pubDate>Sat, 14 Oct 2017 12:04:02 +0700</pubDate><guid>http://www.notaboutcode.com/post/05-retry/</guid><description>&lt;p>&lt;img src="http://www.notaboutcode.com/img/covers/spiral-stairs-01.jpg" alt="Photo by Nick Morris, from Unsplash.com">&lt;/p>
+&lt;p>วันนี้นั่งคุยกับเพื่อนเรื่อง Retry รู้สึกว่าเป็นหัวข้อที่น่าสนใจดี&lt;/p>
+&lt;p>โจทย์คือเรามี External service ที่ไม่ค่อยสเถียรเท่าไร เวลาส่ง Request ไป วันดีคืนดีก็อาจจะ:&lt;/p>
+&lt;ol>
+&lt;li>พังแบบส่งสาเหตุการพังกลับมาให้ เช่น 5xx พร้อม error code&lt;/li>
+&lt;li>พังแบบไม่มีอะไรตอบกลับมา ซึ่งสาเหตุอาจจะมาจากที่ระบบนั้นเดี้ยงไประหว่างการทำงาน หรือเน็ตเวิร์คเน่า&lt;/li>
+&lt;/ol>
+&lt;p>กรณีนี้ เรามีหลายทางเลือก&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>เลือกที่จะจบการทำงาน แล้วแสดงผลให้ฝั่งผู้ใช้ของเรา (Client) รู้ว่าระบบมีปัญหา พร้อม Error code ซึ่งก็ถือว่ายอมรับได้ เพราะหากเราจำเป็นต้องการใช้ข้อมูลจาก External Service ยังไงก็ทำอะไรไม่ได้&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>ทำการ Retry คือการส่ง Request ซ้ำโดยอัตโนมัติ หากเกิดข้อผิดพลาดในฝั่งของ External service ที่เราเรียกใช้&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Decouple ให้สองระบบเรียกกับแบบ Asynchronous โดยเอา Request ที่ไม่สำเร็จของเราไปเก็บไว้ใน Queue แล้ว Retry ใหม่ในภายหลัง&lt;/p>
+&lt;/li>
+&lt;/ol></description></item></channel></rss>

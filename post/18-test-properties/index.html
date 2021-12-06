@@ -1,0 +1,439 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>คุณสมบัติของเทสต์ในการกำหนด Testing Strategy - Not About Code - Technical Leadership</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="ijemmy"><meta name=description content="ช่วงนี้ทีมขึ้นโปรเจ็คใหม่ ผมต้องคุยกับ QA Engineer เกี่ยวกับเรื่อง Testing Strategy บ่อยๆ
+โดยเนื้อหาที่คุยหลักๆคือ
+ จะเทสต์อะไรบ้าง จะเทสต์ด้วยเทสต์ชนิดไหน (ex. Unit, Component, Integration) เราจะใช้เทสต์แต่ละชนิดในกรณีไหนบ้าง  พอคุยกันเรื่องนี้เยอะๆ ก็ค้นพบหัวข้อที่ 3 เป็นเรื่องที่ซับซ้อนพอควร หนึ่งในเรื่องที่ตกผลึกก็คือคุณสมบัติของเทสต์แต่ละชนิด ซึ่งเป็นเรื่องที่จะนำมาเล่าในบทความนี้
+"><meta name=keywords content="Hugo,theme,even">
+<meta name=generator content="Hugo 0.89.4 with theme even">
+<link rel=canonical href=http://www.notaboutcode.com/post/18-test-properties/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<link rel=stylesheet href=/css//css/custom.css>
+<meta property="og:title" content="คุณสมบัติของเทสต์ในการกำหนด Testing Strategy">
+<meta property="og:description" content="
+ช่วงนี้ทีมขึ้นโปรเจ็คใหม่ ผมต้องคุยกับ QA Engineer เกี่ยวกับเรื่อง Testing Strategy บ่อยๆ
+โดยเนื้อหาที่คุยหลักๆคือ
+
+จะเทสต์อะไรบ้าง
+จะเทสต์ด้วยเทสต์ชนิดไหน (ex. Unit, Component, Integration)
+เราจะใช้เทสต์แต่ละชนิดในกรณีไหนบ้าง
+
+พอคุยกันเรื่องนี้เยอะๆ ก็ค้นพบหัวข้อที่ 3 เป็นเรื่องที่ซับซ้อนพอควร  หนึ่งในเรื่องที่ตกผลึกก็คือคุณสมบัติของเทสต์แต่ละชนิด ซึ่งเป็นเรื่องที่จะนำมาเล่าในบทความนี้">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://www.notaboutcode.com/post/18-test-properties/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2018-01-12T12:04:02+07:00">
+<meta property="article:modified_time" content="2018-01-12T12:04:02+07:00">
+<meta itemprop=name content="คุณสมบัติของเทสต์ในการกำหนด Testing Strategy">
+<meta itemprop=description content="
+ช่วงนี้ทีมขึ้นโปรเจ็คใหม่ ผมต้องคุยกับ QA Engineer เกี่ยวกับเรื่อง Testing Strategy บ่อยๆ
+โดยเนื้อหาที่คุยหลักๆคือ
+
+จะเทสต์อะไรบ้าง
+จะเทสต์ด้วยเทสต์ชนิดไหน (ex. Unit, Component, Integration)
+เราจะใช้เทสต์แต่ละชนิดในกรณีไหนบ้าง
+
+พอคุยกันเรื่องนี้เยอะๆ ก็ค้นพบหัวข้อที่ 3 เป็นเรื่องที่ซับซ้อนพอควร  หนึ่งในเรื่องที่ตกผลึกก็คือคุณสมบัติของเทสต์แต่ละชนิด ซึ่งเป็นเรื่องที่จะนำมาเล่าในบทความนี้"><meta itemprop=datePublished content="2018-01-12T12:04:02+07:00">
+<meta itemprop=dateModified content="2018-01-12T12:04:02+07:00">
+<meta itemprop=wordCount content="632">
+<meta itemprop=keywords content="CI,CD,Testing,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="คุณสมบัติของเทสต์ในการกำหนด Testing Strategy">
+<meta name=twitter:description content="
+ช่วงนี้ทีมขึ้นโปรเจ็คใหม่ ผมต้องคุยกับ QA Engineer เกี่ยวกับเรื่อง Testing Strategy บ่อยๆ
+โดยเนื้อหาที่คุยหลักๆคือ
+
+จะเทสต์อะไรบ้าง
+จะเทสต์ด้วยเทสต์ชนิดไหน (ex. Unit, Component, Integration)
+เราจะใช้เทสต์แต่ละชนิดในกรณีไหนบ้าง
+
+พอคุยกันเรื่องนี้เยอะๆ ก็ค้นพบหัวข้อที่ 3 เป็นเรื่องที่ซับซ้อนพอควร  หนึ่งในเรื่องที่ตกผลึกก็คือคุณสมบัติของเทสต์แต่ละชนิด ซึ่งเป็นเรื่องที่จะนำมาเล่าในบทความนี้"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>คุณสมบัติของเทสต์ในการกำหนด Testing Strategy</h1>
+<div class=post-meta>
+<span class=post-time> 2018-01-12 </span>
+<div class=post-category>
+<a href=/categories/continuous-delivery/> Continuous Delivery </a>
+</div>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>Contents</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#เขาใจเทสตในระดบตางๆ>เข้าใจเทสต์ในระดับต่างๆ</a></li>
+<li><a href=#จะเทสตในระดบไหนด>จะเทสต์ในระดับไหนดี?</a></li>
+<li><a href=#คณสมบตทสำคญของเทสต>คุณสมบัติที่สำคัญของเทสต์</a>
+<ul>
+<li><a href=#1-ความถกตองของระบบ-system-verification>1. ความถูกต้องของระบบ (System Verification)</a></li>
+<li><a href=#2-การรนอตโนมต-automation>2. การรันอัตโนมัติ (Automation)</a></li>
+<li><a href=#3-ความเรว-speed>3. ความเร็ว (Speed)</a></li>
+<li><a href=#4-ความไมสมำเสมอ-flakiness>4. ความไม่สม่ำเสมอ (Flakiness)</a></li>
+<li><a href=#5-ความเปราะบาง-brittleness>5. ความเปราะบาง (Brittleness)</a></li>
+<li><a href=#6-ความงายในการหาตนตอ-failure-isolation>6. ความง่ายในการหาต้นตอ (Failure Isolation)</a></li>
+</ul>
+</li>
+<li><a href=#สรป>สรุป</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p><img src=/img/covers/bug-01.jpg alt="Photo by Michel Bosma on Unsplash"></p>
+<p>ช่วงนี้ทีมขึ้นโปรเจ็คใหม่ ผมต้องคุยกับ QA Engineer เกี่ยวกับเรื่อง Testing Strategy บ่อยๆ</p>
+<p>โดยเนื้อหาที่คุยหลักๆคือ</p>
+<ol>
+<li>จะเทสต์อะไรบ้าง</li>
+<li>จะเทสต์ด้วยเทสต์ชนิดไหน (ex. Unit, Component, Integration)</li>
+<li>เราจะใช้เทสต์แต่ละชนิดในกรณีไหนบ้าง</li>
+</ol>
+<p>พอคุยกันเรื่องนี้เยอะๆ ก็ค้นพบหัวข้อที่ 3 เป็นเรื่องที่ซับซ้อนพอควร หนึ่งในเรื่องที่ตกผลึกก็คือคุณสมบัติของเทสต์แต่ละชนิด ซึ่งเป็นเรื่องที่จะนำมาเล่าในบทความนี้</p>
+<h1 id=เขาใจเทสตในระดบตางๆ>เข้าใจเทสต์ในระดับต่างๆ</h1>
+<p>ผมเชื่อว่าผู้อ่านคงเคยได้ยินชนิดของเทสต์ต่างๆมาแล้ว แต่เพื่อความเข้าใจที่ตรงกัน ผมอยากชี้แจงเรื่องระดับของเทสต์ด้วยตารางข้างล่าง</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>ชนิด</th>
+<th style=text-align:left>สิ่งที่ต้องการเทสต์</th>
+<th style=text-align:left>ตัวอย่างเรื่องที่เทสต์</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left><strong>Functional Acceptance Testing</strong></td>
+<td style=text-align:left>Functional Requirement ของระบบ</td>
+<td style=text-align:left>ลูกค้าสามารถซื้อของได้</td>
+</tr>
+<tr>
+<td style=text-align:left><strong>System Integration Testing</strong></td>
+<td style=text-align:left>ระบบของเราสามารถทำงานกับระบบอื่นๆ (External Dependencies) ได้ถูกต้องหรือไม่</td>
+<td style=text-align:left>มีการตัดเงินจากบัญชีธนาคารของผู้ใช้อย่างถูกต้อง</td>
+</tr>
+<tr>
+<td style=text-align:left><strong>Component Testing</strong></td>
+<td style=text-align:left>ชิ้นส่วนต่างๆในระบบของเราสามารถทำงานร่วมกันได้ถูกต้อง</td>
+<td style=text-align:left>Ordering Component สามารถส่งคำสั่งที่ถูกต้องไปยัง Mocked Database Component</td>
+</tr>
+<tr>
+<td style=text-align:left><strong>Unit Testing</strong></td>
+<td style=text-align:left>ชิ้นส่วนที่เล็กที่สุดในระบบของเราสามารถทำงาานได้ถูกต้อง</td>
+<td style=text-align:left>คลาส Order สามารถคำนวนราคาของคำสั่งซื้อได้ถูกต้อง</td>
+</tr>
+</tbody>
+</table>
+<p>จากตารางด้านบน เทสต์ที่อยู่ระดับบน (เช่น Functional Acceptance Test) จะทดสอบสิ่งที่ใกล้เคียงกับความต้องการของผู้ใช้มากที่สุด</p>
+<p>ในขณะที่เทสต์ที่อยู่ระดับล่าง จะมุ่งเน้นไปการทดสอบไปที่ Technical Details เมื่อมองในมุมของผู้ใช้ เทสต์ในระดับล่างจะไม่ให้คุณค่ามากเท่าไร เพราะจุดประสงค์ของผู้ใช้คือต้องการซื้อของ ไม่ได้สนใจว่าคลาส Order จะทำงานได้หรือไม่</p>
+<h1 id=จะเทสตในระดบไหนด>จะเทสต์ในระดับไหนดี?</h1>
+<p>สมมติว่าเรามีผู้ใช้ชื่อสุธี และโปรแกรมเมอร์ชื่อนัท</p>
+<p>สิ่งที่สุธีต้องการคือซื้อของ ดูรายการที่ซื้อไป และตรวจสอบว่าของจะมาถึงเมื่อไร</p>
+<p>สำหรับสุธีแล้ว เค้าไม่แคร์ในเรื่องของ Technical เลย ตราบเท่าที่เรามี Functional Acceptance Tests ที่ครอบคลุมพอ</p>
+<p>ดังนั้น โปรเจ็คของเรา สุธีจึงเสนอให้ทำแต่ Functional Acceptance Tests อย่างเดียว</p>
+<p>ฟังดูแล้วก็โอเคดี เป้าหมายของเราคือสร้างโปรแกรมให้กับผู้ใช้ ทำไมเราต้องไปเทสต์ในเรื่องของ Technical ด้วย? มันไม่ได้ให้คุณค่าอะไรกับผู้ใช้เลย</p>
+<p>แต่พอนึกต่อ หากโปรเจ็คเรามีแค่ Functional Acceptance Tests ชนิดเดียว ผลที่ตามมาคือ</p>
+<ol>
+<li>สุธีต้องใช้เวลานานมากกว่าจะได้เทสต์ระบบ เพราะทุกอย่างต้องเสร็จหมด ก่อนที่สุธีจะทดสอบได้</li>
+<li>หากเทสต์แล้วเจอบั๊ก เราจะหาบั๊กยากมากเพราะจะผิดที่ไหนในระบบก็ได้</li>
+<li>Functional Acceptance Tests อาจจะ Automate ไม่ได้ทั้งหมด หรือได้ แต่ยากมาก</li>
+</ol>
+<p>กลับมาที่โปรแกรมเมอร์นัท เสนอทางที่ตรงกันข้าม คือให้เขียนด้วย Unit test ทั้งหมด เพราะ</p>
+<ol>
+<li>เราสามารถทดสอบได้ทันทีที่เขียนโค้ด ไม่ต้องรอให้ระบบเสร็จเพราะทุกอย่างต้องเสร็จหมด</li>
+<li>หากเทสต์แล้วเจอ จะรู้ทันทีว่าปัญหาอยู่ที่คลาสหรือฟังก์ชั่นไหน</li>
+<li>สามารถ Automate ได้ง่าย แถมรันได้เร็วมาก</li>
+</ol>
+<p>แต่ปัญหาของวิธีนี้ก็คือ แม้เทสต์จะผ่านหมด เราไม่สามารถมั่นใจได้เลยว่าผู้ใช้อย่างสุธีจะสามารถซื้อของได้หรือเปล่า</p>
+<p>เพราะเวลาเอาชิ้นส่วนต่างๆมาทำงานร่วมกัน หรือติดต่อกับระบบอื่นจริงๆ มันอาจจะไม่ได้ทำงานร่วมกันไม่ได้อย่างที่คิดไว้</p>
+<p>ดังนั้น เราจึงต้องมีเทสต์ในระดับกลางๆ อย่าง Component หรือ System Integration ด้วย</p>
+<p>จะเห็นว่าปัญหานี้ไม่มีทางออกที่ดีที่สุดตายตัว เราจึงจะต้องมีเทสต์หลายๆชนิดรวมกัน เพื่อตรวจให้ได้ครอบคลุมมากที่สุด ในขณะที่ทีมยังสามารถทำงานได้ง่ายและมีประสิทธิภาพอยู่</p>
+<p>ซึ่งความเข้าใจในคุณสมบัติของเทสต์แต่ละชนิด จะทำให้เราเลือกใช้เทสต์ได้เหมาะสมยิ่งขึ้น</p>
+<h1 id=คณสมบตทสำคญของเทสต>คุณสมบัติที่สำคัญของเทสต์</h1>
+<h2 id=1-ความถกตองของระบบ-system-verification>1. ความถูกต้องของระบบ (System Verification)</h2>
+<p>ก่อนอื่นเราต้องถามตัวเองก่อนว่าเขียนเทสต์เพื่ออะไร</p>
+<p>บางคนจะตอบแบบกำปั้นทุบดินว่าเพื่อตรวจสอบความถูกต้องของระบบ (System Verification) แต่หลายคนอาจจะไม่เห็นด้วยเสียทีเดียว ตัวอย่างเช่น</p>
+<ul>
+<li>บางคนที่ใช้ Test-Driven-Development (TDD) อาจะมองว่าการเขียนเทสต์เป็นการบังคับให้โปรแกรมเมอร์กำหนด Interface และจุดประสงค์ของคลาสชัดเจน (เช่น Loose Couple, High Cohesion) เป็นการช่วยให้เราออกแบบโค้ดที่อ่านและดูแลได้ง่าย</li>
+<li>บางคนก็จะมองว่าเทสต์คือ Documentation อย่างหนึ่งที่อธิบายพฤติกรรมของโค้ดได้ถูกต้องที่สุด</li>
+<li>บางคนอาจจะมองว่าเทสต์คือการสื่อสารระหว่างผู้ใช้กับโปรแกรมเมอร์ (เช่น กรณีของ Behavior-Driven-Development)</li>
+</ul>
+<p>ในบทความนี้ เราจะพิจารณาแค่คุณค่าเดียวคือการตรวจสอบความถูกต้องของระบบ เพื่อไม่ให้ออกทะเลไปไกล</p>
+<p>ซึ่งเทสต์ในระดับสูงอย่าง Functional Acceptance Test จะสามารถตรวจสอบความถูกต้องได้ดีกว่า เพราะทดสอบการทำงานจริง ไม่ใช่แค่ส่วนย่อยๆในสถานการณ์สมมติ</p>
+<h2 id=2-การรนอตโนมต-automation>2. การรันอัตโนมัติ (Automation)</h2>
+<p>ลองถามตัวเองว่า หากเราต้องการทำ Continuous Integration (CI) แต่ไม่มี Automated Tests เลย เราจะทำได้หรือเปล่า?</p>
+<p>คำตอบคือได้ แต่จะเจ็บปวดมาก</p>
+<p>คือทุกครั้งที่ Push โค้ด ก็ให้เรียกสุธีมาทำการทดสอบทั้งหมดในระบบรอบนึง ถ้าสุธีให้ผ่าน เราก็ไปต่อ แต่ถ้าไม่ให้ผ่าน เราก็ Revert ออกมาแก้ใหม่</p>
+<p>จะเห็นว่าหากทีมใหญ่ขึ้น การแก้โค้ดทุกอย่างจะมาตกคอขวดอยู่ที่สุธี การทำ Test Automation จึงเป็นหัวใจสำคัญที่จะทำให้ทีมพัฒนาโปรแกรมได้เร็วโดยไม่ใส่บั๊กเข้าไปในระบบ</p>
+<p>สมัยก่อน การทำ Automation ในเทสต์ระดับสูงๆค่อนข้างยากมาก เดี๋ยวนี้ง่ายขึ้นมาก เพราะเรามีเครื่องมือในการ Stub กับ Driver ที่ดีขึ้น (เช่น WireMock, Mountebank, Selenium)</p>
+<p>แต่ถึงกระนั้น การทำ Automation ในระดับสูงๆก็ยังยากกว่าอยู่ดี ลองนึกภาพว่าเราต้องทำการทดสอบการสั่งซื้อ ในระดับ System Integration</p>
+<ul>
+<li>ต้องแก้ Database ทุกครั้งที่มีการ SetUp/TearDown เพราะเรารันซ้ำไปเรื่อยๆโดยไม่ลบออกเราจะมี Order ที่สร้างจากการเทสต์เต็มไปหมด</li>
+<li>ต้องสร้าง Environment ใหม่ขึ้นมารันเทสต์ เพราะเราจะไปยิงคำสั่งซื้อบน Production มั่วซั่วไม่ได้</li>
+<li>ถ้าธนาคารไม่มีระบบให้เราลองเทสต์ เราก็ต้องสร้าง Stub Server ขึ้นมาเอง</li>
+<li>ต้องหาวิธี Simulate Error 404, 5xx, ฯลฯ เวลามี Network call เพื่อทดสอบกรณีที่มีปัญหา</li>
+</ul>
+<p>จะเห็นว่านี่ไม่ใช่เรื่องง่ายซะทีเดียว จึงไม่แปลกที่บางโปรเจ็คเลือกที่จะไม่ Automate เทสต์ในระดับบนๆ แล้วจ่ายด้วยการจ้างคนมาทำ Manual แทน</p>
+<h2 id=3-ความเรว-speed>3. ความเร็ว (Speed)</h2>
+<p>เทสต์ที่อยู่ในระดับล่างๆ (Unit Test) จะใช้เวลาในการรันที่เร็วกว่า แต่เทสต์บนๆจะใช้เวลานานมาก (Integration Test) เพราะอาจจะต้องมีการส่งข้อมูลผ่าน Network หรือเซ็ตอัพข้อมูล Database นี่เป็น Trade-off ที่คนในทีมต้องกำหนดกลยุทธิ์ในการเทสต์ให้ดี</p>
+<p>การที่เทสต์ใช้เวลารันนานนั้น ทีมจะต้องจ่ายด้วย Productivity เพราะว่า</p>
+<p><strong>1. Feedback Loop ยาวกว่า</strong></p>
+<p>หากเทสต์รันเร็วมากๆ อย่าง Unit Test นั้นเราสามารถตั้งให้รันทุกครั้งที่มีการเปลี่ยนแปลงไฟล์ ทำให้โปรแกรมเมอร์รู้ทันทีว่ามีโค้ดไม่ได้ทำงานอย่างที่ตั้้งใจไว้</p>
+<p>ในขณะที่ System Integration Test นี่นานมาก เพราะต้องรอจนขึ้น Environment จริงใน Pipeline</p>
+<p>หากเราพึ่งเทสต์ในระดับสูงเยอะ ก็จะมีโอกาสที่เทสต์ก็จะไปตายใน Pipeline บ่อยๆ ซึ่งทำให้ติดขัดทั้งทีม และ Productivity ของทีมโดยรวมช้าลง</p>
+<p><strong>2. หาบั๊กยาก</strong></p>
+<p>เวลาเทสต์พังใน CI จะหา Commit ที่สร้างปัญหายากกว่ามาก</p>
+<p>ลองนึกภาพว่าเทสต์ทั้งหมดต้องใช้เวลา 2 ชั่วโมงในการรัน ยิ่งปริมาณทีมมีขนาดใหญ่ขึั้น จำนวน Commit ที่เข้าไปใน 2 ชั่วโมงนั้นอาจจะมากกว่า 2-3 Commits ซึ่งเวลาพังขึ้นมา จะดีบั้กยากว่ามาจากไหน (เพราะต้องหาสาเหตุจาก commits จากโค้ดของคนอื่นๆที่เราไม่ได้เขียนด้วย) และมักจะเกี่ยงกันว่าใครจะเป็นคนหาบั้ก</p>
+<h2 id=4-ความไมสมำเสมอ-flakiness>4. ความไม่สม่ำเสมอ (Flakiness)</h2>
+<p>Test ในระดับบนๆ ตั้งแต่ System Integration Test ขึ้นไป จะมีปัญหาเรื่องความไม่สม่ำเสมอในผลลัพธ์การรัน เกิด False Alarm ขึ้นบ่อย ตัวอย่างเช่น</p>
+<ul>
+<li>เทสต์ในระดับ Browser (ex. Selenium) บางคนอาจจะเจออาการว่าเทสต์รันผ่านบ้างไม่ผ่านบ้าง เพราะรีบกดปุ่มในชั้นถัดไปเร็วเกิน หน้า UI ยังเรนเดอร์ใหม่ไม่เสร็จ หรือเทสต์บางตัวรันไม่ผ่าน เพราะขนาดหน้าของ Browser เป็นคนละไซส์และปุ่มไปซ่อนอยู่</li>
+<li>เทสต์ในระดับที่ต้องยิงผ่าน Network บางทีก็ยิงไม่สำเร็จเพราะเน็ตเวิร์คมีปัญหาพอดี ทำให้เทสต์พังบ้างนานๆที</li>
+<li>เทสต์ในระดับที่ต้องติดต่อกับ Third-party System บางทีระบบเราทำงานถูกต้องแล้ว แต่ระบบที่เรายิง Request ไปขอข้อมูลเกิดพังขึ้นมา</li>
+</ul>
+<p>ความไม่สม่ำเสมอนั้นสร้างปัญหาให้กับ CD มาก เพราะเราจะไม่สามารถปล่อยให้โค้ดไหลผ่าน Pipeline ไปบน Production ได้โดยอัตโนมัติ ต้องมานั่งเช็คว่าเทสต์ที่พังนี่พังจริงๆหรือเพราะ Flakiness ซึ่งจ่ายกันด้วย Productivity อีก</p>
+<h2 id=5-ความเปราะบาง-brittleness>5. ความเปราะบาง (Brittleness)</h2>
+<p>เทสต์ที่เปราะบาง เวลาแก้โค้ดที่นึง เทสต์จะพังเป็นยวง ต้องแก้เยอะมาก</p>
+<p>ความเปราะบางของเทสต์จะมีผลต่อค่าใช้จ่ายในการดูแลรักษา</p>
+<p>โดยหลักการแล้ว ส่วนที่มีปัญหาบ่อยคือ UI เพราะเวลาเปลี่ยน UI ทีนึง ID หรือ Class ที่ใช้หา Element เปลี่ยน โปรแกรมเมอร์ดันแก้เทสต์โค้ดไม่หมด ทำให้เทสต์ไปค้น ID เดิม (วิธีนี้อาจจะแก้ได้ด้วย Page Object Pattern)</p>
+<p>แต่ถ้าโปรดักต์มีการเปลี่ยน UI บ่อยๆ ปัญหานี้จะหลีกเลี่ยงไม่ได้ ทีมคงได้แต่ลด Test ที่อยู่ในระดับนี้ให้น้อยที่สุด แล้วไปทดสอบ Combination หรือ Edge case ในระดับล่างๆแทน</p>
+<p>ในทางปฏิบัติ เทสต์ระดับล่างก็มักจะมีปัญหาแนวนี้ด้วยเหมือนกัน แต่สาเหตุมักจะมาจากการออกแบบที่ไม่ดี เช่น Unit Test ของโค้ดที่เปิด Public Interface ในส่วนที่ไม่ควรจะเปิด เวลา Refactor โค้ดส่วนที่ควรจะเป็น Internal Implementation ดันกลายเป็นทำให้ Unit Test พังด้วย</p>
+<h2 id=6-ความงายในการหาตนตอ-failure-isolation>6. ความง่ายในการหาต้นตอ (Failure Isolation)</h2>
+<p>เวลา Unit Test พัง เรามักจะรู้เลยว่าน่าจะเป็น Class หรือ Function ไหน ในกรณีอะไร ซึ่งบางครั้งแค่เห็นชื่อเทสต์ที่พังก็จะรู้เลยว่าต้องไปเช็คโค้ดบรรทัดไหน</p>
+<p>ในทางตรงข้าม Functional Acceptance Test พอไม่ผ่านทีนึง เราอาจจะได้ดีบั้กกันข้ามเซอร์วิซกันหลายวัน กว่าจะเจอว่าปัญหามากบรรทัดไหน</p>
+<p>ส่วนใหญ่ความง่ายในการหาต้นตอจะลดลงเมื่อเทสต์ขึ้นมาในระดับที่สูงขึ้นเรื่อยๆอย่างหลีกเลี่ยงได้ยาก พอเทสต์ขึ้นมาถึงระดับที่ต้องยิงข้าม Service แล้ว ส่วนใหญ่จะต้องพึ่ง Log ในการแก้ปัญหากัน และต้องใช้ความเข้าใจในระบบที่ดีบั้กสูงมาก</p>
+<h1 id=สรป>สรุป</h1>
+<p>ถ้าเราสรุปคุณสมบัติต่างๆของเทสต์แต่ละชนิด เราจะได้ตารางด้านล่าง</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>ชนิด</th>
+<th>System Verification</th>
+<th>Automation</th>
+<th>Speed</th>
+<th>Flakiness</th>
+<th>Brittleness</th>
+<th>Failure Isolation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left><strong>Functional Acceptance Testing</strong></td>
+<td>สูง</td>
+<td>ยาก</td>
+<td>ช้ามาก</td>
+<td>แย่มาก</td>
+<td>แย่</td>
+<td>แย่มาก</td>
+</tr>
+<tr>
+<td style=text-align:left><strong>System Integration Testing</strong></td>
+<td>สูง</td>
+<td>ยาก</td>
+<td>ช้า</td>
+<td>แย่</td>
+<td>กลาง</td>
+<td>แย่</td>
+</tr>
+<tr>
+<td style=text-align:left><strong>Component Testing</strong></td>
+<td>กลาง</td>
+<td>กลาง</td>
+<td>กลาง</td>
+<td>ดี</td>
+<td>กลาง</td>
+<td>กลาง</td>
+</tr>
+<tr>
+<td style=text-align:left><strong>Unit Testing</strong></td>
+<td>ต่ำ</td>
+<td>ง่าย</td>
+<td>เร็วมาก</td>
+<td>ดี</td>
+<td>ดี</td>
+<td>ดีมาก</td>
+</tr>
+</tbody>
+</table>
+<p>ตารางนี้แค่ให้เห็นภาพรวมคร่าวๆ เวลาเขียนจริง ขึ้นอยู่กับการออกแบบเทสต์มาก อย่างผมเองเคยเห็นระบบที่มี Unit Tests ที่โคตร Brittle แต่ System Integration เสถียรมากมาแล้ว</p>
+<p>ส่วนคุณสมบัติแต่ละอย่าง จะส่งผลกระทบต่อทีมต่างกัน</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>คุณสมบัติ</th>
+<th style=text-align:left>ผลกระทบ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>System Verification</td>
+<td style=text-align:left>ความมั่นใจว่าระบบทำงานได้ถูกต้อง</td>
+</tr>
+<tr>
+<td style=text-align:left>Automation</td>
+<td style=text-align:left>ความเร็วในการพัฒนา, Effort ในการเทสต์</td>
+</tr>
+<tr>
+<td style=text-align:left>Speed</td>
+<td style=text-align:left>ความเร็วในการพัฒนา, โค้ดขึ้น Production ได้เร็ว (CD)</td>
+</tr>
+<tr>
+<td style=text-align:left>Flakiness</td>
+<td style=text-align:left>Effort ในการสร้างและดูแลเทสต์, โค้ดขึ้น Production ได้เร็ว (CD)</td>
+</tr>
+<tr>
+<td style=text-align:left>Brittleness</td>
+<td style=text-align:left>ความเร็วในการพัฒนา, Effort ในการสร้างและดูแลเทสต์</td>
+</tr>
+<tr>
+<td style=text-align:left>Failure Isolation</td>
+<td style=text-align:left>Effort ในการแก้บั๊ก</td>
+</tr>
+</tbody>
+</table>
+<p>ตารางสรุปจะสอดคล้องกับเรื่องราวของสุธีและอรุช ว่า ฝั่ง Technical จะชอบเทสต์ระดับล่างๆกันมากกว่า ในขณะที่ผู้ใช้สนแต่ระดับบนๆว่าระบบทำงานที่ต้องการไหม</p>
+<p>ถ้าไม่คิดอะไรมาก เราอาจจะยึดหลักง่ายๆว่า 10:20:70</p>
+<ul>
+<li>Functional Acceptance ประมาณ 10% เช่น เช็คแค่กรณีที่ใส่ข้อมูลถูกและซื้อของสำเร็จ และไปตรวจกรณีที่ไม่สำเร็จในระดับล่างๆ</li>
+<li>Integration/Component ประมาณ 20% ไว้ทดสอบกรณีที่ Unit Test จับไม่ได้
+๊* Unit ประมาณ 70% เทสต์ทุกกรณีและ Combination</li>
+</ul>
+<p>แต่ถ้าคิดมาก ก็ต้องมานั่งดูกันจริงๆ ว่าระบบมีโอกาสผิดพลาดที่จุดไหนสูงเป็นพิเศษ แล้วเลือกเทสต์ในระดับที่ต่ำที่สุดที่จะยังสามารถตรวจพบข้อผิดพลาดนั้นได้ เช่น คิดว่าระบบจะมีปัญหากับการติดต่อระบบธนาคารบ่อยๆ เราก็ต้องทำ System Integration Testing ให้ครอบคลุมเยอะหน่อย</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>Author</span>
+<span class=item-content>ijemmy</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>LastMod</span>
+<span class=item-content>
+2018-01-12
+</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>License</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/ci/>CI</a>
+<a href=/tags/cd/>CD</a>
+<a href=/tags/testing/>Testing</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/19-deploy-order/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">จะ Deploy Frontend หรือ Backend ก่อนดี</span>
+<span class="prev-text nav-mobile">Prev</span>
+</a>
+<a class=next href=/post/17-cap-theorem/>
+<span class="next-text nav-default">บริษัทสุธีการจำ, CAP Theorem, และ Eventual Consistency</span>
+<span class="next-text nav-mobile">Next</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
+<a href=http://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+Powered by <a class=hexo-link href=https://gohugo.io>Hugo</a>
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+Theme -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<span class=copyright-year>
+&copy;
+2017 -
+2021<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

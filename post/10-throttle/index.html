@@ -1,0 +1,383 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>ปกป้องเซอร์วิซจากผู้ใช้มักมากด้วย Throttling - Not About Code - Technical Leadership</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="ijemmy"><meta name=description content="ลองนึกภาพว่าเรามีระบบที่ถูกออกแบบเป็น Service-Oriented Architecture (SOA)
+ในบรรดาเซอร์วิซทั้งหมด จะมีบางเซอร์วิซทีเป็น Dependency ของเซอร์วิซอื่นๆ ผมจะเรียกเซอร์วิซนี้ว่าเซอร์วิซ A
+ถ้าเซอร์วิซ A พังขึ้นมา เซอร์วิซอื่นที่ต้องเรียกใช้ข้อมูลนี้ทั้งหมดก็จะทำงานไม่ได้
+ตัวอย่างเช่นในภาพข้างล่าง หากเซอร์วิซ A พัง เซอร์วิซ B, และ C จะทำงานไม่ได้
+"><meta name=keywords content="Hugo,theme,even">
+<meta name=generator content="Hugo 0.89.4 with theme even">
+<link rel=canonical href=http://www.notaboutcode.com/post/10-throttle/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<link rel=stylesheet href=/css//css/custom.css>
+<meta property="og:title" content="ปกป้องเซอร์วิซจากผู้ใช้มักมากด้วย Throttling">
+<meta property="og:description" content="
+ลองนึกภาพว่าเรามีระบบที่ถูกออกแบบเป็น Service-Oriented Architecture (SOA)
+ในบรรดาเซอร์วิซทั้งหมด จะมีบางเซอร์วิซทีเป็น Dependency ของเซอร์วิซอื่นๆ ผมจะเรียกเซอร์วิซนี้ว่าเซอร์วิซ A
+ถ้าเซอร์วิซ A พังขึ้นมา เซอร์วิซอื่นที่ต้องเรียกใช้ข้อมูลนี้ทั้งหมดก็จะทำงานไม่ได้
+ตัวอย่างเช่นในภาพข้างล่าง หากเซอร์วิซ A พัง  เซอร์วิซ B, และ C จะทำงานไม่ได้">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://www.notaboutcode.com/post/10-throttle/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2017-11-09T12:04:02+07:00">
+<meta property="article:modified_time" content="2017-11-09T12:04:02+07:00">
+<meta itemprop=name content="ปกป้องเซอร์วิซจากผู้ใช้มักมากด้วย Throttling">
+<meta itemprop=description content="
+ลองนึกภาพว่าเรามีระบบที่ถูกออกแบบเป็น Service-Oriented Architecture (SOA)
+ในบรรดาเซอร์วิซทั้งหมด จะมีบางเซอร์วิซทีเป็น Dependency ของเซอร์วิซอื่นๆ ผมจะเรียกเซอร์วิซนี้ว่าเซอร์วิซ A
+ถ้าเซอร์วิซ A พังขึ้นมา เซอร์วิซอื่นที่ต้องเรียกใช้ข้อมูลนี้ทั้งหมดก็จะทำงานไม่ได้
+ตัวอย่างเช่นในภาพข้างล่าง หากเซอร์วิซ A พัง  เซอร์วิซ B, และ C จะทำงานไม่ได้"><meta itemprop=datePublished content="2017-11-09T12:04:02+07:00">
+<meta itemprop=dateModified content="2017-11-09T12:04:02+07:00">
+<meta itemprop=wordCount content="697">
+<meta itemprop=keywords content="reliability,design,throttling,rate limit,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="ปกป้องเซอร์วิซจากผู้ใช้มักมากด้วย Throttling">
+<meta name=twitter:description content="
+ลองนึกภาพว่าเรามีระบบที่ถูกออกแบบเป็น Service-Oriented Architecture (SOA)
+ในบรรดาเซอร์วิซทั้งหมด จะมีบางเซอร์วิซทีเป็น Dependency ของเซอร์วิซอื่นๆ ผมจะเรียกเซอร์วิซนี้ว่าเซอร์วิซ A
+ถ้าเซอร์วิซ A พังขึ้นมา เซอร์วิซอื่นที่ต้องเรียกใช้ข้อมูลนี้ทั้งหมดก็จะทำงานไม่ได้
+ตัวอย่างเช่นในภาพข้างล่าง หากเซอร์วิซ A พัง  เซอร์วิซ B, และ C จะทำงานไม่ได้"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>ปกป้องเซอร์วิซจากผู้ใช้มักมากด้วย Throttling</h1>
+<div class=post-meta>
+<span class=post-time> 2017-11-09 </span>
+<div class=post-category>
+<a href=/categories/system-design/> System Design </a>
+</div>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>Contents</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#ผใชมกมาก>ผู้ใช้มักมาก</a></li>
+<li><a href=#ความซบซอนในการกำหนด-throttling>ความซับซ้อนในการกำหนด Throttling</a></li>
+<li><a href=#สราง-config-file-สำหรบ-throttling>สร้าง Config file สำหรับ Throttling</a></li>
+<li><a href=#throttle-กอนจะทำงานทกน-resource>Throttle ก่อนจะทำงานที่กิน Resource</a></li>
+<li><a href=#สงขอมลของ-rate-กลบไปใหผใช>ส่งข้อมูลของ Rate กลับไปให้ผู้ใช้</a></li>
+<li><a href=#หากเซอรวซ-a-มหลายเซอรเวอร>หากเซอร์วิซ A มีหลายเซอร์เวอร์</a></li>
+<li><a href=#สรป>สรุป</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p><img src=/img/covers/limit-01.jpg alt="Photo by Ksenia Kudelkina, from Unsplash.com"></p>
+<p>ลองนึกภาพว่าเรามีระบบที่ถูกออกแบบเป็น Service-Oriented Architecture (SOA)</p>
+<p>ในบรรดาเซอร์วิซทั้งหมด จะมีบางเซอร์วิซทีเป็น Dependency ของเซอร์วิซอื่นๆ ผมจะเรียกเซอร์วิซนี้ว่าเซอร์วิซ A</p>
+<p>ถ้าเซอร์วิซ A พังขึ้นมา เซอร์วิซอื่นที่ต้องเรียกใช้ข้อมูลนี้ทั้งหมดก็จะทำงานไม่ได้</p>
+<p>ตัวอย่างเช่นในภาพข้างล่าง หากเซอร์วิซ A พัง เซอร์วิซ B, และ C จะทำงานไม่ได้</p>
+<figure class=center>
+<img src=/img/diagrams/10-throttle/01-dependencies.jpg alt="เซอร์วิซ A เป็น Dependency ของ B และ C">
+<figcaption>
+เซอร์วิซ A เป็น Dependency ของ B และ C
+</figcaption>
+</figure>
+<p>วันดีคืนดี มีคนเขียนโปรแกรมในระบบ B ผิดพลาด ใส่ Infinite Loop เข้าไป ทำให้พยายามยิง Request เพื่อดึงข้อมูลจากระบบ A รัวๆไม่หยุด</p>
+<p>ผลคือระบบ A รับการทำงานไม่ไหว Request อื่นๆที่ส่งมาก็จะโดน Time Out Error ตลอด</p>
+<figure class=center>
+<img src=/img/diagrams/10-throttle/02-B-send-requests.jpg alt="เซอร์วิซ B ถล่มเซอร์วิซ A ด้วยการ Request จำนวนมากรัวๆ">
+<figcaption>
+เซอร์วิซ B ถล่มเซอร์วิซ A ด้วยการ Request จำนวนมากรัวๆ
+</figcaption>
+</figure>
+<p>ประเด็นคือ เซอร์วิซ C ซึ่งไม่รู้อิโหน่อิเหน่อะไรด้วยก็ติดร่างแหไปด้วย ทั้งๆที่ออกแบบมาอย่างดี เทสต์มาอย่างดีทุกอย่าง ดันมาตายน้ำตื้นเพราะดันมีอีกเซอร์วิซเขียน Infinite Loop ซะงั้น</p>
+<p>เราจะป้องกันปัญหานี้ยังไงดี?</p>
+<h1 id=ผใชมกมาก>ผู้ใช้มักมาก</h1>
+<p>หาก<strong>ผู้ใช้</strong>เรียกใช้เซอร์วิซเป็นจำนวนมากในระยะเวลาสั้นๆ เป็นหน้าที่ของเซอร์วิซ A ที่จะต้องทำการปกป้องทรัพยากร (Resource) ของตน ไม่ให้ถูกใช้จนหมดผ่านผู้ใช้คนเดียว</p>
+<p>ผมขอเรียกผู้ใช้จำพวกนี้ว่า <strong>&ldquo;ผู้ใช้มักมาก&rdquo;</strong> ก็แล้วกัน</p>
+<p>ตัวอย่างที่พบในชีวิตจริงก็เช่น</p>
+<ul>
+<li>ผู้ใช้อยู่ดีๆก็ยิง Request มากขึ้นแบบพุ่งพรวด (จาก 10 Request/วินาที เป็น 1,000 Request ต่อวินาที) เพราะเว็บโดนแชร์ในโซเชียล</li>
+<li>ผู้ใช้เขียนโปรแกรมผิดพลาด เหมือนกรณี Infinite Loop ข้างต้น</li>
+<li>ผู้ใช้พยายามเขียนบอตเพื่อดึงข้อมูล แล้วไม่รอก่อนยิงคำสั่งถัดไป (กรณี REST interface สำหรับเว็บไซต์)</li>
+</ul>
+<p>คำว่า <strong>&ldquo;ผู้ใช้&rdquo;</strong> ในที่นี้ อาจจะเป็นเซอร์วิซของทีมข้างๆ หรืออาจเป็นใครที่อยู่ภายนอกบริษัทที่เราควบคุมไม่ได้เลย</p>
+<p>ผมเลือกใช้คำว่า <strong>&ldquo;มักมาก&rdquo;</strong> เพราะเค้าไม่ได้ประสงค์ร้ายที่จะพังเซอร์วิซ A เค้าแค่อยากจะส่ง Request ปริมาณมากๆเท่านั้น</p>
+<p>เหมือนกับบางครั้ง เราไปซื้อซาลาเปาไส้ครีมที่เซเว่น แล้วคนก่อนหน้าเราดันสั่งที 5 โหล เราเลยอดกิน (ไม่ก็รออุ่นกันจนตาเหลือก)</p>
+<p>ซึ่งถามว่าเค้าเจตนาแกล้งเราหรือแกล้งเซเว่นไหม ก็เปล่า</p>
+<blockquote>
+<p>แต่เราอดกิน เสียความรู้สึกกับเซเว่นสุดๆ</p>
+</blockquote>
+<p>ดังนั้น เซเว่นน่าจะช่วยอะไรเราหน่อย</p>
+<p>ลองมาคิดดูกันครับ ว่าถ้าเราเป็นเซเว่น เราทำอะไรได้บ้าง?</p>
+<ul>
+<li>จำกัดปริมาณซาลาเปาที่แต่ละคนซื้อได้ในแต่ละวัน</li>
+<li>จำกัดปริมาณการซื้อแต่ละที ให้ได้แค่คนละสามลูก หากซื้ออยากได้มากกว่าสามลูก ต้องกลับไปเริ่มต่อคิวใหม่</li>
+<li>แบ่งคิวให้คนที่ซื้อต่ำกว่าสามลูกคิวนึง คนที่ซื้อเกินสามลูกแยกไปอีกคิวนึง</li>
+<li>ซื้อเครื่องอบเพิ่ม ทำให้อบรวดเดียวห้าโหลได้</li>
+</ul>
+<p>ฯลฯ</p>
+<p>ซึ่งวิธีการที่พูดมาทั้งหมดนี้ เราสามารถเอามาใช้ในการออกแบบเซอร์วิซของเราได้</p>
+<p>ในบทความนี้ เราจะมาหนึ่งในวิธีข้างต้น คือการจำกัดปริมาณซาลาเปา เอ้ย ปริมาณ Request ซึ่งมีชื่อเรียกว่า <strong>Throttling</strong> (บางที่ก็จะเรียกว่า <strong>Rate Limiting</strong>)</p>
+<p>ซึ่งไอเดียก็คือ เราจะจำกัดให้ผู้ใช้แต่ละคนเรียกใช้เซอร์วิซเราได้ในจำนวนที่จำกัดในช่วงระยะเวลาหนึ่งๆ หากเรียกมาเกินกว่านั้น ก็ให้ปฏิเสธ Request ไป</p>
+<p>ตัวอย่างเช่น เราอาจจะกำหนดให้ผู้ใช้แต่ละคน สามารถส่ง Request ได้ไม่เกิน 100 ครั้งต่อวินาที หากเซอร์วิซ B ส่ง Request มา 150 Requests ในหนึ่งวินาที ส่วนที่เกิน (50 Requests) จะได้รับค่า Error 429 (Too Many Requests) กลับไป</p>
+<figure class=center>
+<img src=/img/diagrams/10-throttle/03-B-throttled.jpg alt="เซอร์วิซ B โดน Thottled ซึ่งทำให้เซอร์วิซ C ไม่ได้รับผลกระทบ ">
+<figcaption>
+เซอร์วิซ B โดน Thottled ซึ่งทำให้เซอร์วิซ C ไม่ได้รับผลกระทบ
+</figcaption>
+</figure>
+<h1 id=ความซบซอนในการกำหนด-throttling>ความซับซ้อนในการกำหนด Throttling</h1>
+<p>ในทางปฏิบัติ เราควรจะใช้ไลบรารี่ที่คนอื่นทำไว้แล้ว เพราะการเขียนและทดสอบ Throttling นี่ยากมาก อย่าไปเขียนใช้เองนะครับ บั้กกระจายแน่นอน</p>
+<p>พอใช้ไลบรารี่ นอกจากค่า Limit ที่ส่งได้แล้ว เราต้องเลือกค่า Key ในที่ใช้ในการ Throttle ด้วย</p>
+<p>วิธีที่ง่ายที่สุดคือให้ Key ตาม Username ของผู้ใช้ ตัวอย่างเช่น</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>จำนวน Request ในช่วงวินาทีที่ผ่านมา</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user1</td>
+<td>57</td>
+</tr>
+<tr>
+<td>user2</td>
+<td>30</td>
+</tr>
+<tr>
+<td>user3</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+<p>ถ้าเรากำหนด Limit ไว้ที่ 100 Requests/วินาที ณ จุดนี้ user3 จะโดนปฏิเสธ Request ถัดๆไป</p>
+<p>ในบางกรณี เราจะไม่ได้ Username แต่จะได้มาเป็นพวก Access Token อันนี้ก็ใช้แทนได้ ไม่ต่างกัน</p>
+<p>แต่บางครั้ง Request ที่ส่งมาก็ไม่รู้ว่ามาจาก User ไหนเลย ยกตัวอย่างเช่น ระบบ B อาจจะเป็นเว็บไซต์ เวลาได้ Request ที่ต้องการดึงข้อมูลจากระบบ A คำสั่งก็จะมาในนามของระบบ B ตรงๆ โดยที่ A ไม่มีข้อมูลเลยว่ามาจาก User คนไหน เพราะข้อมูล User ถูกเก็บไว้ในระบบ B ไม่ได้ส่งมาด้วย</p>
+<p>กรณีนี้ก็ต้องใช้เป็น Access Token ของระบบนั้นๆไป โดยอาจปรับเรทให้สูงหน่อย เพราะอาจจะมาจาก User หลายๆคน</p>
+<p>ถ้าคิดว่าจะใช้ IP ก็ต้องยอมรับว่า IP มันเปลี่ยนได้เรื่อยๆ ผลการ Throttling จึงอาจไม่ได้เป้ะ ยิ่งถ้าเซอร์วิซ B มีหลายเซอร์เวอร์ Request อาจจะมาจากหลาย IP ได้</p>
+<blockquote>
+<p>ถ้าโอเคกับ IP ลองเช็คค่าคอนฟิคใน Web Server หรือ Load Balancer ดูก่อนนะครับ อาจจะทำได้อยู่แล้ว ไม่ต้องเขียนโค้ดเพิ่ม</p>
+</blockquote>
+<h1 id=สราง-config-file-สำหรบ-throttling>สร้าง Config file สำหรับ Throttling</h1>
+<p>พอถึงจุดนี้ เราจะค้นพบว่าเซอร์วิซ B และ C อาจจะต้องยิง Request ในอัตราที่ต่างกัน ดังนั้น เราจะ Throttle ด้วยค่าเดียวกันไม่ได้</p>
+<p>เราจึงต้องกำหนด Rate ที่ต่างกันสำหรับแต่ละ Key โดยแยกเก็บ Config ไว้ในไฟล์แยกจากโค้ด เพื่อง่ายต่อการจัดการ</p>
+<p>ยกตัวอย่าง ในรูปแบบ JSON เราอาจเก็บเป็นแบบนี้</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=err>ratePerSecond</span> <span class=err>=</span> <span class=p>{</span>
+  <span class=err>serviceB:</span> <span class=err>100,</span> <span class=c1>// key = serviceB, 100 request/second
+</span><span class=c1></span>  <span class=err>serviceC:</span> <span class=err>50,</span>
+  <span class=err>other:</span> <span class=err>10</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>โดยเราอาจจะให้แอพพลิเคชั่นของเราโหลด Config File ตอนเริ่มต้น Application แล้วเก็บไว้ใน Memory ตลอดการทำงาน</p>
+<p>หรืออาจจะทำการโหลดซ้ำทุกๆนาที หากเราต้องมีการเปลี่ยนค่านี้บ่อยๆ จะได้ไม่ต้อง Restart Application ทุกครั้งที่เปลี่ยน</p>
+<p>ถ้าเอาให้ละเอียดลงไปอีก เราอาจจะต้องใส่ชนิดของ Operation ลงไปใน Key ด้วย เช่น A อาจจะอ่านข้อมูลได้เยอะ แต่เขียนข้อมูลได้ช้ามาก เราก็ต้องอาจจะกำหนดให้การเขียนทำได้แค่ 1 ใน 10 ของการอ่าน</p>
+<p>ตัว Config File ก็จะเป็นดังนี้</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=err>ratePerSecond</span> <span class=err>=</span> <span class=p>{</span>
+  <span class=err>serviceB_read:</span> <span class=err>100,</span>
+  <span class=err>serviceB_write:</span> <span class=err>10,</span>
+  <span class=err>serviceC_read:</span> <span class=err>50,</span>
+  <span class=err>serviceC_write:</span> <span class=err>5,</span>
+  <span class=err>other_read:</span> <span class=err>10,</span>
+  <span class=err>other_write:</span> <span class=err>1</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>ตัว Key อาจจะซับซ้อนขึ้นไปอีกโดยมีมิติมากกว่าแค่ Operation อันนี้ก็แล้วแต่ออกแบบ</p>
+<p>แต่แนะนำว่าพยายามให้ง่าย (Simple) ที่สุด จะได้ดูแลได้ง่าย ถ้าไม่จำเป็นจริงๆก็อย่าใส่อะไรเพิ่มเข้าไป แค่ หนึ่งค่าต่อเซอร์วิซก็พอแล้ว</p>
+<h1 id=throttle-กอนจะทำงานทกน-resource>Throttle ก่อนจะทำงานที่กิน Resource</h1>
+<p>การเรียกเช็ค Throttling ควรทำเป็นลำดับแรกๆ ไม่ใช่ไปดึงข้อมูลจาก DB ก่อน แล้วค่อยมาเช็คว่าต้อง Throttle รึเปล่า</p>
+<p>ถ้าเราไปทำงานที่กิน Resource ก่อน Throttling แบบนี้ ผลลัพธ์ก็แทบจะไม่ต่างกับไม่มี Throttling เลย ถ้าโดนเรียกมากๆ DB ก็จะเดี้ยงไปก่อน เซอร์วิซก็ตายอยู่ดี</p>
+<p>ข้อนี้เขียนเตือนไว้ กันตกม้าตาย เพราะบางครั้งโค้ดก็เขียนไว้งงมาก เราต้องเช็คให้ดีก่อนว่าไม่ได้มีการทำงานหนักๆก่อนตำแหน่งที่เช็คThrottling ไม่งั้นอาจเหนื่อยฟรีได้</p>
+<h1 id=สงขอมลของ-rate-กลบไปใหผใช>ส่งข้อมูลของ Rate กลับไปให้ผู้ใช้</h1>
+<p>ถ้าเซอร์วิซ B มีหลายเซอร์เวอร์ บางเซอร์เวอร์อาจจะส่ง Request เยอะมาก จนชน Rate Limit ไปเรียบร้อยแล้ว</p>
+<p>ส่วนอีกเซอร์เวอร์นึง พึ่งเรียกครั้งแรก ก็เจอะ Error 429 (Too Many Requests) ทันทีเลย</p>
+<p>สิ่งที่เซอร์เวอร์นี้ต้องการรู้คือ ควรจะรออีกนานเท่าไร ถึงค่อยส่ง Request ถัดไป</p>
+<p>ซึ่งไม่ง่ายเลย เพราะมันไม่รู้ว่าค่า Rate Config ใน A เป็นอะไร และเซอร์เวอร์อื่นๆของ B ส่ง Request ไปเมื่อไรบ้าง</p>
+<p>ดังนั้น เพื่อให้ง่ายต่อผู้ใช้ เซอร์วิซ A สามารถส่งค่าพวกนี้กลับไปทาง Response</p>
+<p>ที่เห็นใช้กันบ่อยก็คือการใส่ค่ากลับไปใน Response Header โดยมักจะส่งค่าสามค่านี้กัน:</p>
+<ul>
+<li><strong>X-Rate-Limit-Limit</strong> : 100 (จำนวน Request ที่ส่งได้ในช่วงเวลาที่กำหนด ในกรณีนี้เป็น 100 Request/second)</li>
+<li><strong>X-Rate-Limit-Remaining</strong> : 45 (จำนวน Request ที่เหลือยังส่งได้ ในกรณีนี้คือส่งไปแล้ว 55 Requests ก็ยังเหลือ 45 Request)</li>
+<li><strong>X-Rate-Limit-Reset : 500</strong> (เวลาก่อนที่ก่อนที่ค่า Remaining จะถูกเซ็ตกลับเป็นค่าเดิม ในกรณีนี้ อีก 500 ms, Remaining จะกลับเป็น 100)</li>
+</ul>
+<p>วิธีนี้ นอกจากจะทำให้ฝั่ง B เขียนโค้ดได้ง่ายขึ้น ยังลดโอกาสที่ผู้ใช้จะยังส่ง Request มาแล้วเจอ 429 อีกรอบ เป็นผลดีต่อฝั่ง A ด้วย</p>
+<h1 id=หากเซอรวซ-a-มหลายเซอรเวอร>หากเซอร์วิซ A มีหลายเซอร์เวอร์</h1>
+<p>ปัญหาการ Throttling จะบานปลาย กลายเป็นปัญหา Distributed System ในทันที เพราะเซอร์เวอร์ใน A ต้องคุยกันให้รู้ว่ายอดปัจจุบันเป็นเท่าไรแล้ว</p>
+<p>สมมติว่าเรามีเซอร์เวอร์อยู่ 3 ตัว เราต้องการกำหนด Rate ให้อยู่ที่ 100 Request ต่อวินาที จะทำยังไง?</p>
+<p>อันนี้ก็ต้องพึ่งไลบรารี่ของท่านแล้วล่ะครับ เพราะเขียนเองยากมาก อย่าลืมส่งเมลล์ไปขอบคุณคนเขียนด้วย ที่ทำให้ชีวิตง่ายขึ้น</p>
+<p>แต่หากหาไลบรารี่ไม่ได้ อาจจะมีวิธีหลบอยู่บ้าง เช่น</p>
+<ol>
+<li><strong>ทำ Throttling ตั้งแต่ก่อนกระจาย Request</strong> โดยสร้างเซอร์เวอร์ตัวหนึ่งมากั้นกลางเหมือน Reverse Proxy เพื่อรับ Request ที่เข้ามาทั้งหมดก่อน แล้วทำการนับที่เซอร์เวอร์นี้อย่างเดียว ถ้าผ่าน Limit Rate ถึงค่อยส่ง Request ไปต่อ</li>
+<li><strong>เอาไปเก็บไว้ใน Database กลาง</strong> วิธีนี้อาจจะทำได้ในกรณีที่ Request กระจายตัว ไม่ได้เข้ามาถี่มาก เพราะการอ่านจาก Database นั้นช้ากว่ามาก แม้จะใช้ In-Memory DB ก็ตาม</li>
+<li><strong>ยอมรับความคาดเคลื่อน</strong> โดยเซ็ตค่าไปที่ 34 Request/วินาที ในแต่ละเซอร์เวอร์ ซึ่งแน่นอนว่า Request จะไม่กระจายเท่าๆกันเป๊ะ ดังนั้น Request มีโอกาสจะเข้า Server ตัวแรกบ่อยๆ และอาจจะโดนบล็อคก่อนครบ 102 Request</li>
+</ol>
+<h1 id=สรป>สรุป</h1>
+<p>ในเซอร์วิซที่มีคนใช้เยอะมาก เรามักจะเจอปัญหาว่าผู้ใช้บางคน"มักมาก" โดยส่ง Request มาเยอะๆในช่วงเวลาสั้นๆ จนกินทรัพยากรของเซอร์วิซไปจนหมด ส่งผลให้ผู้ใช้คนอื่นไม่สามารถใช้งานได้</p>
+<p>เราสามารถป้องกันเหตุการณ์นี้ได้โดยการจำกัดจำนวน Request ซึ่งเราเรียกเทคนิคนี้ว่า Throttling (Rate Limiter)</p>
+<p>โดยการใช้เทคนิคนี้ มีรายละเอียดที่ต้องคิดอยู่เยอะพอสมควร ได้แก่</p>
+<ul>
+<li>เราจะกำหนด Key อย่างไร และจัดการกับ Config file ยังไง</li>
+<li>เราต้องทำการ Throttling ก่อนการทำงานที่กิน Resource เยอะๆ</li>
+<li>เราอาจส่งข้อมูลของ Rate กลับไปให้ผู้ใช้ ผู้ใช้ได้จะได้รู้ว่าต้องหยุดรอนานเท่าไร ก่อนจะส่ง Request มาอีก</li>
+<li>หากเซอร์วิซของเรามีหลายเซอร์เวอร์ ปัญหาจะยากขึ้นมาก เราอาจจะต้องยอม Trade-off ความเร็วและความซับซ้อนของเซอร์วิซ กับความแม่นยำในการคำนวน Rate</li>
+</ul>
+<p>ในทางปฏิบัติ เราไม่จำเป็นต้องทำทุกอย่างให้ครบและเพอร์เฟ็คตั้งแต่แรกนะครับ เพราะบางอย่างก็อาจจะไม่จำเป็นสำหรับเซอร์วิซของเรา แต่หากเราพอรู้ Requirement ของระบบตั้งแต่แรก การออกแบบ Throttling ให้เหมาะสมตั้งแต่แรก จะทำให้เสียเวลามาแก้หรือเพิ่มอะไรทีหลังน้อยลงครับ</p>
+<p>ตอนหน้าผมจะเขียนถึงอีกเทคนิคนึงที่เรียกว่า Bulkhead ซึ่งเหมาะสมมากกว่ากับกรณีที่ระบบ B หรือ C มีระบบหนึ่งที่ Critical มากกว่า และเรายอมให้ล่มไม่ได้ ใครอยากติดตามก็ไป Follow ได้ที่เพจ <a href=https://www.facebook.com/notaboutcode/>Not About Code</a> ครับ</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>Author</span>
+<span class=item-content>ijemmy</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>LastMod</span>
+<span class=item-content>
+2017-11-09
+</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>License</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/reliability/>reliability</a>
+<a href=/tags/design/>design</a>
+<a href=/tags/throttling/>throttling</a>
+<a href=/tags/rate-limit/>rate limit</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/11-bulkhead/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">ปกป้องระบบไม่ให้ล่มหมดด้วย Bulkhead</span>
+<span class="prev-text nav-mobile">Prev</span>
+</a>
+<a class=next href=/post/08-sticky-session/>
+<span class="next-text nav-default">ปัญหาของ Sticky Session</span>
+<span class="next-text nav-mobile">Next</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
+<a href=http://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+Powered by <a class=hexo-link href=https://gohugo.io>Hugo</a>
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+Theme -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<span class=copyright-year>
+&copy;
+2017 -
+2021<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

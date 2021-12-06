@@ -1,0 +1,281 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>ปกป้องระบบไม่ให้ล่มหมดด้วย Bulkhead - Not About Code - Technical Leadership</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="ijemmy"><meta name=description content="Bulkhead เป็นเทคนิคการออกแบบที่เหมาะกับ Critical System คือ ถ้าล่มปุ๊บ คนในองค์กรจะไม่สามารถทำงานต่อได้เลย
+ถ้าใครเปิดดิกดู ศัพท์นี้จริงๆใช้เรียกการออกแบบพาหนะครับ
+ Bulkhead (n.) a dividing wall or barrier between separate compartments inside a ship, aircraft, or other vehicle.
+ ไอเดียของ Bulkhead คือการออกแบบให้พาหนะแยกออกเป็นส่วนๆ (Compartmentalisation) หากมีส่วนใดส่วนหนึ่งมีปัญหา ผลกระทบจะต้องไม่รุนแรงจนทำให้ทั้งพาหนะล่มหมด
+ยกตัวอย่างเช่น สมมติว่าเรือของเรามีจุดรั่วจุดหนึ่ง หากเราไม่ได้มีการแบ่งโซนเป็นส่วน น้ำจะกระจายไปทั่วท้องเรือ เรือก็จะจมแน่นอน
+การใช้ Bulkhead คือการกั้นส่วนท้องเรือออกเป็นส่วนๆ หากน้ำรั่วขึ้นมา น้ำก็จะเข้ามาจนเต็มแค่ส่วนหนึ่งๆ โดยไม่หนักพอทำให้เรือล่มทั้งลำ (ถ้ายังนึกภาพไม่ออก ลองดูภาพในกูเกิ้ลครับ)
+"><meta name=keywords content="Hugo,theme,even">
+<meta name=generator content="Hugo 0.89.4 with theme even">
+<link rel=canonical href=http://www.notaboutcode.com/post/11-bulkhead/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<link rel=stylesheet href=/css//css/custom.css>
+<meta property="og:title" content="ปกป้องระบบไม่ให้ล่มหมดด้วย Bulkhead">
+<meta property="og:description" content="
+Bulkhead เป็นเทคนิคการออกแบบที่เหมาะกับ Critical System คือ ถ้าล่มปุ๊บ คนในองค์กรจะไม่สามารถทำงานต่อได้เลย
+ถ้าใครเปิดดิกดู ศัพท์นี้จริงๆใช้เรียกการออกแบบพาหนะครับ
+
+Bulkhead (n.) a dividing wall or barrier between separate compartments inside a ship, aircraft, or other vehicle.
+
+ไอเดียของ Bulkhead คือการออกแบบให้พาหนะแยกออกเป็นส่วนๆ (Compartmentalisation) หากมีส่วนใดส่วนหนึ่งมีปัญหา ผลกระทบจะต้องไม่รุนแรงจนทำให้ทั้งพาหนะล่มหมด
+ยกตัวอย่างเช่น สมมติว่าเรือของเรามีจุดรั่วจุดหนึ่ง หากเราไม่ได้มีการแบ่งโซนเป็นส่วน น้ำจะกระจายไปทั่วท้องเรือ เรือก็จะจมแน่นอน
+การใช้ Bulkhead คือการกั้นส่วนท้องเรือออกเป็นส่วนๆ หากน้ำรั่วขึ้นมา น้ำก็จะเข้ามาจนเต็มแค่ส่วนหนึ่งๆ โดยไม่หนักพอทำให้เรือล่มทั้งลำ (ถ้ายังนึกภาพไม่ออก ลองดูภาพในกูเกิ้ลครับ)">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://www.notaboutcode.com/post/11-bulkhead/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2017-11-12T12:04:02+07:00">
+<meta property="article:modified_time" content="2017-11-12T12:04:02+07:00">
+<meta itemprop=name content="ปกป้องระบบไม่ให้ล่มหมดด้วย Bulkhead">
+<meta itemprop=description content="
+Bulkhead เป็นเทคนิคการออกแบบที่เหมาะกับ Critical System คือ ถ้าล่มปุ๊บ คนในองค์กรจะไม่สามารถทำงานต่อได้เลย
+ถ้าใครเปิดดิกดู ศัพท์นี้จริงๆใช้เรียกการออกแบบพาหนะครับ
+
+Bulkhead (n.) a dividing wall or barrier between separate compartments inside a ship, aircraft, or other vehicle.
+
+ไอเดียของ Bulkhead คือการออกแบบให้พาหนะแยกออกเป็นส่วนๆ (Compartmentalisation) หากมีส่วนใดส่วนหนึ่งมีปัญหา ผลกระทบจะต้องไม่รุนแรงจนทำให้ทั้งพาหนะล่มหมด
+ยกตัวอย่างเช่น สมมติว่าเรือของเรามีจุดรั่วจุดหนึ่ง หากเราไม่ได้มีการแบ่งโซนเป็นส่วน น้ำจะกระจายไปทั่วท้องเรือ เรือก็จะจมแน่นอน
+การใช้ Bulkhead คือการกั้นส่วนท้องเรือออกเป็นส่วนๆ หากน้ำรั่วขึ้นมา น้ำก็จะเข้ามาจนเต็มแค่ส่วนหนึ่งๆ โดยไม่หนักพอทำให้เรือล่มทั้งลำ (ถ้ายังนึกภาพไม่ออก ลองดูภาพในกูเกิ้ลครับ)"><meta itemprop=datePublished content="2017-11-12T12:04:02+07:00">
+<meta itemprop=dateModified content="2017-11-12T12:04:02+07:00">
+<meta itemprop=wordCount content="373">
+<meta itemprop=keywords content="reliability,design,bulkhead,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="ปกป้องระบบไม่ให้ล่มหมดด้วย Bulkhead">
+<meta name=twitter:description content="
+Bulkhead เป็นเทคนิคการออกแบบที่เหมาะกับ Critical System คือ ถ้าล่มปุ๊บ คนในองค์กรจะไม่สามารถทำงานต่อได้เลย
+ถ้าใครเปิดดิกดู ศัพท์นี้จริงๆใช้เรียกการออกแบบพาหนะครับ
+
+Bulkhead (n.) a dividing wall or barrier between separate compartments inside a ship, aircraft, or other vehicle.
+
+ไอเดียของ Bulkhead คือการออกแบบให้พาหนะแยกออกเป็นส่วนๆ (Compartmentalisation) หากมีส่วนใดส่วนหนึ่งมีปัญหา ผลกระทบจะต้องไม่รุนแรงจนทำให้ทั้งพาหนะล่มหมด
+ยกตัวอย่างเช่น สมมติว่าเรือของเรามีจุดรั่วจุดหนึ่ง หากเราไม่ได้มีการแบ่งโซนเป็นส่วน น้ำจะกระจายไปทั่วท้องเรือ เรือก็จะจมแน่นอน
+การใช้ Bulkhead คือการกั้นส่วนท้องเรือออกเป็นส่วนๆ หากน้ำรั่วขึ้นมา น้ำก็จะเข้ามาจนเต็มแค่ส่วนหนึ่งๆ โดยไม่หนักพอทำให้เรือล่มทั้งลำ (ถ้ายังนึกภาพไม่ออก ลองดูภาพในกูเกิ้ลครับ)"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>ปกป้องระบบไม่ให้ล่มหมดด้วย Bulkhead</h1>
+<div class=post-meta>
+<span class=post-time> 2017-11-12 </span>
+<div class=post-category>
+<a href=/categories/system-design/> System Design </a>
+</div>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>Contents</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#ปญหาทใช-bulkhead-ชวยได>ปัญหาที่ใช้ Bulkhead ช่วยได้</a></li>
+<li><a href=#เทคนคการออกแบบ-bulkhead>เทคนิคการออกแบบ Bulkhead</a></li>
+<li><a href=#ขอเสยของ-bulkhead>ข้อเสียของ Bulkhead</a></li>
+<li><a href=#สรป>สรุป</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p><img src=/img/covers/ship-01.jpg alt="Photo by Abraham Wiebe, from Unsplash.com"></p>
+<p>Bulkhead เป็นเทคนิคการออกแบบที่เหมาะกับ Critical System คือ ถ้าล่มปุ๊บ คนในองค์กรจะไม่สามารถทำงานต่อได้เลย</p>
+<p>ถ้าใครเปิดดิกดู ศัพท์นี้จริงๆใช้เรียกการออกแบบพาหนะครับ</p>
+<blockquote>
+<p>Bulkhead (n.) a dividing wall or barrier between separate compartments inside a ship, aircraft, or other vehicle.</p>
+</blockquote>
+<p>ไอเดียของ Bulkhead คือการออกแบบให้พาหนะแยกออกเป็นส่วนๆ (Compartmentalisation) หากมีส่วนใดส่วนหนึ่งมีปัญหา ผลกระทบจะต้องไม่รุนแรงจนทำให้ทั้งพาหนะล่มหมด</p>
+<p>ยกตัวอย่างเช่น สมมติว่าเรือของเรามีจุดรั่วจุดหนึ่ง หากเราไม่ได้มีการแบ่งโซนเป็นส่วน น้ำจะกระจายไปทั่วท้องเรือ เรือก็จะจมแน่นอน</p>
+<p>การใช้ Bulkhead คือการกั้นส่วนท้องเรือออกเป็นส่วนๆ หากน้ำรั่วขึ้นมา น้ำก็จะเข้ามาจนเต็มแค่ส่วนหนึ่งๆ โดยไม่หนักพอทำให้เรือล่มทั้งลำ (ถ้ายังนึกภาพไม่ออก ลองดู<a href="https://www.google.nl/search?dcr=0&biw=1832&bih=989&tbm=isch&sa=1&q=bulkhead&oq=bulkhead">ภาพในกูเกิ้ล</a>ครับ)</p>
+<h1 id=ปญหาทใช-bulkhead-ชวยได>ปัญหาที่ใช้ Bulkhead ช่วยได้</h1>
+<p>ใน<a href=/post/10-throttle/>บทความเรื่อง Throttling </a> เราพูดถึงปัญหาที่บางเซอร์วิซส่ง Request จำนวนมาก มายังระบบ A ทำให้ระบบล่ม และระบบอื่นๆไม่สามารถติดต่อกับ A ไปด้วย</p>
+<figure class=center>
+<img src=/img/diagrams/11-bulkhead/01-B-send-requests.jpg alt="เซอร์วิซ A โดน B ถล่ม C เลยทำงานไม่ได้ไปด้วย">
+<figcaption>
+เซอร์วิซ A โดน B ถล่ม C เลยทำงานไม่ได้ไปด้วย
+</figcaption>
+</figure>
+<p>สมมติว่ามีเหตุการอันไม่คาดฝัน (อาจจะมีระบบส่ง Request เยอะมาก, DDoS Attack) ถ้าระบบ A ล่มไป ทั้ง B และ C ก็จะทำงานไม่ได้</p>
+<p>คราวนี้ลองสมมติเพิ่มว่าระบบ C ของผมเป็น Critical System ในขณะที่ B ไม่ใช่</p>
+<p>ตัวอย่างเช่น ผมกำลังออกแบบระบบให้สายการบินฮัสกี้แอร์ไลน์(นามสมมติ) ผมมีระบบ A คือระบบที่เก็บข้อมูลเที่ยวบินทั้งหมด</p>
+<ul>
+<li>B เป็นระบบที่ใช้คำนวนค่าจ้างของนักบิน สจ๊วต และแอร์โฮสเตจ ซึ่งได้เงินแปรผันตามจำนวนและระยะทางของเที่ยวบิน โดยต้องดึงข้อมูลเที่ยวบินจาก A มาใช้ในการคำนวน</li>
+<li>C เป็นระบบสำหรับใช้เช็คอินผู้โดยสาร ถูกใช้โดยพนักงานในสนามบิน (ตรงที่เราต้องเอากระเป๋าไปโหลด) หากไม่มีข้อมูลเที่ยวบินจาก A พนักงานในสนามบินจะเช็คอินไม่ได้</li>
+</ul>
+<p>จากตัวอย่างนี้ ระบบ B สำคัญก็จริง แต่ต่อให้ทำงานไม่ได้ ก็ไม่ได้ทำให้ทั้งบริษัทหยุดชะงัก แต่หากระบบ C พัง โกลาหลแน่นอน เสียหายมหาศาลทั้งด้านค่าใช้จ่ายและหน้าตาของบริษัท</p>
+<p>ดังนั้น ผมต้องการออกแบบระบบ A ให้แม้มีอะไรพังบ้าง ยังไง ก็ต้องให้ระบบ C ทำงานต่อได้</p>
+<figure class=center>
+<img src=/img/diagrams/11-bulkhead/02-critical.jpg alt="ระบบ C สำคัญมาก หากทำงานไม่ได้ จะกระทบทั้งบริษัท กรณีนี้เราจะออกแบบระบบ A ยังไง?">
+<figcaption>
+ระบบ C สำคัญมาก หากทำงานไม่ได้ จะกระทบทั้งบริษัท กรณีนี้เราจะออกแบบระบบ A ยังไง?
+</figcaption>
+</figure>
+<h1 id=เทคนคการออกแบบ-bulkhead>เทคนิคการออกแบบ Bulkhead</h1>
+<p>ในความเป็นจริง ผมไม่มีทางการันตีได้ 100% หรอก เพราะไม่รู้ว่าอะไรจะพังบ้าง</p>
+<p>แต่ผมลดความเสี่ยงได้ ตามรูปข้างล่าง</p>
+<figure class=center>
+<img src=/img/diagrams/11-bulkhead/03-bulkhead.jpg alt="ออกแบบให้ 7 เซอร์เวอร์ กับ 3 เซอร์เวอร์แยกออกจากกัน">
+<figcaption>
+ออกแบบให้ 7 เซอร์เวอร์ กับ 3 เซอร์เวอร์แยกออกจากกัน
+</figcaption>
+</figure>
+<p>ในรูปนี้ เราออกแบบเซอร์วิซ A ให้มีทั้งหมด 10 เซอร์เวอร์ แต่แยกจากกันเป็น 7:3</p>
+<p>โดยระบบที่ไม่ได้ Critical (สีน้ำเงิน ได้แก่ B, D, E, F) จะติดต่อไปยัง A1 ในขณะที่ระบบที่สำคัญมากอย่าง C จะติดต่อไปที่ A2</p>
+<p>วิธีนี้ช่วยการันตีได้ว่า หากระบบสีน้ำเงินส่ง Request จำนวนมากเข้ามา หรือทำการ DDoS ระบบสีน้ำเงิน ระบบ C จะไม่ได้รับผลกระทบเลย</p>
+<blockquote>
+<p>อีกวิธีหนึ่ง คือให้ C มี Endpoint ของทั้ง A1 และ A2 โดยถ้า A2 เกิดฟลุ้คพังขึ้นมา C ก็ยังมี A1 ให้ใช้ แต่วิธีนี้ต้องระวังเรื่อง Internal State กับ Data Replication ให้ดีเพราะข้อมูลของ A1 กับ A2 อาจต่างกัน ทำให้เกิดบั้กแปลกๆได้</p>
+</blockquote>
+<p>เพื่อความปลอดภัย ผมพยายามแยกส่วนให้ทั้งสองส่วนของ A ไม่เกี่ยวกันโดยสิ้นเชิง โดย</p>
+<ol>
+<li>A1 และ A2 ต่างก็มี Load Balancer ของตนเอง และอยู่ใน Physical Machine ที่แยกกัน (กรณีใช้ Virtual Machine) ถ้าเอาโหดๆหน่อย ผมจะจัดให้เซอร์เวอร์ 3 ตัว A2 ตั้งอยู่ใน Data Center มากกว่าหนึ่งที่ เผื่อที่นึงไฟไหม้</li>
+<li>A1 และ A2 มีระบบการ Deploy ที่แยกกัน (ใช้ Deployment Script เดียวกัน แต่เวลา Deploy ไม่ Deploy พร้อมกัน)</li>
+</ol>
+<p>เวลาผมทำการ Deploy ผมจะทำการ Deploy ลง 7 เซอร์เวอร์ใน A1 ก่อน แล้วทำการเช็คว่า Metrics และค่าต่างๆปกติดี ระบบยังใช้งานได้ ก่อน Deploy ลงในอีก 3 เซอร์เวอร์ของ A2</p>
+<p>ดังนั้น หากโค้ดมีความผิดพลาด ระบบ C จะไม่ได้รับผลกระทบ เพราะเราจะตรวจจับเจอก่อนเอาเข้า A2</p>
+<h1 id=ขอเสยของ-bulkhead>ข้อเสียของ Bulkhead</h1>
+<p>ในโลกของการออกแบบระบบ แทบทุกอย่างจะเป็น Trade-off ไม่มีอะไรดีๆที่ได้มาฟรีๆครับ</p>
+<ol>
+<li><strong>อัตรา Server Utilization ลดลง</strong> แทนที่เราจะสามารถกระจายโหลดในระบบทั้งหมดไปใน 10 เซอร์เวอร์เวลาที่ Peak เราจะต้องกระจายแยก 7:3 กัน สมมติว่าระบบ C จะเรียกใช้งาน A หนักๆช่วงตอนกลางวัน แต่ B จะเป็นช่วงกลางคืน หากแชร์โหลดบนระบบเดียวกัน เราอาจจะใช้เครื่องน้อยกว่า 10 เครื่องได้</li>
+<li><strong>ความซับซ้อนในการ Maintenance เพิ่มขึ้น</strong> แม้ในรูปจะดูง่ายมาก แต่การ Maintenance ทั้งหมดจะต้องทำเพิ่มขึ้นเท่าตัว เช่น Deploy, LoadBalancer, Configuration, Logging ซึ่งหากไม่ได้มีสคริป Deployment Automatation ที่ดีๆอยู่ จะทำให้การจัดการยากขึ้น และมีโอกาสเกิด Human Error สูงกว่า</li>
+</ol>
+<p>ในมุมมองของผม ค่าใช้จ่ายเรื่อง Hardware เดี๋ยวนี้ต่ำมาก เมื่อเทียบกับค่าจ้างโปรแกรมเมอร์ (ที่อเมริกาหรือยุโรป) ดังนั้น ข้อเสียหนักๆของ Bulkhead คือเรื่องความซับซ้อนมากกว่า</p>
+<h1 id=สรป>สรุป</h1>
+<p>ไอเดียหลักของ Bulkhead คือการแยกส่วน (Compartmentalisation) ในระดับของเซอร์เวอร์ให้แยกออกจากกันโดยสิ้นเชิง หากมีส่วนใดส่วนหนึ่งพัง อีกส่วนควรจะทำงานต่อได้</p>
+<p>โดยหากระบบที่เรียกใช้บางตัวมีความสำคัญมาก เราสามารถกันส่วนหนึ่งๆให้ตัวนั้นเลย (ในกรณีของ C) ซึ่งจะช่วยการันตีว่า C จะไม่ได้รับผลกระทบจากพฤติกรรมของระบบอื่นๆ (B, D, E, F)</p>
+<p>แน่นอน การออกแบบแบบนี้ จะทำให้อัตรา Server Utilization ต่ำลง ทำให้อาจต้องการเซอร์เวอร์มากขึ้น และการ Maintenance ก็จะมีรายละเอียดเยอะขึ้น จึงควรมีการทำ Deployment Automation ให้พร้อมก่อนแต่แรก</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>Author</span>
+<span class=item-content>ijemmy</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>LastMod</span>
+<span class=item-content>
+2017-11-12
+</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>License</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/reliability/>reliability</a>
+<a href=/tags/design/>design</a>
+<a href=/tags/bulkhead/>bulkhead</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/12-interviewer-bad-practices/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">ปัญหาในการสัมภาษณ์งานโปรแกรมเมอร์</span>
+<span class="prev-text nav-mobile">Prev</span>
+</a>
+<a class=next href=/post/10-throttle/>
+<span class="next-text nav-default">ปกป้องเซอร์วิซจากผู้ใช้มักมากด้วย Throttling</span>
+<span class="next-text nav-mobile">Next</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
+<a href=http://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+Powered by <a class=hexo-link href=https://gohugo.io>Hugo</a>
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+Theme -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<span class=copyright-year>
+&copy;
+2017 -
+2021<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

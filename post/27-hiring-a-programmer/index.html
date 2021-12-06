@@ -1,0 +1,273 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>เขียนโปรแกรมไม่เป็น แต่ต้องคัดเลือกโปรแกรมเมอร์เข้าทีม - Not About Code - Technical Leadership</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="ijemmy"><meta name=description content="เมื่อวันก่อนมีน้องที่เป็น Project Manager โทรมาขอคำแนะนำเรื่องจะจ้างโปรแกรมเมอร์ใหม่เข้าทีม
+แต่ความท้าทายคือในทีมไม่มีใครที่มีประสบการณ์เรื่องเขียนโปรแกรมเลย จะคัดเลือกคนยังไงดี
+หลังจากคุยเสร็จ ก็รู้สึกว่านี่เป็นปัญหาสากลที่น่าจะมีหลายๆคนเจออยู่ แม้แต่คนที่เขียนโปรแกรมเป็น ถ้าต้องคัดเลือกคนที่ในด้านที่เราไม่มีทักษะทางด้านนั้นๆ (เช่น เขียน Frontend เป็นหลัก แต่ต้องช่วยทีมจ้าง Backend Developer หรือ Infra) เรื่องนี้ก็น่าจะยากอยู่ ยิ่งถ้านึกภาพว่าผมต้องไปสัมภาษณ์งานเพื่อคัดเลือกจ้าง Project Manager ผมเองก็คงไปไม่ถูกเหมือนกัน
+ผมเอาเรื่องนี้มานั่งตกตะกอนอยู่หลายวัน แทนที่จะมานั่งลิสต์เป็นข้อๆแห้งๆ รู้สึกว่าถ้ายกเคสของน้องเค้ามาเลยน่าจะทำให้เข้าใจวิธีคิดได้ง่ายกว่า เนื่องจากโจทย์ประเภทนี้ไม่ได้มีคำถามและคำตอบที่ตายตัว หากเข้าใจวิธีคิด ก็น่าจะเอาไปประยุกต์กับกรณีของตัวเองได้
+ก็เลยเป็นที่มาของบทความนี้ครับ
+"><meta name=keywords content="Hugo,theme,even">
+<meta name=generator content="Hugo 0.89.4 with theme even">
+<link rel=canonical href=http://www.notaboutcode.com/post/27-hiring-a-programmer/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<link rel=stylesheet href=/css//css/custom.css>
+<meta property="og:title" content="เขียนโปรแกรมไม่เป็น แต่ต้องคัดเลือกโปรแกรมเมอร์เข้าทีม">
+<meta property="og:description" content="
+เมื่อวันก่อนมีน้องที่เป็น Project Manager  โทรมาขอคำแนะนำเรื่องจะจ้างโปรแกรมเมอร์ใหม่เข้าทีม
+แต่ความท้าทายคือในทีมไม่มีใครที่มีประสบการณ์เรื่องเขียนโปรแกรมเลย จะคัดเลือกคนยังไงดี
+หลังจากคุยเสร็จ ก็รู้สึกว่านี่เป็นปัญหาสากลที่น่าจะมีหลายๆคนเจออยู่ แม้แต่คนที่เขียนโปรแกรมเป็น ถ้าต้องคัดเลือกคนที่ในด้านที่เราไม่มีทักษะทางด้านนั้นๆ (เช่น เขียน Frontend เป็นหลัก แต่ต้องช่วยทีมจ้าง Backend Developer หรือ  Infra) เรื่องนี้ก็น่าจะยากอยู่ ยิ่งถ้านึกภาพว่าผมต้องไปสัมภาษณ์งานเพื่อคัดเลือกจ้าง Project Manager ผมเองก็คงไปไม่ถูกเหมือนกัน
+ผมเอาเรื่องนี้มานั่งตกตะกอนอยู่หลายวัน แทนที่จะมานั่งลิสต์เป็นข้อๆแห้งๆ รู้สึกว่าถ้ายกเคสของน้องเค้ามาเลยน่าจะทำให้เข้าใจวิธีคิดได้ง่ายกว่า เนื่องจากโจทย์ประเภทนี้ไม่ได้มีคำถามและคำตอบที่ตายตัว หากเข้าใจวิธีคิด ก็น่าจะเอาไปประยุกต์กับกรณีของตัวเองได้
+ก็เลยเป็นที่มาของบทความนี้ครับ">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://www.notaboutcode.com/post/27-hiring-a-programmer/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2018-09-16T12:04:02+07:00">
+<meta property="article:modified_time" content="2018-09-16T12:04:02+07:00">
+<meta itemprop=name content="เขียนโปรแกรมไม่เป็น แต่ต้องคัดเลือกโปรแกรมเมอร์เข้าทีม">
+<meta itemprop=description content="
+เมื่อวันก่อนมีน้องที่เป็น Project Manager  โทรมาขอคำแนะนำเรื่องจะจ้างโปรแกรมเมอร์ใหม่เข้าทีม
+แต่ความท้าทายคือในทีมไม่มีใครที่มีประสบการณ์เรื่องเขียนโปรแกรมเลย จะคัดเลือกคนยังไงดี
+หลังจากคุยเสร็จ ก็รู้สึกว่านี่เป็นปัญหาสากลที่น่าจะมีหลายๆคนเจออยู่ แม้แต่คนที่เขียนโปรแกรมเป็น ถ้าต้องคัดเลือกคนที่ในด้านที่เราไม่มีทักษะทางด้านนั้นๆ (เช่น เขียน Frontend เป็นหลัก แต่ต้องช่วยทีมจ้าง Backend Developer หรือ  Infra) เรื่องนี้ก็น่าจะยากอยู่ ยิ่งถ้านึกภาพว่าผมต้องไปสัมภาษณ์งานเพื่อคัดเลือกจ้าง Project Manager ผมเองก็คงไปไม่ถูกเหมือนกัน
+ผมเอาเรื่องนี้มานั่งตกตะกอนอยู่หลายวัน แทนที่จะมานั่งลิสต์เป็นข้อๆแห้งๆ รู้สึกว่าถ้ายกเคสของน้องเค้ามาเลยน่าจะทำให้เข้าใจวิธีคิดได้ง่ายกว่า เนื่องจากโจทย์ประเภทนี้ไม่ได้มีคำถามและคำตอบที่ตายตัว หากเข้าใจวิธีคิด ก็น่าจะเอาไปประยุกต์กับกรณีของตัวเองได้
+ก็เลยเป็นที่มาของบทความนี้ครับ"><meta itemprop=datePublished content="2018-09-16T12:04:02+07:00">
+<meta itemprop=dateModified content="2018-09-16T12:04:02+07:00">
+<meta itemprop=wordCount content="296">
+<meta itemprop=keywords content="interview,recruitment,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="เขียนโปรแกรมไม่เป็น แต่ต้องคัดเลือกโปรแกรมเมอร์เข้าทีม">
+<meta name=twitter:description content="
+เมื่อวันก่อนมีน้องที่เป็น Project Manager  โทรมาขอคำแนะนำเรื่องจะจ้างโปรแกรมเมอร์ใหม่เข้าทีม
+แต่ความท้าทายคือในทีมไม่มีใครที่มีประสบการณ์เรื่องเขียนโปรแกรมเลย จะคัดเลือกคนยังไงดี
+หลังจากคุยเสร็จ ก็รู้สึกว่านี่เป็นปัญหาสากลที่น่าจะมีหลายๆคนเจออยู่ แม้แต่คนที่เขียนโปรแกรมเป็น ถ้าต้องคัดเลือกคนที่ในด้านที่เราไม่มีทักษะทางด้านนั้นๆ (เช่น เขียน Frontend เป็นหลัก แต่ต้องช่วยทีมจ้าง Backend Developer หรือ  Infra) เรื่องนี้ก็น่าจะยากอยู่ ยิ่งถ้านึกภาพว่าผมต้องไปสัมภาษณ์งานเพื่อคัดเลือกจ้าง Project Manager ผมเองก็คงไปไม่ถูกเหมือนกัน
+ผมเอาเรื่องนี้มานั่งตกตะกอนอยู่หลายวัน แทนที่จะมานั่งลิสต์เป็นข้อๆแห้งๆ รู้สึกว่าถ้ายกเคสของน้องเค้ามาเลยน่าจะทำให้เข้าใจวิธีคิดได้ง่ายกว่า เนื่องจากโจทย์ประเภทนี้ไม่ได้มีคำถามและคำตอบที่ตายตัว หากเข้าใจวิธีคิด ก็น่าจะเอาไปประยุกต์กับกรณีของตัวเองได้
+ก็เลยเป็นที่มาของบทความนี้ครับ"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>เขียนโปรแกรมไม่เป็น แต่ต้องคัดเลือกโปรแกรมเมอร์เข้าทีม</h1>
+<div class=post-meta>
+<span class=post-time> 2018-09-16 </span>
+<div class=post-category>
+<a href=/categories/technical-leadership/> Technical Leadership </a>
+</div>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>Contents</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#1-กำหนด-requirement-ชดเจนวาเราอยากไดโปรแกรมเมอรประเภทไหน-มทกษะอะไรบาง>1. กำหนด Requirement ชัดเจนว่าเราอยากได้โปรแกรมเมอร์ประเภทไหน มีทักษะอะไรบ้าง</a></li>
+<li><a href=#2-หาคนทมความรดานนนมาสมภาษณ>2. หาคนที่มีความรู้ด้านนั้นมาสัมภาษณ์</a></li>
+<li><a href=#3-ทำการบานเกยวกบหวขอทตองคย>3. ทำการบ้านเกี่ยวกับหัวข้อที่ต้องคุย</a></li>
+<li><a href=#4-ดทหลกฐานมากกวาลมปาก>4. ดูที่หลักฐานมากกว่าลมปาก</a></li>
+<li><a href=#5-เชค-reference>5. เช็ค Reference</a></li>
+<li><a href=#สรป>สรุป</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p><img src=/img/covers/interview-01.jpg alt="Photo by rawpixel on Unsplash"></p>
+<p>เมื่อวันก่อนมีน้องที่เป็น Project Manager โทรมาขอคำแนะนำเรื่องจะจ้างโปรแกรมเมอร์ใหม่เข้าทีม</p>
+<p>แต่ความท้าทายคือในทีมไม่มีใครที่มีประสบการณ์เรื่องเขียนโปรแกรมเลย จะคัดเลือกคนยังไงดี</p>
+<p>หลังจากคุยเสร็จ ก็รู้สึกว่านี่เป็นปัญหาสากลที่น่าจะมีหลายๆคนเจออยู่ แม้แต่คนที่เขียนโปรแกรมเป็น ถ้าต้องคัดเลือกคนที่ในด้านที่เราไม่มีทักษะทางด้านนั้นๆ (เช่น เขียน Frontend เป็นหลัก แต่ต้องช่วยทีมจ้าง Backend Developer หรือ Infra) เรื่องนี้ก็น่าจะยากอยู่ ยิ่งถ้านึกภาพว่าผมต้องไปสัมภาษณ์งานเพื่อคัดเลือกจ้าง Project Manager ผมเองก็คงไปไม่ถูกเหมือนกัน</p>
+<p>ผมเอาเรื่องนี้มานั่งตกตะกอนอยู่หลายวัน แทนที่จะมานั่งลิสต์เป็นข้อๆแห้งๆ รู้สึกว่าถ้ายกเคสของน้องเค้ามาเลยน่าจะทำให้เข้าใจวิธีคิดได้ง่ายกว่า เนื่องจากโจทย์ประเภทนี้ไม่ได้มีคำถามและคำตอบที่ตายตัว หากเข้าใจวิธีคิด ก็น่าจะเอาไปประยุกต์กับกรณีของตัวเองได้</p>
+<p>ก็เลยเป็นที่มาของบทความนี้ครับ</p>
+<h1 id=1-กำหนด-requirement-ชดเจนวาเราอยากไดโปรแกรมเมอรประเภทไหน-มทกษะอะไรบาง>1. กำหนด Requirement ชัดเจนว่าเราอยากได้โปรแกรมเมอร์ประเภทไหน มีทักษะอะไรบ้าง</h1>
+<p>ให้เป็นข้อแรกเลย เพราะโปรแกรมเมอร์มีหลากหลายประเภทมาก อย่างน้องที่มาถามนี่ถือว่าทำการบ้านมา เค้าพอเข้าใจว่าโปรแกรมเมอร์มีฝั่ง Frontend กับ Backend ซึ่งใช้เทคโนโลยีที่ต่างกัน นอกจากนี้ก็มี Full-stack ด้วย</p>
+<blockquote>
+<p>ใครที่ยังไม่เข้าใจศัพท์พวกนี้ อยากให้ลอง Google เพิ่มเติมดูนะครับ</p>
+</blockquote>
+<p>น้องเค้ามีเป้าชัดเจนว่าอยากจ้าง Full-stack เพราะทีมสามารถจ้างได้แค่คนเดียว ซึ่งก็เหมาะกับงานของเค้าเพราะต้องการ Web Application ที่ไม่ได้ซับซ้อนหรือต้องสเกลใหญ่มาก ไม่มีความจำเป็นที่งานจะต้องใช้ Specialist ในด้านใดด้านหนึ่ง</p>
+<p>ในกรณีที่ต้องดูแลระบบที่มีอยู่แล้ว เทคโนโลยีเดิมจะเป็นตัวกำหนดเลยว่าต้องจ้างคนที่เขียนภาษาอะไร (เช่น C#, Java, JavaScript, ฯลฯ) แต่ในกรณีนี้ น้องเค้าต้องการคนมาสร้างระบบใหม่ จึงไม่ได้มีเงื่อนไขด้านภาษาหรือเทคโนโลยี</p>
+<p>ส่วนที่น่าสนใจคือน้องเค้าทำงานใน Corporate ขนาดใหญ่ มีคนที่เกี่ยวข้องกับโปรเจ็คมาก ซึ่งแต่ละคนก็จะมีเป้าหมายส่วนตัวที่ต่างกัน เค้าเลยต้องการ Soft skill ที่ค่อนข้างสูงด้วย โปรแกรมเมอร์ที่จ้างมาจะต้องคุยกับคนเยอะ และต้องโน้มน้าวคนที่เกี่ยวข้องเพื่อให้โปรเจ็คเดินไปได้สะดวก แม้ว่าตัวน้องเองจะสามารถช่วยเรื่องนี้ได้ในฐานะ Project Manager แต่ก็จะต้องพึ่งโปรแกรมเมอร์คนนี้ในการ~~<a href=https://www.facebook.com/kumthailand/posts/%E0%B8%AB%E0%B8%A5%E0%B8%B2%E0%B8%A2-%E0%B9%86-%E0%B8%84%E0%B8%99%E0%B8%AA%E0%B8%87%E0%B8%AA%E0%B8%B1%E0%B8%A2%E0%B8%A7%E0%B9%88%E0%B8%B2-%E0%B8%95%E0%B8%9A%E0%B8%A1%E0%B8%B7%E0%B8%AD-%E0%B8%AB%E0%B8%A3%E0%B8%B7%E0%B8%AD-%E0%B8%9B%E0%B8%A3%E0%B8%9A%E0%B8%A1%E0%B8%B7%E0%B8%AD-%E0%B8%95%E0%B8%9A%E0%B8%A1%E0%B8%B7%E0%B8%AD-%E0%B8%81%E0%B8%B1%E0%B8%9A-%E0%B8%9B%E0%B8%A3%E0%B8%9A%E0%B8%A1%E0%B8%B7%E0%B8%AD-%E0%B8%9E%E0%B8%88%E0%B8%99%E0%B8%B2%E0%B8%99%E0%B8%B8%E0%B8%81%E0%B8%A3%E0%B8%A1-%E0%B8%89%E0%B8%9A%E0%B8%B1%E0%B8%9A%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%9A%E0%B8%B1%E0%B8%93%E0%B8%91%E0%B8%B4%E0%B8%95%E0%B8%A2%E0%B8%AA%E0%B8%96%E0%B8%B2/1620424478275759/>สู้รบตบมือ</a>~~เจรจากับเหล่า Architect ในด้านของ Technical ด้วย</p>
+<p>อีกเรื่องคือองค์กรของน้องเริ่มมีการเปลี่ยนแปลงเพื่อนำ Agile, DevOps และ Microservices Architecture เข้ามาในบริษัท เรื่องพวกนี้เลยเป็นหนึ่งใน Requirement สำคัญที่จะต้องมีจากโปรแกรมเมอร์คนนี้</p>
+<p>พอผ่านขั้นตอนนี้ไป เราจะเริ่มเป็นภาพแล้วว่าเราต้องการโปรแกรมเมอร์แนวไหน เวลาส่งให้ Recruiter หาคน เค้าจะได้ช่วยกรองให้ได้ดีขึ้น และเวลาสัมภาษณ์ ทีมก็จะได้มีทิศทางชัดเจนด้วยว่าจะเช็คอะไร</p>
+<p>ส่วนหนึ่งที่อยากให้สังเกต คือหลังจากลิสต์รายการทั้งหมดแล้ว เราจะเห็นภาพของคนคนนี้ชัดขึ้น ไม่ใช่แค่อยากได้ &ldquo;Full-stack Developer&rdquo;</p>
+<p>ข้อมูลพวกนี้จะมีประโยชน์กับรีครุตเตอร์ แนะนำให้บอกเค้าให้ละเอียดที่สุดครับ จะช่วยกรองคนออกไปได้มาก ไม่ต้องเสียเวลามาสัมภาษณ์คนที่ไม่ใช่ชัวร์ๆ</p>
+<h1 id=2-หาคนทมความรดานนนมาสมภาษณ>2. หาคนที่มีความรู้ด้านนั้นมาสัมภาษณ์</h1>
+<p>หลังจากเข้าใจความต้องการเรียบร้อย คำแนะนำแรกที่ผมให้กับน้องเค้าคือ</p>
+<blockquote>
+<p>&ldquo;ถ้าทีมไม่มีคน แถวนั้นทีมข้างๆมีโปรแกรมเมอร์ที่เก่งๆไหม จะได้ให้เค้ามาเช็ค Technical Skill ให้&rdquo;</p>
+</blockquote>
+<p>สมมติว่าเราจะจ้างนักบัญชี เราคงไม่ให้ผู้จัดการฝ่ายขายมาเป็นคนสัมภาษณ์ใช่ไหมครับ?</p>
+<p>แต่กลับกลายเป็นว่า เรามักจะเอาผู้จัดการที่ไม่เคยเขียนโค้ดมาสัมภาษณ์โปรแกรมเมอร์กัน</p>
+<p>ฝั่ง Project manager เองอาจจะเช็คเรื่องความสามารถการเรียนรู้ การเจรจาต่อรอง การแก้ปัญหา การทำงานร่วมกับคนอื่น หรือแม้แต่ความเหมาะสมกับวัฒนธรรมองค์กร</p>
+<p>แต่ทักษะเฉพาะทางอย่างการเขียนโปรแกรม อันนี้ต้องให้ผีมาเห็นผีด้วยกันเอง</p>
+<p>เสร็จแล้วเอาข้อมูลจากทั้งสองด้านมาใช้ในการตัดสินใจ</p>
+<p>แต่ผีก็ไม่ได้เห็นผีด้วยกันหมด อย่างกรณีที่น้องเค้ายกตัวอย่างมา เค้าต้องการคนที่เป็น Senior ในระดับหนึ่ง จะให้เอาโปรแกรมเมอร์ Junior มากๆมาสัมภาษณ์เลยก็คงไม่เหมาะ ต้องหาคนที่มีความรู้มากกว่า หรือใกล้ๆกันมาสัมภาษณ์</p>
+<p>อย่างไรก็ตาม เคสของน้องนี้มีกรณีที่น่าสนใจมาก คือเค้าไม่สามารถให้ทีมข้างๆช่วยได้ด้วยเหตุผลทางการเมือง เราเลยต้องมีข้อต่อไป</p>
+<h1 id=3-ทำการบานเกยวกบหวขอทตองคย>3. ทำการบ้านเกี่ยวกับหัวข้อที่ต้องคุย</h1>
+<p>ถ้าต้องสัมภาษณ์เอง อย่างแรกที่สำคัญที่สุด คือต้องคุยกับโปรแกรมเมอร์ให้รู้เรื่องครับ</p>
+<p>เราต้องคุยในหัวข้อของเค้า ด้วยศัพท์ต่างๆที่เราไม่ถนัด ถ้าไม่เตรียมตัวอะไรไปเลยจะงงมาก กลายเป็นสัมภาษณ์แล้วไม่ได้อะไร</p>
+<p>อย่างกรณีนี้ ควรจะอ่านไปก่อนว่า Agile, DevOps, Microservices พวกนี้คืออะไร Best Practices ที่นิยมทำกันมีอะไรบ้าง</p>
+<p>ส่วนเรื่องพวกชื่อเทคโนโลยีหรือเฟรมเวิร์คต่างๆที่เค้าเขียนไว้ใน Resume อย่างน้อยก็ต้องรู้ว่าเอาไว้ใช้ทำอะไร ตรงนี้จะหาข้อมูลที่เขียนให้เข้าใจง่ายๆยากมาก ผมแนะนำว่าให้ถามเพื่อนที่เป็นโปรแกรมเมอร์ ให้เค้าอธิบายแบบให้คนทั่วไปฟังเข้าใจ</p>
+<p>แต่ต่อให้เราเข้าใจ เราจะทดสอบความรู้พวกนี้ได้อย่างไร เพราะอีกฝ่ายมีความรู้มากกว่า?</p>
+<h1 id=4-ดทหลกฐานมากกวาลมปาก>4. ดูที่หลักฐานมากกว่าลมปาก</h1>
+<p>ถ้าเราไม่มีวิธีเช็คความรู้ วิธีที่ใกล้เคียงที่สุดคือหาหลักฐาน (หรือผลงาน) ที่เราสามารถเข้าใจได้มาเช็คแทนครับ</p>
+<p>ไม่ว่าเค้าจะพูดอะไรมา ตั้งสมมติฐานไว้ก่อนว่า</p>
+<blockquote>
+<p>&ldquo;Incompetent unless proven with evidence&rdquo; &ndash; ทำไม่ได้ถ้าไม่มีหลักฐานว่าทำได้</p>
+</blockquote>
+<p>เวลาเช็คหลักฐานพวกนี้ เช็คด้วยนะครับว่าเค้าทำจริงๆแค่ส่วนไหน บางทีเค้าอาจจะทำแค่ส่วนที่เล็กๆก็ได้</p>
+<p>กรณีของนี้ ต้องการ Full-Stack</p>
+<p>ส่วน Frontend นี้น่าจะมีหลักฐานให้ดูชัดเจนเลย ก็จะง่ายหน่อย แต่ต้องระวังเรื่องของคุณภาพของงาน เช็คด้วยว่าเวลาเขียนโค้ด เค้าคิดถึงเรื่องการดูแลโค้ดหลังส่งมอบแค่ไหน มีเขียนเทสต์รึเปล่า คนถัดไปมาทำงานจะเข้าใจโค้ดพวกนี้ได้ยังไง</p>
+<p>บางกรณี หลักฐานอาจจะไม่สามารถจับต้องได้</p>
+<p>วิธีหนึ่งคือลองเลือกงานที่ตัวเองเคยทำกับโปรแกรมเมอร์มาก่อน แล้วรู้สึกว่าเข้าใจปัญหานั้นๆดี เสร็จแล้วลองยกมาถามเค้าดู อาจจะใช้เทียบกันได้คร่าวๆว่าโปรแกรมเมอร์คนนี้แก้ปัญหานั้นได้ดีแค่ไหน แต่ก็อีกแหละครับ อธิบายได้นี่ไม่ได้แปลว่าเขียนโค้ดได้</p>
+<p>หรือถ้าบางคนอ้างถึงงานที่เราดูผลชัดเจนไม่ได้ เช่น Optimize backend performance ได้ 50% กรณีนี้ก็ไม่มีทางเลือก ต้องถามเจาะให้ลึกแล้ววิเคราะห์ดูว่าเค้ารู้จริงแค่ไหน เช่น</p>
+<ol>
+<li>ปัญหาที่พยายามแก้คืออะไร ความยากอยู่ที่ตรงไหน</li>
+<li>ปัญหานี้ใช้เวลานานแค่ไหนในการแก้ และสร้าง Impact ให้กับระบบทั้งระบบได้แค่ไหน (เพื่อทำความเข้าใจขนาดของปัญหา ปกติคนที่ได้แก้ปัญหาขนาดใหญ่ๆมักจะต้องมีความสามารถสูงในทีม)</li>
+<li>แก้ไขปัญหานี้ด้วยวิธีอะไร</li>
+<li>ทำไมถึงเลือกแก้ไขด้วยวิธีนี้ มีวิธีอื่นไหม</li>
+<li>คิดว่าโปรแกรมเมอร์คนอื่นจะแก้ปัญหานี้ได้เหมือนกันไหม เพราะอะไร</li>
+</ol>
+<p>ถ้าเจอคนที่ไม่รู้จริง เค้าจะไม่สามารถตอบคำถามที่ลงลึกได้ เวลาสัมภาษณ์จะรู้สึกได้ถึงความกระอักกระอ่วนเวลาตอบ</p>
+<p>พูดกันตรงๆ กรณีพวกนี้ ถ้าคนสัมภาษณ์ไม่เคยทำโปรเจ็คที่เกี่ยวข้องกับเรื่องพวกนี้เลย จะเข้าใจยากมากครับ ต้องตอบได้ลึกแค่ไหนก็จะบอกไม่ถูก</p>
+<p>งั้นลองข้อถัดไปกัน เผื่อจะช่วยได้</p>
+<h1 id=5-เชค-reference>5. เช็ค Reference</h1>
+<p>ข้อสุดท้าย ถ้ามีส่วนสำคัญที่เราวัดไม่ได้ แต่สำคัญจริงๆ อาจจะต้องใช้วิธีเช็คกับ Reference จากที่ทำงานเก่าๆของเค้าครับ</p>
+<p>หลังจบการสัมภาษณ์ อาจจะขอ Contact จากที่ทำงาน 2-3 ที่มา (เราเป็นคนเลือกเลยครับว่าที่ไหน อย่าให้เค้าเลือกเอง)</p>
+<p>เก็บข้อมูลจากการสัมภาษณ์ให้ดีๆว่าเค้าทำงานอะไรบ้าง แล้วนำไป Cross-check กับ Reference ของเค้า ดูว่าตรงกับที่เล่าให้ฟังระหว่างสัมภาษณ์รึเปล่า โดยเฉพาะผลลัพธ์ว่าเป็นอย่างไร เสร็จแล้วไป</p>
+<h1 id=สรป>สรุป</h1>
+<p>หวังว่าจะพอเห็นภาพมากขึ้นนะครับ</p>
+<p>การจะจ้างคนที่มีความรู้ในเรื่องที่เราไม่รู้เป็นเรื่องที่ยากมากครับ เราเองก็ไม่มีคฑาวิเศษที่จะช่วยอะไรได้ วิธีการที่ดีที่สุดก็คือการกำหนดความต้องการของเราให้ชัดเจน แล้วให้โปรแกรมเมอร์ที่มีประสบการณ์ช่วยเช็คความรู้ด้านเทคนิค</p>
+<p>หากไม่ได้ ก็ใช้วิธีเช็คจากผลงาน หรือ Reference เอา วิธีพวกนี้จะยากและใช้เวลามากกว่า แต่หากต้องการคัดคนให้ดีจริงๆ เลือกผิดไม่ได้เหมือนในกรณีนี้ ก็ต้องละเอียดหน่อยครับ</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>Author</span>
+<span class=item-content>ijemmy</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>LastMod</span>
+<span class=item-content>
+2018-09-16
+</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>License</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/interview/>interview</a>
+<a href=/tags/recruitment/>recruitment</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/28-deployment-methods/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">Deploy ระบบอย่างไรไม่ให้ล่ม</span>
+<span class="prev-text nav-mobile">Prev</span>
+</a>
+<a class=next href=/post/26-serverless-architecture/>
+<span class="next-text nav-default">มาทำความรู้จักกับ Serverless กัน</span>
+<span class="next-text nav-mobile">Next</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
+<a href=http://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+Powered by <a class=hexo-link href=https://gohugo.io>Hugo</a>
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+Theme -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<span class=copyright-year>
+&copy;
+2017 -
+2021<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>
