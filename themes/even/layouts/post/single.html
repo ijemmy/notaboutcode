@@ -1,5 +1,4 @@
 {{ define "content" -}}
-  {{ $lang := .Site.Data.even.default -}}
   <article class="post">
     <!-- post-header -->
     <header class="post-header">
@@ -10,71 +9,60 @@
         {{ with .Params.categories -}}
           <div class="post-category">
             {{ range . -}}
-              <a href="{{ "categories" | relURL }}/{{ . | urlize }}/">{{ . }}</a>
-            {{- end }}
+              <a href="{{ "categories" | relLangURL }}/{{ . | urlize }}/"> {{ . }} </a>
+            {{ end -}}
           </div>
         {{- end }}
-        {{ if .Site.Params.moreMeta -}}
-        <span class="more-meta"> {{ printf $lang.posts.header.wordCount .WordCount }} </span>
-        <span class="more-meta"> {{ printf $lang.posts.header.readingTime .ReadingTime }} </span>
+        {{- if .Site.Params.moreMeta }}
+          <span class="more-meta"> {{ T "wordCount" .WordCount }} </span>
+          <span class="more-meta"> {{ T "readingTime" .ReadingTime }} </span>
+        {{- end }}
+        {{ if and .Site.Params.busuanzi.enable .Site.Params.busuanzi.pagePV -}}
+          {{ $valueSpan := printf `<span id="busuanzi_value_page_pv"><img src="%s" alt="spinner.svg"/></span>` ("img/spinner.svg" | relURL) -}}
+          <span id="busuanzi_container_page_pv" class="more-meta"> {{ printf (T "pagePV") $valueSpan | safeHTML }} </span>
         {{- end }}
       </div>
     </header>
 
     <!-- TOC -->
-    {{ partial "post/toc.html" . }}
+    {{- partial "post/toc.html" . -}}
+
+    <!-- Outdated Info Warning -->
+    {{- partial "post/outdated-info-warning.html" . -}}
 
     <!-- Content -->
     <div class="post-content">
       {{ .Content }}
-
-      <div  class="fb-page"
-            data-href="https://www.facebook.com/notaboutcode/"
-            data-tabs=""
-            data-small-header="false"
-            data-adapt-container-width="true"
-            data-hide-cover="false"
-            data-show-facepile="true">
-
-            <blockquote cite="https://www.facebook.com/notaboutcode/" class="fb-xfbml-parse-ignore">
-              <a href="https://www.facebook.com/notaboutcode/">Not about code</a>
-            </blockquote>
-      </div>
     </div>
 
-    <!-- Facebook root -->
-    <div id="fb-root"></div>
-
     <!-- Copyright -->
-    {{ partial "post/copyright.html" . }}
+    {{- partial "post/copyright.html" . -}}
 
     <!-- Reward -->
-    {{ partial "post/reward.html" . }}
+    {{- partial "post/reward.html" . -}}
 
     <footer class="post-footer">
       {{ with .Params.tags -}}
         <div class="post-tags">
-          {{ range . }}
-          <a href="{{ "tags" | relURL }}/{{ . | urlize }}/">{{ . }}</a>
-          {{ end }}
+          {{ range . -}}
+            <a href="{{ "tags" | relLangURL }}/{{ . | urlize }}{{ if $.Site.Params.uglyURLs }}.html{{ else }}/{{ end }}">{{ . }}</a>
+          {{ end -}}
         </div>
-      {{- end }}
+      {{- end -}}
 
-      <div class="fb-comments"
-           data-numposts="5"></div>
       <!-- Post Pagination -->
       <nav class="post-nav">
-        {{ with .NextInSection }}
-          <a class="prev" href="{{ .URL }}">
+        {{ with .NextInSection -}}
+          <a class="prev" href="{{ .RelPermalink }}">
             <i class="iconfont icon-left"></i>
             <span class="prev-text nav-default">{{ .Title }}</span>
-            <span class="prev-text nav-mobile">{{ $lang.posts.prev_post }}</span>
+            <span class="prev-text nav-mobile">{{ T "prevPost" }}</span>
           </a>
         {{- end }}
-        {{ with .PrevInSection }}
-          <a class="next" href="{{ .URL }}">
+        {{ with .PrevInSection -}}
+          <a class="next" href="{{ .RelPermalink }}">
             <span class="next-text nav-default">{{ .Title }}</span>
-            <span class="prev-text nav-mobile">{{ $lang.posts.next_post }}</span>
+            <span class="next-text nav-mobile">{{ T "nextPost" }}</span>
             <i class="iconfont icon-right"></i>
           </a>
         {{- end }}
