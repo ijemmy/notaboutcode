@@ -8,7 +8,7 @@ categories: ["Continuous Delivery"]
 author: "ijemmy"
 ---
 
-![Photo by Jeremy Cai, from Unsplash](img/covers/walk-desert-01.jpg)
+![Photo by Jeremy Cai, from Unsplash](/img/covers/walk-desert-01.jpg)
 
 ผมเคยคิดว่าการทำ CI เป็นเรื่องง่ายๆ และเป็นเบสิคของทุกทีมที่ต้องปฏิบัติกัน แต่ในความเป็นจริง น้อยทีมมากที่จะทำออกมาได้ดี เพราะมันมีรายละเอียดยุ่บยั่บที่มากกว่าแค่เรื่องทางเทคนิค
 

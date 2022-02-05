@@ -7,7 +7,7 @@ tags: ["interview", "recruitment"]
 categories: ["career"]
 ---
 
- ![Photo by Alejandro Escamilla on Unsplash](img/covers/meeting-02.jpg)
+ ![Photo by Alejandro Escamilla on Unsplash](/img/covers/meeting-02.jpg)
 
 จะได้เขียนไหมเนี่ย
 <!--more-->

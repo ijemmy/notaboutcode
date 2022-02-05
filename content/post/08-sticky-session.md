@@ -9,7 +9,7 @@ categories: ["System Design"]
 
 
 
-![Photo by Denys Nevozhai, from Unsplash.com](img/covers/traffic-01.jpg)
+![Photo by Denys Nevozhai, from Unsplash.com](/img/covers/traffic-01.jpg)
 
 ใครที่เคยใช้ Load Balancer (LB) คงจะเคยได้ยินคำว่า Sticky Session (หรือ Session Affinity) กันมาบ้าง
 

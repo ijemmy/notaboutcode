@@ -7,7 +7,7 @@ tags: ["api", "design", "web service"]
 categories: ["System Design"]
 ---
 
- ![Photo by Iker Urteaga on Unsplash](img/covers/lego-01.jpg)
+ ![Photo by Iker Urteaga on Unsplash](/img/covers/lego-01.jpg)
 
 > "APIs, like diamonds, are forever" -- Xebia Essentials
 

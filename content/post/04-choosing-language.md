@@ -7,7 +7,7 @@ tags: ["Language"]
 categories: ["Technical Leadership"]
 ---
 
-![Photo by Nick Morris, from Unsplash.com](img/covers/new-project-01.jpg)
+![Photo by Nick Morris, from Unsplash.com](/img/covers/new-project-01.jpg)
 
 เมื่อวันก่อน นั่งคุยกับน้องคนหนึ่งที่กำลังจะขึ้นโปรเจ็คใหม่ แต่ลังเลว่าจะใช้ภาษาอะไรดี
 

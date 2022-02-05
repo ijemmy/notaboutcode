@@ -7,7 +7,7 @@ tags: ["conflict", "technical", "meeting", "design"]
 categories: ["Technical Leadership"]
 ---
 
-![Photo by rawpixel on Unsplash](img/covers/fight-01.png)
+![Photo by rawpixel on Unsplash](/img/covers/fight-01.png)
 
 เคยตกอยู่ในสถานการณ์ที่คนในห้องประชุมเถียงเรื่องเดียวกันติดต่อเป็นระยะเวลา 30 นาทีแล้วไม่ไปไหนไหมครับ?
 

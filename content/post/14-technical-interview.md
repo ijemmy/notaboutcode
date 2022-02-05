@@ -12,7 +12,7 @@ categories: ["Technical Leadership"]
 บทความนี้จะพูดถึงรูปแบบในการวัด Technical Skill กันบ้าง โดยผมจะยกตัวอย่างวิธีการวัด Technical Skill ต่างๆที่ผมเคยเจอมา ซึ่งแต่ละแบบก็จะมีข้อดีข้อเสียแตกต่างกัน
 
 
- ![Photo by Helloquence on Unsplash](img/covers/meeting-03.jpg)
+ ![Photo by Helloquence on Unsplash](/img/covers/meeting-03.jpg)
 
 <!--more-->
 

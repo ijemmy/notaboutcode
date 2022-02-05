@@ -7,7 +7,7 @@ tags: ["interview", "recruitment", "behavioral"]
 categories: ["Technical Leadership"]
 ---
 
- ![Photo by Alejandro Escamilla on Unsplash](img/covers/meeting-02.jpg)
+ ![Photo by Alejandro Escamilla on Unsplash](/img/covers/meeting-02.jpg)
 
 ในบทความที่แล้ว เราคุยกันไปในเรื่องกระบวนการสัมภาษณ์งานโดยรวม (Process)
 

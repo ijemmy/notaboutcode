@@ -7,7 +7,7 @@ tags: ["distributed system", "design"]
 categories: ["System Design"]
 ---
 
-![Photo by Joanna Kosinska on Unsplash](img/covers/photo-01.jpg)
+![Photo by Joanna Kosinska on Unsplash](/img/covers/photo-01.jpg)
 
 หัวข้อด้าน Distributed System เป็นอะไรที่สนุก แต่เข้าใจยากมาก
 

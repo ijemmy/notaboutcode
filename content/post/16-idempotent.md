@@ -7,7 +7,7 @@ tags: ["api", "design", "web service"]
 categories: ["System Design"]
 ---
 
- ![Photo by William Iven on Unsplash](img/covers/pay-01.jpg)
+ ![Photo by William Iven on Unsplash](/img/covers/pay-01.jpg)
 
 ใครเคยเรียกใช้งานเซอร์วิซครั้งเดียว (เช่น การโอนเงิน สั่งซื้อของ ฯลฯ) แล้วเจอ Transaction ตัดซ้ำสองครั้งไหมครับ?
 

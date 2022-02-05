@@ -7,7 +7,7 @@ tags: ["Learning"]
 categories: ["Career"]
 ---
 
-![Photo by Andy Beales on Unsplash](img/covers/run-01.jpg)
+![Photo by Andy Beales on Unsplash](/img/covers/run-01.jpg)
 
 พอโปรแกรมเมอร์มีประสบการณ์มากขึ้น ก็จะค้นพบว่าตัวเองมีสิ่งที่ยังไม่รู้มากขึ้น
 

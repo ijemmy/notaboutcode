@@ -7,7 +7,7 @@ tags: ["interview", "recruitment", "process", "pitfalls"]
 categories: ["Technical Leadership"]
 ---
 
- ![Photo by Nik MacMillan on Unsplash](img/covers/meeting-01.jpg)
+ ![Photo by Nik MacMillan on Unsplash](/img/covers/meeting-01.jpg)
 
 ผมมีงานอันน่าท้าทายมาให้ทุกคนลองทำครับ
 

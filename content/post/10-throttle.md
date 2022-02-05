@@ -8,7 +8,7 @@ categories: ["System Design"]
 ---
 
 
- ![Photo by Ksenia Kudelkina, from Unsplash.com](img/covers/limit-01.jpg)
+ ![Photo by Ksenia Kudelkina, from Unsplash.com](/img/covers/limit-01.jpg)
 
 
 ลองนึกภาพว่าเรามีระบบที่ถูกออกแบบเป็น Service-Oriented Architecture (SOA)
