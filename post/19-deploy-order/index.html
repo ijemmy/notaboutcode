@@ -130,13 +130,13 @@
 </div>
 </div>
 <div class=post-content>
-<p><img src=/img/covers/child-01.jpg alt="Photo by Jelleke Vanooteghem on Unsplash"></p>
+<p><img src=img/covers/child-01.jpg alt="Photo by Jelleke Vanooteghem on Unsplash"></p>
 <p>ความน่ารักของ Web Developer สมัยนี้คือมีการแยก Frontend กับ Backend ออกอย่างชัดเจน ถ้าใครย้อนกลับไปสมัยสิบปีก่อน เราไม่มีตำแหน่ง Frontend Developer ด้วยซ้ำ มีแต่เรียกรวมๆว่า Web Developer</p>
 <p>การแยกกันของโค้ดสองส่วน ทำให้การ Deployment ทำแยกกันด้วย คำถามที่เกิดขึ้นคือ เวลาจะ Deploy เราจะเอา Frontend ขึ้นก่อน หรือ Backend ขึ้นก่อนดี</p>
 <p>แม้จะเป็นคำถามง่ายๆ แต่รายละเอียดข้างในนั้นค่อนข้างเยอะ ถ้าไม่คิดให้ถี่ถ้วน อาจจะเจออาการเว็บพังขณะ Deploy เป็นประจำ</p>
 <p>บทความนี้จะมาวิเคราะห์เจาะลึกกันในเรื่องนี้</p>
 <h1 id=ทำความเขาใจปญหา>ทำความเข้าใจปัญหา</h1>
-<p><img src=/img/diagrams/19-deploy-order/case-01.jpg alt="มี Static File Server แยกต่างหาก"></p>
+<p><img src=img/diagrams/19-deploy-order/case-01.jpg alt="มี Static File Server แยกต่างหาก"></p>
 <p>จากรูปแรก สมมติว่าเรามี Static File Server แยกไปต่างหาก การ Deploy Frontend กับ Backend ของเราจะแยกกันชัดเจน (JavaScript/CSS/HTML ไปเซอร์เวอร์กลุ่มหนึ่ง ส่วน Backend Code ก็ไปอีกกลุ่มหนึ่ง)</p>
 <blockquote>
 <p>สำหรับใครที่ใช้ Cloud และแยก Static File ไปใส่ไว้ในอีก Service หนึ่ง อันนี้ก็จะหน้าตาคล้ายกัน แค่่ Request ของผู้ใช้ไม่ได้ผ่าน Reverse Proxy ของเรา แต่ตรงเข้า Cloud เลย</p>
@@ -204,7 +204,7 @@
 <h1 id=ถาเราลงทง-frontend-และ-backend-พรอมๆกนละ>ถ้าเราลงทั้ง Frontend และ Backend พร้อมๆกันล่ะ?</h1>
 <p>&ldquo;ทำได้ด้วยเหรอ?&rdquo;</p>
 <p>&ldquo;ทำได้สิ ก็เอาทุกอย่างใส่บน Server แล้ว Deploy พร้อมๆกันรวดเดียวเลยไง ดูนะ&rdquo;</p>
-<p><img src=/img/diagrams/19-deploy-order/case-02.jpg alt=ใส่ทุกอย่างลงบนเซอร์เวอร์เดียว></p>
+<p><img src=img/diagrams/19-deploy-order/case-02.jpg alt=ใส่ทุกอย่างลงบนเซอร์เวอร์เดียว></p>
 <p>อันนี้ดูเผินๆ อาจจะรอดจากปัญหา &ldquo;ไก่กับไข่&rdquo; ไปได้ เพราะหากเปลี่ยนทุกอย่างพร้อมกัน ผู้ใช้ที่เข้าเว็บก็จะได้ไฟล์ JavaScript ใหม่ แล้วเรียกใช้ API อันใหม่ได้เลย</p>
 <p>แต่เดี๋ยวก่อนนนน มันยังมีช่องว่างอยู่</p>
 <ol>
@@ -418,7 +418,7 @@ Theme -
 <span class=copyright-year>
 &copy;
 2017 -
-2021<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
 </span>
 </div>
 </footer>
