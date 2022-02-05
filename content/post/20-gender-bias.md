@@ -7,7 +7,7 @@ tags: ["Equality", "Leadership", "Gender Bias"]
 categories: ["Technical Leadership"]
 ---
 
-![Photo by Brandon Day on Unsplash](/img/covers/child-02.jpg)
+![Photo by Brandon Day on Unsplash](img/covers/child-02.jpg)
 
 เผอิญช่วงนี้กลับมาไทย ได้ไปร่วมงาน [DjangoGirls Bangkok](https://djangogirls.org/bangkok/)  มา และฟีดในเฟสบุ้คที่โผล่มาหาบ่อยที่สุดก็เป็นเรื่องที่เกี่ยวข้องพอดี
 

@@ -7,7 +7,7 @@ tags: ["career", "personal development"]
 categories: ["Career"]
 ---
 
-![Photo by Michel Bosma on Unsplash](/img/covers/bug-01.jpg)
+![Photo by Michel Bosma on Unsplash](img/covers/bug-01.jpg)
 
 ช่วงนี้หาตำแหน่งใหม่
 <!--more-->

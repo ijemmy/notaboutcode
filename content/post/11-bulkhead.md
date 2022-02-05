@@ -7,7 +7,7 @@ tags: ["reliability", "design", "bulkhead"]
 categories: ["System Design"]
 ---
 
- ![Photo by Abraham Wiebe, from Unsplash.com](/img/covers/ship-01.jpg)
+ ![Photo by Abraham Wiebe, from Unsplash.com](img/covers/ship-01.jpg)
 
 Bulkhead เป็นเทคนิคการออกแบบที่เหมาะกับ Critical System คือ ถ้าล่มปุ๊บ คนในองค์กรจะไม่สามารถทำงานต่อได้เลย
 

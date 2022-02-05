@@ -7,7 +7,7 @@ tags: ["Culture", "Process", "Agile"]
 categories: ["Software Engineering"]
 ---
 
-![Photo by rawpixel on Unsplash](/img/covers/collaboration-01.jpg)
+![Photo by rawpixel on Unsplash](img/covers/collaboration-01.jpg)
 
 ผมรู้จักกับ Agile (อไจล์) เมื่อสิบกว่าปีที่แล้ว ตอนนั้นก็ไม่รู้หรอกว่ามันจะป๊อบขนาดนี้ สมัยนั้นอย่าพูดถึงอไจล์เลย ทีมไหนทำ Unit Testing ก็ถือว่าหรูแล้ว
 

@@ -7,7 +7,7 @@ tags: ["career", "learning"]
 categories: ["Career "]
 ---
 
-![Photo by Jake Hills, from Unsplash.com](/img/covers/career-01.jpg)
+![Photo by Jake Hills, from Unsplash.com](img/covers/career-01.jpg)
 
 ความยากลำบากของโปรแกรมเมอร์สมัยนี้คือมีเรื่องที่ต้องเรียนรู้เยอะมาก...
 

@@ -7,7 +7,7 @@ tags: ["system design", "architecture"]
 categories: ["System Design"]
 ---
 
-![Photo by Immo Wegmann on Unsplash](/img/covers/scale-01.jpg)
+![Photo by Immo Wegmann on Unsplash](img/covers/scale-01.jpg)
 
 เมื่อเดือนที่แล้ว มีโอกาสกลับไปเป็น Guest Speaker ที่ภาค ในวิชา System Analysis and Design
 

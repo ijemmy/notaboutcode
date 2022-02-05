@@ -7,7 +7,7 @@ tags: ["reliability", "availability", "retry", "throttling", "design", "microser
 categories: ["System Design"]
 ---
 
-![Photo by Nick Morris, from Unsplash.com](/img/covers/spiral-stairs-01.jpg)
+![Photo by Nick Morris, from Unsplash.com](img/covers/spiral-stairs-01.jpg)
 
 วันนี้นั่งคุยกับเพื่อนเรื่อง Retry รู้สึกว่าเป็นหัวข้อที่น่าสนใจดี
 

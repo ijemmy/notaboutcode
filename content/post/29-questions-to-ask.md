@@ -7,7 +7,7 @@ tags: ["career", "personal development"]
 categories: ["Career"]
 ---
 
-![Photo by rawpixel on Unsplash](/img/covers/interview-02.png)
+![Photo by rawpixel on Unsplash](img/covers/interview-02.png)
 
 เมื่อวานนั่งคุยกับเพื่อนเรื่องเงินเดือนโปรแกรมเมอร์ ทำให้นึกถึงบล็อคนึงที่เขียนดราฟต์ไว้เมื่อปีที่แล้ว ว่าด้วยเรื่องการประเมินบริษัทที่จะทำงานด้วย วันนี้เอามาแชร์ให้ฟังครับ
 

@@ -7,7 +7,7 @@ tags: ["CI", "CD", "Testing"]
 categories: ["Continuous Delivery"]
 ---
 
-![Photo by Michel Bosma on Unsplash](/img/covers/bug-01.jpg)
+![Photo by Michel Bosma on Unsplash](img/covers/bug-01.jpg)
 
 ช่วงนี้ทีมขึ้นโปรเจ็คใหม่ ผมต้องคุยกับ QA Engineer เกี่ยวกับเรื่อง Testing Strategy บ่อยๆ
 

@@ -7,7 +7,7 @@ tags: ["Architecture", "Serverless"]
 categories: ["Software Engineering"]
 ---
 
-![Photo by Nicolas J Leclercq on Unsplash](/img/covers/aurora-01.jpg)
+![Photo by Nicolas J Leclercq on Unsplash](img/covers/aurora-01.jpg)
 
 ช่วงสองปีที่ผ่านมา แนวคิดหนึ่งที่ผมจับตาดูอยู่คือเรื่องของ Serverless
 

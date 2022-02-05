@@ -7,7 +7,7 @@ tags: ["CI", "CD", "Testing"]
 categories: ["Continuous Delivery"]
 ---
 
-![Photo by Chris Liverani on Unsplash](/img/covers/test-01.jpg)
+![Photo by Chris Liverani on Unsplash](img/covers/test-01.jpg)
 
 จากประสบการณ์ส่วนตัว End-to-End(E2E) Tests เป็นตัวที่สร้างความปวดหัวให้กับผมอันดับที่หนึ่งเลย รองลงมาก็ System Integration Tests ตอนเขียนบทความนี้ฉบับแรก เลยตัดสินใจแยกเทสต์สองประเภทนี้ออกมาเขียนแยกออกมา จะได้ลงรายละเอียดได้
 

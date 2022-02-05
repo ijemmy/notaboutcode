@@ -7,7 +7,7 @@ tags: ["CI", "CD"]
 categories: ["Continuous Delivery"]
 ---
 
-![Photo by Ilya Pavlov, from Unsplash.com](/img/covers/code-01.jpg)
+![Photo by Ilya Pavlov, from Unsplash.com](img/covers/code-01.jpg)
 
 สืบเนื่องจาก[บันทึกที่แล้ว](/post/01-ci-journey/) ผมได้อธิบายไว้ ว่าหลังจากทีมเริ่มมี CI Server แล้ว ทีมก็มักจะเริ่มใส่เครื่องมือหลายๆอย่างลงไปเพื่อทำการ Automation  และควบคุมคุณภาพของโค้ด
 

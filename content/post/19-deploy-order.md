@@ -7,7 +7,7 @@ tags: ["CD", "Deployment", "Frontend"]
 categories: ["Continuous Delivery"]
 ---
 
-![Photo by Jelleke Vanooteghem on Unsplash](/img/covers/child-01.jpg)
+![Photo by Jelleke Vanooteghem on Unsplash](img/covers/child-01.jpg)
 
 ความน่ารักของ Web Developer สมัยนี้คือมีการแยก Frontend กับ Backend ออกอย่างชัดเจน ถ้าใครย้อนกลับไปสมัยสิบปีก่อน เราไม่มีตำแหน่ง Frontend Developer ด้วยซ้ำ มีแต่เรียกรวมๆว่า Web Developer
 
@@ -21,7 +21,7 @@ categories: ["Continuous Delivery"]
 
 # ทำความเข้าใจปัญหา
 
-![มี Static File Server แยกต่างหาก](/img/diagrams/19-deploy-order/case-01.jpg)
+![มี Static File Server แยกต่างหาก](img/diagrams/19-deploy-order/case-01.jpg)
 
 จากรูปแรก สมมติว่าเรามี Static File Server แยกไปต่างหาก การ Deploy Frontend กับ Backend ของเราจะแยกกันชัดเจน (JavaScript/CSS/HTML ไปเซอร์เวอร์กลุ่มหนึ่ง ส่วน Backend Code ก็ไปอีกกลุ่มหนึ่ง)
 
@@ -78,7 +78,7 @@ categories: ["Continuous Delivery"]
 
 "ทำได้สิ ก็เอาทุกอย่างใส่บน Server แล้ว Deploy พร้อมๆกันรวดเดียวเลยไง ดูนะ"
 
-![ใส่ทุกอย่างลงบนเซอร์เวอร์เดียว](/img/diagrams/19-deploy-order/case-02.jpg)
+![ใส่ทุกอย่างลงบนเซอร์เวอร์เดียว](img/diagrams/19-deploy-order/case-02.jpg)
 
 อันนี้ดูเผินๆ อาจจะรอดจากปัญหา "ไก่กับไข่" ไปได้ เพราะหากเปลี่ยนทุกอย่างพร้อมกัน ผู้ใช้ที่เข้าเว็บก็จะได้ไฟล์ JavaScript ใหม่ แล้วเรียกใช้ API อันใหม่ได้เลย
 

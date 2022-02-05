@@ -7,7 +7,7 @@ tags: ["CI", "CD", "Testing"]
 categories: ["Continuous Delivery"]
 ---
 
-![Photo by Sharon McCutcheon on Unsplash](/img/covers/candle-01.jpg)
+![Photo by Sharon McCutcheon on Unsplash](img/covers/candle-01.jpg)
 
 ปกติผมไม่ค่อยเชื่อเรื่องบาปบุญเท่าไร แต่เวลาเห็นโปรเจ็คไม่เขียนเทสต์ หรือเขียนเทสต์ไม่ดี ผมพูดเรื่องบาปบุญขึ้นมาทันที
 
