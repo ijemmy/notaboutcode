@@ -16,15 +16,15 @@
  จะเทสต์อะไรบ้าง จะเทสต์ด้วยเทสต์ชนิดไหน (ex. Unit, Component, Integration) เราจะใช้เทสต์แต่ละชนิดในกรณีไหนบ้าง  พอคุยกันเรื่องนี้เยอะๆ ก็ค้นพบหัวข้อที่ 3 เป็นเรื่องที่ซับซ้อนพอควร หนึ่งในเรื่องที่ตกผลึกก็คือคุณสมบัติของเทสต์แต่ละชนิด ซึ่งเป็นเรื่องที่จะนำมาเล่าในบทความนี้
 "><meta name=keywords content="Hugo,theme,even">
 <meta name=generator content="Hugo 0.89.4 with theme even">
-<link rel=canonical href=https://ijemmy.github.io/notaboutcode/post/18-test-properties/>
-<link rel=apple-touch-icon sizes=180x180 href=/notaboutcode/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=/notaboutcode/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/notaboutcode/favicon-16x16.png>
-<link rel=manifest href=/notaboutcode/manifest.json>
-<link rel=mask-icon href=/notaboutcode/safari-pinned-tab.svg color=#5bbad5>
-<link href=/notaboutcode/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=canonical href=https://www.notaboutcode.com/post/18-test-properties/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
 <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
-<link rel=stylesheet href=/notaboutcode/css/custom.css>
+<link rel=stylesheet href=/css/custom.css>
 <meta property="og:title" content="คุณสมบัติของเทสต์ในการกำหนด Testing Strategy">
 <meta property="og:description" content="
 ช่วงนี้ทีมขึ้นโปรเจ็คใหม่ ผมต้องคุยกับ QA Engineer เกี่ยวกับเรื่อง Testing Strategy บ่อยๆ
@@ -36,7 +36,7 @@
 
 พอคุยกันเรื่องนี้เยอะๆ ก็ค้นพบหัวข้อที่ 3 เป็นเรื่องที่ซับซ้อนพอควร  หนึ่งในเรื่องที่ตกผลึกก็คือคุณสมบัติของเทสต์แต่ละชนิด ซึ่งเป็นเรื่องที่จะนำมาเล่าในบทความนี้">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://ijemmy.github.io/notaboutcode/post/18-test-properties/"><meta property="article:section" content="post">
+<meta property="og:url" content="https://www.notaboutcode.com/post/18-test-properties/"><meta property="article:section" content="post">
 <meta property="article:published_time" content="2018-01-12T12:04:02+07:00">
 <meta property="article:modified_time" content="2018-01-12T12:04:02+07:00">
 <meta itemprop=name content="คุณสมบัติของเทสต์ในการกำหนด Testing Strategy">
@@ -67,7 +67,7 @@
 <body>
 <div id=mobile-navbar class=mobile-navbar>
 <div class=mobile-header-logo>
-<a href=/notaboutcode/ class=logo>Not About Code</a>
+<a href=/ class=logo>Not About Code</a>
 </div>
 <div class=mobile-navbar-icon>
 <span></span>
@@ -77,15 +77,15 @@
 </div>
 <nav id=mobile-menu class="mobile-menu slideout-menu">
 <ul class=mobile-menu-list>
-<a href=/notaboutcode/>
+<a href=/>
 <li class=mobile-menu-item>Home</li>
-</a><a href=/notaboutcode/post/>
+</a><a href=/post/>
 <li class=mobile-menu-item>Archives</li>
-</a><a href=/notaboutcode/tags/>
+</a><a href=/tags/>
 <li class=mobile-menu-item>Tags</li>
-</a><a href=/notaboutcode/categories/>
+</a><a href=/categories/>
 <li class=mobile-menu-item>Categories</li>
-</a><a href=/notaboutcode/about/>
+</a><a href=/about/>
 <li class=mobile-menu-item>About</li>
 </a>
 </ul>
@@ -93,22 +93,25 @@
 <div class=container id=mobile-panel>
 <header id=header class=header>
 <div class=logo-wrapper>
-<a href=/notaboutcode/ class=logo>Not About Code</a>
+<a href=/ class=logo>Not About Code</a>
 </div>
 <nav class=site-navbar>
 <ul id=menu class=menu>
 <li class=menu-item>
-<a class=menu-item-link href=/notaboutcode/>Home</a>
+<a class=menu-item-link href=/>Home</a>
 </li><li class=menu-item>
-<a class=menu-item-link href=/notaboutcode/post/>Archives</a>
+<a class=menu-item-link href=/post/>Archives</a>
 </li><li class=menu-item>
-<a class=menu-item-link href=/notaboutcode/tags/>Tags</a>
+<a class=menu-item-link href=/tags/>Tags</a>
 </li><li class=menu-item>
-<a class=menu-item-link href=/notaboutcode/categories/>Categories</a>
+<a class=menu-item-link href=/categories/>Categories</a>
 </li><li class=menu-item>
-<a class=menu-item-link href=/notaboutcode/about/>About</a>
+<a class=menu-item-link href=/about/>About</a>
 </li>
 </ul>
+<a href=https://webring.wonderful.software#notaboutcode.com title=วงแหวนเว็บ>
+<img alt=วงแหวนเว็บ width=32 height=32 src=https://webring.wonderful.software/webring.black.svg>
+</a>
 </nav>
 </header>
 <main id=main class=main>
@@ -120,7 +123,7 @@
 <div class=post-meta>
 <span class=post-time> 2018-01-12 </span>
 <div class=post-category>
-<a href=/notaboutcode/categories/continuous-delivery/> Continuous Delivery </a>
+<a href=/categories/continuous-delivery/> Continuous Delivery </a>
 </div>
 </div>
 </header>
@@ -147,7 +150,7 @@
 </div>
 </div>
 <div class=post-content>
-<p><img src=img/covers/bug-01.jpg alt="Photo by Michel Bosma on Unsplash"></p>
+<p><img src=/img/covers/bug-01.jpg alt="Photo by Michel Bosma on Unsplash"></p>
 <p>ช่วงนี้ทีมขึ้นโปรเจ็คใหม่ ผมต้องคุยกับ QA Engineer เกี่ยวกับเรื่อง Testing Strategy บ่อยๆ</p>
 <p>โดยเนื้อหาที่คุยหลักๆคือ</p>
 <ol>
@@ -364,7 +367,13 @@
 ๊* Unit ประมาณ 70% เทสต์ทุกกรณีและ Combination</li>
 </ul>
 <p>แต่ถ้าคิดมาก ก็ต้องมานั่งดูกันจริงๆ ว่าระบบมีโอกาสผิดพลาดที่จุดไหนสูงเป็นพิเศษ แล้วเลือกเทสต์ในระดับที่ต่ำที่สุดที่จะยังสามารถตรวจพบข้อผิดพลาดนั้นได้ เช่น คิดว่าระบบจะมีปัญหากับการติดต่อระบบธนาคารบ่อยๆ เราก็ต้องทำ System Integration Testing ให้ครอบคลุมเยอะหน่อย</p>
+<div class=fb-page data-href=https://www.facebook.com/notaboutcode/ data-tabs data-small-header=false data-adapt-container-width=true data-hide-cover=false data-show-facepile=true>
+<blockquote cite=https://www.facebook.com/notaboutcode/ class=fb-xfbml-parse-ignore>
+<a href=https://www.facebook.com/notaboutcode/>Not about code</a>
+</blockquote>
 </div>
+</div>
+<div id=fb-root></div>
 <div class=post-copyright>
 <p class=copyright-item>
 <span class=item-title>Author</span>
@@ -383,17 +392,18 @@
 </div>
 <footer class=post-footer>
 <div class=post-tags>
-<a href=/notaboutcode/tags/ci/>CI</a>
-<a href=/notaboutcode/tags/cd/>CD</a>
-<a href=/notaboutcode/tags/testing/>Testing</a>
+<a href=/tags/ci/>CI</a>
+<a href=/tags/cd/>CD</a>
+<a href=/tags/testing/>Testing</a>
 </div>
+<div class=fb-comments data-numposts=5></div>
 <nav class=post-nav>
-<a class=prev href=/notaboutcode/post/19-deploy-order/>
+<a class=prev href=/post/19-deploy-order/>
 <i class="iconfont icon-left"></i>
 <span class="prev-text nav-default">จะ Deploy Frontend หรือ Backend ก่อนดี</span>
 <span class="prev-text nav-mobile">Prev</span>
 </a>
-<a class=next href=/notaboutcode/post/17-cap-theorem/>
+<a class=next href=/post/17-cap-theorem/>
 <span class="next-text nav-default">บริษัทสุธีการจำ, CAP Theorem, และ Eventual Consistency</span>
 <span class="next-text nav-mobile">Next</span>
 <i class="iconfont icon-right"></i>
@@ -407,7 +417,7 @@
 <footer id=footer class=footer>
 <div class=social-links>
 <a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
-<a href=https://ijemmy.github.io/notaboutcode/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+<a href=https://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
 </div>
 <div class=copyright>
 <span class=power-by>
@@ -432,8 +442,9 @@ Theme -
 <script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
-<script type=text/javascript src=/notaboutcode/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
 <script async src=https://www.google-analytics.com/analytics.js></script>
+<script>(function(b,c,d){var a,e=b.getElementsByTagName(c)[0];if(b.getElementById(d))return;a=b.createElement(c),a.id=d,a.src='https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676',e.parentNode.insertBefore(a,e)})(document,'script','facebook-jssdk')</script>
 </body>
 </html>

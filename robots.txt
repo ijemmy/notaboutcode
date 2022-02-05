@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://ijemmy.github.io/notaboutcode/sitemap.xml
+Sitemap: https://www.notaboutcode.com/sitemap.xml
