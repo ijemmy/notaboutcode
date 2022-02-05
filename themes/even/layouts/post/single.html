@@ -33,7 +33,26 @@
     <!-- Content -->
     <div class="post-content">
       {{ .Content }}
+
+
+      <!-- Custom: Link to Facebook Page -->
+      <div  class="fb-page"
+            data-href="https://www.facebook.com/notaboutcode/"
+            data-tabs=""
+            data-small-header="false"
+            data-adapt-container-width="true"
+            data-hide-cover="false"
+            data-show-facepile="true">
+
+            <blockquote cite="https://www.facebook.com/notaboutcode/" class="fb-xfbml-parse-ignore">
+              <a href="https://www.facebook.com/notaboutcode/">Not about code</a>
+            </blockquote>
+      </div>
+
     </div>
+
+    <!-- Custom: Facebook root -->
+    <div id="fb-root"></div>
 
     <!-- Copyright -->
     {{- partial "post/copyright.html" . -}}
@@ -49,7 +68,9 @@
           {{ end -}}
         </div>
       {{- end -}}
-
+      
+      <!-- Custom: Facebook comments -->
+      <div class="fb-comments" data-numposts="5"></div>
       <!-- Post Pagination -->
       <nav class="post-nav">
         {{ with .NextInSection -}}
