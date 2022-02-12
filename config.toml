@@ -1,6 +1,6 @@
 baseURL = "https://www.notaboutcode.com"
-languageCode = "en"
-defaultContentLanguage = "en"
+languageCode = "th"
+defaultContentLanguage = "th"
 title = "Not About Code - Technical Leadership"
 preserveTaxonomyNames = true
 enableRobotsTXT = true
