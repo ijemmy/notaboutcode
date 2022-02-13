@@ -77,3 +77,15 @@ verification of requirement?
 prototyping?
 
 # เทสต์ยิ่งสูง ยิ่งมีคุณค่า แต่ราคายิ่งแพง
+
+
+# Caching
+
+## ใส่ Cache ที่ไหน
+## ปัญหาที่ตามมา
+
+Cache refresh + spike when down
+How to invalidate
+Consistency
+Failure in cache fleet can affect downstream system
+
