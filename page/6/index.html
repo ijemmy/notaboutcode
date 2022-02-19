@@ -91,6 +91,43 @@
 <section id=posts class=posts>
 <article class=post>
 <header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/05-retry/>Retry ยังไงให้ปลอดภัย</a></h1>
+<div class=post-meta>
+<span class=post-time> 2017-10-14 </span>
+<div class=post-category>
+<a href=/categories/system-design/> System Design </a>
+</div>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+<p><img src=/img/covers/spiral-stairs-01.jpg alt="Photo by Nick Morris, from Unsplash.com"></p>
+<p>วันนี้นั่งคุยกับเพื่อนเรื่อง Retry รู้สึกว่าเป็นหัวข้อที่น่าสนใจดี</p>
+<p>โจทย์คือเรามี External service ที่ไม่ค่อยสเถียรเท่าไร เวลาส่ง Request ไป วันดีคืนดีก็อาจจะ:</p>
+<ol>
+<li>พังแบบส่งสาเหตุการพังกลับมาให้ เช่น 5xx พร้อม error code</li>
+<li>พังแบบไม่มีอะไรตอบกลับมา ซึ่งสาเหตุอาจจะมาจากที่ระบบนั้นเดี้ยงไประหว่างการทำงาน หรือเน็ตเวิร์คเน่า</li>
+</ol>
+<p>กรณีนี้ เรามีหลายทางเลือก</p>
+<ol>
+<li>
+<p>เลือกที่จะจบการทำงาน แล้วแสดงผลให้ฝั่งผู้ใช้ของเรา (Client) รู้ว่าระบบมีปัญหา พร้อม Error code ซึ่งก็ถือว่ายอมรับได้ เพราะหากเราจำเป็นต้องการใช้ข้อมูลจาก External Service ยังไงก็ทำอะไรไม่ได้</p>
+</li>
+<li>
+<p>ทำการ Retry คือการส่ง Request ซ้ำโดยอัตโนมัติ หากเกิดข้อผิดพลาดในฝั่งของ External service ที่เราเรียกใช้</p>
+</li>
+<li>
+<p>Decouple ให้สองระบบเรียกกับแบบ Asynchronous โดยเอา Request ที่ไม่สำเร็จของเราไปเก็บไว้ใน Queue แล้ว Retry ใหม่ในภายหลัง</p>
+</li>
+</ol>
+</div>
+<div class=read-more>
+<a href=/post/05-retry/ class=read-more-link></a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
 <h1 class=post-title><a class=post-link href=/post/04-choosing-language/>ขึ้นโปรเจ็คใหม่ ใช้ภาษาอะไรดี</a></h1>
 <div class=post-meta>
 <span class=post-time> 2017-10-13 </span>
@@ -152,21 +189,6 @@
 </div>
 <div class=read-more>
 <a href=/post/01-ci-journey/ class=read-more-link></a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/31-mid-life-programmer/></a></h1>
-<div class=post-meta>
-<span class=post-time> 0001-01-01 </span>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-</div>
-<div class=read-more>
-<a href=/post/31-mid-life-programmer/ class=read-more-link></a>
 </div>
 </div>
 </article>
