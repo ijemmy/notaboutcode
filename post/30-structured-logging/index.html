@@ -1,146 +1,202 @@
-<!doctype html><html lang=th>
+<!DOCTYPE html>
+<html lang="th">
 <head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>Structured Logging คืออะไร ทำไมถึงเป็นที่นิยม - Not About Code - Technical Leadership</title>
-<meta name=renderer content="webkit">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta http-equiv=cache-control content="no-transform">
-<meta http-equiv=cache-control content="no-siteapp">
-<meta name=theme-color content="#f8f5ec">
-<meta name=msapplication-navbutton-color content="#f8f5ec">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
-<meta name=author content="ijemmy"><meta name=description content="เมื่อ 6 ปีที่แล้ว สมัยผมยังทำงาน Operation คู่กับงาน Dev อยู่ หนึ่งในสิ่งที่ผมไม่ชอบมากๆคือการนั่งไล่ Log เพื่อหาว่าบั้คมันมาจากไหน
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Structured Logging คืออะไร ทำไมถึงเป็นที่นิยม - Not About Code - Technical Leadership</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ijemmy" /><meta name="description" content="เมื่อ 6 ปีที่แล้ว สมัยผมยังทำงาน Operation คู่กับงาน Dev อยู่ หนึ่งในสิ่งที่ผมไม่ชอบมากๆคือการนั่งไล่ Log เพื่อหาว่าบั้คมันมาจากไหน
 สมัยก่อนก็ไม่เคยคิดครับว่าทำไมการไล่ Log มันถึงทรมานมาก พอเวลาผ่านไป เห็น Practice ใหม่ๆมากขึ้นถึงเข้าใจ ว่าปัญหามันมาตั้งแต่การออกแบบ Log Format และวิธีการเก็บ
 ปัจจุบันนี้ เวลาผมให้คำปรึกษาลูกค้า ผมจะบอกให้ทำ สิ่งที่เรียกว่า Structured Logging ซึ่งทำให้ชีวิตของการไล่ Log มันดีขึ้นมาก เวลามีบั้คก็หาต้นตอกันเร็วขึ้น
 วันนี้เราจะมาคุยเรื่องนี้กัน ผมจะเริ่มเล่าให้ฟังถึงวิธีการเก็บ Log ในสมัยก่อน ชี้ให้เห็นถึงปัญหาว่าทำไมมันทำให้ไล่ยาก และจบด้วยตัวอย่างการใช้ Structured Logging ที่มาช่วยแก้ปัญหานี้ครับ
-"><meta name=keywords content="Hugo,theme,even">
-<meta name=generator content="Hugo 0.89.4 with theme even">
-<link rel=canonical href=https://www.notaboutcode.com/post/30-structured-logging/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=manifest href=/manifest.json>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
-<link rel=stylesheet href=/css/custom.css>
-<meta property="og:title" content="Structured Logging คืออะไร ทำไมถึงเป็นที่นิยม">
+" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://www.notaboutcode.com/post/30-structured-logging/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/custom.css">
+
+
+<meta property="og:title" content="Structured Logging คืออะไร ทำไมถึงเป็นที่นิยม" />
 <meta property="og:description" content="
 เมื่อ 6 ปีที่แล้ว สมัยผมยังทำงาน Operation คู่กับงาน Dev อยู่ หนึ่งในสิ่งที่ผมไม่ชอบมากๆคือการนั่งไล่ Log เพื่อหาว่าบั้คมันมาจากไหน
 สมัยก่อนก็ไม่เคยคิดครับว่าทำไมการไล่ Log มันถึงทรมานมาก พอเวลาผ่านไป เห็น Practice ใหม่ๆมากขึ้นถึงเข้าใจ ว่าปัญหามันมาตั้งแต่การออกแบบ Log Format และวิธีการเก็บ
 ปัจจุบันนี้ เวลาผมให้คำปรึกษาลูกค้า ผมจะบอกให้ทำ สิ่งที่เรียกว่า Structured Logging ซึ่งทำให้ชีวิตของการไล่ Log มันดีขึ้นมาก เวลามีบั้คก็หาต้นตอกันเร็วขึ้น
-วันนี้เราจะมาคุยเรื่องนี้กัน ผมจะเริ่มเล่าให้ฟังถึงวิธีการเก็บ Log ในสมัยก่อน ชี้ให้เห็นถึงปัญหาว่าทำไมมันทำให้ไล่ยาก และจบด้วยตัวอย่างการใช้ Structured Logging ที่มาช่วยแก้ปัญหานี้ครับ">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://www.notaboutcode.com/post/30-structured-logging/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2022-02-12T12:04:02+07:00">
-<meta property="article:modified_time" content="2022-02-12T12:04:02+07:00">
-<meta itemprop=name content="Structured Logging คืออะไร ทำไมถึงเป็นที่นิยม">
-<meta itemprop=description content="
+วันนี้เราจะมาคุยเรื่องนี้กัน ผมจะเริ่มเล่าให้ฟังถึงวิธีการเก็บ Log ในสมัยก่อน ชี้ให้เห็นถึงปัญหาว่าทำไมมันทำให้ไล่ยาก และจบด้วยตัวอย่างการใช้ Structured Logging ที่มาช่วยแก้ปัญหานี้ครับ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.notaboutcode.com/post/30-structured-logging/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-02-12T12:04:02+07:00" />
+<meta property="article:modified_time" content="2022-02-12T12:04:02+07:00" />
+
+<meta itemprop="name" content="Structured Logging คืออะไร ทำไมถึงเป็นที่นิยม">
+<meta itemprop="description" content="
 เมื่อ 6 ปีที่แล้ว สมัยผมยังทำงาน Operation คู่กับงาน Dev อยู่ หนึ่งในสิ่งที่ผมไม่ชอบมากๆคือการนั่งไล่ Log เพื่อหาว่าบั้คมันมาจากไหน
 สมัยก่อนก็ไม่เคยคิดครับว่าทำไมการไล่ Log มันถึงทรมานมาก พอเวลาผ่านไป เห็น Practice ใหม่ๆมากขึ้นถึงเข้าใจ ว่าปัญหามันมาตั้งแต่การออกแบบ Log Format และวิธีการเก็บ
 ปัจจุบันนี้ เวลาผมให้คำปรึกษาลูกค้า ผมจะบอกให้ทำ สิ่งที่เรียกว่า Structured Logging ซึ่งทำให้ชีวิตของการไล่ Log มันดีขึ้นมาก เวลามีบั้คก็หาต้นตอกันเร็วขึ้น
-วันนี้เราจะมาคุยเรื่องนี้กัน ผมจะเริ่มเล่าให้ฟังถึงวิธีการเก็บ Log ในสมัยก่อน ชี้ให้เห็นถึงปัญหาว่าทำไมมันทำให้ไล่ยาก และจบด้วยตัวอย่างการใช้ Structured Logging ที่มาช่วยแก้ปัญหานี้ครับ"><meta itemprop=datePublished content="2022-02-12T12:04:02+07:00">
-<meta itemprop=dateModified content="2022-02-12T12:04:02+07:00">
-<meta itemprop=wordCount content="615">
-<meta itemprop=keywords content="operation,log,observability,"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="Structured Logging คืออะไร ทำไมถึงเป็นที่นิยม">
-<meta name=twitter:description content="
+วันนี้เราจะมาคุยเรื่องนี้กัน ผมจะเริ่มเล่าให้ฟังถึงวิธีการเก็บ Log ในสมัยก่อน ชี้ให้เห็นถึงปัญหาว่าทำไมมันทำให้ไล่ยาก และจบด้วยตัวอย่างการใช้ Structured Logging ที่มาช่วยแก้ปัญหานี้ครับ"><meta itemprop="datePublished" content="2022-02-12T12:04:02+07:00" />
+<meta itemprop="dateModified" content="2022-02-12T12:04:02+07:00" />
+<meta itemprop="wordCount" content="615">
+<meta itemprop="keywords" content="operation,log,observability," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Structured Logging คืออะไร ทำไมถึงเป็นที่นิยม"/>
+<meta name="twitter:description" content="
 เมื่อ 6 ปีที่แล้ว สมัยผมยังทำงาน Operation คู่กับงาน Dev อยู่ หนึ่งในสิ่งที่ผมไม่ชอบมากๆคือการนั่งไล่ Log เพื่อหาว่าบั้คมันมาจากไหน
 สมัยก่อนก็ไม่เคยคิดครับว่าทำไมการไล่ Log มันถึงทรมานมาก พอเวลาผ่านไป เห็น Practice ใหม่ๆมากขึ้นถึงเข้าใจ ว่าปัญหามันมาตั้งแต่การออกแบบ Log Format และวิธีการเก็บ
 ปัจจุบันนี้ เวลาผมให้คำปรึกษาลูกค้า ผมจะบอกให้ทำ สิ่งที่เรียกว่า Structured Logging ซึ่งทำให้ชีวิตของการไล่ Log มันดีขึ้นมาก เวลามีบั้คก็หาต้นตอกันเร็วขึ้น
-วันนี้เราจะมาคุยเรื่องนี้กัน ผมจะเริ่มเล่าให้ฟังถึงวิธีการเก็บ Log ในสมัยก่อน ชี้ให้เห็นถึงปัญหาว่าทำไมมันทำให้ไล่ยาก และจบด้วยตัวอย่างการใช้ Structured Logging ที่มาช่วยแก้ปัญหานี้ครับ"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
-<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+วันนี้เราจะมาคุยเรื่องนี้กัน ผมจะเริ่มเล่าให้ฟังถึงวิธีการเก็บ Log ในสมัยก่อน ชี้ให้เห็นถึงปัญหาว่าทำไมมันทำให้ไล่ยาก และจบด้วยตัวอย่างการใช้ Structured Logging ที่มาช่วยแก้ปัญหานี้ครับ"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
 </head>
 <body>
-<div id=mobile-navbar class=mobile-navbar>
-<div class=mobile-header-logo>
-<a href=/ class=logo>Not About Code</a>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Not About Code</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
-<div class=mobile-navbar-icon>
-<span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-<nav id=mobile-menu class="mobile-menu slideout-menu">
-<ul class=mobile-menu-list>
-<a href=/>
-<li class=mobile-menu-item>Home</li>
-</a><a href=/post/>
-<li class=mobile-menu-item>Archives</li>
-</a><a href=/tags/>
-<li class=mobile-menu-item>Tags</li>
-</a><a href=/categories/>
-<li class=mobile-menu-item>Categories</li>
-</a><a href=/about/>
-<li class=mobile-menu-item>About</li>
-</a>
-</ul>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
 </nav>
-<div class=container id=mobile-panel>
-<header id=header class=header>
-<div class=logo-wrapper>
-<a href=/ class=logo>Not About Code</a>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Not About Code</a>
 </div>
-<nav class=site-navbar>
-<ul id=menu class=menu>
-<li class=menu-item>
-<a class=menu-item-link href=/>Home</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/post/>Archives</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/tags/>Tags</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/categories/>Categories</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/about/>About</a>
-</li>
-</ul>
-<a href=https://webring.wonderful.software#notaboutcode.com title=วงแหวนเว็บ>
-<img alt=วงแหวนเว็บ width=32 height=32 src=https://webring.wonderful.software/webring.black.svg>
-</a>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+
+  
+  <a href="https://webring.wonderful.software#notaboutcode.com" title="วงแหวนเว็บ">
+    <img
+        alt="วงแหวนเว็บ"
+        width="32"
+        height="32"
+        src="https://webring.wonderful.software/webring.black.svg"
+    />
+  </a>
 </nav>
-</header>
-<main id=main class=main>
-<div class=content-wrapper>
-<div id=content class=content>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title>Structured Logging คืออะไร ทำไมถึงเป็นที่นิยม</h1>
-<div class=post-meta>
-<span class=post-time> 2022-02-12 </span>
-<div class=post-category>
-<a href=/categories/devops/> devops </a>
-</div>
-</div>
-</header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title></h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#ปกตเราเกบอะไรกนใน-application-log-บาง>ปกติเราเก็บอะไรกันใน Application Log บ้าง</a></li>
-<li><a href=#ความลำบากของการนงไล-log>ความลำบากของการนั่งไล่ Log</a></li>
-<li><a href=#ทำความรจกกบ-structured-logging>ทำความรู้จักกับ Structured Logging</a></li>
-<li><a href=#ขอดของการใช-structure-logging>ข้อดีของการใช้ Structure Logging</a></li>
-<li><a href=#ในทางปฏบต>ในทางปฏิบัติ</a></li>
-</ul>
+
+
+
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Structured Logging คืออะไร ทำไมถึงเป็นที่นิยม</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-02-12 </span>
+        <div class="post-category">
+            <a href="/categories/devops/"> devops </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title"></h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ปกตเราเกบอะไรกนใน-application-log-บาง">ปกติเราเก็บอะไรกันใน Application Log บ้าง</a></li>
+    <li><a href="#ความลำบากของการนงไล-log">ความลำบากของการนั่งไล่ Log</a></li>
+    <li><a href="#ทำความรจกกบ-structured-logging">ทำความรู้จักกับ Structured Logging</a></li>
+    <li><a href="#ขอดของการใช-structure-logging">ข้อดีของการใช้ Structure Logging</a></li>
+    <li><a href="#ในทางปฏบต">ในทางปฏิบัติ</a></li>
+  </ul>
 </nav>
+  </div>
 </div>
-</div>
-<div class=post-content>
-<p><img src=/img/covers/log-01.png alt="Photo by Atlas Kadrów(@atlaskadrow) on Unsplash"></p>
+    <div class="post-content">
+      <p><img src="/img/covers/log-01.png" alt="Photo by Atlas Kadrów(@atlaskadrow) on Unsplash"></p>
 <p>เมื่อ 6 ปีที่แล้ว สมัยผมยังทำงาน Operation คู่กับงาน Dev อยู่ หนึ่งในสิ่งที่ผมไม่ชอบมากๆคือการนั่งไล่ Log เพื่อหาว่าบั้คมันมาจากไหน</p>
 <p>สมัยก่อนก็ไม่เคยคิดครับว่าทำไมการไล่ Log มันถึงทรมานมาก พอเวลาผ่านไป เห็น Practice ใหม่ๆมากขึ้นถึงเข้าใจ ว่าปัญหามันมาตั้งแต่การออกแบบ Log Format และวิธีการเก็บ</p>
 <p>ปัจจุบันนี้ เวลาผมให้คำปรึกษาลูกค้า ผมจะบอกให้ทำ สิ่งที่เรียกว่า Structured Logging ซึ่งทำให้ชีวิตของการไล่ Log มันดีขึ้นมาก เวลามีบั้คก็หาต้นตอกันเร็วขึ้น</p>
 <p>วันนี้เราจะมาคุยเรื่องนี้กัน ผมจะเริ่มเล่าให้ฟังถึงวิธีการเก็บ Log ในสมัยก่อน ชี้ให้เห็นถึงปัญหาว่าทำไมมันทำให้ไล่ยาก และจบด้วยตัวอย่างการใช้ Structured Logging ที่มาช่วยแก้ปัญหานี้ครับ</p>
-<h1 id=ปกตเราเกบอะไรกนใน-application-log-บาง>ปกติเราเก็บอะไรกันใน Application Log บ้าง</h1>
+<h1 id="ปกตเราเกบอะไรกนใน-application-log-บาง">ปกติเราเก็บอะไรกันใน Application Log บ้าง</h1>
 <p>ก่อนอื่นให้แยกก่อนนะครับว่ามันมี Log จากหลายที่ อย่างพวก Server log ถ้าใครใช้ Apache หน้าตาจะประมาณนี้</p>
 <p>Access log</p>
 <blockquote>
-<p>10.185.248.71 - - [09/Jan/2015:19:12:06 +0000] 808840 &ldquo;GET /inventoryService/inventory/purchaseItem?userId=20253471&itemId=23434300 HTTP/1.1&rdquo; 500 17 &ldquo;-&rdquo; &ldquo;Apache-HttpClient/4.2.6 (java 1.5)&rdquo;</p>
+<p>10.185.248.71 - - [09/Jan/2015:19:12:06 +0000] 808840 &ldquo;GET /inventoryService/inventory/purchaseItem?userId=20253471&amp;itemId=23434300 HTTP/1.1&rdquo; 500 17 &ldquo;-&rdquo; &ldquo;Apache-HttpClient/4.2.6 (java 1.5)&rdquo;</p>
 </blockquote>
 <p>Error log</p>
 <blockquote>
@@ -156,15 +212,15 @@
 <li><strong>Time</strong>: ใน UTC เช่น 2022-02-12T10:00:40Z</li>
 <li><strong>Log level</strong>: เช่น DEBUG, INFO, WARN, ERROR</li>
 <li><strong>Service Name</strong>: เนื่องจาก Log จะถูกเก็บรวมกันอยู่ที่ระบบเดียว เราเลยต้องมี Field เพื่อให้ดึงข้อมูลออกมาเฉพาะ Log ของแต่ละเซอร์วิซ</li>
-<li><strong>Method Name</strong>: อย่างในกรณีนี้คือ PurchaseItem เพราะผู้ใช้คนเดียวอาจจะทำหลายๆอย่างในหนึ่ง Session การมีฟิลด์นี้จะทำให้รู้ว่า Log นั้นๆมาจากส่วนไหนของเซอร์วิซ</li>
+<li><strong>Method Name</strong>: อย่างในกรณีนี้คือ PurchaseItem  เพราะผู้ใช้คนเดียวอาจจะทำหลายๆอย่างในหนึ่ง Session การมีฟิลด์นี้จะทำให้รู้ว่า Log นั้นๆมาจากส่วนไหนของเซอร์วิซ</li>
 <li><strong>Log Message</strong>: อันนี้เป็น String ที่โปรแกรมทำการล็อคไว้ ใส่อะไรลงไปก็ได้ ทีมที่คิดถึงอนาคตก็จะมีข้อตกลงชัดเจนว่าต้องเขียนประมาณไหน เวลาต้องมานั่งคุ้ย Log ชีวิตจะได้ไม่ลำบากมาก</li>
 <li><strong>Field พิเศษต่างๆ</strong>: มักจะเป็น Field ที่เราใช้ค้นหาบ่อยในระดับที่ควรจะใส่ในทุก Log Message ตัวอย่างที่ผมยกก็คือ user-id, request-id, instace-id (มาจากเครื่องเซอร์เวอร์เครื่องไหน)</li>
 </ol>
 <p>ปกติแล้วระบบที่ใช้เก็บและค้นหา Log จะแชร์กันหลายๆทีมครับ ดังนั้น Field พิเศษต่างๆของ Log นั้นจะต้องมีการตกลงลำดับกัน เราก็จะใช้วิธีตกลงกันล่วงหน้าว่าต้องเก็บ Log ด้วยข้อมูลประมาณนี้นะ</p>
 <p>ถ้าใครไม่ทำตาม เวลามานั่งคุ้ย Log ก็จะลำบาก เพราะจะใช้พวก Script ที่เขียนเอาไว้ไม่ได้</p>
-<h1 id=ความลำบากของการนงไล-log>ความลำบากของการนั่งไล่ Log</h1>
+<h1 id="ความลำบากของการนงไล-log">ความลำบากของการนั่งไล่ Log</h1>
 <p>พวก Log สมัยก่อนจะเก็บกันบรรทัดเดียว ผมเดาว่าสาเหตุส่วนหนึ่งเป็นเพราะราคา Storage ในอดีต (สักยีสิบปีที่แล้ว) มันแพง เลยต้องการประหยัดเนื้อที่ และเซอร์เวอร์ก็มักจะมีแค่ตัวเดียว เวลานั่ง ไล่ Log กันก็จะเรียงลำดับกันอย่างชัดเจน สมมติว่าผมเจอล็อคของ Error ที่เวลา 10:10 ผมก็แค่ดึง Log ช่วง 10:09 - 10:11 ขั้นมาดูได้</p>
-<p>แต่ระบบปัจจุบัน Application มักจะมีเครื่องเซอร์เวอร์หลายเครื่องเพื่อให้ <a href=/post/22-design-to-scale/>Scale ได้ง่ายๆ</a> พอล็อคจากหลายๆเครื่องมารวมกันแล้ว ถ้าไม่มีการเก็บ request-id ไว้สำหรับ Filter ชีวิตจะนรกมากครับ</p>
+<p>แต่ระบบปัจจุบัน Application มักจะมีเครื่องเซอร์เวอร์หลายเครื่องเพื่อให้ <a href="/post/22-design-to-scale/">Scale ได้ง่ายๆ</a> พอล็อคจากหลายๆเครื่องมารวมกันแล้ว ถ้าไม่มีการเก็บ request-id ไว้สำหรับ Filter ชีวิตจะนรกมากครับ</p>
 <p>ตัวอย่างเช่น API นึงจะล็อคข้อความ A, B, C ถ้ามี request เข้ามาพร้อมๆกันและถูกกระจายไปสามเซอร์เวอร์ คุณจะเห็น Log ประมาณนี้</p>
 <blockquote>
 <p>A</p>
@@ -197,154 +253,214 @@
 <p>ในขณะเดียวกัน ทีมข้างๆที่ดูและอีกระบบก็พึ่งค้นพบพอดีว่าเค้าอยากจะแปะ version-id ของ Application เข้าไปด้วย เพราะ Deploy กันบบ่อยมากแล้วสับสนว่าบั๊กมาจากเวอร์ชั่นไหน</p>
 <p>การจะมาใส่ Field พิเศษพวกนี้เพิ่มทีหลังก็จะวุ่นวาย เพราะต้องตกลงลำดับกันให้ดี แล้วไปนั่งแก้โปรแกรมที่ใช้โหลด Logเข้าระบบ (ingestion) หรือใช้ค้นหา Log</p>
 <p>ในทางปฏิบัติ ทีมก็เลยจะเป็นการยัดพวก field พิเศษพวกนี้เข้าไปใน Log message แล้วก็ทำ Full text search เลย ซึ่งถ้าจำนวน Log เยอะมากๆ การ Filter แบบนี้จะช้ามากครับ</p>
-<h1 id=ทำความรจกกบ-structured-logging>ทำความรู้จักกับ Structured Logging</h1>
+<h1 id="ทำความรจกกบ-structured-logging">ทำความรู้จักกับ Structured Logging</h1>
 <p>แทนที่เราจะเก็บ Log message เป็น String เราสามารถเก็บ Log เป็น JSON แทนได้ หน้าตาจะประมาณนี้ครับ</p>
 <blockquote>
 <p>2022-02-12T10:00:40Z INFO {&ldquo;service&rdquo;: &ldquo;ServiceA&rdquo;, &ldquo;method&rdquo;: &ldquo;PurchaseItem&rdquo;, &ldquo;message&rdquo;: &ldquo;Log message from the application&rdquo;, &ldquo;userId&rdquo;: &ldquo;user-id-12345&rdquo;, &ldquo;requestId&rdquo;: &ldquo;request-id-123456&rdquo;, &ldquo;instanceId&rdquo;: &ldquo;instance-id-1234&rdquo;}</p>
 </blockquote>
 <p>ถ้าเราเอา Log message มาฟอร์แมตให้อ่านง่าย จะเป็นแบบนี้</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=p>{</span>
-    <span class=nt>&#34;service&#34;</span><span class=p>:</span> <span class=s2>&#34;ServiceA&#34;</span><span class=p>,</span> 
-    <span class=nt>&#34;method&#34;</span><span class=p>:</span> <span class=s2>&#34;PurchaseItem&#34;</span><span class=p>,</span> 
-    <span class=nt>&#34;message&#34;</span><span class=p>:</span> <span class=s2>&#34;Log message from the application&#34;</span><span class=p>,</span> 
-    <span class=nt>&#34;userId&#34;</span><span class=p>:</span> <span class=s2>&#34;user-id-12345&#34;</span><span class=p>,</span> 
-    <span class=nt>&#34;requestId&#34;</span><span class=p>:</span> <span class=s2>&#34;request-id-123456&#34;</span><span class=p>,</span> 
-    <span class=nt>&#34;instanceId&#34;</span><span class=p>:</span> <span class=s2>&#34;instance-id-1234&#34;</span>
-<span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;service&#34;</span><span class="p">:</span> <span class="s2">&#34;ServiceA&#34;</span><span class="p">,</span> 
+    <span class="nt">&#34;method&#34;</span><span class="p">:</span> <span class="s2">&#34;PurchaseItem&#34;</span><span class="p">,</span> 
+    <span class="nt">&#34;message&#34;</span><span class="p">:</span> <span class="s2">&#34;Log message from the application&#34;</span><span class="p">,</span> 
+    <span class="nt">&#34;userId&#34;</span><span class="p">:</span> <span class="s2">&#34;user-id-12345&#34;</span><span class="p">,</span> 
+    <span class="nt">&#34;requestId&#34;</span><span class="p">:</span> <span class="s2">&#34;request-id-123456&#34;</span><span class="p">,</span> 
+    <span class="nt">&#34;instanceId&#34;</span><span class="p">:</span> <span class="s2">&#34;instance-id-1234&#34;</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>นี่คือส่งที่เรียกว่า ​Structured Logging ครับ คือมีการยัด metadata ลงไปด้วยว่าแต่ละ Field คืออะไร</p>
 <p>จริงๆแล้วจะใช้ XML หรือฟอร์แมตอื่นก็ได้ แต่ส่วนใหญ่นิยมใช้ JSON กันครับ สาเหตุหลักๆเลยคืออ่านง่าย และพวก Library, framework, monitoring system ก็ support ฟอร์แมตนี้</p>
 <p>บางที่อาจจะมี Nested Object ใน Field ต่างๆด้วย อันนี้ก็แล้วแต่ตกลงกันในบริษัท</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
-</span><span class=lnt>9
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=p>{</span>
-    <span class=err>...</span> <span class=err>other</span> <span class=err>fields...</span>
-    <span class=nt>&#34;instance&#34;</span><span class=p>:</span> <span class=p>{</span>
-        <span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;instance-id-1234&#34;</span><span class=p>,</span>
-        <span class=nt>&#34;ip&#34;</span><span class=p>:</span> <span class=s2>&#34;123.0.0.0&#34;</span><span class=p>,</span>
-        <span class=nt>&#34;hostName&#34;</span><span class=p>:</span> <span class=s2>&#34;abcde.mydomain.com&#34;</span>
-    <span class=p>},</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="err">...</span> <span class="err">other</span> <span class="err">fields...</span>
+    <span class="nt">&#34;instance&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;instance-id-1234&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;ip&#34;</span><span class="p">:</span> <span class="s2">&#34;123.0.0.0&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;hostName&#34;</span><span class="p">:</span> <span class="s2">&#34;abcde.mydomain.com&#34;</span>
+    <span class="p">},</span>
     
-<span class=p>}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>พอ Log พวกนี้ถูกเอาเข้าระบบที่เหมาะสม (เช่น ElasticSearch) ระบบก็จะทำการเก็บข้อมูลให้เราสามารถค้นหาจาก Field ต่างๆได้อย่างมีประสิทธิภาพ ไม่ต้องทำ Full text search ช้ามาก</p>
-<h1 id=ขอดของการใช-structure-logging>ข้อดีของการใช้ Structure Logging</h1>
+<h1 id="ขอดของการใช-structure-logging">ข้อดีของการใช้ Structure Logging</h1>
 <ol>
 <li><strong>เพิ่มหรือลด field ใหม่ๆได้โดยไม่ต้องตกลงกับทีมอื่น</strong> อันนี้ผมว่าเป็นข้อดีที่สุดเลย ถ้าผมอยากได้ Field ไหน ผมก็แค่ใส่เข้าไปแล้วไปแก้ Query ของทีมผม ไม่ต้องไปตกลง Format ใหม่กับทีมอื่นว่าอันดับที่เท่าไรเป็นค่าไหน โปรแกรมที่ดึงหา Log ก็สามารถใช้ร่วมกันได้โดยไม่ต้องเปลี่ยน (เช่น Kibana บน ElasticSearch อีกที)</li>
 <li><strong>อ่านง่าย</strong> เนื่องจากมี Metadata ติดอยู่ในแต่ละ Field ระหว่างที่กำลังพัฒนาโปรแกรม ถ้าผมต้องการดูล็อค ดูปุ๊บก็รู้ปั๊บว่า UUID ที่เห็นอยู่นี่เป็น request-id หรือ user-id ไม่ต้องมานั่งนับว่ามันตำแหน่งที่เท่าไร</li>
-<li><strong>หาได้เร็ว</strong> หากต้องfilter หลาย field ก็ทำได้เร็ว อันนี้จริงๆต้องยกเครดิตให้กับระบบการเก็บ Log ในปัจจุบันที่ทำ Ingestion กับ Index ได้มีประสิทธิภาพกว่าในอดีต</li>
+<li><strong>หาได้เร็ว</strong>  หากต้องfilter หลาย field ก็ทำได้เร็ว อันนี้จริงๆต้องยกเครดิตให้กับระบบการเก็บ Log ในปัจจุบันที่ทำ Ingestion กับ Index ได้มีประสิทธิภาพกว่าในอดีต</li>
 </ol>
-<h1 id=ในทางปฏบต>ในทางปฏิบัติ</h1>
+<h1 id="ในทางปฏบต">ในทางปฏิบัติ</h1>
 <p>ถ้าบริษัทมีมากกว่า 3-4 ทีมที่ใช้ภาษาเดียวกัน ผมจะแนะนำให้มี Logging Library กลางที่ใช้ร่วมกัน</p>
-<p>โดย Logging Library กลางนี้ก็ขยายมาจาก Logging ที่ใช้กันเป็นปกตินั่นแหละครับ (e.g. structlog, Log4J, winston) แต่มีการใส่ข้อตกลงระหว่างทีมเข้าไปในนั้นเลย เช่นเรื่องของ Logging level, common fields to log, where & how put log files เวลาลง Log agent ก็จะได้ใช้ตัวเดียวกัน Ingestion script ก็ใช้อันเดียวกันได้</p>
+<p>โดย Logging Library กลางนี้ก็ขยายมาจาก Logging  ที่ใช้กันเป็นปกตินั่นแหละครับ (e.g. structlog, Log4J, winston) แต่มีการใส่ข้อตกลงระหว่างทีมเข้าไปในนั้นเลย เช่นเรื่องของ Logging level, common fields to log, where &amp; how put log files  เวลาลง Log agent ก็จะได้ใช้ตัวเดียวกัน Ingestion script ก็ใช้อันเดียวกันได้</p>
 <p>วิธีนี้จะช่วยให้ชื่อของ Field ต่างๆเป็นแบบเดียวกัน (e.g. requestId vs. RequestId vs. request-id) เวลาหาล็อคข้ามของเซอร์วิซอื่นก็จะไม่งง และไม่ต้องมานั่งไล่เช็คกันในทีมว่าเขียนกันตรงตามมาตรฐานหรือเปล่า</p>
 <p>ในอนาคต ถ้าจะทำ Correlation Id (aka. Trace Id) ก็จะทำได้ง่าย ใส่เข้าในไลบรารี่นี้แล้วล็อคให้อัตโนมัติเลย</p>
-<br>
+<br />
 ---
-<p>ใครสนใจบทความสำหรับโปรแกรมเมอร์ทั้งด้าน Technical Skills และ Soft Skills ติดตามได้ที่ Facebook page <a href=http://facebook.com/notaboutcode>Not about code</a> หรือ Twitter <a href=https://twitter.com/notaboutcode/>@notaboutcode</a> บทความจะเน้นเนื้อหาที่นำไปใช้ได้กับชีวิตจริง แต่ไม่ยึดติดกับเทคโนโลยีหรือภาษา เช่น System Design, Continuous Delivery, Testing, Career, etc.</p>
-<div class=fb-page data-href=https://www.facebook.com/notaboutcode/ data-tabs data-small-header=false data-adapt-container-width=true data-hide-cover=false data-show-facepile=true>
-<blockquote cite=https://www.facebook.com/notaboutcode/ class=fb-xfbml-parse-ignore>
-<a href=https://www.facebook.com/notaboutcode/>Not about code</a>
-</blockquote>
+<p>ใครสนใจบทความสำหรับโปรแกรมเมอร์ทั้งด้าน Technical Skills และ Soft Skills ติดตามได้ที่ Facebook page <a href="http://facebook.com/notaboutcode">Not about code</a> หรือ Twitter <a href="https://twitter.com/notaboutcode/">@notaboutcode</a> บทความจะเน้นเนื้อหาที่นำไปใช้ได้กับชีวิตจริง แต่ไม่ยึดติดกับเทคโนโลยีหรือภาษา เช่น System Design, Continuous Delivery, Testing, Career, etc.</p>
+
+
+      
+      <div  class="fb-page"
+            data-href="https://www.facebook.com/notaboutcode/"
+            data-tabs=""
+            data-small-header="false"
+            data-adapt-container-width="true"
+            data-hide-cover="false"
+            data-show-facepile="true">
+
+            <blockquote cite="https://www.facebook.com/notaboutcode/" class="fb-xfbml-parse-ignore">
+              <a href="https://www.facebook.com/notaboutcode/">Not about code</a>
+            </blockquote>
+      </div>
+
+    </div>
+
+    
+    <div id="fb-root"></div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content">ijemmy</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content">
+        2022-02-12
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
 </div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/operation/">operation</a>
+          <a href="/tags/log/">log</a>
+          <a href="/tags/observability/">observability</a>
+          </div>
+      <div class="fb-comments" data-numposts="5"></div>
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/31-caching/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">จะสเกลระบบหลักล้านด้วย Cache ต้องพิจารณาอะไรบ้าง</span>
+            <span class="prev-text nav-mobile"></span>
+          </a>
+        <a class="next" href="/post/29-technical-conflict-resolution/">
+            <span class="next-text nav-default">เถียงเรื่อง Technical Design กันไม่จบซักที ทำไงดี?</span>
+            <span class="next-text nav-mobile"></span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://www.facebook.com/notaboutcode/" class="iconfont icon-facebook" title="facebook"></a>
+  <a href="https://www.notaboutcode.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-<div id=fb-root></div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span class=item-title></span>
-<span class=item-content>ijemmy</span>
-</p>
-<p class=copyright-item>
-<span class=item-title></span>
-<span class=item-content>
-2022-02-12
-</span>
-</p>
-<p class=copyright-item>
-<span class=item-title></span>
-<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
-</p>
+
+<div class="copyright">
+  <span class="power-by">
+    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+     - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+  </span>
 </div>
-<footer class=post-footer>
-<div class=post-tags>
-<a href=/tags/operation/>operation</a>
-<a href=/tags/log/>log</a>
-<a href=/tags/observability/>observability</a>
-</div>
-<div class=fb-comments data-numposts=5></div>
-<nav class=post-nav>
-<a class=prev href=/post/31-caching/>
-<i class="iconfont icon-left"></i>
-<span class="prev-text nav-default">จะสเกลระบบหลักล้านด้วย Cache ต้องพิจารณาอะไรบ้าง</span>
-<span class="prev-text nav-mobile"></span>
-</a>
-<a class=next href=/post/29-technical-conflict-resolution/>
-<span class="next-text nav-default">เถียงเรื่อง Technical Design กันไม่จบซักที ทำไงดี?</span>
-<span class="next-text nav-mobile"></span>
-<i class="iconfont icon-right"></i>
-</a>
-</nav>
-</footer>
-</article>
-</div>
-</div>
-</main>
-<footer id=footer class=footer>
-<div class=social-links>
-<a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
-<a href=https://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
-</div>
-<div class=copyright>
-<span class=power-by>
-%!(EXTRA string=<a class=hexo-link href=https://gohugo.io>Hugo</a>)
-</span>
-<span class=division>|</span>
-<span class=theme-info>
--
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
-</span>
-<span class=copyright-year>
-&copy;
-2017 -
-2022<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
-</span>
-</div>
-</footer>
-<div class=back-to-top id=back-to-top>
-<i class="iconfont icon-up"></i>
-</div>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
-<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
-<script async src=https://www.google-analytics.com/analytics.js></script>
-<script>(function(b,c,d){var a,e=b.getElementsByTagName(c)[0];if(b.getElementById(d))return;a=b.createElement(c),a.id=d,a.src='https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676',e.parentNode.insertBefore(a,e)})(document,'script','facebook-jssdk')</script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-108239205-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 </body>
 </html>

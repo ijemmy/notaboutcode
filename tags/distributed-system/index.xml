@@ -1,6 +1,25 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>distributed system on Not About Code - Technical Leadership</title><link>https://www.notaboutcode.com/tags/distributed-system/</link><description>Recent content in distributed system on Not About Code - Technical Leadership</description><generator>Hugo -- gohugo.io</generator><language>th</language><lastBuildDate>Sun, 07 Jan 2018 12:04:02 +0700</lastBuildDate><atom:link href="https://www.notaboutcode.com/tags/distributed-system/index.xml" rel="self" type="application/rss+xml"/><item><title>บริษัทสุธีการจำ, CAP Theorem, และ Eventual Consistency</title><link>https://www.notaboutcode.com/post/17-cap-theorem/</link><pubDate>Sun, 07 Jan 2018 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/17-cap-theorem/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/photo-01.jpg" alt="Photo by Joanna Kosinska on Unsplash">&lt;/p>
-&lt;p>หัวข้อด้าน Distributed System เป็นอะไรที่สนุก แต่เข้าใจยากมาก&lt;/p>
-&lt;p>หนึ่งในเรื่องที่ผมอ่านหลายรอบกว่าจะเก็ต ก็คือเรื่องของ CAP Theorem ซึ่งเป็นแนวคิดในการ Trade-off คุณสมบัติของ Distributed System ที่เราออกแบบ&lt;/p>
-&lt;p>&amp;ldquo;CAP&amp;rdquo; เป็นตัวย่อจาก Consistency, Availability, Partition Tolerant โดย Theorem นี้ได้กล่าวไว้ว่า คุณไม่มีทางที่่จะออกแบบระบบโดยมีคุณสมบัติ 3 ข้อนี้ พร้อมกัน อย่างเก่งก็ได้แค่ 2 ใน 3&lt;/p>
-&lt;p>แต่ทำไมถึงเป็นอย่างนั้นล่ะ?&lt;/p>
-&lt;p>วันนี้เราจะมาทำความเข้าใจกับเจ้า Theorem นี้กัน ผ่านการเรื่องราวของบริษัท &amp;ldquo;สุธีการจำ&amp;rdquo; !!&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>distributed system on Not About Code - Technical Leadership</title>
+    <link>https://www.notaboutcode.com/tags/distributed-system/</link>
+    <description>Recent content in distributed system on Not About Code - Technical Leadership</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>th</language>
+    <lastBuildDate>Sun, 07 Jan 2018 12:04:02 +0700</lastBuildDate><atom:link href="https://www.notaboutcode.com/tags/distributed-system/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>บริษัทสุธีการจำ, CAP Theorem, และ Eventual Consistency</title>
+      <link>https://www.notaboutcode.com/post/17-cap-theorem/</link>
+      <pubDate>Sun, 07 Jan 2018 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/17-cap-theorem/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/photo-01.jpg&#34; alt=&#34;Photo by Joanna Kosinska on Unsplash&#34;&gt;&lt;/p&gt;
+&lt;p&gt;หัวข้อด้าน Distributed System เป็นอะไรที่สนุก แต่เข้าใจยากมาก&lt;/p&gt;
+&lt;p&gt;หนึ่งในเรื่องที่ผมอ่านหลายรอบกว่าจะเก็ต ก็คือเรื่องของ CAP Theorem ซึ่งเป็นแนวคิดในการ Trade-off คุณสมบัติของ Distributed System ที่เราออกแบบ&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;CAP&amp;rdquo; เป็นตัวย่อจาก Consistency, Availability, Partition Tolerant  โดย Theorem นี้ได้กล่าวไว้ว่า คุณไม่มีทางที่่จะออกแบบระบบโดยมีคุณสมบัติ 3 ข้อนี้ พร้อมกัน อย่างเก่งก็ได้แค่ 2 ใน 3&lt;/p&gt;
+&lt;p&gt;แต่ทำไมถึงเป็นอย่างนั้นล่ะ?&lt;/p&gt;
+&lt;p&gt;วันนี้เราจะมาทำความเข้าใจกับเจ้า Theorem นี้กัน ผ่านการเรื่องราวของบริษัท &amp;ldquo;สุธีการจำ&amp;rdquo; !!&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

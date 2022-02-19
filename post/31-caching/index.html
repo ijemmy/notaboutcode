@@ -1,138 +1,194 @@
-<!doctype html><html lang=th>
+<!DOCTYPE html>
+<html lang="th">
 <head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>จะสเกลระบบหลักล้านด้วย Cache ต้องพิจารณาอะไรบ้าง - Not About Code - Technical Leadership</title>
-<meta name=renderer content="webkit">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta http-equiv=cache-control content="no-transform">
-<meta http-equiv=cache-control content="no-siteapp">
-<meta name=theme-color content="#f8f5ec">
-<meta name=msapplication-navbutton-color content="#f8f5ec">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
-<meta name=author content="ijemmy"><meta name=description content="แคช(Cache)เป็นหนึ่งในตัวเลือกที่ถูกใช้บ่อยมากในการสเกลระบบให้สามารถรับโหลดได้เยอะๆ ถ้าใครไปสัมภาษณ์งานแล้วเจอคำถามว่าระบบมีคนใช้หลักล้าน และเป็นการอ่านข้อมูลเป็นหลัก (Read-intensive) ตอบได้เลยว่าใช้แคช แต่รายละเอียดของคำตอบว่าจะใช้ยังไง ต้องพิจารณาเรื่องไหนบ้าง เราจะมาคุยกันในบทความนี้ครับ
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>จะสเกลระบบหลักล้านด้วย Cache ต้องพิจารณาอะไรบ้าง - Not About Code - Technical Leadership</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ijemmy" /><meta name="description" content="แคช(Cache)เป็นหนึ่งในตัวเลือกที่ถูกใช้บ่อยมากในการสเกลระบบให้สามารถรับโหลดได้เยอะๆ ถ้าใครไปสัมภาษณ์งานแล้วเจอคำถามว่าระบบมีคนใช้หลักล้าน และเป็นการอ่านข้อมูลเป็นหลัก (Read-intensive) ตอบได้เลยว่าใช้แคช แต่รายละเอียดของคำตอบว่าจะใช้ยังไง ต้องพิจารณาเรื่องไหนบ้าง เราจะมาคุยกันในบทความนี้ครับ
 ชี้แจงก่อนว่า เราจะคุยกันในมุมของการออกแบบระบบ (System Design) ซึ่งจะเป็นการใช้แคชในระดับของ Backend services เพราะแนวคิดของแคชนั้นถูกใช้ในทุกระดับ ยกตัวอย่างเช่น
-"><meta name=keywords content="Hugo,theme,even">
-<meta name=generator content="Hugo 0.89.4 with theme even">
-<link rel=canonical href=https://www.notaboutcode.com/post/31-caching/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=manifest href=/manifest.json>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
-<link rel=stylesheet href=/css/custom.css>
-<meta property="og:title" content="จะสเกลระบบหลักล้านด้วย Cache ต้องพิจารณาอะไรบ้าง">
+" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://www.notaboutcode.com/post/31-caching/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/custom.css">
+
+
+<meta property="og:title" content="จะสเกลระบบหลักล้านด้วย Cache ต้องพิจารณาอะไรบ้าง" />
 <meta property="og:description" content="
 แคช(Cache)เป็นหนึ่งในตัวเลือกที่ถูกใช้บ่อยมากในการสเกลระบบให้สามารถรับโหลดได้เยอะๆ ถ้าใครไปสัมภาษณ์งานแล้วเจอคำถามว่าระบบมีคนใช้หลักล้าน และเป็นการอ่านข้อมูลเป็นหลัก (Read-intensive) ตอบได้เลยว่าใช้แคช แต่รายละเอียดของคำตอบว่าจะใช้ยังไง ต้องพิจารณาเรื่องไหนบ้าง เราจะมาคุยกันในบทความนี้ครับ
-ชี้แจงก่อนว่า เราจะคุยกันในมุมของการออกแบบระบบ (System Design) ซึ่งจะเป็นการใช้แคชในระดับของ Backend services เพราะแนวคิดของแคชนั้นถูกใช้ในทุกระดับ ยกตัวอย่างเช่น">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://www.notaboutcode.com/post/31-caching/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2022-02-19T12:04:02+07:00">
-<meta property="article:modified_time" content="2022-02-19T12:04:02+07:00">
-<meta itemprop=name content="จะสเกลระบบหลักล้านด้วย Cache ต้องพิจารณาอะไรบ้าง">
-<meta itemprop=description content="
+ชี้แจงก่อนว่า เราจะคุยกันในมุมของการออกแบบระบบ (System Design) ซึ่งจะเป็นการใช้แคชในระดับของ Backend services เพราะแนวคิดของแคชนั้นถูกใช้ในทุกระดับ ยกตัวอย่างเช่น" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.notaboutcode.com/post/31-caching/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-02-19T12:04:02+07:00" />
+<meta property="article:modified_time" content="2022-02-19T12:04:02+07:00" />
+
+<meta itemprop="name" content="จะสเกลระบบหลักล้านด้วย Cache ต้องพิจารณาอะไรบ้าง">
+<meta itemprop="description" content="
 แคช(Cache)เป็นหนึ่งในตัวเลือกที่ถูกใช้บ่อยมากในการสเกลระบบให้สามารถรับโหลดได้เยอะๆ ถ้าใครไปสัมภาษณ์งานแล้วเจอคำถามว่าระบบมีคนใช้หลักล้าน และเป็นการอ่านข้อมูลเป็นหลัก (Read-intensive) ตอบได้เลยว่าใช้แคช แต่รายละเอียดของคำตอบว่าจะใช้ยังไง ต้องพิจารณาเรื่องไหนบ้าง เราจะมาคุยกันในบทความนี้ครับ
-ชี้แจงก่อนว่า เราจะคุยกันในมุมของการออกแบบระบบ (System Design) ซึ่งจะเป็นการใช้แคชในระดับของ Backend services เพราะแนวคิดของแคชนั้นถูกใช้ในทุกระดับ ยกตัวอย่างเช่น"><meta itemprop=datePublished content="2022-02-19T12:04:02+07:00">
-<meta itemprop=dateModified content="2022-02-19T12:04:02+07:00">
-<meta itemprop=wordCount content="433">
-<meta itemprop=keywords content="caching,scalability,performance,"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="จะสเกลระบบหลักล้านด้วย Cache ต้องพิจารณาอะไรบ้าง">
-<meta name=twitter:description content="
+ชี้แจงก่อนว่า เราจะคุยกันในมุมของการออกแบบระบบ (System Design) ซึ่งจะเป็นการใช้แคชในระดับของ Backend services เพราะแนวคิดของแคชนั้นถูกใช้ในทุกระดับ ยกตัวอย่างเช่น"><meta itemprop="datePublished" content="2022-02-19T12:04:02+07:00" />
+<meta itemprop="dateModified" content="2022-02-19T12:04:02+07:00" />
+<meta itemprop="wordCount" content="433">
+<meta itemprop="keywords" content="caching,scalability,performance," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="จะสเกลระบบหลักล้านด้วย Cache ต้องพิจารณาอะไรบ้าง"/>
+<meta name="twitter:description" content="
 แคช(Cache)เป็นหนึ่งในตัวเลือกที่ถูกใช้บ่อยมากในการสเกลระบบให้สามารถรับโหลดได้เยอะๆ ถ้าใครไปสัมภาษณ์งานแล้วเจอคำถามว่าระบบมีคนใช้หลักล้าน และเป็นการอ่านข้อมูลเป็นหลัก (Read-intensive) ตอบได้เลยว่าใช้แคช แต่รายละเอียดของคำตอบว่าจะใช้ยังไง ต้องพิจารณาเรื่องไหนบ้าง เราจะมาคุยกันในบทความนี้ครับ
-ชี้แจงก่อนว่า เราจะคุยกันในมุมของการออกแบบระบบ (System Design) ซึ่งจะเป็นการใช้แคชในระดับของ Backend services เพราะแนวคิดของแคชนั้นถูกใช้ในทุกระดับ ยกตัวอย่างเช่น"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
-<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+ชี้แจงก่อนว่า เราจะคุยกันในมุมของการออกแบบระบบ (System Design) ซึ่งจะเป็นการใช้แคชในระดับของ Backend services เพราะแนวคิดของแคชนั้นถูกใช้ในทุกระดับ ยกตัวอย่างเช่น"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
 </head>
 <body>
-<div id=mobile-navbar class=mobile-navbar>
-<div class=mobile-header-logo>
-<a href=/ class=logo>Not About Code</a>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Not About Code</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
-<div class=mobile-navbar-icon>
-<span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-<nav id=mobile-menu class="mobile-menu slideout-menu">
-<ul class=mobile-menu-list>
-<a href=/>
-<li class=mobile-menu-item>Home</li>
-</a><a href=/post/>
-<li class=mobile-menu-item>Archives</li>
-</a><a href=/tags/>
-<li class=mobile-menu-item>Tags</li>
-</a><a href=/categories/>
-<li class=mobile-menu-item>Categories</li>
-</a><a href=/about/>
-<li class=mobile-menu-item>About</li>
-</a>
-</ul>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
 </nav>
-<div class=container id=mobile-panel>
-<header id=header class=header>
-<div class=logo-wrapper>
-<a href=/ class=logo>Not About Code</a>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Not About Code</a>
 </div>
-<nav class=site-navbar>
-<ul id=menu class=menu>
-<li class=menu-item>
-<a class=menu-item-link href=/>Home</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/post/>Archives</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/tags/>Tags</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/categories/>Categories</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/about/>About</a>
-</li>
-</ul>
-<a href=https://webring.wonderful.software#notaboutcode.com title=วงแหวนเว็บ>
-<img alt=วงแหวนเว็บ width=32 height=32 src=https://webring.wonderful.software/webring.black.svg>
-</a>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+
+  
+  <a href="https://webring.wonderful.software#notaboutcode.com" title="วงแหวนเว็บ">
+    <img
+        alt="วงแหวนเว็บ"
+        width="32"
+        height="32"
+        src="https://webring.wonderful.software/webring.black.svg"
+    />
+  </a>
 </nav>
-</header>
-<main id=main class=main>
-<div class=content-wrapper>
-<div id=content class=content>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title>จะสเกลระบบหลักล้านด้วย Cache ต้องพิจารณาอะไรบ้าง</h1>
-<div class=post-meta>
-<span class=post-time> 2022-02-19 </span>
-<div class=post-category>
-<a href=/categories/system-design/> system design </a>
-</div>
-</div>
-</header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title></h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
-<ul>
-<li>
-<ul>
-<li><a href=#ทำไมถงใชแคช>ทำไมถึงใช้แคช</a></li>
-<li><a href=#เรองทตองพจารณากอนใชแคช>เรื่องที่ต้องพืจารณาก่อนใช้แคช</a>
-<ul>
-<li><a href=#1-ขนาดของแคช>1. ขนาดของแคช</a></li>
-<li><a href=#2-ขอมลมการเปลยนแปลงบอยแคไหน>2. ข้อมูลมีการเปลี่ยนแปลงบ่อยแค่ไหน</a></li>
-<li><a href=#3-การเอาขอมลเกาในแคชออก-cache-invalidation>3. การเอาข้อมูลเก่าในแคชออก (Cache invalidation)</a></li>
-<li><a href=#4-วธการอพเดตขอมล>4. วิธีการอัพเดตข้อมูล</a></li>
-</ul>
-</li>
-<li><a href=#สรป>สรุป</a></li>
-</ul>
-</li>
-</ul>
+
+
+
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">จะสเกลระบบหลักล้านด้วย Cache ต้องพิจารณาอะไรบ้าง</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-02-19 </span>
+        <div class="post-category">
+            <a href="/categories/system-design/"> system design </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title"></h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#ทำไมถงใชแคช">ทำไมถึงใช้แคช</a></li>
+        <li><a href="#เรองทตองพจารณากอนใชแคช">เรื่องที่ต้องพืจารณาก่อนใช้แคช</a>
+          <ul>
+            <li><a href="#1-ขนาดของแคช">1. ขนาดของแคช</a></li>
+            <li><a href="#2-ขอมลมการเปลยนแปลงบอยแคไหน">2. ข้อมูลมีการเปลี่ยนแปลงบ่อยแค่ไหน</a></li>
+            <li><a href="#3-การเอาขอมลเกาในแคชออก-cache-invalidation">3. การเอาข้อมูลเก่าในแคชออก (Cache invalidation)</a></li>
+            <li><a href="#4-วธการอพเดตขอมล">4. วิธีการอัพเดตข้อมูล</a></li>
+          </ul>
+        </li>
+        <li><a href="#สรป">สรุป</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
+  </div>
 </div>
-</div>
-<div class=post-content>
-<p><img src=/img/covers/desk-01.png alt="Photo by Wonderlane(@wonderlane) on Unsplash"></p>
+    <div class="post-content">
+      <p><img src="/img/covers/desk-01.png" alt="Photo by Wonderlane(@wonderlane) on Unsplash"></p>
 <p>แคช(Cache)เป็นหนึ่งในตัวเลือกที่ถูกใช้บ่อยมากในการสเกลระบบให้สามารถรับโหลดได้เยอะๆ ถ้าใครไปสัมภาษณ์งานแล้วเจอคำถามว่าระบบมีคนใช้หลักล้าน และเป็นการอ่านข้อมูลเป็นหลัก (Read-intensive) ตอบได้เลยว่าใช้แคช แต่รายละเอียดของคำตอบว่าจะใช้ยังไง ต้องพิจารณาเรื่องไหนบ้าง เราจะมาคุยกันในบทความนี้ครับ</p>
 <p>ชี้แจงก่อนว่า เราจะคุยกันในมุมของการออกแบบระบบ (System Design) ซึ่งจะเป็นการใช้แคชในระดับของ Backend services เพราะแนวคิดของแคชนั้นถูกใช้ในทุกระดับ ยกตัวอย่างเช่น</p>
 <ol>
@@ -145,13 +201,14 @@
 </ol>
 <p>เพื่อไม่ให้สับสน เวลาเราพูดถึงแคชในบทความนี้ ให้นึกถึงตัวอย่าง 5 กับ 6 นะครับ</p>
 <p>ถึงแม้การใช้แคชจะตอบโจทย์ได้บ่อยมาก แต่ก่อนที่จะใส่เข้าไปในระบบ มีเรื่องที่ต้องพิจารณาค่อนข้างมาก มาดูกันครับ</p>
-<h2 id=ทำไมถงใชแคช>ทำไมถึงใช้แคช</h2>
+<h2 id="ทำไมถงใชแคช">ทำไมถึงใช้แคช</h2>
 <p>ตามที่เกริ่นไปขั้นต้น แคชนั้นเหมาะสมการกรณีที่ระบบมีอการอ่านข้อมูลเป็นหลัก ถ้าระบบที่คุณพัฒนาอยู่เริ่มมีการทำงานช้า แล้วพอนั่งวิเคราะห์อัตราส่วนของ Request แล้วพบว่าเป็น Read เกิน 80% ก็ควรพิจารณาใช้แคชได้แล้ว</p>
 <p>แนวคิดของแคชคือการเก็บข้อมูลไว้ให้ใกล้ตัวที่สุด ลองพิจารณา 3-tier architecture ข้างล่างดูครับ</p>
-<figure><img src=/img/diagrams/31-caching/3-tier-with-a-downstream-service.png><figcaption>
-<h4>ตัวอย่าง 3-tier architecture ที่มี downstream service</h4>
-</figcaption>
+<figure><img src="/img/diagrams/31-caching/3-tier-with-a-downstream-service.png"/><figcaption>
+            <h4>ตัวอย่าง 3-tier architecture ที่มี downstream service</h4>
+        </figcaption>
 </figure>
+
 <p>ถ้าระบบมีการอ่านข้อมูลมากจนฐานข้อมูล(Database)ทำงานหนักเกินไป การใส่แคชเข้าไปในระบบจะลดการทำงานของฐานข้อมูล ทำให้ระบบรับโหลดได้ดีขึ้น (Improve scalability) และระบบตอบสนองได้เร็วกว่า(Reduced latency) เพราะแคชจะเก็บข้อมูลจากหน่วยความจำ (Memory หรือ RAM ที่เรารู้จักกัน) ซึ่งเร็วกว่าอ่านจากดิสก์มากๆ แถมยังไม่มี Network Call ด้วยหากเราเก็บแคชไว้ในเซอร์เวอร์</p>
 <p>อีกกรณีคือระบบที่มีการคำนวนเยอะ เราสามารถคำนวนค่าพวกนี้และเก็บเอาไว้ในแคช ทำให้ไม่ต้องคำนวนใหม่หลายรอบ</p>
 <p>นอกจากฝั่งฐานข้อมูล เราอาจจะใช้แคชในการเก็บข้อมูลที่ต้องเรียกใช้จากอีกระบบ (ในรูปข้างบนคือกล่อง Downstream service) แคชจะช่วยลดจำนวนรีเควสต์ที่เราต้องส่งไป ทำให้ระบบตอบสนองได้เร็วขึ้น และลดโหลดในระบบที่เรียกใช้</p>
@@ -163,9 +220,9 @@
 <li>ระบบที่เรียกใช้รับโหลดน้อยลง (Reduced load on downstream systems)</li>
 <li>ลดค่าใช้จ่าย (Reduced cost)</li>
 </ol>
-<h2 id=เรองทตองพจารณากอนใชแคช>เรื่องที่ต้องพืจารณาก่อนใช้แคช</h2>
+<h2 id="เรองทตองพจารณากอนใชแคช">เรื่องที่ต้องพืจารณาก่อนใช้แคช</h2>
 <p>แคชจะดูมีประโยชน์มาก แต่ไม่มีอะไรได้มาฟรีๆครับ ก่อนที่จะใช้แคช เราต้องพิจารณาเรื่องพวกนี้ให้ดีก่อน</p>
-<h3 id=1-ขนาดของแคช>1. ขนาดของแคช</h3>
+<h3 id="1-ขนาดของแคช">1. ขนาดของแคช</h3>
 <p>แคชมักจะถูกเก็บไว้ในหน่วยความจำ หน่วยความจำนั้นราคาแพงกว่าฮาร์ดดิสก์หลายเท่า ดังนั้น พื้นที่ของแคชจะมีขนาดเล็กกว่าฐานข้อมูลที่เราใช้มาก ทำให้เราไม่สามารถเก็บข้อมูลทุกอย่างลงในแคชได้หมด</p>
 <p>ระบบที่ใช้แคชได้มีประสิทธิภาพ นอกจากจะมีการอ่านข้อมูลเป็นหลักแล้ว จะต้องมีการอ่านค่าเดิมซ้ำๆกันด้วย</p>
 <p>สมมติว่าแคชสามารถเก็บข้อมูลได้แค่ 1 ชิ้น รอบแรก ผู้ใช้ขอข้อมูล A เราก็จะดึงจากฐานข้อมูลมาเก็บไว้ในแคชและส่งให้ผ้ใช้</p>
@@ -173,10 +230,11 @@
 <p>ถ้าเกิดดวงไม่ดีรีเควสต์ที่เข้ามาสลับไปสลับมาตลอดเป็น A ซัก 50% เป็น B อีก 50% ระบบนี้จะทำงานแย่กว่าเดิมอีก เพราะต้องมาคอยอัพเดตค่าแคชที่แทบไม่ได้ใช้เลย</p>
 <p>แต่ถ้าระบบนี้มีรีเควสต์เป็น A อยู่ 99% แคชจะมีประโยชน์มาก เพราะใน 100 รีเควสต์ เราต้องดึงข้อมูลจากฐานข้อมูลแค่ 2 ครั้ง</p>
 <p>ดังนั้น การเลือกขนาดของแคชมักจะต้องดูว่ารีเควสต์ดึงข้อมูลซ้ำๆกันแค่ไหน วิธีหนึ่งที่ใช้กันคือความถี่ของข้อมูลที่อ่านมาพล็อตเป็นกราฟ Histogram (เรียงลำดับจากที่ถูกอ่านถี่สุดไปต่ำสุด) หน้าตาควรจะออกมาประมาณนี้ครับ</p>
-<figure><img src=https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Long_tail.svg/2880px-Long_tail.svg.png><figcaption>
-<h4>ภาพ Longtail distribution จาก Wikipedia </h4>
-</figcaption>
+<figure><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Long_tail.svg/2880px-Long_tail.svg.png"/><figcaption>
+            <h4>ภาพ Longtail distribution จาก Wikipedia </h4>
+        </figcaption>
 </figure>
+
 <p>ในภาพข้างบน ให้แกน X คือข้อมูลที่ถูกอ่าน ส่วนแกน Y คือจำนวนครั้งของการอ่านข้อมูลนั้นๆ</p>
 <p>ข้อมูลที่อยู่ในส่วนเขียวคือส่วนที่สามารถเก็บไว้ในแคชได้ ซึ่งกะคร่าวๆว่าประมาณ 15% ของข้อมูลทั้งหมด (แกน X)</p>
 <p>แต่แค่ 15% นี้ก็พอจะสามารถตอบกลับรีเควสต์ส่วนใหญ่ได้ทันทีโดยไม่ต้องดึงข้อมูลจากฐานข้อมูล เพราะมันคลุมพื้นที่สีเขียว ประมาณ 65% ของพื้นที่ทั้งหมด</p>
@@ -187,10 +245,10 @@
 <p>อย่าลืมนะครับว่าแคชมีราคาแพง เราไม่สามารถทำแคชที่ใหญ่เท่ากับฐานข้อมูลได้ การมีข้อมูลการเข้าถึงข้อมูลแบบข้างบนจะทำให้เราปรับจูนขนาดของแคชได้เหมาะสมขึ้น</p>
 <p>ตัวอย่างของระบบที่เหมาะกับการใช้แคช ได้แก่พวกเว็บไซต์ข่าวต่างๆ คนส่วนใหญ่ไม่ค่อยได้อ่านข่าวเก่า ข่าวที่มีการอ่านบ่อยๆก็มักจะเป็นข่าวในช่วงสัปดาห์ที่ผ่านมา</p>
 <p>หรือเว็บไซต์อย่างทวิตเตอร์ที่มีการอ่านมากกว่าการอัพเดตและข้อความที่ถูกอ่านเยอะส่วนใหญ่ก็มักจะเป็นทวีตจากคนที่มีชื่อเสียง ก็น่าจะเหมาะสมกับการใช้แคช อย่างไรก็ตาม แคชจะต้องมีการอัพเดตกรณีที่มีคอมเม้นต์ใหม่ๆเข้ามา</p>
-<h3 id=2-ขอมลมการเปลยนแปลงบอยแคไหน>2. ข้อมูลมีการเปลี่ยนแปลงบ่อยแค่ไหน</h3>
+<h3 id="2-ขอมลมการเปลยนแปลงบอยแคไหน">2. ข้อมูลมีการเปลี่ยนแปลงบ่อยแค่ไหน</h3>
 <p>ข้อมูลที่มีการเปลี่ยนแปลงบ่อยนั้นไม่เหมาะสมการการใช้แคชครับ เพราะทุกครั้งที่มีการเปลี่ยนแปลง เราต้องอัพเดตทั้งข้อมูลต้นทาง(ในฐานข้อมูล)และข้อมูลในแคช ทำให้การอัพเดตนั้นช้าลง ถ้าจังหวะที่อัพเดตดันมีรีเควสต์อ่านเข้ามาพอดี ระบบก็อาจจะยังส่งค่าเก่าในแคชไปได้</p>
 <p>สำหรับระบบบางประเภท การที่ข้อมูลที่เปลี่ยนแปลงมาช้าไปบ้างไม่ได้มีผลกระทบตัวอย่างกับผู้ใช้มาก เช่นโพสต์ในเฟสบุ้ค บางทีการอัพเดตโพสต์อาจจะไม่ขึ้นทันที อันนี้คนส่วนใหญ่ยอมรับได้ จุดนี้เป็น Trade-off ที่ผู้ออกแบบระบบสามารถเลือกได้</p>
-<h3 id=3-การเอาขอมลเกาในแคชออก-cache-invalidation>3. การเอาข้อมูลเก่าในแคชออก (Cache invalidation)</h3>
+<h3 id="3-การเอาขอมลเกาในแคชออก-cache-invalidation">3. การเอาข้อมูลเก่าในแคชออก (Cache invalidation)</h3>
 <p>เนื่องจากแคชมีขนาดเล็กกว่าข้อมูลทั้งหมด พอเวลาผ่านไป แคชบางส่วนจะต้องถูกเอาออก</p>
 <p>ตัวอย่างเช่น เรามีข้อมูลทั้งหมด 50 ชิ้น แคชใส่ได้แค่ 5 ชิ้น</p>
 <p>เวลาผ่านไป เรามีข้อมูลเต็ม 5 ชิ้นอยู่ในแคช โดยถูกเก็บตามลำดับดังนี้</p>
@@ -199,98 +257,159 @@
 </blockquote>
 <p>ณ จุดนี้ เรามีรีเควสต์ใหม่เข้ามาเพื่อดึงข้อมูล F</p>
 <p>คำถามคือ เราเอาข้อมูลไหนออก แล้วเอา F เข้าไปใส่แทน เราจะเอาตัวไหนออก เอาตัวเก่าสุด A หรือตัวใหม่สุด E หรือไม่เอาออกเลย?</p>
-<p>เรื่องนี้คือ Cache Invalidation strategy ครับ (บางคนก็เรียกว่า Replacement strategy, eviction policy) วิธีการให้เลือกหลายแบบ (<a href=https://en.wikipedia.org/wiki/Cache_replacement_policies>อ่านเพิ่มเติม</a>) วิธีที่นิยมกันมักจะเป็น Least Recently Used (LRU)</p>
-<h3 id=4-วธการอพเดตขอมล>4. วิธีการอัพเดตข้อมูล</h3>
+<p>เรื่องนี้คือ Cache Invalidation strategy ครับ (บางคนก็เรียกว่า Replacement strategy, eviction policy) วิธีการให้เลือกหลายแบบ (<a href="https://en.wikipedia.org/wiki/Cache_replacement_policies">อ่านเพิ่มเติม</a>) วิธีที่นิยมกันมักจะเป็น Least Recently Used (LRU)</p>
+<h3 id="4-วธการอพเดตขอมล">4. วิธีการอัพเดตข้อมูล</h3>
 <p>นอกจาก Invalidation เวลาที่แคชเต็มแล้ว เรายังต้องคำนึงด้วยว่าข้อมูลจะต้องมีการอัพเดตด้วย</p>
 <p>แต่เดิม ถ้าเราเก็บข้อมูลไว้ที่เดียว เราก็แค่อัพเดตที่เดียวจบ พอมีแคชเข้ามา เราก็จะต้องอัพเดตทั้งสองที่ ทั้งฝั่งต้นทางของข้อมูล และในแคชด้วย</p>
 <p>ถ้าเราเลือกจะเก็บแคชไว้ในหน่วยความจำของเซอร์เวอร์ (ไม่ได้แยกออกมา เช่นใช้ Redis หรือ Memchached) และเรามีเซอร์เวอร์หลายเครื่อง พอเวลามีการอัพเดต เราจะทำอย่างไรให้ค่านี้ในแคชของทุกเซอร์เวอร์ถูกเปลี่ยน (Cache coherance)</p>
 <p>ถ้าระบบไม่ได้ต้องการ Consistency ที่สูง ยอมรับได้ว่าอาจจะส่งข้อมูลเก่าบ้างเป็นบางครั้ง เราอาจจะเลือกคือการติดค่า Time-to-live (TTL) ไว้ในแต่ละข้อมูล หากเวลาตัวนี้ยังผ่านไปไม่เกิน TTL ระบบจะส่งข้อมูลที่อยู่ในแคชกลับ หากเกิน ระบบจะเช็คข้อมูลจากต้นทางใหม่และทำการอัพเดตค่า วิธีนี้จะทำให้ระบบทำงานได้เร็วขึ้น แต่อาจจะมีการส่งค่าเก่ากลับไปบ้างเป็นบางครั้ง ถ้า TTL ยาวเกินไป</p>
-<h2 id=สรป>สรุป</h2>
+<h2 id="สรป">สรุป</h2>
 <p>การเลือกใช้แคชมีสิ่งต้องพิจารณาหลายอย่าง หากเราตัดสินใจเรื่องพวกนี้ไม่ดี นอกจากจะเสียเงิน เสียเวลาใส่แคชเข้าไปแล้ว อาจจะทำให้ระบบช้าลงหรือส่งค่าเก่ามาให้</p>
 <p>ข้อมูลที่ใช้ประกอบการตัดสินใจคือ (1) รูปแบบการเข้าถึงข้อมูล (จำนวนความถี่ในการอ่านแต่ละข้อมูล) (2) การเปลี่ยนแปลงของข้อมูล</p>
 <p>ซึ่งจะจำเป็นในการตัดสินใจว่าเราจะตั้งค่า (1) ขนาดของแคช, (2) การเลือก Invalidation strategy, (3) การอัพเดตค่าในแคช หรือ (4) การเซ็ตค่า TTL</p>
 <p>ในทางปฏิบัติ ค่าพวกนี้มักจะมีการเปลี่ยนเรื่อยๆครับ สาเหตุเพราะตอนแรก เราอาจจะไม่ได้รู้รูปแบบการเข้าถึงข้อมูลที่แน่ชัด หรือรูปแบบนั้นอาจจะเปลี่ยนตามกาลเวลา ดังนั้น เราควรจะมีระบบ Monitoring ที่ดีเพื่อเก็บข้อมูลเหล่านี้ไว้สำหรับการปรับจูน</p>
-<br>
+<br />
 ---
 <blockquote>
-<p>ติดตามบทความสำหรับโปรแกรมเมอร์ทั้งด้านได้ที่ Facebook page <a href=http://facebook.com/notaboutcode>Not about code</a> หรือ Twitter <a href=https://twitter.com/notaboutcode/>@notaboutcode</a> บทความของเพจจะเน้นเนื้อหาที่นำไปใช้ได้กับชีวิตจริง แต่ไม่ยึดติดกับเทคโนโลยีหรือภาษา เช่น System Design, Continuous Delivery, Testing, Career, etc.
-<br>
-<br>
+<p>ติดตามบทความสำหรับโปรแกรมเมอร์ทั้งด้านได้ที่ Facebook page <a href="http://facebook.com/notaboutcode">Not about code</a> หรือ Twitter <a href="https://twitter.com/notaboutcode/">@notaboutcode</a> บทความของเพจจะเน้นเนื้อหาที่นำไปใช้ได้กับชีวิตจริง แต่ไม่ยึดติดกับเทคโนโลยีหรือภาษา เช่น System Design, Continuous Delivery, Testing, Career, etc.
+<br />
+<br />
 สำหรับท่านที่อยากสนับสนุนผู้เขียน รบกวนช่วยแชร์โพสต์ในเฟสบุ้คให้กับเพื่อนๆที่น่าจะสนใจหัวข้อพวกนี้ด้วยครับ</p>
 </blockquote>
-<div class=fb-page data-href=https://www.facebook.com/notaboutcode/ data-tabs data-small-header=false data-adapt-container-width=true data-hide-cover=false data-show-facepile=true>
-<blockquote cite=https://www.facebook.com/notaboutcode/ class=fb-xfbml-parse-ignore>
-<a href=https://www.facebook.com/notaboutcode/>Not about code</a>
-</blockquote>
+
+
+      
+      <div  class="fb-page"
+            data-href="https://www.facebook.com/notaboutcode/"
+            data-tabs=""
+            data-small-header="false"
+            data-adapt-container-width="true"
+            data-hide-cover="false"
+            data-show-facepile="true">
+
+            <blockquote cite="https://www.facebook.com/notaboutcode/" class="fb-xfbml-parse-ignore">
+              <a href="https://www.facebook.com/notaboutcode/">Not about code</a>
+            </blockquote>
+      </div>
+
+    </div>
+
+    
+    <div id="fb-root"></div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content">ijemmy</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content">
+        2022-02-19
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
 </div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/caching/">caching</a>
+          <a href="/tags/scalability/">scalability</a>
+          <a href="/tags/performance/">performance</a>
+          </div>
+      <div class="fb-comments" data-numposts="5"></div>
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/30-structured-logging/">
+            <span class="next-text nav-default">Structured Logging คืออะไร ทำไมถึงเป็นที่นิยม</span>
+            <span class="next-text nav-mobile"></span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://www.facebook.com/notaboutcode/" class="iconfont icon-facebook" title="facebook"></a>
+  <a href="https://www.notaboutcode.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-<div id=fb-root></div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span class=item-title></span>
-<span class=item-content>ijemmy</span>
-</p>
-<p class=copyright-item>
-<span class=item-title></span>
-<span class=item-content>
-2022-02-19
-</span>
-</p>
-<p class=copyright-item>
-<span class=item-title></span>
-<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
-</p>
+
+<div class="copyright">
+  <span class="power-by">
+    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+     - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+  </span>
 </div>
-<footer class=post-footer>
-<div class=post-tags>
-<a href=/tags/caching/>caching</a>
-<a href=/tags/scalability/>scalability</a>
-<a href=/tags/performance/>performance</a>
-</div>
-<div class=fb-comments data-numposts=5></div>
-<nav class=post-nav>
-<a class=next href=/post/30-structured-logging/>
-<span class="next-text nav-default">Structured Logging คืออะไร ทำไมถึงเป็นที่นิยม</span>
-<span class="next-text nav-mobile"></span>
-<i class="iconfont icon-right"></i>
-</a>
-</nav>
-</footer>
-</article>
-</div>
-</div>
-</main>
-<footer id=footer class=footer>
-<div class=social-links>
-<a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
-<a href=https://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
-</div>
-<div class=copyright>
-<span class=power-by>
-%!(EXTRA string=<a class=hexo-link href=https://gohugo.io>Hugo</a>)
-</span>
-<span class=division>|</span>
-<span class=theme-info>
--
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
-</span>
-<span class=copyright-year>
-&copy;
-2017 -
-2022<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
-</span>
-</div>
-</footer>
-<div class=back-to-top id=back-to-top>
-<i class="iconfont icon-up"></i>
-</div>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
-<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
-<script async src=https://www.google-analytics.com/analytics.js></script>
-<script>(function(b,c,d){var a,e=b.getElementsByTagName(c)[0];if(b.getElementById(d))return;a=b.createElement(c),a.id=d,a.src='https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676',e.parentNode.insertBefore(a,e)})(document,'script','facebook-jssdk')</script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-108239205-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 </body>
 </html>

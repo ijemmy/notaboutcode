@@ -1,148 +1,204 @@
-<!doctype html><html lang=th>
+<!DOCTYPE html>
+<html lang="th">
 <head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>การออกแบบ Service API ให้เป็น Idempotent - Not About Code - Technical Leadership</title>
-<meta name=renderer content="webkit">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta http-equiv=cache-control content="no-transform">
-<meta http-equiv=cache-control content="no-siteapp">
-<meta name=theme-color content="#f8f5ec">
-<meta name=msapplication-navbutton-color content="#f8f5ec">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
-<meta name=author content="ijemmy"><meta name=description content="ใครเคยเรียกใช้งานเซอร์วิซครั้งเดียว (เช่น การโอนเงิน สั่งซื้อของ ฯลฯ) แล้วเจอ Transaction ตัดซ้ำสองครั้งไหมครับ?
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>การออกแบบ Service API ให้เป็น Idempotent - Not About Code - Technical Leadership</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ijemmy" /><meta name="description" content="ใครเคยเรียกใช้งานเซอร์วิซครั้งเดียว (เช่น การโอนเงิน สั่งซื้อของ ฯลฯ) แล้วเจอ Transaction ตัดซ้ำสองครั้งไหมครับ?
 ถ้าใช่ คุณเจอปัญหาเรื่อง Idempotent เข้าให้แล้วล่ะ
 เราเคยคุยกันในเรื่องของRetryไปแล้ว ว่าอาจจะถล่มเซอร์วิซตัวเองได้ หากไม่จัดการให้ดี
 มานั่งตรึกตรองดูอีกที จริงๆแล้วผมลืมอีกคอนเซ็บหนึ่งที่สำคัญมากเวลาเราใช้ Retry นั่นก็คือเรื่อง Idempotent ซึ่งเป็นที่มาของ เคส Transaction เกิดขึ้นสองที
 บทความนี้จะเริ่มต้นจากต้นตอของปัญหานี้ก่อน เพื่ออธิบายให้เห็นภาพว่าเกิดอะไรขึ้น และเสนอวิธีการแก้ปัญหาในตอนท้ายครับ
-"><meta name=keywords content="Hugo,theme,even">
-<meta name=generator content="Hugo 0.89.4 with theme even">
-<link rel=canonical href=https://www.notaboutcode.com/post/16-idempotent/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=manifest href=/manifest.json>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
-<link rel=stylesheet href=/css/custom.css>
-<meta property="og:title" content="การออกแบบ Service API ให้เป็น Idempotent">
+" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://www.notaboutcode.com/post/16-idempotent/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/custom.css">
+
+
+<meta property="og:title" content="การออกแบบ Service API ให้เป็น Idempotent" />
 <meta property="og:description" content="
 ใครเคยเรียกใช้งานเซอร์วิซครั้งเดียว (เช่น การโอนเงิน สั่งซื้อของ ฯลฯ) แล้วเจอ Transaction ตัดซ้ำสองครั้งไหมครับ?
 ถ้าใช่ คุณเจอปัญหาเรื่อง Idempotent เข้าให้แล้วล่ะ
 เราเคยคุยกันในเรื่องของRetryไปแล้ว ว่าอาจจะถล่มเซอร์วิซตัวเองได้ หากไม่จัดการให้ดี
 มานั่งตรึกตรองดูอีกที จริงๆแล้วผมลืมอีกคอนเซ็บหนึ่งที่สำคัญมากเวลาเราใช้ Retry นั่นก็คือเรื่อง Idempotent ซึ่งเป็นที่มาของ เคส Transaction เกิดขึ้นสองที
-บทความนี้จะเริ่มต้นจากต้นตอของปัญหานี้ก่อน เพื่ออธิบายให้เห็นภาพว่าเกิดอะไรขึ้น และเสนอวิธีการแก้ปัญหาในตอนท้ายครับ">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://www.notaboutcode.com/post/16-idempotent/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2017-12-26T12:04:02+07:00">
-<meta property="article:modified_time" content="2018-01-01T12:04:02+07:00">
-<meta itemprop=name content="การออกแบบ Service API ให้เป็น Idempotent">
-<meta itemprop=description content="
+บทความนี้จะเริ่มต้นจากต้นตอของปัญหานี้ก่อน เพื่ออธิบายให้เห็นภาพว่าเกิดอะไรขึ้น และเสนอวิธีการแก้ปัญหาในตอนท้ายครับ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.notaboutcode.com/post/16-idempotent/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2017-12-26T12:04:02+07:00" />
+<meta property="article:modified_time" content="2018-01-01T12:04:02+07:00" />
+
+<meta itemprop="name" content="การออกแบบ Service API ให้เป็น Idempotent">
+<meta itemprop="description" content="
 ใครเคยเรียกใช้งานเซอร์วิซครั้งเดียว (เช่น การโอนเงิน สั่งซื้อของ ฯลฯ) แล้วเจอ Transaction ตัดซ้ำสองครั้งไหมครับ?
 ถ้าใช่ คุณเจอปัญหาเรื่อง Idempotent เข้าให้แล้วล่ะ
 เราเคยคุยกันในเรื่องของRetryไปแล้ว ว่าอาจจะถล่มเซอร์วิซตัวเองได้ หากไม่จัดการให้ดี
 มานั่งตรึกตรองดูอีกที จริงๆแล้วผมลืมอีกคอนเซ็บหนึ่งที่สำคัญมากเวลาเราใช้ Retry นั่นก็คือเรื่อง Idempotent ซึ่งเป็นที่มาของ เคส Transaction เกิดขึ้นสองที
-บทความนี้จะเริ่มต้นจากต้นตอของปัญหานี้ก่อน เพื่ออธิบายให้เห็นภาพว่าเกิดอะไรขึ้น และเสนอวิธีการแก้ปัญหาในตอนท้ายครับ"><meta itemprop=datePublished content="2017-12-26T12:04:02+07:00">
-<meta itemprop=dateModified content="2018-01-01T12:04:02+07:00">
-<meta itemprop=wordCount content="612">
-<meta itemprop=keywords content="api,design,web service,"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="การออกแบบ Service API ให้เป็น Idempotent">
-<meta name=twitter:description content="
+บทความนี้จะเริ่มต้นจากต้นตอของปัญหานี้ก่อน เพื่ออธิบายให้เห็นภาพว่าเกิดอะไรขึ้น และเสนอวิธีการแก้ปัญหาในตอนท้ายครับ"><meta itemprop="datePublished" content="2017-12-26T12:04:02+07:00" />
+<meta itemprop="dateModified" content="2018-01-01T12:04:02+07:00" />
+<meta itemprop="wordCount" content="612">
+<meta itemprop="keywords" content="api,design,web service," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="การออกแบบ Service API ให้เป็น Idempotent"/>
+<meta name="twitter:description" content="
 ใครเคยเรียกใช้งานเซอร์วิซครั้งเดียว (เช่น การโอนเงิน สั่งซื้อของ ฯลฯ) แล้วเจอ Transaction ตัดซ้ำสองครั้งไหมครับ?
 ถ้าใช่ คุณเจอปัญหาเรื่อง Idempotent เข้าให้แล้วล่ะ
 เราเคยคุยกันในเรื่องของRetryไปแล้ว ว่าอาจจะถล่มเซอร์วิซตัวเองได้ หากไม่จัดการให้ดี
 มานั่งตรึกตรองดูอีกที จริงๆแล้วผมลืมอีกคอนเซ็บหนึ่งที่สำคัญมากเวลาเราใช้ Retry นั่นก็คือเรื่อง Idempotent ซึ่งเป็นที่มาของ เคส Transaction เกิดขึ้นสองที
-บทความนี้จะเริ่มต้นจากต้นตอของปัญหานี้ก่อน เพื่ออธิบายให้เห็นภาพว่าเกิดอะไรขึ้น และเสนอวิธีการแก้ปัญหาในตอนท้ายครับ"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
-<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+บทความนี้จะเริ่มต้นจากต้นตอของปัญหานี้ก่อน เพื่ออธิบายให้เห็นภาพว่าเกิดอะไรขึ้น และเสนอวิธีการแก้ปัญหาในตอนท้ายครับ"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
 </head>
 <body>
-<div id=mobile-navbar class=mobile-navbar>
-<div class=mobile-header-logo>
-<a href=/ class=logo>Not About Code</a>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Not About Code</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
-<div class=mobile-navbar-icon>
-<span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-<nav id=mobile-menu class="mobile-menu slideout-menu">
-<ul class=mobile-menu-list>
-<a href=/>
-<li class=mobile-menu-item>Home</li>
-</a><a href=/post/>
-<li class=mobile-menu-item>Archives</li>
-</a><a href=/tags/>
-<li class=mobile-menu-item>Tags</li>
-</a><a href=/categories/>
-<li class=mobile-menu-item>Categories</li>
-</a><a href=/about/>
-<li class=mobile-menu-item>About</li>
-</a>
-</ul>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
 </nav>
-<div class=container id=mobile-panel>
-<header id=header class=header>
-<div class=logo-wrapper>
-<a href=/ class=logo>Not About Code</a>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Not About Code</a>
 </div>
-<nav class=site-navbar>
-<ul id=menu class=menu>
-<li class=menu-item>
-<a class=menu-item-link href=/>Home</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/post/>Archives</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/tags/>Tags</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/categories/>Categories</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/about/>About</a>
-</li>
-</ul>
-<a href=https://webring.wonderful.software#notaboutcode.com title=วงแหวนเว็บ>
-<img alt=วงแหวนเว็บ width=32 height=32 src=https://webring.wonderful.software/webring.black.svg>
-</a>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+
+  
+  <a href="https://webring.wonderful.software#notaboutcode.com" title="วงแหวนเว็บ">
+    <img
+        alt="วงแหวนเว็บ"
+        width="32"
+        height="32"
+        src="https://webring.wonderful.software/webring.black.svg"
+    />
+  </a>
 </nav>
-</header>
-<main id=main class=main>
-<div class=content-wrapper>
-<div id=content class=content>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title>การออกแบบ Service API ให้เป็น Idempotent</h1>
-<div class=post-meta>
-<span class=post-time> 2017-12-26 </span>
-<div class=post-category>
-<a href=/categories/system-design/> System Design </a>
-</div>
-</div>
-</header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title></h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#ทำไมถงเกด-transaction-ซำ>ทำไมถึงเกิด Transaction ซ้ำ</a></li>
-<li><a href=#network-ไม-reliable>Network ไม่ Reliable</a></li>
-<li><a href=#นยามและความสำคญ>นิยามและความสำคัญ</a></li>
-<li><a href=#วธ-1-ระบเงอนไขตงตนในการเปลยนแปลง>วิธี 1: ระบุเงื่อนไขตั้งต้นในการเปลี่ยนแปลง</a></li>
-<li><a href=#วธท-2-จำ-uuid-ของแตละ-request>วิธีที่ 2: จำ UUID ของแต่ละ Request</a></li>
-<li><a href=#สรป>สรุป</a></li>
-</ul>
+
+
+
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">การออกแบบ Service API ให้เป็น Idempotent</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2017-12-26 </span>
+        <div class="post-category">
+            <a href="/categories/system-design/"> System Design </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title"></h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ทำไมถงเกด-transaction-ซำ">ทำไมถึงเกิด Transaction ซ้ำ</a></li>
+    <li><a href="#network-ไม-reliable">Network ไม่ Reliable</a></li>
+    <li><a href="#นยามและความสำคญ">นิยามและความสำคัญ</a></li>
+    <li><a href="#วธ-1-ระบเงอนไขตงตนในการเปลยนแปลง">วิธี 1: ระบุเงื่อนไขตั้งต้นในการเปลี่ยนแปลง</a></li>
+    <li><a href="#วธท-2-จำ-uuid-ของแตละ-request">วิธีที่ 2: จำ UUID ของแต่ละ Request</a></li>
+    <li><a href="#สรป">สรุป</a></li>
+  </ul>
 </nav>
+  </div>
 </div>
-</div>
-<div class=post-content>
-<p><img src=/img/covers/pay-01.jpg alt="Photo by William Iven on Unsplash"></p>
+    <div class="post-content">
+      <p><img src="/img/covers/pay-01.jpg" alt="Photo by William Iven on Unsplash"></p>
 <p>ใครเคยเรียกใช้งานเซอร์วิซครั้งเดียว (เช่น การโอนเงิน สั่งซื้อของ ฯลฯ) แล้วเจอ Transaction ตัดซ้ำสองครั้งไหมครับ?</p>
 <p>ถ้าใช่ คุณเจอปัญหาเรื่อง Idempotent เข้าให้แล้วล่ะ</p>
-<p>เราเคยคุยกันในเรื่องของ<a href=/post/05-retry/>Retry</a>ไปแล้ว ว่าอาจจะถล่มเซอร์วิซตัวเองได้ หากไม่จัดการให้ดี</p>
+<p>เราเคยคุยกันในเรื่องของ<a href="/post/05-retry/">Retry</a>ไปแล้ว ว่าอาจจะถล่มเซอร์วิซตัวเองได้ หากไม่จัดการให้ดี</p>
 <p>มานั่งตรึกตรองดูอีกที จริงๆแล้วผมลืมอีกคอนเซ็บหนึ่งที่สำคัญมากเวลาเราใช้ Retry นั่นก็คือเรื่อง Idempotent ซึ่งเป็นที่มาของ เคส Transaction เกิดขึ้นสองที</p>
 <p>บทความนี้จะเริ่มต้นจากต้นตอของปัญหานี้ก่อน เพื่ออธิบายให้เห็นภาพว่าเกิดอะไรขึ้น และเสนอวิธีการแก้ปัญหาในตอนท้ายครับ</p>
-<h1 id=ทำไมถงเกด-transaction-ซำ>ทำไมถึงเกิด Transaction ซ้ำ</h1>
+<h1 id="ทำไมถงเกด-transaction-ซำ">ทำไมถึงเกิด Transaction ซ้ำ</h1>
 <p>ตอนเริ่มเขียนโปรแกรมใหม่ ผมเชื่อมั่นว่าถ้ายิง Request ไป แล้วต้องได้คำตอบกลับมาแน่ๆ</p>
 <p>พอเขียนไปสักพัก ถึงค้นพบว่าบางทียิงไปแล้วก็ไม่มีคำตอบกลับ เนื่องด้วยความเปรี้ยว ก็เลยใส่ Loop เข้าไปว่าถ้ายังไม่ได้คำตอบกลับมา ให้ยิง Request ไปอีกจนได้คำตอบ (ก็คือการทำ Retry นั่นเอง)</p>
 <p>โดยลืมไปว่า ไอ้การไม่ได้รับคำตอบ มันเป็นไปได้หลายกรณี</p>
@@ -151,19 +207,21 @@
 <li>Request ไปถึง, Server ทำการประมวลผลเสร็จแล้ว, แต่ Response ที่ส่งมาหายไประหว่างทาง</li>
 </ol>
 <p>ในที่นี้ ผมทึกทักเอาไปเองว่าเป็นข้อ 1. แต่จริงๆอาจเป็นข้อ 2. ก็ได้</p>
-<p>สมมติว่าผมส่ง Request ไปทำการโอนเงิน เป็นไปได้ว่า Request แรกเกิดกรณีข้อ 2. ขึ้น แต่ผมดันเข้าใจผิดว่า Request ไปไม่ถึง เลยทะลึ่งส่งไปอีกรอบ ทำให้โอนเงินซ้ำไปสองที</p>
+<p>สมมติว่าผมส่ง Request ไปทำการโอนเงิน เป็นไปได้ว่า Request แรกเกิดกรณีข้อ 2. ขึ้น  แต่ผมดันเข้าใจผิดว่า Request ไปไม่ถึง เลยทะลึ่งส่งไปอีกรอบ ทำให้โอนเงินซ้ำไปสองที</p>
 <p>ที่น่ากลัวที่สุด คือผมไม่รู้เรื่องเลยว่าโอนเงินซ้ำ จนกระทั่งหัวหน้าเรียกไปพบ เพราะลูกค้าโทรมาด่า</p>
-<h1 id=network-ไม-reliable>Network ไม่ Reliable</h1>
+<h1 id="network-ไม-reliable">Network ไม่ Reliable</h1>
 <p>Network ที่เราใช้ในอินเตอร์เน็ต ไม่ได้ถูกออกแบบมาให้การันตีว่าทุกๆ Request ที่เราส่ง จะไปถึงเป้าหมาย 100% ครับ</p>
 <p>การส่ง Request ก็เหมือนกับการส่งจดหมายผ่านไปรษณีย์ไทยนั่นแหละ ไม่รู้หรอกว่าจะถึงรึเปล่า</p>
 <p>ถ้า Response ไม่กลับมา เราก็ไม่มีทางรู้เลยว่ามันเกิดกรณี 1 หรือ 2</p>
 <p>เพื่อให้เห็นภาพชัด ผมขอเล่าถึงปัญหาคลาสสิคที่ชื่อว่า &ldquo;Two Generals' Problem&rdquo;</p>
 <p>กล่าวคือ มีขุนพลสองคน ตั้งกำลังพลขนาบข้างศัตรูอยู่หลังภูเขา พร้อมจะจู่โจมได้ทุกเมื่อ ดังรูปข้างล่าง</p>
-<figure class=center>
-<img src=/img/diagrams/16-idempotent/two-generals.jpg alt=ขุนพลสุธีกับขุนพลอรุชพยายามสื่อสารกันเพื่อนัดเวลาจู่โจม>
-<figcaption>
-ขุนพลสุธีกับขุนพลอรุชพยายามสื่อสารกันเพื่อนัดเวลาจู่โจม
-</figcaption>
+<figure class="center" >
+  <img  src="/img/diagrams/16-idempotent/two-generals.jpg"
+        alt="ขุนพลสุธีกับขุนพลอรุชพยายามสื่อสารกันเพื่อนัดเวลาจู่โจม"
+        >
+  <figcaption>
+    ขุนพลสุธีกับขุนพลอรุชพยายามสื่อสารกันเพื่อนัดเวลาจู่โจม
+  </figcaption>
 </figure>
 <p>เนื่องจากขุนพลทั้งสองมีกำลังน้อยกว่า วิธีการเดียวที่จะชนะศัตรูได้ คือต้องจู่โจมขนาบข้างพร้อมกัน</p>
 <p>ขุนพลสุธีจึงส่งม้าเร็วไปแจ้งขุนพลอรุชว่า &ldquo;เก้าโมงเช้าพรุ่งนี้ เราจะเข้าตีศัตรูพร้อมกัน&rdquo;</p>
@@ -175,17 +233,17 @@
 </ol>
 <p>เพื่อความปลอดภัย ขุนพลสุธีจึงเขียนไปว่า &ldquo;เก้าโมงเช้าพรุ่งนี้ เราจะเข้าตีศัตรูพร้อมกัน ถ้าได้รับสารแล้วส่งคำตอบมาด้วย&rdquo; จะได้ชัวร์ ไม่ไปเก้อคนเดียว</p>
 <p>ปรากฏว่า ม้าเร็วไปถึงขุนพลอรุช ส่งสารได้สำเร็จ ขุนพลอรุชส่งสารกลับไป &ldquo;โอเค เก้าโมงเช้าเจอกัน&rdquo;</p>
-<p>แต่เดี๋ยวก่อน ถ้าหากม้าเร็วโดนสอยไประหว่างขากลับล่ะ กรณีนั้น ขุนพลสุธีก็จะไม่ได้รับสาร และเข้าใจไปว่าสารไปไม่ถึง พรุ่งนี้เก้าโมงเช้า ขุนพลอรุชก็จะยกทัพไปโดนกระทืบคนเดียว ไม่ได้การล่ะ ต้องเขียนไปใหม่ว่า &ldquo;โอเค เก้าโมงเช้าเจอกัน ได้รับสารแล้วตอบกลับมาด้วย&rdquo;</p>
+<p>แต่เดี๋ยวก่อน ถ้าหากม้าเร็วโดนสอยไประหว่างขากลับล่ะ กรณีนั้น ขุนพลสุธีก็จะไม่ได้รับสาร และเข้าใจไปว่าสารไปไม่ถึง พรุ่งนี้เก้าโมงเช้า ขุนพลอรุชก็จะยกทัพไปโดนกระทืบคนเดียว ไม่ได้การล่ะ ต้องเขียนไปใหม่ว่า  &ldquo;โอเค เก้าโมงเช้าเจอกัน ได้รับสารแล้วตอบกลับมาด้วย&rdquo;</p>
 <p>ม้าเร็วก็วิ่งกลับไปหาขุนพลสุธี</p>
-<p>ขุนพลสุธีได้รับสารกระหยิ่มยิ้มย่อง จะส่งสารกลับไป แต่เอ๊ะ ถ้าเกิดคราวนี้ม้าเร็วพลาดขึ้นมา โดนศัตรูสอยระหว่างทาง ขุนพลอรุชก็จะเข้าใจว่าเราไมไ่ด้รับสาร เราก็จะเข้าตีคนเดียว&mldr; ฉิบหายล่ะ อย่างนี้ต้องให้ขุนพลอรุชตอบกลับมาอีกครั้ง</p>
-<p>&mldr;</p>
+<p>ขุนพลสุธีได้รับสารกระหยิ่มยิ้มย่อง จะส่งสารกลับไป แต่เอ๊ะ ถ้าเกิดคราวนี้ม้าเร็วพลาดขึ้นมา โดนศัตรูสอยระหว่างทาง ขุนพลอรุชก็จะเข้าใจว่าเราไมไ่ด้รับสาร เราก็จะเข้าตีคนเดียว&hellip; ฉิบหายล่ะ อย่างนี้ต้องให้ขุนพลอรุชตอบกลับมาอีกครั้ง</p>
+<p>&hellip;</p>
 <p>จะเห็นได้ว่า ไม่ว่าขุนพลทั้งสองจะส่งม้าเร็วกลับไปมาอีกกี่สิบชาติ ก็ไม่มีทางที่จะมั่นใจได้ว่าอีกฝั่งนึงได้รับสารชัวร์ๆ</p>
 <p>ปัญหาคลาสสิคนี้ถูกเรียกว่า Two Generals' problem</p>
 <p>ต้นเหตุของปัญหานี้คือความไม่แน่นอน (Unreliable) ของม้าเร็ว ที่อาจจะส่งสารไปถึงหรือไม่ก็ได้</p>
 <p>ซึ่งมันตรงกับปัญหาที่เรากำลังเจออยู่มาก</p>
 <p>การที่ม้าเร็วอาจโดนศัตรูสอยระหว่างทาง ก็เหมือนกับการที่ Network ไม่ Reliable นั่นแหละ</p>
 <p>ไม่ว่าเราจะให้มี Request(สารจากขุนพลสุธี), Response (สารจากขุนพลอรุช) ทั้งหมดกี่รอบ ยังไงอีกฝั่งก็ไม่มีทางรู้ว่าอีกฝั่งได้รับข้อมูลจริงๆหรือเปล่า?</p>
-<h1 id=นยามและความสำคญ>นิยามและความสำคัญ</h1>
+<h1 id="นยามและความสำคญ">นิยามและความสำคัญ</h1>
 <p>มาคิดในมุมของขุนพลสุธีกัน ว่าจะจัดการกับปัญหานี้อย่างไร</p>
 <p>ถ้าเราส่งม้าเร็วหลายๆตัวไปพร้อมกันล่ะ?</p>
 <p>สมมติว่าโอกาสที่ม้าเร็วจะถูกสอยโดยกองทัพศัตรูคือ 25% (และ independent ต่อกัน)</p>
@@ -203,30 +261,30 @@
 </blockquote>
 <p>ในทางตรงกันข้าม หาก Request นั้นไม่มีคุณสมบัติ Idempotent ก็จะเกิดกรณีที่ Transaction เกิดขึ้นสองครั้ง เช่น</p>
 <ol>
-<li><strong>การโอนเงิน</strong> สั่งให้โอนเงิน 100 บาทจากบัญชีสุธี ไปยังบัญชีอรุช หากสั่งสองที ก็กลายเป็นโอนทั้งหมด 200</li>
-<li><strong>การสั่งของ</strong> สั่งให้ซื้อกล้วย 10 หวี หากสั่งสองที สุธีก็จะได้กล้วย 20 หวี</li>
+<li><strong>การโอนเงิน</strong> สั่งให้โอนเงิน 100 บาทจากบัญชีสุธี ไปยังบัญชีอรุช  หากสั่งสองที ก็กลายเป็นโอนทั้งหมด 200</li>
+<li><strong>การสั่งของ</strong> สั่งให้ซื้อกล้วย 10 หวี  หากสั่งสองที สุธีก็จะได้กล้วย 20 หวี</li>
 </ol>
 <p>Request จำพวกนี้ จำเป็นต้องเกิดขึ้นครั้งเดียวเป๊ะ (Exactly Once) หากถูกสั่งมากกว่าหนึ่งครั้ง</p>
 <p>ใครที่ใช้ REST API สามารถมองได้ว่าพวกนี้คือคำสั่งประเภท POST นั่นเอง</p>
 <p>แต่ทุกปัญหาย่อมมีทางออก เราสามารถใช้เทคนิคต่อไปนี้ เพื่อทำให้ Request ข้างต้นกลายเป็น Idempotent ได้ !!</p>
-<h1 id=วธ-1-ระบเงอนไขตงตนในการเปลยนแปลง>วิธี 1: ระบุเงื่อนไขตั้งต้นในการเปลี่ยนแปลง</h1>
+<h1 id="วธ-1-ระบเงอนไขตงตนในการเปลยนแปลง">วิธี 1: ระบุเงื่อนไขตั้งต้นในการเปลี่ยนแปลง</h1>
 <p>ลองย้อนกลับไปยังเรื่องของการโอนเงิน คำสั่งคือ</p>
 <p>&ldquo;โอนเงิน 100 บาทจากบัญชีสุธี ไปยังบัญชีอรุช&rdquo;</p>
 <p>สมมติว่า สุธีมีเงินในบัญชี 1,000 บาท เราสามารถแก้คำสั่งนี้ให้เป็น Idempotent ได้ โดยการระบุเงื่อนไขตั้งต้น</p>
 <p>&ldquo;หากสุธีมีเงินในบัญชี 1,000 บาท ให้เปลี่ยนจำนวนเงินเป็น 900 บาท แล้วเพิ่มเงินในบัญชีอรุช 100 บาท&rdquo;</p>
-<p>ต่อให้เรายิง Request นี้สองครั้ง Request ที่สองจะล้มเหลว เพราะเงินตั้งต้นเป็น 900 เรียบร้อยแล้ว</p>
+<p>ต่อให้เรายิง Request นี้สองครั้ง  Request ที่สองจะล้มเหลว เพราะเงินตั้งต้นเป็น 900 เรียบร้อยแล้ว</p>
 <p>วิธีนี้มีช่องโหว่ตรงที่</p>
 <ol>
-<li>หากสุธีต้องการจ่ายเงินพร้อมๆกัน (เช่น จ่ายให้อรุช 1,000->900 และจ่ายซื้อดอกไม้ให้สาว 1,000->500) คำสั่งที่ไปถึงทีหลังจะไม่สามารถทำงานได้ เพราะจำนวนเงินตั้งต้นในบัญชีไม่ใช่ 1,000 แล้ว ต้องส่ง Request ด้วยค่าใหม่อีกรอบ</li>
+<li>หากสุธีต้องการจ่ายเงินพร้อมๆกัน (เช่น จ่ายให้อรุช 1,000-&gt;900 และจ่ายซื้อดอกไม้ให้สาว 1,000-&gt;500) คำสั่งที่ไปถึงทีหลังจะไม่สามารถทำงานได้ เพราะจำนวนเงินตั้งต้นในบัญชีไม่ใช่ 1,000 แล้ว ต้องส่ง Request ด้วยค่าใหม่อีกรอบ</li>
 <li>หากสุธีซวยจริงๆ ดันมีคนอื่นโอนเงินเข้ามา 100 บาทระหว่าง 2 Request ก็จะโดนตัดเงินสองรอบ</li>
 <li>หากสุธีไม่ได้ Response กลับมาจากครั้งแรก แต่ได้ Response ครั้งที่สองออกมาว่าโอนเงินไม่สำเร็จ เพราะเงินเหลือแค่ 900 บาท สุธีจะไม่มีทางรู้เลยว่าเงินที่หายไป 100 บาทนั้นเกิดจาก Request แรก หรือบังเอิญมีการตัดเงิน 100 บาทจากที่อื่นพอดี</li>
 <li>หากสุธีต้องการจะซื้อกล้วย จะไม่มี State ให้สุธีใช้เป็นเงื่อนไขตั้งต้น</li>
 </ol>
 <p>ซึ่งถ้ากรณีพวกนี้อาจเกิดขึ้นได้ถ้าระบบเรามีการเปลี่ยนแปลง Record เดียวกันบ่อยๆ (กรณี#1-2) หรือมีการสร้าง Record ใหม่พร้อมกันเยอะๆ (กรณี#4) หากระบบที่ออกแบบอยู่มีแนวโน้มที่จะเป็นแบบนั้น เราอาจจะต้องพิจารณาวิธีถัดไป</p>
-<h1 id=วธท-2-จำ-uuid-ของแตละ-request>วิธีที่ 2: จำ UUID ของแต่ละ Request</h1>
+<h1 id="วธท-2-จำ-uuid-ของแตละ-request">วิธีที่ 2: จำ UUID ของแต่ละ Request</h1>
 <p>ปัญหาของวิธีที่แล้ว คือการใช้สถานะของข้อมูลเป็นเงื่อนไขตั้งต้น ซึ่งข้อมูล พวกนี้สามารถเปลี่ยนกลับไปกลับมาได้</p>
 <p>ดังนั้น แทนที่จะไปใช้สถานะของข้อมูล เรามาจัดการกับ Request แทนที่จะรอ</p>
-<p>โดยฝั่งผู้ใช้จะต้องใส่ Universally Unique ID (UUID) ให้กับแต่ละ Request ส่วนฝั่งเซอร์เวอร์ก็จะต้องทำการจำว่า Request ไหน (UUID ไหน) ได้ประมวลผลไปแล้วบ้าง จะได้ไม่ทำซ้ำ</p>
+<p>โดยฝั่งผู้ใช้จะต้องใส่ Universally Unique ID  (UUID) ให้กับแต่ละ Request  ส่วนฝั่งเซอร์เวอร์ก็จะต้องทำการจำว่า Request ไหน (UUID ไหน) ได้ประมวลผลไปแล้วบ้าง จะได้ไม่ทำซ้ำ</p>
 <p>จากตัวอย่างข้างต้น เราสามารถใส่ UUID=189a8538-75a9-404f-a9db-197f4bb704f1 ให้กับทั้ง Request แรก และ Request ที่สองที่ Retry</p>
 <p>ฝั่งเซอร์เวอร์ หากจัดการประมวลผล Request แรกไปแล้ว และยังได้ Request ที่ 2 อีก ก็สามารถเช็คจาก UUID ได้ว่าเป็น Request เดียวกัน และสามารถส่งคำตอบเดิมกลับไปได้</p>
 <p>ฟังดูแล้ววิธีนี้ดูสะดวกกว่ามาก แต่จะท้าทายเมื่อระบบต้อง Scale หรือเป็น Distributed System</p>
@@ -239,91 +297,151 @@
 <p>บางคนอาจจะแย้งว่า ถ้าเราต้องการเช็คแค่กรณี Retry เราจำแค่ 1 นาทีก็พอ แต่หาก Request พวกนี้ไม่ใช่ HTTP Request ที่มี Timeout สั้นๆล่ะ? Request บางอันอาจจะถูกส่งมาเก็บไว้ใน Queue เพื่อรอการประมวลผลแบบ Asynchronous ก็ได้ ซึ่งแต่ละ Request อาจจะค้างอยู่เป็นวันก่อนได้ประมวลผล กรณีนี้ได้จำกันขี้แตกแน่นอน</p>
 <p>ยิ่งหากเซอร์วิซของเราต้องมี Server หลายๆตัว แปลว่า UUID นี้เก็บในเซอร์เวอร์แต่ละตัวแยกกันไม่ได้ (Retry Request อาจจะถูกส่งไปอีกเซอร์เวอร์) เราจึงต้องแยกเก็บใน In-Memory Database ต่างหาก ทำให้ต้องเสีย Latency ในการทำ Network Call อีกรอบ เพื่อเช็คว่า UUID นี้มีเซอร์เวอร์ไหนประมวลผลไปแล้วหรือยัง</p>
 <p>เทียบกับวิธีแรก เราไม่จำเป็นต้องจำอะไร หรือเก็บอะไรไว้ที่อื่นเลย นอกจากข้อมูลที่เราต้องใช้อยู่แล้ว</p>
-<h1 id=สรป>สรุป</h1>
+<h1 id="สรป">สรุป</h1>
 <p>เน็ตเวิร์คไม่เที่ยง (ไม่ Reliable)</p>
 <p>Request ที่ไม่มี Response กลับมา อาจจะไปถึงผู้รับหรือไม่ก็ได้ โดยเราไม่มีทางรู้เลย ปัญหานี้เหมือนกับสองขุนพล ที่ต่อให้ส่ง Request กับ Response กี่ครั้ง ก็ไม่สามารถมั่นใจได้ว่าอีกฝ่ายจะได้รับหรือเปล่า</p>
 <p>เราแก้ปัญหาข้างต้นได้ด้วยการ Retry (ส่ง Request ซ้ำ) แต่หาก Service API ของเราไม่เป็น Idempotent อาจจะทำให้เกิดอาการ &ldquo;ตัด Transaction ซ้ำสองรอบ&rdquo; ขึ้นมาได้</p>
 <p>เพื่อแก้ปัญหานี้ เราสามารถกำหนดเงื่อนไขตั้งต้นใน Request (วิธีที่ 1) หรือการจำ UUID ของแต่ละ Request (วิธีที่ 2) ซึ่งทั้งสองวิธีมีข้อจำกัดที่แตกต่างกัน</p>
 <p>วิธีที่ 1 ใช้ทรัพยากรในการคำนวนน้อยกว่า แต่มีโอกาสเกิดปัญหาหากมีการเปลี่ยนข้อมูลใน Record เดียวกันเยอะๆ หรือมีการสร้าง Record ใหม่บ่อยๆ</p>
 <p>วิธีที่ 2 มีความยืดหยุ่นและหลอดภัยกว่า แต่ก็ต้องแลกมาด้วยการจำข้อมูลที่เยอะขึ้น และ Latency ในการเช็ค UUID เพราะต้องเก็บลิสต์ของ UUID ไว้ใน In-memory Database กลาง</p>
-<div class=fb-page data-href=https://www.facebook.com/notaboutcode/ data-tabs data-small-header=false data-adapt-container-width=true data-hide-cover=false data-show-facepile=true>
-<blockquote cite=https://www.facebook.com/notaboutcode/ class=fb-xfbml-parse-ignore>
-<a href=https://www.facebook.com/notaboutcode/>Not about code</a>
-</blockquote>
+
+
+      
+      <div  class="fb-page"
+            data-href="https://www.facebook.com/notaboutcode/"
+            data-tabs=""
+            data-small-header="false"
+            data-adapt-container-width="true"
+            data-hide-cover="false"
+            data-show-facepile="true">
+
+            <blockquote cite="https://www.facebook.com/notaboutcode/" class="fb-xfbml-parse-ignore">
+              <a href="https://www.facebook.com/notaboutcode/">Not about code</a>
+            </blockquote>
+      </div>
+
+    </div>
+
+    
+    <div id="fb-root"></div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content">ijemmy</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content">
+        2018-01-01
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
 </div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/api/">api</a>
+          <a href="/tags/design/">design</a>
+          <a href="/tags/web-service/">web service</a>
+          </div>
+      <div class="fb-comments" data-numposts="5"></div>
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/17-cap-theorem/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">บริษัทสุธีการจำ, CAP Theorem, และ Eventual Consistency</span>
+            <span class="prev-text nav-mobile"></span>
+          </a>
+        <a class="next" href="/post/15-service-api-versioning/">
+            <span class="next-text nav-default">การออกแบบ Service API ให้ Backward-Compatible</span>
+            <span class="next-text nav-mobile"></span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://www.facebook.com/notaboutcode/" class="iconfont icon-facebook" title="facebook"></a>
+  <a href="https://www.notaboutcode.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-<div id=fb-root></div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span class=item-title></span>
-<span class=item-content>ijemmy</span>
-</p>
-<p class=copyright-item>
-<span class=item-title></span>
-<span class=item-content>
-2018-01-01
-</span>
-</p>
-<p class=copyright-item>
-<span class=item-title></span>
-<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
-</p>
+
+<div class="copyright">
+  <span class="power-by">
+    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+     - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+  </span>
 </div>
-<footer class=post-footer>
-<div class=post-tags>
-<a href=/tags/api/>api</a>
-<a href=/tags/design/>design</a>
-<a href=/tags/web-service/>web service</a>
-</div>
-<div class=fb-comments data-numposts=5></div>
-<nav class=post-nav>
-<a class=prev href=/post/17-cap-theorem/>
-<i class="iconfont icon-left"></i>
-<span class="prev-text nav-default">บริษัทสุธีการจำ, CAP Theorem, และ Eventual Consistency</span>
-<span class="prev-text nav-mobile"></span>
-</a>
-<a class=next href=/post/15-service-api-versioning/>
-<span class="next-text nav-default">การออกแบบ Service API ให้ Backward-Compatible</span>
-<span class="next-text nav-mobile"></span>
-<i class="iconfont icon-right"></i>
-</a>
-</nav>
-</footer>
-</article>
-</div>
-</div>
-</main>
-<footer id=footer class=footer>
-<div class=social-links>
-<a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
-<a href=https://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
-</div>
-<div class=copyright>
-<span class=power-by>
-%!(EXTRA string=<a class=hexo-link href=https://gohugo.io>Hugo</a>)
-</span>
-<span class=division>|</span>
-<span class=theme-info>
--
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
-</span>
-<span class=copyright-year>
-&copy;
-2017 -
-2022<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
-</span>
-</div>
-</footer>
-<div class=back-to-top id=back-to-top>
-<i class="iconfont icon-up"></i>
-</div>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
-<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
-<script async src=https://www.google-analytics.com/analytics.js></script>
-<script>(function(b,c,d){var a,e=b.getElementsByTagName(c)[0];if(b.getElementById(d))return;a=b.createElement(c),a.id=d,a.src='https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676',e.parentNode.insertBefore(a,e)})(document,'script','facebook-jssdk')</script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-108239205-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 </body>
 </html>

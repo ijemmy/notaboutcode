@@ -1,12 +1,40 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>career on Not About Code - Technical Leadership</title><link>https://www.notaboutcode.com/tags/career/</link><description>Recent content in career on Not About Code - Technical Leadership</description><generator>Hugo -- gohugo.io</generator><language>th</language><lastBuildDate>Tue, 31 Oct 2017 12:04:02 +0700</lastBuildDate><atom:link href="https://www.notaboutcode.com/tags/career/index.xml" rel="self" type="application/rss+xml"/><item><title>โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี (ภาค 2)</title><link>https://www.notaboutcode.com/post/07-career-start-non-technical/</link><pubDate>Tue, 31 Oct 2017 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/07-career-start-non-technical/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/career-02.jpg" alt="Photo by Olu Eletu, from Unsplash.com">&lt;/p>
-&lt;p>ใน&lt;a href="https://www.notaboutcode.com/post/06-career-start/">ภาคแรก&lt;/a>เราคุยกันในเรื่องของ Technical Skills ทีเป็นพื้นฐานไว้ใช้ในระยะยาว&lt;/p>
-&lt;p>สำหรับภาคนี้ เราจะมาโฟกัสในส่วนของ Non-technical กันบ้าง ซึ่งเป็นครอบคลุมค่อนข้างหลากหลายเรื่อง โดยผมคัดเฉพาะหัวข้อที่ผมคิดว่าสำคัญๆ เพื่อไม่ให้ยาวเกินไป&lt;/p>
-&lt;p>บทความนี้มีความคิดเห็นส่วนตัวเยอะมาก ผมเลยแยกออกมาจากภาคแรก&lt;/p>
-&lt;p>ใครที่มีความเห็นแตกต่าง หรืออ่านแล้วรู้สึกจี้ด ไม่เห็นด้วยมากๆ ลองมาแลกเปลี่ยนความเห็นกันใน&lt;a href="https://www.facebook.com/notaboutcode/">เฟสบุ้คเพจ&lt;/a>ได้ครับ เผื่อบทความนี้อาจจะมีภาค3 ผมเองก็อยากเก็บรายละเอียด ให้ได้มากที่สุด เพราะบล็อคนี้ตั้งใจจะเขียนทิ้งไว้นาน&lt;/p>
-&lt;p>สำหรับโปรแกรมเมอร์มือใหม่ที่ยังไม่มีความคิดเห็น อ่านแล้วก็ฟังหูไว้หู ใช้เป็นแนวทางแต่อย่ายึดมั่นกับมันมาก ยังมีคนที่เก่งกว่าผมอีกมากที่ใช้แนวทางอื่นในการพัฒนาตนเอง&lt;/p></description></item><item><title>โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี ภาค 1</title><link>https://www.notaboutcode.com/post/06-career-start/</link><pubDate>Thu, 19 Oct 2017 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/06-career-start/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/career-01.jpg" alt="Photo by Jake Hills, from Unsplash.com">&lt;/p>
-&lt;p>ความยากลำบากของโปรแกรมเมอร์สมัยนี้คือมีเรื่องที่ต้องเรียนรู้เยอะมาก&amp;hellip;&lt;/p>
-&lt;p>มากจนไม่รู้ว่าจะเริ่มต้นที่ไหนดี&lt;/p>
-&lt;p>บทความนี้รวมสิ่งที่ผมคิดว่าสำหรับโปรแกรมเมอร์มือใหม่ ควรจะเรียนรู้เอาไว้ ไม่ว่าจะเป็นสาย Frontend, Backend, หรือ Fullstack เรื่องพวกนี้ได้ใช้แน่ๆ และได้ใช้นานด้วย&lt;/p>
-&lt;p>ผมเชื่อว่าความรู้พวกนี้ ในอีก 20 ปีข้างหน้า โปรแกรมเมอร์ยุคนั้นก็ยังต้องรู้กัน (ถ้าไม่โดน AI แย่งงานไปก่อน)&lt;/p>
-&lt;p>แทนที่จะเอาเวลาไปเรียนรู้พวกเฟรมเวิร์ค ภาษา หรือไลบรารี่ที่เปลี่ยนใหม่ทุกๆ 3-5 ปี เรียนรู้พวกนี้ดีกว่าครับ เรียนรอบเดียว ใช้ยาว&lt;/p>
-&lt;p>มาดูกันครับว่ามีอะไรบ้าง&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>career on Not About Code - Technical Leadership</title>
+    <link>https://www.notaboutcode.com/tags/career/</link>
+    <description>Recent content in career on Not About Code - Technical Leadership</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>th</language>
+    <lastBuildDate>Tue, 31 Oct 2017 12:04:02 +0700</lastBuildDate><atom:link href="https://www.notaboutcode.com/tags/career/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี (ภาค 2)</title>
+      <link>https://www.notaboutcode.com/post/07-career-start-non-technical/</link>
+      <pubDate>Tue, 31 Oct 2017 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/07-career-start-non-technical/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/career-02.jpg&#34; alt=&#34;Photo by Olu Eletu, from Unsplash.com&#34;&gt;&lt;/p&gt;
+&lt;p&gt;ใน&lt;a href=&#34;https://www.notaboutcode.com/post/06-career-start/&#34;&gt;ภาคแรก&lt;/a&gt;เราคุยกันในเรื่องของ Technical Skills ทีเป็นพื้นฐานไว้ใช้ในระยะยาว&lt;/p&gt;
+&lt;p&gt;สำหรับภาคนี้ เราจะมาโฟกัสในส่วนของ Non-technical กันบ้าง ซึ่งเป็นครอบคลุมค่อนข้างหลากหลายเรื่อง โดยผมคัดเฉพาะหัวข้อที่ผมคิดว่าสำคัญๆ เพื่อไม่ให้ยาวเกินไป&lt;/p&gt;
+&lt;p&gt;บทความนี้มีความคิดเห็นส่วนตัวเยอะมาก ผมเลยแยกออกมาจากภาคแรก&lt;/p&gt;
+&lt;p&gt;ใครที่มีความเห็นแตกต่าง หรืออ่านแล้วรู้สึกจี้ด ไม่เห็นด้วยมากๆ ลองมาแลกเปลี่ยนความเห็นกันใน&lt;a href=&#34;https://www.facebook.com/notaboutcode/&#34;&gt;เฟสบุ้คเพจ&lt;/a&gt;ได้ครับ เผื่อบทความนี้อาจจะมีภาค3 ผมเองก็อยากเก็บรายละเอียด ให้ได้มากที่สุด เพราะบล็อคนี้ตั้งใจจะเขียนทิ้งไว้นาน&lt;/p&gt;
+&lt;p&gt;สำหรับโปรแกรมเมอร์มือใหม่ที่ยังไม่มีความคิดเห็น อ่านแล้วก็ฟังหูไว้หู ใช้เป็นแนวทางแต่อย่ายึดมั่นกับมันมาก ยังมีคนที่เก่งกว่าผมอีกมากที่ใช้แนวทางอื่นในการพัฒนาตนเอง&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี ภาค 1</title>
+      <link>https://www.notaboutcode.com/post/06-career-start/</link>
+      <pubDate>Thu, 19 Oct 2017 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/06-career-start/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/career-01.jpg&#34; alt=&#34;Photo by Jake Hills, from Unsplash.com&#34;&gt;&lt;/p&gt;
+&lt;p&gt;ความยากลำบากของโปรแกรมเมอร์สมัยนี้คือมีเรื่องที่ต้องเรียนรู้เยอะมาก&amp;hellip;&lt;/p&gt;
+&lt;p&gt;มากจนไม่รู้ว่าจะเริ่มต้นที่ไหนดี&lt;/p&gt;
+&lt;p&gt;บทความนี้รวมสิ่งที่ผมคิดว่าสำหรับโปรแกรมเมอร์มือใหม่ ควรจะเรียนรู้เอาไว้ ไม่ว่าจะเป็นสาย Frontend, Backend, หรือ Fullstack เรื่องพวกนี้ได้ใช้แน่ๆ และได้ใช้นานด้วย&lt;/p&gt;
+&lt;p&gt;ผมเชื่อว่าความรู้พวกนี้ ในอีก 20 ปีข้างหน้า โปรแกรมเมอร์ยุคนั้นก็ยังต้องรู้กัน (ถ้าไม่โดน AI แย่งงานไปก่อน)&lt;/p&gt;
+&lt;p&gt;แทนที่จะเอาเวลาไปเรียนรู้พวกเฟรมเวิร์ค ภาษา หรือไลบรารี่ที่เปลี่ยนใหม่ทุกๆ 3-5 ปี  เรียนรู้พวกนี้ดีกว่าครับ เรียนรอบเดียว ใช้ยาว&lt;/p&gt;
+&lt;p&gt;มาดูกันครับว่ามีอะไรบ้าง&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

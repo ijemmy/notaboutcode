@@ -1,34 +1,52 @@
-<!doctype html><html lang=th>
+<!DOCTYPE html>
+<html lang="th">
 <head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>ปัญหาของ Sticky Session - Not About Code - Technical Leadership</title>
-<meta name=renderer content="webkit">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta http-equiv=cache-control content="no-transform">
-<meta http-equiv=cache-control content="no-siteapp">
-<meta name=theme-color content="#f8f5ec">
-<meta name=msapplication-navbutton-color content="#f8f5ec">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
-<meta name=author content="ijemmy"><meta name=description content="ใครที่เคยใช้ Load Balancer (LB) คงจะเคยได้ยินคำว่า Sticky Session (หรือ Session Affinity) กันมาบ้าง
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>ปัญหาของ Sticky Session - Not About Code - Technical Leadership</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ijemmy" /><meta name="description" content="ใครที่เคยใช้ Load Balancer (LB) คงจะเคยได้ยินคำว่า Sticky Session (หรือ Session Affinity) กันมาบ้าง
 แนวคิดของ Sticky Session คือการให้ LB ส่ง Request ที่มาจากผู้ใช้ (Client) คนเดียวยัง ไปยังเซอร์เวอร์ตัวเดียวกันตลอด
 ตัวอย่างเช่น เรามีเซอร์เวอร์ 3 ตัว ชื่อว่า S1, S2, และ S3 วางอยู่ข้างหลัง LB แล้วมีผู้ใช้ส่ง Request เข้ามายังเว็บเรา
  Load Balancer with 3 servers   ในครั้งแรก Request ถูกส่งไปให้ S1 แต่พอผู้ใช้ส่ง Request ถัดๆไป LB อาจส่ง Request นั้นไปยัง S2 หรือ S3 แทน
 แต่หากเราเปิด Sticky Session แล้วล่ะก็ ตัว LB จะส่ง Request จากผู้ใช้คนเดิมไปยัง S1 ตลอด โดยไม่ส่งไปที่ S2 หรือ S3 เลย
 ในบทความนี้ เราจะมาทำความเข้าใจว่า Sticky Session ให้ละเอียดยิ่งขึ้น และอธิบายถึงปัญหาที่มักจะเกิดขึ้นในการใช้ Sticky Session
-"><meta name=keywords content="Hugo,theme,even">
-<meta name=generator content="Hugo 0.89.4 with theme even">
-<link rel=canonical href=https://www.notaboutcode.com/post/08-sticky-session/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=manifest href=/manifest.json>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
-<link rel=stylesheet href=/css/custom.css>
-<meta property="og:title" content="ปัญหาของ Sticky Session">
+" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://www.notaboutcode.com/post/08-sticky-session/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/custom.css">
+
+
+<meta property="og:title" content="ปัญหาของ Sticky Session" />
 <meta property="og:description" content="
 ใครที่เคยใช้ Load Balancer (LB) คงจะเคยได้ยินคำว่า Sticky Session (หรือ Session Affinity) กันมาบ้าง
 แนวคิดของ Sticky Session คือการให้ LB ส่ง Request ที่มาจากผู้ใช้ (Client) คนเดียวยัง ไปยังเซอร์เวอร์ตัวเดียวกันตลอด
@@ -41,13 +59,14 @@
 
 ในครั้งแรก Request ถูกส่งไปให้ S1 แต่พอผู้ใช้ส่ง Request ถัดๆไป LB อาจส่ง Request นั้นไปยัง S2 หรือ S3 แทน
 แต่หากเราเปิด Sticky Session แล้วล่ะก็ ตัว LB จะส่ง Request จากผู้ใช้คนเดิมไปยัง S1 ตลอด โดยไม่ส่งไปที่ S2 หรือ S3 เลย
-ในบทความนี้ เราจะมาทำความเข้าใจว่า Sticky Session ให้ละเอียดยิ่งขึ้น และอธิบายถึงปัญหาที่มักจะเกิดขึ้นในการใช้ Sticky Session">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://www.notaboutcode.com/post/08-sticky-session/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2017-11-02T12:04:02+07:00">
-<meta property="article:modified_time" content="2017-11-02T12:04:02+07:00">
-<meta itemprop=name content="ปัญหาของ Sticky Session">
-<meta itemprop=description content="
+ในบทความนี้ เราจะมาทำความเข้าใจว่า Sticky Session ให้ละเอียดยิ่งขึ้น และอธิบายถึงปัญหาที่มักจะเกิดขึ้นในการใช้ Sticky Session" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.notaboutcode.com/post/08-sticky-session/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2017-11-02T12:04:02+07:00" />
+<meta property="article:modified_time" content="2017-11-02T12:04:02+07:00" />
+
+<meta itemprop="name" content="ปัญหาของ Sticky Session">
+<meta itemprop="description" content="
 ใครที่เคยใช้ Load Balancer (LB) คงจะเคยได้ยินคำว่า Sticky Session (หรือ Session Affinity) กันมาบ้าง
 แนวคิดของ Sticky Session คือการให้ LB ส่ง Request ที่มาจากผู้ใช้ (Client) คนเดียวยัง ไปยังเซอร์เวอร์ตัวเดียวกันตลอด
 ตัวอย่างเช่น เรามีเซอร์เวอร์ 3 ตัว ชื่อว่า S1, S2, และ S3 วางอยู่ข้างหลัง LB  แล้วมีผู้ใช้ส่ง Request เข้ามายังเว็บเรา
@@ -59,12 +78,12 @@
 
 ในครั้งแรก Request ถูกส่งไปให้ S1 แต่พอผู้ใช้ส่ง Request ถัดๆไป LB อาจส่ง Request นั้นไปยัง S2 หรือ S3 แทน
 แต่หากเราเปิด Sticky Session แล้วล่ะก็ ตัว LB จะส่ง Request จากผู้ใช้คนเดิมไปยัง S1 ตลอด โดยไม่ส่งไปที่ S2 หรือ S3 เลย
-ในบทความนี้ เราจะมาทำความเข้าใจว่า Sticky Session ให้ละเอียดยิ่งขึ้น และอธิบายถึงปัญหาที่มักจะเกิดขึ้นในการใช้ Sticky Session"><meta itemprop=datePublished content="2017-11-02T12:04:02+07:00">
-<meta itemprop=dateModified content="2017-11-02T12:04:02+07:00">
-<meta itemprop=wordCount content="832">
-<meta itemprop=keywords content="scalability,loadbalancer,sticky session,design,"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="ปัญหาของ Sticky Session">
-<meta name=twitter:description content="
+ในบทความนี้ เราจะมาทำความเข้าใจว่า Sticky Session ให้ละเอียดยิ่งขึ้น และอธิบายถึงปัญหาที่มักจะเกิดขึ้นในการใช้ Sticky Session"><meta itemprop="datePublished" content="2017-11-02T12:04:02+07:00" />
+<meta itemprop="dateModified" content="2017-11-02T12:04:02+07:00" />
+<meta itemprop="wordCount" content="832">
+<meta itemprop="keywords" content="scalability,loadbalancer,sticky session,design," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ปัญหาของ Sticky Session"/>
+<meta name="twitter:description" content="
 ใครที่เคยใช้ Load Balancer (LB) คงจะเคยได้ยินคำว่า Sticky Session (หรือ Session Affinity) กันมาบ้าง
 แนวคิดของ Sticky Session คือการให้ LB ส่ง Request ที่มาจากผู้ใช้ (Client) คนเดียวยัง ไปยังเซอร์เวอร์ตัวเดียวกันตลอด
 ตัวอย่างเช่น เรามีเซอร์เวอร์ 3 ตัว ชื่อว่า S1, S2, และ S3 วางอยู่ข้างหลัง LB  แล้วมีผู้ใช้ส่ง Request เข้ามายังเว็บเรา
@@ -76,111 +95,150 @@
 
 ในครั้งแรก Request ถูกส่งไปให้ S1 แต่พอผู้ใช้ส่ง Request ถัดๆไป LB อาจส่ง Request นั้นไปยัง S2 หรือ S3 แทน
 แต่หากเราเปิด Sticky Session แล้วล่ะก็ ตัว LB จะส่ง Request จากผู้ใช้คนเดิมไปยัง S1 ตลอด โดยไม่ส่งไปที่ S2 หรือ S3 เลย
-ในบทความนี้ เราจะมาทำความเข้าใจว่า Sticky Session ให้ละเอียดยิ่งขึ้น และอธิบายถึงปัญหาที่มักจะเกิดขึ้นในการใช้ Sticky Session"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
-<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+ในบทความนี้ เราจะมาทำความเข้าใจว่า Sticky Session ให้ละเอียดยิ่งขึ้น และอธิบายถึงปัญหาที่มักจะเกิดขึ้นในการใช้ Sticky Session"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
 </head>
 <body>
-<div id=mobile-navbar class=mobile-navbar>
-<div class=mobile-header-logo>
-<a href=/ class=logo>Not About Code</a>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Not About Code</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
-<div class=mobile-navbar-icon>
-<span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-<nav id=mobile-menu class="mobile-menu slideout-menu">
-<ul class=mobile-menu-list>
-<a href=/>
-<li class=mobile-menu-item>Home</li>
-</a><a href=/post/>
-<li class=mobile-menu-item>Archives</li>
-</a><a href=/tags/>
-<li class=mobile-menu-item>Tags</li>
-</a><a href=/categories/>
-<li class=mobile-menu-item>Categories</li>
-</a><a href=/about/>
-<li class=mobile-menu-item>About</li>
-</a>
-</ul>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
 </nav>
-<div class=container id=mobile-panel>
-<header id=header class=header>
-<div class=logo-wrapper>
-<a href=/ class=logo>Not About Code</a>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Not About Code</a>
 </div>
-<nav class=site-navbar>
-<ul id=menu class=menu>
-<li class=menu-item>
-<a class=menu-item-link href=/>Home</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/post/>Archives</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/tags/>Tags</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/categories/>Categories</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/about/>About</a>
-</li>
-</ul>
-<a href=https://webring.wonderful.software#notaboutcode.com title=วงแหวนเว็บ>
-<img alt=วงแหวนเว็บ width=32 height=32 src=https://webring.wonderful.software/webring.black.svg>
-</a>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+
+  
+  <a href="https://webring.wonderful.software#notaboutcode.com" title="วงแหวนเว็บ">
+    <img
+        alt="วงแหวนเว็บ"
+        width="32"
+        height="32"
+        src="https://webring.wonderful.software/webring.black.svg"
+    />
+  </a>
 </nav>
-</header>
-<main id=main class=main>
-<div class=content-wrapper>
-<div id=content class=content>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title>ปัญหาของ Sticky Session</h1>
-<div class=post-meta>
-<span class=post-time> 2017-11-02 </span>
-<div class=post-category>
-<a href=/categories/system-design/> System Design </a>
-</div>
-</div>
-</header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title></h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#sticky-session-ทำงานยงไง>Sticky Session ทำงานยังไง</a></li>
-<li><a href=#ปญหาของ-sticky-session>ปัญหาของ Sticky Session</a></li>
-<li><a href=#แทนทจะพง-sticky-session-ทำทกอยางใหเปน-stateless-แทน>แทนที่จะพึ่ง Sticky Session, ทำทุกอย่างให้เป็น Stateless แทน</a></li>
-<li><a href=#ถาทำ-sticky-session--stateless-ละ>ถ้าทำ Sticky Session + Stateless ล่ะ?</a>
-<ul>
-<li><a href=#1-ขอมลถกแกผานอกเซอรเวอรหนง>1. ข้อมูลถูกแก้ผ่านอีกเซอร์เวอร์หนึ่ง</a></li>
-<li><a href=#2-unbalanced-load>2. Unbalanced Load</a></li>
-<li><a href=#3-ปญหาเวลาเซอรเวอรบางตวดาวน>3. ปัญหาเวลาเซอร์เวอร์บางตัวดาวน์</a></li>
-</ul>
-</li>
-<li><a href=#สรป>สรุป</a></li>
-</ul>
+
+
+
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">ปัญหาของ Sticky Session</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2017-11-02 </span>
+        <div class="post-category">
+            <a href="/categories/system-design/"> System Design </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title"></h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#sticky-session-ทำงานยงไง">Sticky Session ทำงานยังไง</a></li>
+    <li><a href="#ปญหาของ-sticky-session">ปัญหาของ Sticky Session</a></li>
+    <li><a href="#แทนทจะพง-sticky-session-ทำทกอยางใหเปน-stateless-แทน">แทนที่จะพึ่ง Sticky Session, ทำทุกอย่างให้เป็น Stateless แทน</a></li>
+    <li><a href="#ถาทำ-sticky-session--stateless-ละ">ถ้าทำ Sticky Session + Stateless ล่ะ?</a>
+      <ul>
+        <li><a href="#1-ขอมลถกแกผานอกเซอรเวอรหนง">1. ข้อมูลถูกแก้ผ่านอีกเซอร์เวอร์หนึ่ง</a></li>
+        <li><a href="#2-unbalanced-load">2. Unbalanced Load</a></li>
+        <li><a href="#3-ปญหาเวลาเซอรเวอรบางตวดาวน">3. ปัญหาเวลาเซอร์เวอร์บางตัวดาวน์</a></li>
+      </ul>
+    </li>
+    <li><a href="#สรป">สรุป</a></li>
+  </ul>
 </nav>
+  </div>
 </div>
-</div>
-<div class=post-content>
-<p><img src=/img/covers/traffic-01.jpg alt="Photo by Denys Nevozhai, from Unsplash.com"></p>
+    <div class="post-content">
+      <p><img src="/img/covers/traffic-01.jpg" alt="Photo by Denys Nevozhai, from Unsplash.com"></p>
 <p>ใครที่เคยใช้ Load Balancer (LB) คงจะเคยได้ยินคำว่า Sticky Session (หรือ Session Affinity) กันมาบ้าง</p>
 <p>แนวคิดของ Sticky Session คือการให้ LB ส่ง Request ที่มาจากผู้ใช้ (Client) คนเดียวยัง ไปยังเซอร์เวอร์ตัวเดียวกันตลอด</p>
-<p>ตัวอย่างเช่น เรามีเซอร์เวอร์ 3 ตัว ชื่อว่า S1, S2, และ S3 วางอยู่ข้างหลัง LB แล้วมีผู้ใช้ส่ง Request เข้ามายังเว็บเรา</p>
-<figure class=center>
-<img src=/img/diagrams/loadbalancer.png alt="Load Balancer with 3 servers">
-<figcaption>
-Load Balancer with 3 servers
-</figcaption>
+<p>ตัวอย่างเช่น เรามีเซอร์เวอร์ 3 ตัว ชื่อว่า S1, S2, และ S3 วางอยู่ข้างหลัง LB  แล้วมีผู้ใช้ส่ง Request เข้ามายังเว็บเรา</p>
+<figure class="center" >
+  <img  src="/img/diagrams/loadbalancer.png"
+        alt="Load Balancer with 3 servers"
+        >
+  <figcaption>
+    Load Balancer with 3 servers
+  </figcaption>
 </figure>
 <p>ในครั้งแรก Request ถูกส่งไปให้ S1 แต่พอผู้ใช้ส่ง Request ถัดๆไป LB อาจส่ง Request นั้นไปยัง S2 หรือ S3 แทน</p>
 <p>แต่หากเราเปิด Sticky Session แล้วล่ะก็ ตัว LB จะส่ง Request จากผู้ใช้คนเดิมไปยัง S1 ตลอด โดยไม่ส่งไปที่ S2 หรือ S3 เลย</p>
 <p>ในบทความนี้ เราจะมาทำความเข้าใจว่า Sticky Session ให้ละเอียดยิ่งขึ้น และอธิบายถึงปัญหาที่มักจะเกิดขึ้นในการใช้ Sticky Session</p>
-<h1 id=sticky-session-ทำงานยงไง>Sticky Session ทำงานยังไง</h1>
+<h1 id="sticky-session-ทำงานยงไง">Sticky Session ทำงานยังไง</h1>
 <p>สมมติว่าเราเป็น LB เราจะรู้ได้อย่างไรว่า Request นี้มาจากผู้ใช้คนเดิมรึเปล่า?</p>
 <p>วิธีการที่ LB ส่วนใหญ่ใช้ คือทำการใส่ค่า Session Id ลงไปใน Cookie ของ Response และจำค่าเอาไว้ว่า Session Id นี้ถูกส่งไปที่เซอร์เวอร์ไหน (หรือให้โปรแกรมเราเป็นคนใส่เองก็ได้ แต่ต้องกำหนดให้ตรงกันว่า Cookie ชื่ออะไร)</p>
 <p>ส่วนฝั่งผู้ใช้ พอได้รับ Cookie มา ก็จะ Session Id นั้นๆเอาไว้ และใส่ใน Header ของ Request ถัดๆไป</p>
-<p>ตัวอย่างเช่น LB เคยได้ Request มาจากผู้ใช้ 3 คน คนละ 1 Request ตัว LB ก็จะใส่จำค่า Session Id ไว้ตามตารางข้างล่าง</p>
+<p>ตัวอย่างเช่น LB เคยได้ Request มาจากผู้ใช้ 3 คน คนละ 1 Request  ตัว LB ก็จะใส่จำค่า Session Id ไว้ตามตารางข้างล่าง</p>
 <table>
 <thead>
 <tr>
@@ -234,9 +292,9 @@ Load Balancer with 3 servers
 </table>
 <p>วิธีนี้การันตีได้ว่า LB จะส่ง Request จากผู้ใช้เดิมไปยังเซอร์เวอร์ตัวเดียวตลอด หากไม่เกิดเหตุสุดวิสัยขึ้น</p>
 <blockquote>
-<p><strong>Note</strong> LB บางตัวสามารถทำงานโดยการเช็คผ่าน IP Address แทนการใช้ Cookie แต่วิธีนี้อันตรายมากๆ เพราะ<a href=http://www.chaosincomputing.com/2012/05/sticky-sessions-are-evil/>เราไม่มีทางการันตีได้ว่า IP ของแต่ละผู้ใช้จะต่างกัน</a> เป็นไปได้ว่าผู้ใช้จากบริษัทหนึ่งมาจาก Proxy Server หรือ NAT เดียวกัน ผลที่ตามมาคือเซอร์เวอร์นึงจะรับ Request จากผู้ใช้ที่มาจากบริษัทนี้ทั้งหมด</p>
+<p><strong>Note</strong> LB บางตัวสามารถทำงานโดยการเช็คผ่าน IP Address แทนการใช้ Cookie  แต่วิธีนี้อันตรายมากๆ เพราะ<a href="http://www.chaosincomputing.com/2012/05/sticky-sessions-are-evil/">เราไม่มีทางการันตีได้ว่า IP ของแต่ละผู้ใช้จะต่างกัน</a> เป็นไปได้ว่าผู้ใช้จากบริษัทหนึ่งมาจาก Proxy Server หรือ NAT เดียวกัน ผลที่ตามมาคือเซอร์เวอร์นึงจะรับ Request จากผู้ใช้ที่มาจากบริษัทนี้ทั้งหมด</p>
 </blockquote>
-<h1 id=ปญหาของ-sticky-session>ปัญหาของ Sticky Session</h1>
+<h1 id="ปญหาของ-sticky-session">ปัญหาของ Sticky Session</h1>
 <p>ในโลกแห่งความจริงอันโหดร้าย เหตุสุดวิสัยจะต้องเกิดขึ้นแน่นอน</p>
 <p>S1 อาจจะพัง ด้วยสาเหตุนานาประการ เช่น</p>
 <ul>
@@ -247,52 +305,56 @@ Load Balancer with 3 servers
 <li>มีหนูไปฉี่ใส่เมนบอร์ด</li>
 <li>วันนี้ลืมเอาน้ำหวานไปไหว้เจ้าที่ เลยไม่พอใจ เข้าสิงเซอร์เวอร์ให้พัง</li>
 </ul>
-<p>เวลาเซอร์เวอร์ตาย LB จะรู้ เพราะมันจะทำการยิง Health Check Request ไปยังเซอร์เวอร์เป็นระยะๆ พอ Health Check ที่ยิงไปไม่มีอะไรตอบกลับมาจาก S1 ฝั่งLBก็จะรู้ทันทีว่ามีอะไรเกิดขึ้นแล้ว และทำการตัด S1 ออกจากกอง เวลามี Request ใหม่ๆมาก็ส่งไปให้ S2 กับ S3 แทน</p>
-<figure class=center>
-<img src=/img/diagrams/loadbalancer-s1-die.png alt="S1 cannot be reached by Load Balancer">
-<figcaption>
-S1 cannot be reached by Load Balancer
-</figcaption>
+<p>เวลาเซอร์เวอร์ตาย LB จะรู้ เพราะมันจะทำการยิง Health Check Request ไปยังเซอร์เวอร์เป็นระยะๆ พอ Health Check ที่ยิงไปไม่มีอะไรตอบกลับมาจาก S1  ฝั่งLBก็จะรู้ทันทีว่ามีอะไรเกิดขึ้นแล้ว และทำการตัด S1 ออกจากกอง เวลามี Request ใหม่ๆมาก็ส่งไปให้ S2 กับ S3 แทน</p>
+<figure class="center" >
+  <img  src="/img/diagrams/loadbalancer-s1-die.png"
+        alt="S1 cannot be reached by Load Balancer"
+        >
+  <figcaption>
+    S1 cannot be reached by Load Balancer
+  </figcaption>
 </figure>
 <p>ซึ่งในจังหวะนั้นเอง ดันมี Request ที่มาพร้อมกับ Session Id ที่เคยส่งไปให้ S1</p>
 <p>กรณีนี้ LB ไม่มีทางเลือก ต้องส่ง Request นั้นไปยัง S2 หรือ S3 อยู่ดี เพราะ S1 ตายไปเรียบร้อยแล้ว</p>
 <p><strong>จะเห็นได้ว่า แม้เราจะมีการเปิด Sticky Session ไว้แล้ว โปรแกรมจะต้องรองรับกรณีที่ Session ไม่ได้ Sticky อยู่ดี</strong> เพราะเซอร์เวอร์จะตายเมื่อไรก็ได้</p>
 <p>และถ้าเกิดว่าเจ้าที่เกิดเปลี่ยนใจ เนรมิตให้ S1 กลับมาทำงานอีก Request ถัดๆไปก็ไม่กลับมาที่ S1 แล้ว ถ้าหากเราจำข้อมูลอะไรทิ้งไว้ใน S1 แล้วหวังว่าจะมี Request ต่อๆไปมาลบทิ้ง ข้อมูลนั้นอาจจะไม่มีวันถูกลบเลยก็ได้</p>
-<h1 id=แทนทจะพง-sticky-session-ทำทกอยางใหเปน-stateless-แทน>แทนที่จะพึ่ง Sticky Session, ทำทุกอย่างให้เป็น Stateless แทน</h1>
+<h1 id="แทนทจะพง-sticky-session-ทำทกอยางใหเปน-stateless-แทน">แทนที่จะพึ่ง Sticky Session, ทำทุกอย่างให้เป็น Stateless แทน</h1>
 <p>สำหรับโปรแกรมเมอร์ เราจะคาดหวังว่า Request จากผู้ใช้เดียวกันจะมายังเซอร์เวอร์ตัวเดียวอยู่เสมอไม่ได้</p>
-<p>ลองนึกภาพว่าเราทำเว็บขายของ แล้วเก็บของที่ลูกค้าเลือกใส่ตะกร้าเอาไว้ใน S1 พอ S1 ตาย Request ใหม่ถูกส่งไปยัง S2</p>
+<p>ลองนึกภาพว่าเราทำเว็บขายของ แล้วเก็บของที่ลูกค้าเลือกใส่ตะกร้าเอาไว้ใน S1  พอ S1 ตาย Request ใหม่ถูกส่งไปยัง  S2</p>
 <p>S2 ก็งงสิ เพราะไม่มีในตะกร้าเก็บไว้</p>
 <p>กรณีร้ายที่สุด คือไอ้ Request นี้เป็นคำสั่งที่ให้เช็คเอ้าท์จ่ายเงินพอดี ถ้าโปรแกรมไม่ได้เช็คกรณีนี้ไว้ อาจจะเกิดอาการแปลกๆ เช่น ทำการเช็คเอ้าท์แบบไม่มีของ แต่ตัดเงินเต็มจำนวน ได้ดราม่าลงพันทิพย์แน่นอน</p>
 <p>ดังนั้น หากเราจะพึ่ง Sticky Session เราต้องมาเขียนดักกรณีนี้ในทุกฟังก์ชั่นสำหรับกรณีนี้ ถ้าเกิดเราได้ Request ใหม่มาจากเซอร์เวอร์ที่พึ่งตายไป ให้ทำการแจ้งลูกค้าว่าตะกร้าของคุณหาย ให้ไปเลือกใหม่</p>
 <p>นอกจากจะเป็น UX ที่ห่วยแล้ว ยังทำให้โปรแกรมเราซับซ้อนขึ้นมาก</p>
 <p>ในทางปฏิบัติ อย่างน้อยก็ในเลเยอร์ของเว็บเซอร์เวอร์ (Web Server Layer) เราจึงควรออกแบบโปรแกรมให้เป็น Stateless</p>
 <p>Stateless คือไม่จำอะไรอยู่ในเว็บเซอร์เวอร์ ถ้าจะจำ ก็ให้เอาไปจำใน Database แทน</p>
-<figure class=center>
-<img src=/img/diagrams/loadbalancer-stateless.png alt="Keeping no state in server S1-S3">
-<figcaption>
-Keeping no state in server S1-S3
-</figcaption>
+<figure class="center" >
+  <img  src="/img/diagrams/loadbalancer-stateless.png"
+        alt="Keeping no state in server S1-S3"
+        >
+  <figcaption>
+    Keeping no state in server S1-S3
+  </figcaption>
 </figure>
-<p>ซึ่งหากต้องการความเร็ว ก็ให้เอาไปไว้ใน In-Memory Database หากไม่ต้องเร็วมาก ก็ใส่ลงใน NoSQL หรือ Relational DB ธรรมดาได้</p>
+<p>ซึ่งหากต้องการความเร็ว ก็ให้เอาไปไว้ใน In-Memory Database  หากไม่ต้องเร็วมาก ก็ใส่ลงใน NoSQL หรือ Relational DB ธรรมดาได้</p>
 <p>วิธีนี้อาจจะทำให้เซอร์เวอร์ทำงานช้ากว่า เพราะต้องดึงข้อมูลจาก Database แทนที่จะดึงจากในเครื่องได้เลย</p>
 <p>แต่การพัฒนาและการดูแลรักษาจะใช้เวลาน้อยกว่ามาก เพราะโปรแกรมจะซับซ้อนน้อยกว่า</p>
-<h1 id=ถาทำ-sticky-session--stateless-ละ>ถ้าทำ Sticky Session + Stateless ล่ะ?</h1>
+<h1 id="ถาทำ-sticky-session--stateless-ละ">ถ้าทำ Sticky Session + Stateless ล่ะ?</h1>
 <p>สมมติว่าเราทำทุกอย่างให้เป็น Stateless แล้ว โดยการใส่ In-Memory Database แยกไว้ให้ S1/S2/S3 ดึงข้อมูลร่วมกันได้ เหมือนในภาพข้างบน</p>
 <p>เราจัด Sticky Session เพิ่มด้วย แล้วทำการ Cache ข้อมูลลงไปใน S1/S2/S3 ล่ะ</p>
 <p>ถ้าหากข้อมูลที่จะใช้ อยู่ใน Cache ของ S1 แล้ว ก็ทำการส่งกลับได้เลย แทนที่จะต้องไปขอข้อมูลจาก Database</p>
 <p>วิธีนี้ทำให้เร็วขึ้นจริงครับ แต่ก็จะมีปัญหาอยู่ดีในทางปฏิบัติ</p>
 <p>ตัวอย่างเช่น</p>
-<h2 id=1-ขอมลถกแกผานอกเซอรเวอรหนง>1. ข้อมูลถูกแก้ผ่านอีกเซอร์เวอร์หนึ่ง</h2>
-<p>สมมติว่า Request แรก จากผู้ใช้ C1 ถูกส่งไปที่ S1</p>
-<p>S1 ประมวลผล ดึงข้อมูลจาก Database มาแล้วเก็บข้อมูลไว้ใน Cache ก่อนส่งกลับไป</p>
+<h2 id="1-ขอมลถกแกผานอกเซอรเวอรหนง">1. ข้อมูลถูกแก้ผ่านอีกเซอร์เวอร์หนึ่ง</h2>
+<p>สมมติว่า Request แรก จากผู้ใช้ C1  ถูกส่งไปที่ S1</p>
+<p>S1 ประมวลผล ดึงข้อมูลจาก Database มาแล้วเก็บข้อมูลไว้ใน Cache  ก่อนส่งกลับไป</p>
 <p>หลังจากนั้น มีผู้ใช้ C2 ส่ง Request มาแก้ไขข้อมูลดังกล่าว โดย Request นี้ถูกส่งไปที่ S2</p>
-<p>S2 ประมวลผล แก้ข้อมูลใน Database เก็บไว้ใน Cache แล้วส่งกลับ</p>
+<p>S2 ประมวลผล แก้ข้อมูลใน Database  เก็บไว้ใน Cache แล้วส่งกลับ</p>
 <p>ณ จุดนี้ ข้อมูบที่เก็บอยู่ใน S1 จะไม่ถูกต้องแล้ว หากผู้ใช้ C1 ติดต่อมายัง S1 เพื่อดึงข้อมูล จะทำอย่างไร?</p>
 <p>หากต้องการให้ข้อมูลถูกเป๊ะ 100% (Strong Consistency) เราก็ต้องทำแอพพลิเคชั่นของเราให้มีการ Invalidate Cache หากเกิดการแก้ข้อมูล ซึ่งหากมีการแก้ข้อมูลบ่อยๆ ประสิทธิภาพที่ได้ อาจจะไม่คุ้มค่าการเวลาทีต้องเสียไปในการ Invalidate Cache</p>
-<h2 id=2-unbalanced-load>2. Unbalanced Load</h2>
+<h2 id="2-unbalanced-load">2. Unbalanced Load</h2>
 <p>หาก Session ของผู้ใช้แต่ละคนยาวไม่เท่ากัน อาจเป็นไปได้ที่ S1 จะมีผู้ใช้ค้างอยู่จำนวนเยอะกว่า</p>
 <p>ตัวอย่างเช่น เรามีผู้ใช้ C1 ถึง C100 ถูกส่งไปให้ S1 กับ S2 เท่าๆกัน</p>
-<p>โดย Request จาก C1, C3, &mldr;, C99 (เลขคี่) ถูกส่งไปให้กับ S1 ส่วน Request จาก C2, C4, &mldr;, C100 (เลขคู่) ถูกส่งไปให้กับ S2</p>
+<p>โดย Request จาก C1, C3, &hellip;, C99  (เลขคี่) ถูกส่งไปให้กับ S1 ส่วน Request จาก C2, C4, &hellip;, C100  (เลขคู่) ถูกส่งไปให้กับ S2</p>
 <p>ณ จุดนี้ เซอร์เวอร์ทั้งสองจะรองรับผู้ใช้เครื่องละ 50 คน เหมือนจะเท่าๆกัน</p>
 <p>แต่ถ้าเผอิญว่าผู้ใช้กลุ่มเลขคี่ ส่ง Request มาเฉลี่ย 10 ครั้งต่อนาที แต่ผู้ใช้กลุ่มเลขคู่ ส่งแค่ 5 ครั้งต่อนาที</p>
 <p>ดังนั้น S1 จะได้รับทั้งหมด 50 x 10 = 500 Requests/นาที ในขณะที่ S2 จะได้รับแค่ 50 x 5 = 250 Requests/นาที ตามตารางด้านล่าง</p>
@@ -345,13 +407,13 @@ Keeping no state in server S1-S3
 <p>ฟังดูเหมือนจะต้องดวงซวยมากถึงจะเกิดเรื่องแบบนี้ แต่นึกภาพว่าเรารันเซอร์เวอร์ทั้งปี ต่อให้โอกาสเกิดน้อย แต่ก็เกิดขึ้นได้</p>
 <p>นี่คือปัญหาการกระจาย Load ไม่ Balance อย่างที่เราต้องการ กรณีนี้จะทำให้ Capacity ที่เรารองรับได้ลดลงกว่าที่ควรจะเป็น เพราะ S1 จะทำงานไม่ไหวแม้ว่า S2 อาจจะยังเหลือทรัพยากรอีกเยอะ</p>
 <p>ยิ่งถ้า Session ของผู้ใช้บางคนยาวมาก (เช่นหลายชั่วโมง) Session ยาวๆพวกนี้จะค้างอยู่ในระบบนานพอที่จะทำให้มีโอกาสเกิด Unbalanced Load ได้มากขึ้น</p>
-<p>ถ้าคิดว่าเว็บไซต์ของเราอาจมี Session ที่ค้างไว้นาน Sticky Session อาจจะไม่ใช่ตัวเลือกที่เหมาะสม</p>
+<p>ถ้าคิดว่าเว็บไซต์ของเราอาจมี Session ที่ค้างไว้นาน  Sticky Session อาจจะไม่ใช่ตัวเลือกที่เหมาะสม</p>
 <blockquote>
 <p><strong>Note</strong> จริงๆแล้ววิธีนี้อาจแก้ด้วยการกระจาย Load แบบวิธีอื่นๆแทนที่จะกระจายเท่าๆกันตลอด (เช่น กระจายไปให้ตัวที่ Latency ต่ำที่สุด, หรือมี Connection ที่เปิดอยู่น้อยที่สุด) แต่ก็ไม่สามารถการันตีได้อยู่ดีว่า Load จะไม่กระจุกตัว</p>
 </blockquote>
-<h2 id=3-ปญหาเวลาเซอรเวอรบางตวดาวน>3. ปัญหาเวลาเซอร์เวอร์บางตัวดาวน์</h2>
+<h2 id="3-ปญหาเวลาเซอรเวอรบางตวดาวน">3. ปัญหาเวลาเซอร์เวอร์บางตัวดาวน์</h2>
 <p>หากเราต้องการหยุดเซอร์เวอร์ตัวหนึ่งชั่วคราว (อาจจะเพื่ออัพเดตซอฟต์แวร์ หรือเซอร์เวอร์มีปัญหาต้อง restart) จะเกิดอะไรขึ้น?</p>
-<p>ถ้ามีเซอร์เวอร์ 3 ตัว ปริมาณ Request 1/3 ที่เข้ามา S1 จะต้องถูกกระจายไปยัง S2/S3 ซึ่งไม่มี Cache ซึ่งจะนำมาซึ่งปัญหา 2 อย่าง</p>
+<p>ถ้ามีเซอร์เวอร์ 3 ตัว  ปริมาณ Request 1/3 ที่เข้ามา S1 จะต้องถูกกระจายไปยัง S2/S3 ซึ่งไม่มี Cache  ซึ่งจะนำมาซึ่งปัญหา 2 อย่าง</p>
 <ol>
 <li>Latency ของ Request 1/3 ส่วนจะพึ่งขึ้นอย่างมีนัยยะสำคัญ เพราะต้องไปดึงข้อมูลมาจาก In-Memory DB ข้างนอกแทนที่จะใช้ใน Cache ได้เลย ไอ้การพุ่งขึ้นโดยไม่ได้นัดหมายนี้เป็น False alarm ซึ่งอาจจะทำให้ทีม Operation ต้องแหกขี้ตาขึ้นมากลางดึกได้ เป็นที่สาบแช่งของทีมได้</li>
 <li>ปริมาณ Request ที่สูงขึ้นนี้ อาจทำให้ขนาดของ Cache ใน S2/S3 ไม่พอรองรับปริมาณข้อมูลของผู้ใช้ทั้งหมด ลองนึกภาพว่าเราเตรียม Cache ไว้ให้พอดีสำหรับผู้ใช้แค่ 1/3 อยู่ดีๆ ปริมาณข้อมูลดันเพิ่มเป็น 1/2 นั่นแปลว่าจะมีข้อมูล 1/5 (1/2-1/3) ที่ไม่มีที่เก็บใน Cache และต้องถูกเตะออกไป ซึ่งจะทำให้เกิดการ Cache miss บ่อยขึ้น ส่งผลต่อความเสถียรของระบบอีก</li>
@@ -359,91 +421,151 @@ Keeping no state in server S1-S3
 <p>บางคนอาจจะบอกว่า งั้นทำไมเราก็เปิดเซอร์เวอร์ S4 ขึ้นมาช่วยสิ โดยเซ็ตค่าให้เปิดอัตโนมัติเวลามี S1-S3 เดี้ยงไปซักตัวนึง</p>
 <p>ตรงนี้อาจจะช่วยได้หน่อยหนึ่ง แต่ก็ยังมีปัญหาอยู่ดี เพราะ Cache ที่ S1 เก็บไว้นั้นไม่มีอยู่ใน S4 ที่พึ่งเปิดขึ้นมา ต้องใช้เวลาสักพักกว่า S4 จะมี Cache เพิ่ม</p>
 <p>แถม LB เองก็อาจไม่ฉลาดพอ ที่จะส่ง Session พวกนั้นเข้า S4 ให้หมดโดยไม่เข้า S2 หรือ S3 เลย</p>
-<h1 id=สรป>สรุป</h1>
+<h1 id="สรป">สรุป</h1>
 <p>แม้คอนเซ็บ Sticky Session จะฟังดูดีมาก แต่มีปัญหาใหญ่ๆเยอะในระบบจริง ถึงฝั่งเซอร์เวอร์จะเป็น Stateless ก็ตาม</p>
-<p>ปัญหาแรกคือโปรแกรมที่เขียนจะต้องจัดการทั้งกรณีที่ Sticky session เป็น Request เก่า และ Request ใหม่ ทำให้โปรแกรมซับซ้อนมากขึ้น ใช้เวลาในการพัฒนาและดูแลรักษายากขึ้น</p>
+<p>ปัญหาแรกคือโปรแกรมที่เขียนจะต้องจัดการทั้งกรณีที่ Sticky session เป็น Request เก่า และ  Request ใหม่ ทำให้โปรแกรมซับซ้อนมากขึ้น ใช้เวลาในการพัฒนาและดูแลรักษายากขึ้น</p>
 <p>ปัญหาถัดมาคือเรื่องการกระจายของ Load ที่อาจไม่สมดุล เพราะผู้ใช้บางคนอาจใช้งานหนักกว่าคนอื่น หรือมี Session ที่ยาวค้างอยู่ในเซอร์เวอร์หนึ่งๆนาน</p>
 <p>และปัญหาสุดท้าย คือเวลามีเซอร์เวอร์ตัวหนึ่งหยุดทำงาน เซอร์เวอร์ที่เหลือจะทำงานหนักขึ้นชั่วคราว ซึ่งอาจก่อให้เกิดปัญหากับ Operation ได้</p>
-<p>โดยส่วนตัวแล้วผมไม่แนะนำให้ใช้ Sticky Session ใน Layer ของ Web Server เลย เพราะพอระบบต้องขยายเพื่อรับโหลดเยอะๆแล้วผลดีไม่คุ้มกับผลเสีย เว้นเสียแต่ว่ามั่นใจจริงๆว่า Session ของผู้ใช้จะสั้นมากๆ หรือยอมรับผลกระทบต่อผู้ใช้เวลาที่ต้องสลับ Session ได้</p>
-<div class=fb-page data-href=https://www.facebook.com/notaboutcode/ data-tabs data-small-header=false data-adapt-container-width=true data-hide-cover=false data-show-facepile=true>
-<blockquote cite=https://www.facebook.com/notaboutcode/ class=fb-xfbml-parse-ignore>
-<a href=https://www.facebook.com/notaboutcode/>Not about code</a>
-</blockquote>
+<p>โดยส่วนตัวแล้วผมไม่แนะนำให้ใช้ Sticky Session ใน Layer ของ Web Server เลย  เพราะพอระบบต้องขยายเพื่อรับโหลดเยอะๆแล้วผลดีไม่คุ้มกับผลเสีย เว้นเสียแต่ว่ามั่นใจจริงๆว่า Session ของผู้ใช้จะสั้นมากๆ หรือยอมรับผลกระทบต่อผู้ใช้เวลาที่ต้องสลับ Session ได้</p>
+
+
+      
+      <div  class="fb-page"
+            data-href="https://www.facebook.com/notaboutcode/"
+            data-tabs=""
+            data-small-header="false"
+            data-adapt-container-width="true"
+            data-hide-cover="false"
+            data-show-facepile="true">
+
+            <blockquote cite="https://www.facebook.com/notaboutcode/" class="fb-xfbml-parse-ignore">
+              <a href="https://www.facebook.com/notaboutcode/">Not about code</a>
+            </blockquote>
+      </div>
+
+    </div>
+
+    
+    <div id="fb-root"></div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content">ijemmy</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content">
+        2017-11-02
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
 </div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/scalability/">scalability</a>
+          <a href="/tags/loadbalancer/">loadbalancer</a>
+          <a href="/tags/sticky-session/">sticky session</a>
+          <a href="/tags/design/">design</a>
+          </div>
+      <div class="fb-comments" data-numposts="5"></div>
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/10-throttle/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">ปกป้องเซอร์วิซจากผู้ใช้มักมากด้วย Throttling</span>
+            <span class="prev-text nav-mobile"></span>
+          </a>
+        <a class="next" href="/post/07-career-start-non-technical/">
+            <span class="next-text nav-default">โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี (ภาค 2)</span>
+            <span class="next-text nav-mobile"></span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://www.facebook.com/notaboutcode/" class="iconfont icon-facebook" title="facebook"></a>
+  <a href="https://www.notaboutcode.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-<div id=fb-root></div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span class=item-title></span>
-<span class=item-content>ijemmy</span>
-</p>
-<p class=copyright-item>
-<span class=item-title></span>
-<span class=item-content>
-2017-11-02
-</span>
-</p>
-<p class=copyright-item>
-<span class=item-title></span>
-<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
-</p>
+
+<div class="copyright">
+  <span class="power-by">
+    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+     - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+  </span>
 </div>
-<footer class=post-footer>
-<div class=post-tags>
-<a href=/tags/scalability/>scalability</a>
-<a href=/tags/loadbalancer/>loadbalancer</a>
-<a href=/tags/sticky-session/>sticky session</a>
-<a href=/tags/design/>design</a>
-</div>
-<div class=fb-comments data-numposts=5></div>
-<nav class=post-nav>
-<a class=prev href=/post/10-throttle/>
-<i class="iconfont icon-left"></i>
-<span class="prev-text nav-default">ปกป้องเซอร์วิซจากผู้ใช้มักมากด้วย Throttling</span>
-<span class="prev-text nav-mobile"></span>
-</a>
-<a class=next href=/post/07-career-start-non-technical/>
-<span class="next-text nav-default">โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี (ภาค 2)</span>
-<span class="next-text nav-mobile"></span>
-<i class="iconfont icon-right"></i>
-</a>
-</nav>
-</footer>
-</article>
-</div>
-</div>
-</main>
-<footer id=footer class=footer>
-<div class=social-links>
-<a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
-<a href=https://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
-</div>
-<div class=copyright>
-<span class=power-by>
-%!(EXTRA string=<a class=hexo-link href=https://gohugo.io>Hugo</a>)
-</span>
-<span class=division>|</span>
-<span class=theme-info>
--
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
-</span>
-<span class=copyright-year>
-&copy;
-2017 -
-2022<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
-</span>
-</div>
-</footer>
-<div class=back-to-top id=back-to-top>
-<i class="iconfont icon-up"></i>
-</div>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
-<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
-<script async src=https://www.google-analytics.com/analytics.js></script>
-<script>(function(b,c,d){var a,e=b.getElementsByTagName(c)[0];if(b.getElementById(d))return;a=b.createElement(c),a.id=d,a.src='https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676',e.parentNode.insertBefore(a,e)})(document,'script','facebook-jssdk')</script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-108239205-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 </body>
 </html>

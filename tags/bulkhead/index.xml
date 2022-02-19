@@ -1,9 +1,28 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>bulkhead on Not About Code - Technical Leadership</title><link>https://www.notaboutcode.com/tags/bulkhead/</link><description>Recent content in bulkhead on Not About Code - Technical Leadership</description><generator>Hugo -- gohugo.io</generator><language>th</language><lastBuildDate>Sun, 12 Nov 2017 12:04:02 +0700</lastBuildDate><atom:link href="https://www.notaboutcode.com/tags/bulkhead/index.xml" rel="self" type="application/rss+xml"/><item><title>ปกป้องระบบไม่ให้ล่มหมดด้วย Bulkhead</title><link>https://www.notaboutcode.com/post/11-bulkhead/</link><pubDate>Sun, 12 Nov 2017 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/11-bulkhead/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/ship-01.jpg" alt="Photo by Abraham Wiebe, from Unsplash.com">&lt;/p>
-&lt;p>Bulkhead เป็นเทคนิคการออกแบบที่เหมาะกับ Critical System คือ ถ้าล่มปุ๊บ คนในองค์กรจะไม่สามารถทำงานต่อได้เลย&lt;/p>
-&lt;p>ถ้าใครเปิดดิกดู ศัพท์นี้จริงๆใช้เรียกการออกแบบพาหนะครับ&lt;/p>
-&lt;blockquote>
-&lt;p>Bulkhead (n.) a dividing wall or barrier between separate compartments inside a ship, aircraft, or other vehicle.&lt;/p>
-&lt;/blockquote>
-&lt;p>ไอเดียของ Bulkhead คือการออกแบบให้พาหนะแยกออกเป็นส่วนๆ (Compartmentalisation) หากมีส่วนใดส่วนหนึ่งมีปัญหา ผลกระทบจะต้องไม่รุนแรงจนทำให้ทั้งพาหนะล่มหมด&lt;/p>
-&lt;p>ยกตัวอย่างเช่น สมมติว่าเรือของเรามีจุดรั่วจุดหนึ่ง หากเราไม่ได้มีการแบ่งโซนเป็นส่วน น้ำจะกระจายไปทั่วท้องเรือ เรือก็จะจมแน่นอน&lt;/p>
-&lt;p>การใช้ Bulkhead คือการกั้นส่วนท้องเรือออกเป็นส่วนๆ หากน้ำรั่วขึ้นมา น้ำก็จะเข้ามาจนเต็มแค่ส่วนหนึ่งๆ โดยไม่หนักพอทำให้เรือล่มทั้งลำ (ถ้ายังนึกภาพไม่ออก ลองดู&lt;a href="https://www.google.nl/search?dcr=0&amp;amp;biw=1832&amp;amp;bih=989&amp;amp;tbm=isch&amp;amp;sa=1&amp;amp;q=bulkhead&amp;amp;oq=bulkhead">ภาพในกูเกิ้ล&lt;/a>ครับ)&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bulkhead on Not About Code - Technical Leadership</title>
+    <link>https://www.notaboutcode.com/tags/bulkhead/</link>
+    <description>Recent content in bulkhead on Not About Code - Technical Leadership</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>th</language>
+    <lastBuildDate>Sun, 12 Nov 2017 12:04:02 +0700</lastBuildDate><atom:link href="https://www.notaboutcode.com/tags/bulkhead/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ปกป้องระบบไม่ให้ล่มหมดด้วย Bulkhead</title>
+      <link>https://www.notaboutcode.com/post/11-bulkhead/</link>
+      <pubDate>Sun, 12 Nov 2017 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/11-bulkhead/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/ship-01.jpg&#34; alt=&#34;Photo by Abraham Wiebe, from Unsplash.com&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Bulkhead เป็นเทคนิคการออกแบบที่เหมาะกับ Critical System คือ ถ้าล่มปุ๊บ คนในองค์กรจะไม่สามารถทำงานต่อได้เลย&lt;/p&gt;
+&lt;p&gt;ถ้าใครเปิดดิกดู ศัพท์นี้จริงๆใช้เรียกการออกแบบพาหนะครับ&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Bulkhead (n.) a dividing wall or barrier between separate compartments inside a ship, aircraft, or other vehicle.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;ไอเดียของ Bulkhead คือการออกแบบให้พาหนะแยกออกเป็นส่วนๆ (Compartmentalisation) หากมีส่วนใดส่วนหนึ่งมีปัญหา ผลกระทบจะต้องไม่รุนแรงจนทำให้ทั้งพาหนะล่มหมด&lt;/p&gt;
+&lt;p&gt;ยกตัวอย่างเช่น สมมติว่าเรือของเรามีจุดรั่วจุดหนึ่ง หากเราไม่ได้มีการแบ่งโซนเป็นส่วน น้ำจะกระจายไปทั่วท้องเรือ เรือก็จะจมแน่นอน&lt;/p&gt;
+&lt;p&gt;การใช้ Bulkhead คือการกั้นส่วนท้องเรือออกเป็นส่วนๆ หากน้ำรั่วขึ้นมา น้ำก็จะเข้ามาจนเต็มแค่ส่วนหนึ่งๆ โดยไม่หนักพอทำให้เรือล่มทั้งลำ (ถ้ายังนึกภาพไม่ออก ลองดู&lt;a href=&#34;https://www.google.nl/search?dcr=0&amp;amp;biw=1832&amp;amp;bih=989&amp;amp;tbm=isch&amp;amp;sa=1&amp;amp;q=bulkhead&amp;amp;oq=bulkhead&#34;&gt;ภาพในกูเกิ้ล&lt;/a&gt;ครับ)&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

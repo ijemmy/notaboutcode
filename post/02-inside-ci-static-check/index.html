@@ -1,138 +1,194 @@
-<!doctype html><html lang=th>
+<!DOCTYPE html>
+<html lang="th">
 <head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>การนำ Static Code Analysis มาใช้ในทีม - Not About Code - Technical Leadership</title>
-<meta name=renderer content="webkit">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta http-equiv=cache-control content="no-transform">
-<meta http-equiv=cache-control content="no-siteapp">
-<meta name=theme-color content="#f8f5ec">
-<meta name=msapplication-navbutton-color content="#f8f5ec">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
-<meta name=author content="ijemmy"><meta name=description content="สืบเนื่องจากบันทึกที่แล้ว ผมได้อธิบายไว้ ว่าหลังจากทีมเริ่มมี CI Server แล้ว ทีมก็มักจะเริ่มใส่เครื่องมือหลายๆอย่างลงไปเพื่อทำการ Automation และควบคุมคุณภาพของโค้ด
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>การนำ Static Code Analysis มาใช้ในทีม - Not About Code - Technical Leadership</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ijemmy" /><meta name="description" content="สืบเนื่องจากบันทึกที่แล้ว ผมได้อธิบายไว้ ว่าหลังจากทีมเริ่มมี CI Server แล้ว ทีมก็มักจะเริ่มใส่เครื่องมือหลายๆอย่างลงไปเพื่อทำการ Automation และควบคุมคุณภาพของโค้ด
 ในบันทึกฉบับนี้ ผมจะแนะนำเครื่องมือจำพวก Static code analysis ครับ (จากนี้ไปจะเรียกย่อๆว่า SCA)
-"><meta name=keywords content="Hugo,theme,even">
-<meta name=generator content="Hugo 0.89.4 with theme even">
-<link rel=canonical href=https://www.notaboutcode.com/post/02-inside-ci-static-check/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=manifest href=/manifest.json>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
-<link rel=stylesheet href=/css/custom.css>
-<meta property="og:title" content="การนำ Static Code Analysis มาใช้ในทีม">
+" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://www.notaboutcode.com/post/02-inside-ci-static-check/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/custom.css">
+
+
+<meta property="og:title" content="การนำ Static Code Analysis มาใช้ในทีม" />
 <meta property="og:description" content="
 สืบเนื่องจากบันทึกที่แล้ว ผมได้อธิบายไว้ ว่าหลังจากทีมเริ่มมี CI Server แล้ว ทีมก็มักจะเริ่มใส่เครื่องมือหลายๆอย่างลงไปเพื่อทำการ Automation  และควบคุมคุณภาพของโค้ด
-ในบันทึกฉบับนี้ ผมจะแนะนำเครื่องมือจำพวก Static code analysis ครับ (จากนี้ไปจะเรียกย่อๆว่า SCA)">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://www.notaboutcode.com/post/02-inside-ci-static-check/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2017-10-07T16:28:41+07:00">
-<meta property="article:modified_time" content="2017-10-07T16:28:41+07:00">
-<meta itemprop=name content="การนำ Static Code Analysis มาใช้ในทีม">
-<meta itemprop=description content="
+ในบันทึกฉบับนี้ ผมจะแนะนำเครื่องมือจำพวก Static code analysis ครับ (จากนี้ไปจะเรียกย่อๆว่า SCA)" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.notaboutcode.com/post/02-inside-ci-static-check/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2017-10-07T16:28:41+07:00" />
+<meta property="article:modified_time" content="2017-10-07T16:28:41+07:00" />
+
+<meta itemprop="name" content="การนำ Static Code Analysis มาใช้ในทีม">
+<meta itemprop="description" content="
 สืบเนื่องจากบันทึกที่แล้ว ผมได้อธิบายไว้ ว่าหลังจากทีมเริ่มมี CI Server แล้ว ทีมก็มักจะเริ่มใส่เครื่องมือหลายๆอย่างลงไปเพื่อทำการ Automation  และควบคุมคุณภาพของโค้ด
-ในบันทึกฉบับนี้ ผมจะแนะนำเครื่องมือจำพวก Static code analysis ครับ (จากนี้ไปจะเรียกย่อๆว่า SCA)"><meta itemprop=datePublished content="2017-10-07T16:28:41+07:00">
-<meta itemprop=dateModified content="2017-10-07T16:28:41+07:00">
-<meta itemprop=wordCount content="420">
-<meta itemprop=keywords content="CI,CD,"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="การนำ Static Code Analysis มาใช้ในทีม">
-<meta name=twitter:description content="
+ในบันทึกฉบับนี้ ผมจะแนะนำเครื่องมือจำพวก Static code analysis ครับ (จากนี้ไปจะเรียกย่อๆว่า SCA)"><meta itemprop="datePublished" content="2017-10-07T16:28:41+07:00" />
+<meta itemprop="dateModified" content="2017-10-07T16:28:41+07:00" />
+<meta itemprop="wordCount" content="420">
+<meta itemprop="keywords" content="CI,CD," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="การนำ Static Code Analysis มาใช้ในทีม"/>
+<meta name="twitter:description" content="
 สืบเนื่องจากบันทึกที่แล้ว ผมได้อธิบายไว้ ว่าหลังจากทีมเริ่มมี CI Server แล้ว ทีมก็มักจะเริ่มใส่เครื่องมือหลายๆอย่างลงไปเพื่อทำการ Automation  และควบคุมคุณภาพของโค้ด
-ในบันทึกฉบับนี้ ผมจะแนะนำเครื่องมือจำพวก Static code analysis ครับ (จากนี้ไปจะเรียกย่อๆว่า SCA)"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
-<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+ในบันทึกฉบับนี้ ผมจะแนะนำเครื่องมือจำพวก Static code analysis ครับ (จากนี้ไปจะเรียกย่อๆว่า SCA)"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
 </head>
 <body>
-<div id=mobile-navbar class=mobile-navbar>
-<div class=mobile-header-logo>
-<a href=/ class=logo>Not About Code</a>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Not About Code</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
-<div class=mobile-navbar-icon>
-<span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-<nav id=mobile-menu class="mobile-menu slideout-menu">
-<ul class=mobile-menu-list>
-<a href=/>
-<li class=mobile-menu-item>Home</li>
-</a><a href=/post/>
-<li class=mobile-menu-item>Archives</li>
-</a><a href=/tags/>
-<li class=mobile-menu-item>Tags</li>
-</a><a href=/categories/>
-<li class=mobile-menu-item>Categories</li>
-</a><a href=/about/>
-<li class=mobile-menu-item>About</li>
-</a>
-</ul>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
 </nav>
-<div class=container id=mobile-panel>
-<header id=header class=header>
-<div class=logo-wrapper>
-<a href=/ class=logo>Not About Code</a>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Not About Code</a>
 </div>
-<nav class=site-navbar>
-<ul id=menu class=menu>
-<li class=menu-item>
-<a class=menu-item-link href=/>Home</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/post/>Archives</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/tags/>Tags</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/categories/>Categories</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/about/>About</a>
-</li>
-</ul>
-<a href=https://webring.wonderful.software#notaboutcode.com title=วงแหวนเว็บ>
-<img alt=วงแหวนเว็บ width=32 height=32 src=https://webring.wonderful.software/webring.black.svg>
-</a>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+
+  
+  <a href="https://webring.wonderful.software#notaboutcode.com" title="วงแหวนเว็บ">
+    <img
+        alt="วงแหวนเว็บ"
+        width="32"
+        height="32"
+        src="https://webring.wonderful.software/webring.black.svg"
+    />
+  </a>
 </nav>
-</header>
-<main id=main class=main>
-<div class=content-wrapper>
-<div id=content class=content>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title>การนำ Static Code Analysis มาใช้ในทีม</h1>
-<div class=post-meta>
-<span class=post-time> 2017-10-07 </span>
-<div class=post-category>
-<a href=/categories/continuous-delivery/> Continuous Delivery </a>
-</div>
-</div>
-</header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title></h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#ทำความรจก-static-code-analysis>ทำความรู้จัก Static code analysis</a></li>
-<li><a href=#กรณไหนควรใส-sca-ลง-ci>กรณีไหนควรใส่ SCA ลง CI?</a></li>
-<li><a href=#ขอแนะนำในภาคปฏบต>ข้อแนะนำในภาคปฏิบัติ</a>
-<ul>
-<li><a href=#1-คอยเปนคอยไปเพอลดแรงตาน>1. ค่อยเป็นค่อยไปเพื่อลดแรงต้าน</a></li>
-<li><a href=#2-โคดเดมรน-sca-ทแดงพรด>2. โค้ดเดิมรัน SCA ทีแดงพรืด</a></li>
-<li><a href=#3-แกแตละครงยากมาก>3. แก้แต่ละครั้งยากมาก</a></li>
-<li><a href=#4-เขมงวดในการ-override>4. เข้มงวดในการ Override</a></li>
-</ul>
-</li>
-<li><a href=#สรป>สรุป</a></li>
-</ul>
+
+
+
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">การนำ Static Code Analysis มาใช้ในทีม</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2017-10-07 </span>
+        <div class="post-category">
+            <a href="/categories/continuous-delivery/"> Continuous Delivery </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title"></h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ทำความรจก-static-code-analysis">ทำความรู้จัก Static code analysis</a></li>
+    <li><a href="#กรณไหนควรใส-sca-ลง-ci">กรณีไหนควรใส่ SCA ลง CI?</a></li>
+    <li><a href="#ขอแนะนำในภาคปฏบต">ข้อแนะนำในภาคปฏิบัติ</a>
+      <ul>
+        <li><a href="#1-คอยเปนคอยไปเพอลดแรงตาน">1. ค่อยเป็นค่อยไปเพื่อลดแรงต้าน</a></li>
+        <li><a href="#2-โคดเดมรน-sca-ทแดงพรด">2. โค้ดเดิมรัน SCA ทีแดงพรืด</a></li>
+        <li><a href="#3-แกแตละครงยากมาก">3. แก้แต่ละครั้งยากมาก</a></li>
+        <li><a href="#4-เขมงวดในการ-override">4. เข้มงวดในการ Override</a></li>
+      </ul>
+    </li>
+    <li><a href="#สรป">สรุป</a></li>
+  </ul>
 </nav>
+  </div>
 </div>
-</div>
-<div class=post-content>
-<p><img src=/img/covers/code-01.jpg alt="Photo by Ilya Pavlov, from Unsplash.com"></p>
-<p>สืบเนื่องจาก<a href=/post/01-ci-journey/>บันทึกที่แล้ว</a> ผมได้อธิบายไว้ ว่าหลังจากทีมเริ่มมี CI Server แล้ว ทีมก็มักจะเริ่มใส่เครื่องมือหลายๆอย่างลงไปเพื่อทำการ Automation และควบคุมคุณภาพของโค้ด</p>
+    <div class="post-content">
+      <p><img src="/img/covers/code-01.jpg" alt="Photo by Ilya Pavlov, from Unsplash.com"></p>
+<p>สืบเนื่องจาก<a href="/post/01-ci-journey/">บันทึกที่แล้ว</a> ผมได้อธิบายไว้ ว่าหลังจากทีมเริ่มมี CI Server แล้ว ทีมก็มักจะเริ่มใส่เครื่องมือหลายๆอย่างลงไปเพื่อทำการ Automation  และควบคุมคุณภาพของโค้ด</p>
 <p>ในบันทึกฉบับนี้ ผมจะแนะนำเครื่องมือจำพวก Static code analysis ครับ (จากนี้ไปจะเรียกย่อๆว่า SCA)</p>
-<h1 id=ทำความรจก-static-code-analysis>ทำความรู้จัก Static code analysis</h1>
+<h1 id="ทำความรจก-static-code-analysis">ทำความรู้จัก Static code analysis</h1>
 <p>ปกติแล้วการทำ SCA จะทำในขั้นตอนเดียวกันกับการ Build/Compile</p>
 <p>คำว่า Static ถ้าแปลตรงตัวคือ &ldquo;สถิตย์&rdquo; ซึ่งหมายถึงว่าไม่มีการเคลื่อนไหว (เหมือนคำว่าพลังไฟฟ้าสถิตย์ที่เราเรียนม.ปลาย)</p>
 <p>สาเหตุที่เรียกว่า Static เป็นเพราะขั้นตอนนี้จะไม่มีการทำงานของโปรแกรมเลย เป็นการแสกนโค้ดแล้วแสดงผลการวิเคราะห์ออกมาโดยตรง</p>
@@ -146,7 +202,7 @@
 <li>ชื่อตัวแปร (Naming convention)</li>
 <li>ขนาดและวิธีการเว้นช่องไฟ (Tab/space)</li>
 <li>การเขียนคอมเม้นต์</li>
-<li>ความซับซ้อนของโค้ด (Cyclomatic complexity)</li>
+<li>ความซับซ้อนของโค้ด  (Cyclomatic complexity)</li>
 </ul>
 <ol>
 <li><strong>Bug/Bad practice detection</strong> ถึงแม้ SCA จะไม่ได้ลองรันโปรแกรมเพื่อทดสอบจริงๆ แต่มันสามารถตรวจจับลักษณะของโค้ดที่มักจะเกิดบั้กได้ เพื่อแจ้งเตือนเราก่อนล่วงหน้า ตัวอย่างเช่น</li>
@@ -157,12 +213,12 @@
 <li>การใช้เรียกฟังก์ชั่นที่ไม่ได้รับการรองรับในบราวเซอร์รุ่นเก่าๆ (JavaScript)</li>
 </ul>
 <ol>
-<li><strong>Code duplication</strong> เคยก็อบแปะกันไหมครับ? บางทีก็เปลี่ยนชื่อตัวแปรหน่อยนึง กะว่าลองใช้ดูก่อนว่าเวิร์คเปล่า แล้วค่อยมาแก้ทีหลัง แต่พอเอาเข้าจริงก็ไม่เคยแก้เลย SCA จำพวกนี้จะทำการแจ้งเตือนหากมีโค้ดที่หน้าตาคล้ายกันมากๆ หากในทีมมีปัญหานี้มากๆ การตรวจสอบแบบนี้จะช่วยตัดไฟตั้งแต่ต้นลมครับ</li>
+<li><strong>Code duplication</strong> เคยก็อบแปะกันไหมครับ? บางทีก็เปลี่ยนชื่อตัวแปรหน่อยนึง กะว่าลองใช้ดูก่อนว่าเวิร์คเปล่า แล้วค่อยมาแก้ทีหลัง แต่พอเอาเข้าจริงก็ไม่เคยแก้เลย SCA จำพวกนี้จะทำการแจ้งเตือนหากมีโค้ดที่หน้าตาคล้ายกันมากๆ  หากในทีมมีปัญหานี้มากๆ การตรวจสอบแบบนี้จะช่วยตัดไฟตั้งแต่ต้นลมครับ</li>
 </ol>
 <p>แต่ละภาษาก็จะมีเครื่องมือทำ SCA ที่นิยมแตกต่างกันไปครับ โดย SCA บางตัวทำหลายอย่างในตัวเดียวให้เสร็จสรรพ</p>
-<p>ถ้า Java ตัวที่นิยมก็จะมี CheckStyle, PMD, FindBugs มีคนสรุปข้อเปรียบเทียบเอาไว้ที่ <a href=http://continuousdev.com/2015/08/checkstyle-vs-pmd-vs-findbugs/>ลิ้งก์นี้</a></p>
+<p>ถ้า Java ตัวที่นิยมก็จะมี CheckStyle, PMD, FindBugs มีคนสรุปข้อเปรียบเทียบเอาไว้ที่ <a href="http://continuousdev.com/2015/08/checkstyle-vs-pmd-vs-findbugs/">ลิ้งก์นี้</a></p>
 <p>ส่วน JavaScript ก็จะเป็น JSLint, JSHint, ESLint หรือพวก Transpiling Languages (ex. TypeScript, ES6 + Babel) ส่วนใหญ่ก็จะเพิ่มเติมการตรวจสอบมาให้โดยอัตโนมัติ</p>
-<h1 id=กรณไหนควรใส-sca-ลง-ci>กรณีไหนควรใส่ SCA ลง CI?</h1>
+<h1 id="กรณไหนควรใส-sca-ลง-ci">กรณีไหนควรใส่ SCA ลง CI?</h1>
 <p>ก่อนจะตัดสินใจ เรามาประมวลประโยชน์ของ SCA กันก่อน ว่าช่วยอะไรเราได้บ้าง</p>
 <ol>
 <li>คุมคุณภาพของโค้ดได้โดยไม่ต้องใช้คน ประหยัดเวลาและเที่ยงตรง</li>
@@ -170,115 +226,175 @@
 <li>รันเร็ว เจอปัญหาเร็ว ใช้เวลาแก้น้อยกว่าบั้กที่เจอจากการเทสต์ในตอนท้ายๆเช่น UAT (User Acceptance Testing)</li>
 </ol>
 <p>ดังนั้น ผมแนะนำให้ใส่เกือบทุกกรณีครับ เพราะ SCA นั้นจะเหนื่อยแค่ตอนใส่แค่ครั้งแรก สมัยนี้พวก CI Software ก็แทบจะมี Plugin ของตัวดังๆมาให้เกือบหมด กดฉึกๆก็มีรีพอร์ตให้อัตโนมัติแล้ว ไม่ได้ต้องมานั่งเขียน Bash Script กันให้วุ่นวาย</p>
-<p>โดยเฉพาะถ้ามีทีมมี Junior Dev, Offshore หรือ Outsource กรณีนี้ยิ่งควรที่จะตรวจสอบอัตโนมัติเป็นอย่างยิ่ง เพราะจะช่วยให้โค้ดมีมาตรฐานในระดับหนึ่งได้โดยอัตโนมัติ</p>
+<p>โดยเฉพาะถ้ามีทีมมี Junior Dev, Offshore หรือ Outsource  กรณีนี้ยิ่งควรที่จะตรวจสอบอัตโนมัติเป็นอย่างยิ่ง เพราะจะช่วยให้โค้ดมีมาตรฐานในระดับหนึ่งได้โดยอัตโนมัติ</p>
 <p>คำถามที่ตอบยากคือ เราควรเซ็ต SCA ให้เข้มงวดแค่ไหน? เพราะเวลาที่เสียไปในการทำ SCA คือเวลาแก้ให้ SCA แสกนผ่านมากกว่าการติดตั้งตอนแรก ซึ่งนี่เป็นเวลาที่ทุกคนในทีมจะต้องเสียไปตลอด เพื่อแลกกับคุณภาพของโค้ด</p>
 <p>เรื่องนี้ขึ้นอยู่กับทีมและลักษณะงานที่ทำอยู่ ถ้าคิดว่าโปรดักต์จะต้องพัฒนากันต่อไปนานๆหลัง Launch แล้ว การลงทุนให้ SCA ตรวจแบบเข้มข้นหน่อยก็จะคุ้มค่าในภายหลังครับ แต่ถ้าโปรเจ็คกะเผาแป๊บๆแล้วจบเลย อันนี้อาจจะไม่คุ้มค่ากับการเซ็ต SCA ให้ตรวจละเอียดมาก</p>
-<h1 id=ขอแนะนำในภาคปฏบต>ข้อแนะนำในภาคปฏิบัติ</h1>
-<h2 id=1-คอยเปนคอยไปเพอลดแรงตาน>1. ค่อยเป็นค่อยไปเพื่อลดแรงต้าน</h2>
+<h1 id="ขอแนะนำในภาคปฏบต">ข้อแนะนำในภาคปฏิบัติ</h1>
+<h2 id="1-คอยเปนคอยไปเพอลดแรงตาน">1. ค่อยเป็นค่อยไปเพื่อลดแรงต้าน</h2>
 <p>ในทางปฏิบัติจริง การใส่ SCA มักจะได้แรงต้านจากคนในทีมมากครับ เพราะจากที่เคยเขียนอะไรก็ได้ ต้องมารันเช็คอีกรอบนึงก่อน Push (แล้วถ้าลืม ก็จะไปพังบน CI Server ให้เสียเวลาอีก) รันเสร็จก็แดงเถือก ต้องมานั่งแก้กันอีก ซึ่งหลายๆครั้ง ที่เช็คไม่ผ่านก็ดูจะเหมือนจะเป็นเรื่องหยุมหยิม แค่รายละเอียดเล็กๆน้อยๆ</p>
 <p>ขอเตือนว่า อย่าดูถูกเรื่องหยุมหยิมพวกนี้นะครับ โค้ดที่พวกเราก่นด่านกันว่าอ่านไม่รู้เรื่อง มันเริ่มจากการปล่อยปละละเลยเรื่องหยุมหยิมพวกนี้แหละ พอนานเข้า กองมันจะใหญ่เรื่อยๆแล้วต้องมาทนทุกข์ในภายหลัง</p>
 <p>ถ้าเจอปัญหาเรื่องแรงต้านี้ ผมแนะนำว่าให้ค่อยๆแก้ Config ให้เข้มงวดขึ้นทีละนิดครับ ตอนแรกๆอาจตรวจอะไรที่มันแก้ง่ายๆ แต่สำคัญๆก่อน หรืออะไรที่เถียงไม่ได้ว่ามันผิดชัดเจน (เช่น ประกาศตัวแปรทิ้งไว้โดยไม่ได้ใช้)</p>
 <p>หลังจากนั้นจึงขอข้อตกลงในทีมว่าหลังจากผ่านไปสองเดือน เราจะเพิ่มการเช็คให้ละเอียดขึ้นเรื่อยๆนะ</p>
-<h2 id=2-โคดเดมรน-sca-ทแดงพรด>2. โค้ดเดิมรัน SCA ทีแดงพรืด</h2>
+<h2 id="2-โคดเดมรน-sca-ทแดงพรด">2. โค้ดเดิมรัน SCA ทีแดงพรืด</h2>
 <p>ทุกทีมที่ผมเข้าไปเสนอ SCA ตอนแรกจะเหนื่อยมากครับ เพราะแดงพรืด ส่วนใหญ่เป็นพันหรือหมื่นตำแหน่ง</p>
 <p>อันนี้ต้องทำใจให้แข็งแกร่ง เพราะจะเร็วจะช้ามันเป็น Technical Debt ที่ต้องแก้</p>
 <p>โดยในทางปฏิบัติ เริ่มจาก Config เพื่อตรวจแค่ตัวสำคัญๆก่อน แล้วจึงค่อยๆเพิ่มครับ เพราะแก้ทีเดียวหมื่นจุดนี่อาจจะใช้เวลานานมากกว่าจะเสร็จ</p>
 <p>ในกรณีนี้ อาจจะต้องให้ PO (Product Owner) หรือ Manager ยอมให้เวลาเราในการแก้ไขคุณภาพของโค้ดด้วย ถ้าใช้ Scrum ก็ต้องมีการทำ Story ไว้บน Backlog ชัดเจน ว่าอีกกี่เดือนจะเริ่มเช็คอะไรเพิ่ม</p>
 <p>ส่วนใหญ่ถ้า Manager มีพื้นฐานด้านเทคนิคจะคุยกันง่ายหน่อย แต่ถ้าเป็น PO ที่มาจากฝั่งธุรกิจ พยายามอธิบายให้เขาฟังเป็นตัวเลขครับ ว่าถ้าเกิดบั้กบนระบบจริงแล้วบริษัทจะเสียเงินหรือชื่อเสียงแค่ไหน หรือการแก้บั้กตั้งแต่ก่อน Push โค้ดกับรอให้ไปถึง UAT (User Acceptance Testing) แล้วเนี่ย เวลาที่ใช้มันต่างกันมหาศาลแค่ไหน</p>
-<h2 id=3-แกแตละครงยากมาก>3. แก้แต่ละครั้งยากมาก</h2>
+<h2 id="3-แกแตละครงยากมาก">3. แก้แต่ละครั้งยากมาก</h2>
 <p>การที่เราแก้จุดที่ SCA ตรวจเจอไม่ได้ อาจเป็นสัญญาณของการออกแบบที่ไม่ดีนะครับ (Bad design)</p>
 <p>ซึ่งอาการที่พบคือจะแก้จุดเดียว ต้องรื้อคลาสใหม่สามสี่คลาส</p>
-<p>พวกนี้จะเจอบ่อยในเรื่องของ Bug/Bad practice check เวลาตั้งให้การตรวจเข้มงวด</p>
+<p>พวกนี้จะเจอบ่อยในเรื่องของ Bug/Bad practice check  เวลาตั้งให้การตรวจเข้มงวด</p>
 <p>พอถึงจุดนี้ปุ๊บ ทีมจะต้องเลือกระหว่างทำการ Override เพื่อให้ Build ผ่าน หรือลงทุนใช้เวลาแก้</p>
 <p>การ Override มักจะอยู่ในรูปแบบของการเขียนคอมเม้นต์เพื่อบอก SCA Tool ให้เว้นการตรวจสอบบริเวณนี้</p>
 <p>โดยหลักแล้ว ผมแนะนำให้ใ่ช้เวลาแก้ให้ดีครับ เพราะถ้า Override ไปครั้งแล้ว ส่วนใหญ่อีกสักพักก็จะโผล่ออกมาให้ Override อีก เพราะมันผิดตั้งแต่การออกแบบแล้ว</p>
-<h2 id=4-เขมงวดในการ-override>4. เข้มงวดในการ Override</h2>
+<h2 id="4-เขมงวดในการ-override">4. เข้มงวดในการ Override</h2>
 <p>พอทีมเริ่มมีการ Override กันสักครั้งสองครั้ง ก็จะเริ่มมีการแห่ Override กันพรึ่บ</p>
 <p>ทีมควรมีข้อตกลงที่ชัดเจนครับว่ากรณีไหน Override ได้หรือไม่ได้ หรือถ้าเป็นกรณีใหม่ๆก็อาจจะต้องให้ Senior Dev รีวิวก่อน</p>
 <p>หากปล่อยให้ Override กันตามใจ เป็นนิสัย ไอ้ SCA ที่เราอุตส่าห์สร้างมาก็ไม่มีประโยชน์ครับ</p>
 <p>การปล่อยให้ Override SCA นี่บาปใกล้เคียงกับการ Comment Unit test ออกเวลาเทสต์พังนะครับ</p>
 <p>ซึ่งกรรมจะตามทันแน่นอน การเขียนโปรแกรมนี่กรรมติดจรวดเลย</p>
-<h1 id=สรป>สรุป</h1>
-<p>หลังจากทีมมี Unit test และ CI Server แล้ว ผมแนะนำให้ทำการติด SCA เป็นลำดับถัดไปเลยครับ เพราะมันแทบไม่ต้องใช้เวลาในการดูแลรักษาเหมือนเทสต์ รันเร็ว ได้ผลเร็ว แล้วเป็นการสอนทีมให้หลีกเลี่ยง Bad Practice ไปในตัว</p>
+<h1 id="สรป">สรุป</h1>
+<p>หลังจากทีมมี Unit test และ CI Server แล้ว ผมแนะนำให้ทำการติด SCA เป็นลำดับถัดไปเลยครับ เพราะมันแทบไม่ต้องใช้เวลาในการดูแลรักษาเหมือนเทสต์  รันเร็ว ได้ผลเร็ว แล้วเป็นการสอนทีมให้หลีกเลี่ยง Bad Practice ไปในตัว</p>
 <p>สิ่งที่ต้องคิดคือจะตั้ง SCA ให้เข้มงวดแค่ไหน และจะโน้มน้าวทีมยังไงให้ตกลงยอมใช้ ซึ่งตรงนี้ก็ขึ้นอยู่กับทีม และลักษณะของโปรเจ็คที่ทำอยู่ หลักๆเลยคือต้องทำแบบค่อยเป็นค่อยไปครับ</p>
 <p>ถ้าคุณอยู่ในฐานะซีเนียร์หรือทีมลีด เป็นหน้าที่ของคุณที่จะต้องควบคุมคุณภาพของซอฟท์แวร์ กับความเร็วในการพัฒนาฟีเจอร์ใหม่ๆ ซึ่งกรณีนี้ บางทีเราก็ต้องยอมจ่าย Technical Debt เพื่อไปใช้คืนทีหลัง แต่ระวังอย่าให้ล้มละลายนะครับ ถ้ารู้สึกว่าทีมกำลังจ่ายเยอะไป ขืนทำแบบนี้ต่อไปจะไปไม่รอด ก็เป็นหน้าที่ของคุณที่ต้องเหยียบเบรค แล้วเข้าไปเจรจากับผู้เกี่ยวข้องทั้งหลาย</p>
-<div class=fb-page data-href=https://www.facebook.com/notaboutcode/ data-tabs data-small-header=false data-adapt-container-width=true data-hide-cover=false data-show-facepile=true>
-<blockquote cite=https://www.facebook.com/notaboutcode/ class=fb-xfbml-parse-ignore>
-<a href=https://www.facebook.com/notaboutcode/>Not about code</a>
-</blockquote>
+
+
+      
+      <div  class="fb-page"
+            data-href="https://www.facebook.com/notaboutcode/"
+            data-tabs=""
+            data-small-header="false"
+            data-adapt-container-width="true"
+            data-hide-cover="false"
+            data-show-facepile="true">
+
+            <blockquote cite="https://www.facebook.com/notaboutcode/" class="fb-xfbml-parse-ignore">
+              <a href="https://www.facebook.com/notaboutcode/">Not about code</a>
+            </blockquote>
+      </div>
+
+    </div>
+
+    
+    <div id="fb-root"></div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content">ijemmy</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content">
+        2017-10-07
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
 </div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/ci/">CI</a>
+          <a href="/tags/cd/">CD</a>
+          </div>
+      <div class="fb-comments" data-numposts="5"></div>
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/04-choosing-language/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">ขึ้นโปรเจ็คใหม่ ใช้ภาษาอะไรดี</span>
+            <span class="prev-text nav-mobile"></span>
+          </a>
+        <a class="next" href="/post/01-ci-journey/">
+            <span class="next-text nav-default">การเดินทางสู่ CI (Continuous Integration)</span>
+            <span class="next-text nav-mobile"></span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://www.facebook.com/notaboutcode/" class="iconfont icon-facebook" title="facebook"></a>
+  <a href="https://www.notaboutcode.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-<div id=fb-root></div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span class=item-title></span>
-<span class=item-content>ijemmy</span>
-</p>
-<p class=copyright-item>
-<span class=item-title></span>
-<span class=item-content>
-2017-10-07
-</span>
-</p>
-<p class=copyright-item>
-<span class=item-title></span>
-<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
-</p>
+
+<div class="copyright">
+  <span class="power-by">
+    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+     - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+  </span>
 </div>
-<footer class=post-footer>
-<div class=post-tags>
-<a href=/tags/ci/>CI</a>
-<a href=/tags/cd/>CD</a>
-</div>
-<div class=fb-comments data-numposts=5></div>
-<nav class=post-nav>
-<a class=prev href=/post/04-choosing-language/>
-<i class="iconfont icon-left"></i>
-<span class="prev-text nav-default">ขึ้นโปรเจ็คใหม่ ใช้ภาษาอะไรดี</span>
-<span class="prev-text nav-mobile"></span>
-</a>
-<a class=next href=/post/01-ci-journey/>
-<span class="next-text nav-default">การเดินทางสู่ CI (Continuous Integration)</span>
-<span class="next-text nav-mobile"></span>
-<i class="iconfont icon-right"></i>
-</a>
-</nav>
-</footer>
-</article>
-</div>
-</div>
-</main>
-<footer id=footer class=footer>
-<div class=social-links>
-<a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
-<a href=https://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
-</div>
-<div class=copyright>
-<span class=power-by>
-%!(EXTRA string=<a class=hexo-link href=https://gohugo.io>Hugo</a>)
-</span>
-<span class=division>|</span>
-<span class=theme-info>
--
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
-</span>
-<span class=copyright-year>
-&copy;
-2017 -
-2022<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
-</span>
-</div>
-</footer>
-<div class=back-to-top id=back-to-top>
-<i class="iconfont icon-up"></i>
-</div>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
-<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
-<script async src=https://www.google-analytics.com/analytics.js></script>
-<script>(function(b,c,d){var a,e=b.getElementsByTagName(c)[0];if(b.getElementById(d))return;a=b.createElement(c),a.id=d,a.src='https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676',e.parentNode.insertBefore(a,e)})(document,'script','facebook-jssdk')</script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-108239205-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 </body>
 </html>

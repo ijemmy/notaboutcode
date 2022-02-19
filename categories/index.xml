@@ -1,1 +1,74 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Categories on Not About Code - Technical Leadership</title><link>https://www.notaboutcode.com/categories/</link><description>Recent content in Categories on Not About Code - Technical Leadership</description><generator>Hugo -- gohugo.io</generator><language>th</language><lastBuildDate>Sat, 19 Feb 2022 12:04:02 +0700</lastBuildDate><atom:link href="https://www.notaboutcode.com/categories/index.xml" rel="self" type="application/rss+xml"/><item><title>System Design</title><link>https://www.notaboutcode.com/categories/system-design/</link><pubDate>Sat, 19 Feb 2022 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/categories/system-design/</guid><description/></item><item><title>DevOps</title><link>https://www.notaboutcode.com/categories/devops/</link><pubDate>Sat, 12 Feb 2022 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/categories/devops/</guid><description/></item><item><title>Technical Leadership</title><link>https://www.notaboutcode.com/categories/technical-leadership/</link><pubDate>Thu, 11 Jun 2020 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/categories/technical-leadership/</guid><description/></item><item><title>Deployment</title><link>https://www.notaboutcode.com/categories/deployment/</link><pubDate>Sun, 10 Mar 2019 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/categories/deployment/</guid><description/></item><item><title>Software Engineering</title><link>https://www.notaboutcode.com/categories/software-engineering/</link><pubDate>Sat, 01 Sep 2018 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/categories/software-engineering/</guid><description/></item><item><title>Career</title><link>https://www.notaboutcode.com/categories/career/</link><pubDate>Sat, 16 Jun 2018 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/categories/career/</guid><description/></item><item><title>Continuous Delivery</title><link>https://www.notaboutcode.com/categories/continuous-delivery/</link><pubDate>Sat, 05 May 2018 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/categories/continuous-delivery/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Not About Code - Technical Leadership</title>
+    <link>https://www.notaboutcode.com/categories/</link>
+    <description>Recent content in Categories on Not About Code - Technical Leadership</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>th</language>
+    <lastBuildDate>Sat, 19 Feb 2022 12:04:02 +0700</lastBuildDate><atom:link href="https://www.notaboutcode.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>System Design</title>
+      <link>https://www.notaboutcode.com/categories/system-design/</link>
+      <pubDate>Sat, 19 Feb 2022 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/categories/system-design/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DevOps</title>
+      <link>https://www.notaboutcode.com/categories/devops/</link>
+      <pubDate>Sat, 12 Feb 2022 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/categories/devops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Technical Leadership</title>
+      <link>https://www.notaboutcode.com/categories/technical-leadership/</link>
+      <pubDate>Thu, 11 Jun 2020 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/categories/technical-leadership/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Deployment</title>
+      <link>https://www.notaboutcode.com/categories/deployment/</link>
+      <pubDate>Sun, 10 Mar 2019 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/categories/deployment/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Software Engineering</title>
+      <link>https://www.notaboutcode.com/categories/software-engineering/</link>
+      <pubDate>Sat, 01 Sep 2018 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/categories/software-engineering/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Career </title>
+      <link>https://www.notaboutcode.com/categories/career/</link>
+      <pubDate>Sat, 16 Jun 2018 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/categories/career/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Continuous Delivery</title>
+      <link>https://www.notaboutcode.com/categories/continuous-delivery/</link>
+      <pubDate>Sat, 05 May 2018 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/categories/continuous-delivery/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

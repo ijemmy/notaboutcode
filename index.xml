@@ -1,172 +1,461 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Not About Code - Technical Leadership</title><link>https://www.notaboutcode.com/</link><description>Recent content on Not About Code - Technical Leadership</description><generator>Hugo -- gohugo.io</generator><language>th</language><lastBuildDate>Sat, 19 Feb 2022 12:04:02 +0700</lastBuildDate><atom:link href="https://www.notaboutcode.com/index.xml" rel="self" type="application/rss+xml"/><item><title>About</title><link>https://www.notaboutcode.com/about/</link><pubDate>Sun, 20 Aug 2017 21:38:52 +0800</pubDate><guid>https://www.notaboutcode.com/about/</guid><description>เพราะการพัฒนาซอฟท์แวร์ไม่ได้มีแค่โค้ด เมื่อเทียบกับเนื้อหาทางด้านเทคนิคและการเขียนโค้ดแล้ว เรายังมีบล็อคภาษาไทยที่คุยเกี่ยวกับหัวข้ออื่นๆการพัฒนาซอฟท์แวร์ค่อนข้างน้อย
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Not About Code - Technical Leadership</title>
+    <link>https://www.notaboutcode.com/</link>
+    <description>Recent content on Not About Code - Technical Leadership</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>th</language>
+    <lastBuildDate>Sat, 19 Feb 2022 12:04:02 +0700</lastBuildDate><atom:link href="https://www.notaboutcode.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About</title>
+      <link>https://www.notaboutcode.com/about/</link>
+      <pubDate>Sun, 20 Aug 2017 21:38:52 +0800</pubDate>
+      
+      <guid>https://www.notaboutcode.com/about/</guid>
+      <description>เพราะการพัฒนาซอฟท์แวร์ไม่ได้มีแค่โค้ด เมื่อเทียบกับเนื้อหาทางด้านเทคนิคและการเขียนโค้ดแล้ว เรายังมีบล็อคภาษาไทยที่คุยเกี่ยวกับหัวข้ออื่นๆการพัฒนาซอฟท์แวร์ค่อนข้างน้อย
 ทั้งๆที่เรื่องเหล่านี้ก็สำคัญไม่แพ้กัน
 บล็อคจะเน้นหนักไปในด้านของ Generic technical knowledge แต่จะไม่ลงรายละเอียดในเรื่องภาษาหรือเฟรมเวิร์คต่างๆ
 นอกเหนือจากนั้น ผมจะแตะในเรื่องของ Management, Teamwork และ Technical Leadership ด้วย เพราะผมเชื่อว่าทีมที่แข็งแกร่ง ต้องมีความรู้ทั้งสองด้านคอยหนุนกัน และเรื่องแบบนี้นักพัฒนาซอฟท์แวร์ก็ควรจะรู้ไว้ ไม่ใช่โยนให้เป็นหน้าที่ของ SA, PO หรือ Manager เพียงอย่างเดียว
 ดังนั้น บล็อคนี้จะมีบทความเกี่ยวกับ
-Continuous Integration/Delivery System Design Technical Leadership Career Development โดยบล็อคจะถูกจัดเรียงตามหัวข้อเหล่านี้ ในหน้า Categories
-ijemmy</description></item><item><title>จะสเกลระบบหลักล้านด้วย Cache ต้องพิจารณาอะไรบ้าง</title><link>https://www.notaboutcode.com/post/31-caching/</link><pubDate>Sat, 19 Feb 2022 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/31-caching/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/desk-01.png" alt="Photo by Wonderlane(@wonderlane) on Unsplash">&lt;/p>
-&lt;p>แคช(Cache)เป็นหนึ่งในตัวเลือกที่ถูกใช้บ่อยมากในการสเกลระบบให้สามารถรับโหลดได้เยอะๆ ถ้าใครไปสัมภาษณ์งานแล้วเจอคำถามว่าระบบมีคนใช้หลักล้าน และเป็นการอ่านข้อมูลเป็นหลัก (Read-intensive) ตอบได้เลยว่าใช้แคช แต่รายละเอียดของคำตอบว่าจะใช้ยังไง ต้องพิจารณาเรื่องไหนบ้าง เราจะมาคุยกันในบทความนี้ครับ&lt;/p>
-&lt;p>ชี้แจงก่อนว่า เราจะคุยกันในมุมของการออกแบบระบบ (System Design) ซึ่งจะเป็นการใช้แคชในระดับของ Backend services เพราะแนวคิดของแคชนั้นถูกใช้ในทุกระดับ ยกตัวอย่างเช่น&lt;/p></description></item><item><title>Structured Logging คืออะไร ทำไมถึงเป็นที่นิยม</title><link>https://www.notaboutcode.com/post/30-structured-logging/</link><pubDate>Sat, 12 Feb 2022 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/30-structured-logging/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/log-01.png" alt="Photo by Atlas Kadrów(@atlaskadrow) on Unsplash">&lt;/p>
-&lt;p>เมื่อ 6 ปีที่แล้ว สมัยผมยังทำงาน Operation คู่กับงาน Dev อยู่ หนึ่งในสิ่งที่ผมไม่ชอบมากๆคือการนั่งไล่ Log เพื่อหาว่าบั้คมันมาจากไหน&lt;/p>
-&lt;p>สมัยก่อนก็ไม่เคยคิดครับว่าทำไมการไล่ Log มันถึงทรมานมาก พอเวลาผ่านไป เห็น Practice ใหม่ๆมากขึ้นถึงเข้าใจ ว่าปัญหามันมาตั้งแต่การออกแบบ Log Format และวิธีการเก็บ&lt;/p>
-&lt;p>ปัจจุบันนี้ เวลาผมให้คำปรึกษาลูกค้า ผมจะบอกให้ทำ สิ่งที่เรียกว่า Structured Logging ซึ่งทำให้ชีวิตของการไล่ Log มันดีขึ้นมาก เวลามีบั้คก็หาต้นตอกันเร็วขึ้น&lt;/p>
-&lt;p>วันนี้เราจะมาคุยเรื่องนี้กัน ผมจะเริ่มเล่าให้ฟังถึงวิธีการเก็บ Log ในสมัยก่อน ชี้ให้เห็นถึงปัญหาว่าทำไมมันทำให้ไล่ยาก และจบด้วยตัวอย่างการใช้ Structured Logging ที่มาช่วยแก้ปัญหานี้ครับ&lt;/p></description></item><item><title>เถียงเรื่อง Technical Design กันไม่จบซักที ทำไงดี?</title><link>https://www.notaboutcode.com/post/29-technical-conflict-resolution/</link><pubDate>Thu, 11 Jun 2020 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/29-technical-conflict-resolution/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/fight-01.png" alt="Photo by rawpixel on Unsplash">&lt;/p>
-&lt;p>เคยตกอยู่ในสถานการณ์ที่คนในห้องประชุมเถียงเรื่องเดียวกันติดต่อเป็นระยะเวลา 30 นาทีแล้วไม่ไปไหนไหมครับ?&lt;/p>
-&lt;p>ส่วนใหญ่ที่ผมเจอ มักจะเป็นเรื่องของ Technical Design ว่าจะไปในทิศทางไหนดี ซึ่งเราก็รู้กันว่าการ Design มันเป็นเรื่องของการ Trade-off หลายๆครั้งมันยากมากที่จะตอบว่าแบบไหนดีกว่า&lt;/p>
-&lt;p>การตัดสินใจเรื่องนี้ส่งผลกระทบในระยะยาว จึงต้องพิจารณาให้รอบคอบ แต่บางครั้ง เราก็จะเจอสถานการที่คนสองคน(หรือทีมแตกเป็นสองฝ่าย)เถียงกันไม่จบเสียที วนกลับมาประเด็นเดิมซ้ำๆ แย้งกันไปมา ไม่ไปไหน&lt;/p>
-&lt;p>ยิ่งถ้าประชุมก่อนพักเที่ยง ผมจะหิวข้าว ไปกินข้าวสายนี่ไม่โอเคเลย เรื่องกินเรื่องใหญ่&lt;/p>
-&lt;p>วันนี้ผมมีวิธีมานำเสนอ ไม่รับประกันว่าได้ผลตลอด แต่เท่าที่ใช้มานี่ได้ผลดีมาก ช่วยให้ผมไม่ต้องไปกินข้าวสายได้หลายครั้ง&lt;/p></description></item><item><title>Deploy ระบบอย่างไรไม่ให้ล่ม</title><link>https://www.notaboutcode.com/post/28-deployment-methods/</link><pubDate>Sun, 10 Mar 2019 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/28-deployment-methods/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/cars-01.jpg" alt="Photo by rawpixel on Unsplash">&lt;/p>
-&lt;p>สำหรับวีดีโอนี้ เราจะมาคุยกันเรื่องการ Deploy ระบบแบบให้มี High Availability คือผู้ใช้จะต้องสามารถใช้งานระบบของเราได้ตลอด และไม่ได้รับผลกระทบใดๆ เช่น ระบบช้าผิดปกติ หรือบาง Request ผิดพลาด&lt;/p>
-&lt;p>ส่วนแรกของวีดีโอจะคุยกันว่าระบบล่มเวลา Deploy ได้อย่างไร และส่วนที่สองจะอธิบายเรื่องการ Deploy แบบต่างๆและข้อดีข้อเสียของแต่ละแบบ&lt;/p></description></item><item><title>เขียนโปรแกรมไม่เป็น แต่ต้องคัดเลือกโปรแกรมเมอร์เข้าทีม</title><link>https://www.notaboutcode.com/post/27-hiring-a-programmer/</link><pubDate>Sun, 16 Sep 2018 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/27-hiring-a-programmer/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/interview-01.jpg" alt="Photo by rawpixel on Unsplash">&lt;/p>
-&lt;p>เมื่อวันก่อนมีน้องที่เป็น Project Manager โทรมาขอคำแนะนำเรื่องจะจ้างโปรแกรมเมอร์ใหม่เข้าทีม&lt;/p>
-&lt;p>แต่ความท้าทายคือในทีมไม่มีใครที่มีประสบการณ์เรื่องเขียนโปรแกรมเลย จะคัดเลือกคนยังไงดี&lt;/p>
-&lt;p>หลังจากคุยเสร็จ ก็รู้สึกว่านี่เป็นปัญหาสากลที่น่าจะมีหลายๆคนเจออยู่ แม้แต่คนที่เขียนโปรแกรมเป็น ถ้าต้องคัดเลือกคนที่ในด้านที่เราไม่มีทักษะทางด้านนั้นๆ (เช่น เขียน Frontend เป็นหลัก แต่ต้องช่วยทีมจ้าง Backend Developer หรือ Infra) เรื่องนี้ก็น่าจะยากอยู่ ยิ่งถ้านึกภาพว่าผมต้องไปสัมภาษณ์งานเพื่อคัดเลือกจ้าง Project Manager ผมเองก็คงไปไม่ถูกเหมือนกัน&lt;/p>
-&lt;p>ผมเอาเรื่องนี้มานั่งตกตะกอนอยู่หลายวัน แทนที่จะมานั่งลิสต์เป็นข้อๆแห้งๆ รู้สึกว่าถ้ายกเคสของน้องเค้ามาเลยน่าจะทำให้เข้าใจวิธีคิดได้ง่ายกว่า เนื่องจากโจทย์ประเภทนี้ไม่ได้มีคำถามและคำตอบที่ตายตัว หากเข้าใจวิธีคิด ก็น่าจะเอาไปประยุกต์กับกรณีของตัวเองได้&lt;/p>
-&lt;p>ก็เลยเป็นที่มาของบทความนี้ครับ&lt;/p></description></item><item><title>มาทำความรู้จักกับ Serverless กัน</title><link>https://www.notaboutcode.com/post/26-serverless-architecture/</link><pubDate>Sat, 01 Sep 2018 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/26-serverless-architecture/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/aurora-01.jpg" alt="Photo by Nicolas J Leclercq on Unsplash">&lt;/p>
-&lt;p>ช่วงสองปีที่ผ่านมา แนวคิดหนึ่งที่ผมจับตาดูอยู่คือเรื่องของ Serverless&lt;/p>
-&lt;p>ตามชื่อเลย Serverless คือไม่มีเซอร์เวอร์ ซึ่งจริงๆแล้วเซอร์เวอร์ก็ไม่ได้หายไปไหน เพียงแต่ทีมพัฒนาไม่ต้องสนใจมันเหมือนแต่ก่อนแล้ว&lt;/p>
-&lt;p>แนวคิดเรื่องนี้ยังถือว่าค่อนข้างใหม่ เมื่อสองปีที่แล้วผมทดลองใช้ครั้งแรกเพื่อดูว่าเอาไปใช้ทำโปรเจ็คจริงได้รึเปล่า ก็ค้นพบว่าพวก Tool และ Practices ต่างๆยังไม่พร้อมเท่าไร&lt;/p>
-&lt;p>ผ่านมาสองปี รู้สึกว่าเริ่มเข้าที่เข้าทางมากขึ้น จึงพึ่งได้เอามาใช้ทำโปรเจ็คจริง เลยเอามาเล่าสู่กันฟังครับ เผื่อใครอยากจะลองเอาไปใช้กัน&lt;/p></description></item><item><title>การนำ Agile มาใช้ในองค์กร</title><link>https://www.notaboutcode.com/post/25-advices-for-adopting-agile/</link><pubDate>Sat, 23 Jun 2018 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/25-advices-for-adopting-agile/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/collaboration-01.jpg" alt="Photo by rawpixel on Unsplash">&lt;/p>
-&lt;p>ผมรู้จักกับ Agile (อไจล์) เมื่อสิบกว่าปีที่แล้ว ตอนนั้นก็ไม่รู้หรอกว่ามันจะป๊อบขนาดนี้ สมัยนั้นอย่าพูดถึงอไจล์เลย ทีมไหนทำ Unit Testing ก็ถือว่าหรูแล้ว&lt;/p>
-&lt;blockquote>
-&lt;p>ฝั่ง UK จะออกเสียงว่า อา-ไจล์, ฝั่ง US จะอ่านออกเสียว่า แอ-ไจล์ ในบทความนี้จะขอใช้ทับศัพท์ว่าอไจล์ซึ่งเป็นที่นิยมใช้กันนะครับ &amp;ndash; &lt;a href="https://dictionary.cambridge.org/pronunciation/english/agile">https://dictionary.cambridge.org/pronunciation/english/agile&lt;/a>&lt;/p>
-&lt;/blockquote>
-&lt;p>ด้วยความที่คลุกคลีอยู่กับเรื่องนี้ตั้งแต่ยุคที่อไจล์เข้ามาแรกๆ เลยได้เห็นการเปลี่ยนแปลงตั้งแต่สมัยที่ผู้บริหารรู้สึกว่าทีมที่ทำอไจล์คือการก่อกบฏ จนถึงปัจจุบันนี้ ถ้าทีมไหนไม่ทำอไจล์แล้วจะกลายเป็นกบฏแทน&lt;/p>
-&lt;p>ผมเชื่อว่าผู้บริหารระดับสูงที่กล้าจะเลือกใช้อไจล์นั้นมีวิสัยทัศน์ที่ดี แต่เวลาปฏิบัติจริง ผมกลับเห็นว่าหลายที่ได้ผลลัพธ์เละเทะมาก สุดท้ายก็มาจบลงที่ว่าอไจล์ไม่ดี หรือไม่เหมาะกับองค์กร (ซึ่งก็อาจจะเป็นไปได้) หรือบางที่ก็เลือกที่จะซุกปัญหาไว้ใต้พรม แล้วทำ KPI ให้ดูสวยๆว่าผลลัพธ์ออกมาดี&lt;/p>
-&lt;p>สุดท้ายกลายเป็นตราบาปให้กับอไจล์ เป็นแผลเป็นให้กับพนักงานในบริษัท ที่ขยาดทุกครั้งที่ได้ยินคำนี้&lt;/p>
-&lt;p>ผมเลยอยากเขียนบทความนี้ไว้ให้ผู้บริหาร และหัวหน้าทีมพัฒนา (Technical Lead/ Team Lead) เพราะทัศนคติที่ถูกต้องต่ออไจล์จะส่งผลกระทบต่อการรับอไจล์เข้ามาในองค์กรมาก&lt;/p>
-&lt;p>บทความนี้จะพูดถึงข้อแนะนำ และตัวอย่างกรณีที่ดี/ไม่ดีแบบต่างๆ ในการนำอไจล์เข้ามาในองค์กร โดยผู้เขียนอนุมานว่าผู้อ่านรู้จักอไจล์และ Scrum แล้ว หากใครที่ยังไม่เข้าใจคำพวกนี้ แนะนำให้อ่านบทความอื่นก่อนครับ&lt;/p></description></item><item><title>วิ่งไล่ตามเทคโนโลยีไม่ทัน ทำยังไงดี</title><link>https://www.notaboutcode.com/post/24-catching-up-with-tech/</link><pubDate>Sat, 16 Jun 2018 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/24-catching-up-with-tech/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/run-01.jpg" alt="Photo by Andy Beales on Unsplash">&lt;/p>
-&lt;p>พอโปรแกรมเมอร์มีประสบการณ์มากขึ้น ก็จะค้นพบว่าตัวเองมีสิ่งที่ยังไม่รู้มากขึ้น&lt;/p>
-&lt;p>ผมคิดว่าหลายๆคนก็คงคล้ายผม คือจะอยากอ่าน อยากรู้ และอยากลองไปซะทุกอย่าง&lt;/p>
-&lt;p>ในอดีต อาจจะทำแบบนี้ได้ เพราะเทคโนโลยีแต่ก่อนไม่ได้เติบโตเร็วแบบทุกวันนี้&lt;/p>
-&lt;p>ผมเองเป็นคนนึงที่พยายามตามเทคโนโลยีให้ได้มากที่สุด แต่พอถึงจุดนึงก็ต้องยอมรับ ว่าปัจจุบันเทคโนโลยีที่วิ่งเร็วกว่าเรามาก&lt;/p>
-&lt;p>ถ้าตามแบบไม่มีหลักอะไรเลย ตามยังไงก็ไม่ไหว&lt;/p></description></item><item><title>เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับที่ 2 System Integration Tests/End-to-End Tests)</title><link>https://www.notaboutcode.com/post/23-karma-from-bad-tests2/</link><pubDate>Sat, 05 May 2018 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/23-karma-from-bad-tests2/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/test-01.jpg" alt="Photo by Chris Liverani on Unsplash">&lt;/p>
-&lt;p>จากประสบการณ์ส่วนตัว End-to-End(E2E) Tests เป็นตัวที่สร้างความปวดหัวให้กับผมอันดับที่หนึ่งเลย รองลงมาก็ System Integration Tests ตอนเขียนบทความนี้ฉบับแรก เลยตัดสินใจแยกเทสต์สองประเภทนี้ออกมาเขียนแยกออกมา จะได้ลงรายละเอียดได้&lt;/p>
-&lt;p>บทความนี้ก็เหมือนบทความที่แล้วครับ คือทำผิดมาเยอะ จนพอจะสรุปข้อผิดพลาดที่เคยทำไว้มาแชร์กัน ผู้อ่านจะได้หลบเลี่ยงกันได้&lt;/p></description></item><item><title>การออกแบบระบบให้รับ Request เยอะๆ</title><link>https://www.notaboutcode.com/post/22-design-to-scale/</link><pubDate>Sun, 29 Apr 2018 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/22-design-to-scale/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/scale-01.jpg" alt="Photo by Immo Wegmann on Unsplash">&lt;/p>
-&lt;p>เมื่อเดือนที่แล้ว มีโอกาสกลับไปเป็น Guest Speaker ที่ภาค ในวิชา System Analysis and Design&lt;/p>
-&lt;p>อาจารย์ให้อิสระในเรื่องของหัวข้อ เลยตัดสินใจว่าอยากเล่าเรื่องที่มันสนุกๆ เผื่อน้องๆจะสนใจสาย Technical กันมากขึ้น หลังจากคิดอยู่หลายวัน ก็มาจบลงที่เรื่องนี้&lt;/p>
-&lt;p>ด้วยเวลาที่จำกัด รู้สึกว่าถ่ายทอดเนื้อหาได้ไม่ครบเท่าที่ควร เลยเอาเนื้อหามาเขียนเป็นบทความซะเลย จะได้ไม่ค้างคาใจ&lt;/p>
-&lt;p>เราจะเริ่มตั้งแต่การรับ Requirement การกะปริมาณ Load ของระบบ ไล่ไปจนถึงเทคนิคเบื้องที่ใช้ในการออกแบบให้รับ Request ได้เยอะขึ้น และสามารถโตตามปริมาณคนใช้ในอนาคตได้&lt;/p></description></item><item><title>เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับ Unit/Component Tests)</title><link>https://www.notaboutcode.com/post/21-karma-from-bad-tests/</link><pubDate>Sat, 14 Apr 2018 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/21-karma-from-bad-tests/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/candle-01.jpg" alt="Photo by Sharon McCutcheon on Unsplash">&lt;/p>
-&lt;p>ปกติผมไม่ค่อยเชื่อเรื่องบาปบุญเท่าไร แต่เวลาเห็นโปรเจ็คไม่เขียนเทสต์ หรือเขียนเทสต์ไม่ดี ผมพูดเรื่องบาปบุญขึ้นมาทันที&lt;/p>
-&lt;blockquote>
-&lt;p>การไม่เขียนเทสต์ (หรือเขียนเทสต์ไม่ดี)เป็นบาปอย่างหนึ่ง เป็นเวรกรรมจะตามทันทีมในระยะเวลาไม่เกิน 3 เดือน&lt;/p>
-&lt;/blockquote>
-&lt;p>เวลาทำงานกับชาวต่างชาติที่ไม่เข้าใจคอนเซ็บเรื่องบาปบุญ ผมชอบอธิบายให้เค้าฟังแบบนี้&lt;/p>
-&lt;blockquote>
-&lt;p>Writing code without tests (or low-quality tests) is like having one-night stand everyday without protection. You will eventually regret it.&lt;/p>
-&lt;/blockquote>
-&lt;p>เน้นนิดนึงว่าไม่ใช่แค่เรื่องไม่เขียนเทสต์ แต่รวมถึงกรณีเขียนเทสต์ไม่มีคุณภาพด้วย&lt;/p>
-&lt;p>บางทีมอาจจะบอกว่าเขียนแล้ว มี Coverage ครบ 100% เลยด้วย บาปเบิบอะไรไม่มีหรอก&lt;/p>
-&lt;p>แต่ก่อนคนเขียนก็คิดงี้ครับ จนกระทั่งได้มาเจอกับสถานการณ์ &amp;ldquo;เทสต์ท่วมหัว เอาตัวไม่รอด&amp;rdquo;&lt;/p>
-&lt;p>บทความนี้จะเล่าสู่กันฟังเรื่องตัวอย่างการเขียนเทสต์ที่ไม่ดีครับ ผู้อ่านจะได้หลีกเลี่ยงกัน โดยบทความนี้จะเน้นไปในส่วนของ Unit/Component Test เป็นหลัก&lt;/p>
-&lt;p>แต่ก่อนจะเข้าเรื่องเขียนเทสต์ให้ดี ผมขอยกปัญหาจากการไม่เขียนเทสต์ก่อนครับ&lt;/p></description></item><item><title>Gender Bias ในวงการโปรแกรมเมอร์</title><link>https://www.notaboutcode.com/post/20-gender-bias/</link><pubDate>Sun, 25 Mar 2018 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/20-gender-bias/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/child-02.jpg" alt="Photo by Brandon Day on Unsplash">&lt;/p>
-&lt;p>เผอิญช่วงนี้กลับมาไทย ได้ไปร่วมงาน &lt;a href="https://djangogirls.org/bangkok/">DjangoGirls Bangkok&lt;/a> มา และฟีดในเฟสบุ้คที่โผล่มาหาบ่อยที่สุดก็เป็นเรื่องที่เกี่ยวข้องพอดี&lt;/p>
-&lt;blockquote>
-&lt;p>&amp;ldquo;ต้องเชียร์โปรแกรมเมอร์หญิงที่จะไปเป็นไอดอลอย่างไร ให้ไม่เข้าข่ายเหยียดเพศครับ&amp;rdquo;&lt;/p>
-&lt;/blockquote>
-&lt;p>กรณีไอดอลเนี่ย ผมเองก็ไม่รู้เหมือนกัน แต่เรื่องนี้ทำให้นึกถึงเรื่อง Gender Bias ที่จริงจังกันมากในต่างประเทศ&lt;/p>
-&lt;p>หลังจากนั่งอ่านคอมเม้นต์ในโพสต์นั้น, ได้ไปงาน DjangoGirls, รวมถึงเห็นกระแสของ&lt;a href="https://www.youtube.com/watch?v=TYHFLQtiq-M">น้อง Turtle&lt;/a> (น้องโปรแกรมเมอร์อินเทิร์นที่สมัคร BNK48) ผมรู้สึกว่าควรจะเขียนเรื่อง Gender Bias นี้ให้ได้อ่านกัน&lt;/p>
-&lt;p>บางคนอาจจะเห็นด้วย บางคนอาจจะไม่เห็นด้วย แต่การได้รับรู้ว่าเรามีประเด็นในเรื่องนี้อยู่ น่าจะมีประโยชน์ต่อวงการโปรแกรมเมอร์บ้านเรา&lt;/p></description></item><item><title>จะ Deploy Frontend หรือ Backend ก่อนดี</title><link>https://www.notaboutcode.com/post/19-deploy-order/</link><pubDate>Sun, 18 Feb 2018 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/19-deploy-order/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/child-01.jpg" alt="Photo by Jelleke Vanooteghem on Unsplash">&lt;/p>
-&lt;p>ความน่ารักของ Web Developer สมัยนี้คือมีการแยก Frontend กับ Backend ออกอย่างชัดเจน ถ้าใครย้อนกลับไปสมัยสิบปีก่อน เราไม่มีตำแหน่ง Frontend Developer ด้วยซ้ำ มีแต่เรียกรวมๆว่า Web Developer&lt;/p>
-&lt;p>การแยกกันของโค้ดสองส่วน ทำให้การ Deployment ทำแยกกันด้วย คำถามที่เกิดขึ้นคือ เวลาจะ Deploy เราจะเอา Frontend ขึ้นก่อน หรือ Backend ขึ้นก่อนดี&lt;/p>
-&lt;p>แม้จะเป็นคำถามง่ายๆ แต่รายละเอียดข้างในนั้นค่อนข้างเยอะ ถ้าไม่คิดให้ถี่ถ้วน อาจจะเจออาการเว็บพังขณะ Deploy เป็นประจำ&lt;/p>
-&lt;p>บทความนี้จะมาวิเคราะห์เจาะลึกกันในเรื่องนี้&lt;/p></description></item><item><title>คุณสมบัติของเทสต์ในการกำหนด Testing Strategy</title><link>https://www.notaboutcode.com/post/18-test-properties/</link><pubDate>Fri, 12 Jan 2018 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/18-test-properties/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/bug-01.jpg" alt="Photo by Michel Bosma on Unsplash">&lt;/p>
-&lt;p>ช่วงนี้ทีมขึ้นโปรเจ็คใหม่ ผมต้องคุยกับ QA Engineer เกี่ยวกับเรื่อง Testing Strategy บ่อยๆ&lt;/p>
-&lt;p>โดยเนื้อหาที่คุยหลักๆคือ&lt;/p>
-&lt;ol>
-&lt;li>จะเทสต์อะไรบ้าง&lt;/li>
-&lt;li>จะเทสต์ด้วยเทสต์ชนิดไหน (ex. Unit, Component, Integration)&lt;/li>
-&lt;li>เราจะใช้เทสต์แต่ละชนิดในกรณีไหนบ้าง&lt;/li>
-&lt;/ol>
-&lt;p>พอคุยกันเรื่องนี้เยอะๆ ก็ค้นพบหัวข้อที่ 3 เป็นเรื่องที่ซับซ้อนพอควร หนึ่งในเรื่องที่ตกผลึกก็คือคุณสมบัติของเทสต์แต่ละชนิด ซึ่งเป็นเรื่องที่จะนำมาเล่าในบทความนี้&lt;/p></description></item><item><title>บริษัทสุธีการจำ, CAP Theorem, และ Eventual Consistency</title><link>https://www.notaboutcode.com/post/17-cap-theorem/</link><pubDate>Sun, 07 Jan 2018 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/17-cap-theorem/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/photo-01.jpg" alt="Photo by Joanna Kosinska on Unsplash">&lt;/p>
-&lt;p>หัวข้อด้าน Distributed System เป็นอะไรที่สนุก แต่เข้าใจยากมาก&lt;/p>
-&lt;p>หนึ่งในเรื่องที่ผมอ่านหลายรอบกว่าจะเก็ต ก็คือเรื่องของ CAP Theorem ซึ่งเป็นแนวคิดในการ Trade-off คุณสมบัติของ Distributed System ที่เราออกแบบ&lt;/p>
-&lt;p>&amp;ldquo;CAP&amp;rdquo; เป็นตัวย่อจาก Consistency, Availability, Partition Tolerant โดย Theorem นี้ได้กล่าวไว้ว่า คุณไม่มีทางที่่จะออกแบบระบบโดยมีคุณสมบัติ 3 ข้อนี้ พร้อมกัน อย่างเก่งก็ได้แค่ 2 ใน 3&lt;/p>
-&lt;p>แต่ทำไมถึงเป็นอย่างนั้นล่ะ?&lt;/p>
-&lt;p>วันนี้เราจะมาทำความเข้าใจกับเจ้า Theorem นี้กัน ผ่านการเรื่องราวของบริษัท &amp;ldquo;สุธีการจำ&amp;rdquo; !!&lt;/p></description></item><item><title>การออกแบบ Service API ให้เป็น Idempotent</title><link>https://www.notaboutcode.com/post/16-idempotent/</link><pubDate>Tue, 26 Dec 2017 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/16-idempotent/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/pay-01.jpg" alt="Photo by William Iven on Unsplash">&lt;/p>
-&lt;p>ใครเคยเรียกใช้งานเซอร์วิซครั้งเดียว (เช่น การโอนเงิน สั่งซื้อของ ฯลฯ) แล้วเจอ Transaction ตัดซ้ำสองครั้งไหมครับ?&lt;/p>
-&lt;p>ถ้าใช่ คุณเจอปัญหาเรื่อง Idempotent เข้าให้แล้วล่ะ&lt;/p>
-&lt;p>เราเคยคุยกันในเรื่องของ&lt;a href="https://www.notaboutcode.com/post/05-retry/">Retry&lt;/a>ไปแล้ว ว่าอาจจะถล่มเซอร์วิซตัวเองได้ หากไม่จัดการให้ดี&lt;/p>
-&lt;p>มานั่งตรึกตรองดูอีกที จริงๆแล้วผมลืมอีกคอนเซ็บหนึ่งที่สำคัญมากเวลาเราใช้ Retry นั่นก็คือเรื่อง Idempotent ซึ่งเป็นที่มาของ เคส Transaction เกิดขึ้นสองที&lt;/p>
-&lt;p>บทความนี้จะเริ่มต้นจากต้นตอของปัญหานี้ก่อน เพื่ออธิบายให้เห็นภาพว่าเกิดอะไรขึ้น และเสนอวิธีการแก้ปัญหาในตอนท้ายครับ&lt;/p></description></item><item><title>การออกแบบ Service API ให้ Backward-Compatible</title><link>https://www.notaboutcode.com/post/15-service-api-versioning/</link><pubDate>Fri, 15 Dec 2017 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/15-service-api-versioning/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/lego-01.jpg" alt="Photo by Iker Urteaga on Unsplash">&lt;/p>
-&lt;blockquote>
-&lt;p>&amp;ldquo;APIs, like diamonds, are forever&amp;rdquo; &amp;ndash; Xebia Essentials&lt;/p>
-&lt;/blockquote>
-&lt;p>เรานิยมเลือกใช้เพชรในแหวนแต่งงาน เพื่อแสดงความเป็นนิรันดร์&lt;/p>
-&lt;p>เวลาออกแบบ Service API ผมแนะนำให้ใส่ความโรแมนติกนี้ลงไปหน่อย ลองคิดว่านี่แหละคือแหวนแต่งงาน ระหว่างคุณและผู้ใช้เซอร์วิซของคุณ ที่จะอยู่ต่อไปตลอดจนชั่วเซอร์วิซสลาย&lt;/p></description></item><item><title>วิธีการวัด Technical Skill ในการสัมภาษณ์งาน</title><link>https://www.notaboutcode.com/post/14-technical-interview/</link><pubDate>Sat, 09 Dec 2017 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/14-technical-interview/</guid><description>&lt;p>ใน&lt;a href="https://www.notaboutcode.com/post/13-behavioral-interview/">บทความที่แล้ว&lt;/a> เราคุยกันในเรื่อง Soft skill ของผู้สมัครด้วย Behavioral Interview&lt;/p>
-&lt;p>บทความนี้จะพูดถึงรูปแบบในการวัด Technical Skill กันบ้าง โดยผมจะยกตัวอย่างวิธีการวัด Technical Skill ต่างๆที่ผมเคยเจอมา ซึ่งแต่ละแบบก็จะมีข้อดีข้อเสียแตกต่างกัน&lt;/p>
-&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/meeting-03.jpg" alt="Photo by Helloquence on Unsplash">&lt;/p></description></item><item><title>สัมภาษณ์งานด้วย Behavioral Interview</title><link>https://www.notaboutcode.com/post/13-behavioral-interview/</link><pubDate>Sun, 03 Dec 2017 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/13-behavioral-interview/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/meeting-02.jpg" alt="Photo by Alejandro Escamilla on Unsplash">&lt;/p>
-&lt;p>ในบทความที่แล้ว เราคุยกันไปในเรื่องกระบวนการสัมภาษณ์งานโดยรวม (Process)&lt;/p>
-&lt;p>สำหรับบทความนี้ เราจะมาเจาะลึกลงไปในเรื่องการถามคำถามกัน&lt;/p>
-&lt;p>โดยหลักๆแล้ว คำถามในการสัมภาษณ์งานโปรแกรมเมอร์ จะวัดเกณฑ์สองด้าน คือ Technical skill
-และ Soft skill&lt;/p>
-&lt;p>บทความนี้จะคุยกันเรื่องการวัด Soft skill ด้วยเทคนิคที่เรียกว่า Behavioral Interview ครับ&lt;/p></description></item><item><title>ปัญหาในการสัมภาษณ์งานโปรแกรมเมอร์</title><link>https://www.notaboutcode.com/post/12-interviewer-bad-practices/</link><pubDate>Sat, 18 Nov 2017 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/12-interviewer-bad-practices/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/meeting-01.jpg" alt="Photo by Nik MacMillan on Unsplash">&lt;/p>
-&lt;p>ผมมีงานอันน่าท้าทายมาให้ทุกคนลองทำครับ&lt;/p>
-&lt;p>ผมจะให้คุณคุยกับคนแปลกหน้าเป็นเวลา 1 ชั่วโมง&lt;/p>
-&lt;p>หลังจากนั้นคุณจะต้องตัดสินใจว่า คุณอยากจะใช้เวลาร่วมกับคนคนนี้ 8 ชั่วโมงต่อวัน เป็นระยะเวลาอย่างต่ำ 1 ปี หรือไม่&lt;/p>
-&lt;p>ฟังดูยากไหมครับ?&lt;/p>
-&lt;p>งานนี้เรียกว่า &amp;ldquo;การสัมภาษณ์งาน&amp;rdquo;&lt;/p></description></item><item><title>ปกป้องระบบไม่ให้ล่มหมดด้วย Bulkhead</title><link>https://www.notaboutcode.com/post/11-bulkhead/</link><pubDate>Sun, 12 Nov 2017 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/11-bulkhead/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/ship-01.jpg" alt="Photo by Abraham Wiebe, from Unsplash.com">&lt;/p>
-&lt;p>Bulkhead เป็นเทคนิคการออกแบบที่เหมาะกับ Critical System คือ ถ้าล่มปุ๊บ คนในองค์กรจะไม่สามารถทำงานต่อได้เลย&lt;/p>
-&lt;p>ถ้าใครเปิดดิกดู ศัพท์นี้จริงๆใช้เรียกการออกแบบพาหนะครับ&lt;/p>
-&lt;blockquote>
-&lt;p>Bulkhead (n.) a dividing wall or barrier between separate compartments inside a ship, aircraft, or other vehicle.&lt;/p>
-&lt;/blockquote>
-&lt;p>ไอเดียของ Bulkhead คือการออกแบบให้พาหนะแยกออกเป็นส่วนๆ (Compartmentalisation) หากมีส่วนใดส่วนหนึ่งมีปัญหา ผลกระทบจะต้องไม่รุนแรงจนทำให้ทั้งพาหนะล่มหมด&lt;/p>
-&lt;p>ยกตัวอย่างเช่น สมมติว่าเรือของเรามีจุดรั่วจุดหนึ่ง หากเราไม่ได้มีการแบ่งโซนเป็นส่วน น้ำจะกระจายไปทั่วท้องเรือ เรือก็จะจมแน่นอน&lt;/p>
-&lt;p>การใช้ Bulkhead คือการกั้นส่วนท้องเรือออกเป็นส่วนๆ หากน้ำรั่วขึ้นมา น้ำก็จะเข้ามาจนเต็มแค่ส่วนหนึ่งๆ โดยไม่หนักพอทำให้เรือล่มทั้งลำ (ถ้ายังนึกภาพไม่ออก ลองดู&lt;a href="https://www.google.nl/search?dcr=0&amp;amp;biw=1832&amp;amp;bih=989&amp;amp;tbm=isch&amp;amp;sa=1&amp;amp;q=bulkhead&amp;amp;oq=bulkhead">ภาพในกูเกิ้ล&lt;/a>ครับ)&lt;/p></description></item><item><title>ปกป้องเซอร์วิซจากผู้ใช้มักมากด้วย Throttling</title><link>https://www.notaboutcode.com/post/10-throttle/</link><pubDate>Thu, 09 Nov 2017 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/10-throttle/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/limit-01.jpg" alt="Photo by Ksenia Kudelkina, from Unsplash.com">&lt;/p>
-&lt;p>ลองนึกภาพว่าเรามีระบบที่ถูกออกแบบเป็น Service-Oriented Architecture (SOA)&lt;/p>
-&lt;p>ในบรรดาเซอร์วิซทั้งหมด จะมีบางเซอร์วิซทีเป็น Dependency ของเซอร์วิซอื่นๆ ผมจะเรียกเซอร์วิซนี้ว่าเซอร์วิซ A&lt;/p>
-&lt;p>ถ้าเซอร์วิซ A พังขึ้นมา เซอร์วิซอื่นที่ต้องเรียกใช้ข้อมูลนี้ทั้งหมดก็จะทำงานไม่ได้&lt;/p>
-&lt;p>ตัวอย่างเช่นในภาพข้างล่าง หากเซอร์วิซ A พัง เซอร์วิซ B, และ C จะทำงานไม่ได้&lt;/p></description></item><item><title>ปัญหาของ Sticky Session</title><link>https://www.notaboutcode.com/post/08-sticky-session/</link><pubDate>Thu, 02 Nov 2017 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/08-sticky-session/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/traffic-01.jpg" alt="Photo by Denys Nevozhai, from Unsplash.com">&lt;/p>
-&lt;p>ใครที่เคยใช้ Load Balancer (LB) คงจะเคยได้ยินคำว่า Sticky Session (หรือ Session Affinity) กันมาบ้าง&lt;/p>
-&lt;p>แนวคิดของ Sticky Session คือการให้ LB ส่ง Request ที่มาจากผู้ใช้ (Client) คนเดียวยัง ไปยังเซอร์เวอร์ตัวเดียวกันตลอด&lt;/p>
-&lt;p>ตัวอย่างเช่น เรามีเซอร์เวอร์ 3 ตัว ชื่อว่า S1, S2, และ S3 วางอยู่ข้างหลัง LB แล้วมีผู้ใช้ส่ง Request เข้ามายังเว็บเรา&lt;/p>
-&lt;figure class="center" >
-&lt;img src="https://www.notaboutcode.com/img/diagrams/loadbalancer.png"
-alt="Load Balancer with 3 servers"
->
-&lt;figcaption>
-Load Balancer with 3 servers
-&lt;/figcaption>
-&lt;/figure>
-&lt;p>ในครั้งแรก Request ถูกส่งไปให้ S1 แต่พอผู้ใช้ส่ง Request ถัดๆไป LB อาจส่ง Request นั้นไปยัง S2 หรือ S3 แทน&lt;/p>
-&lt;p>แต่หากเราเปิด Sticky Session แล้วล่ะก็ ตัว LB จะส่ง Request จากผู้ใช้คนเดิมไปยัง S1 ตลอด โดยไม่ส่งไปที่ S2 หรือ S3 เลย&lt;/p>
-&lt;p>ในบทความนี้ เราจะมาทำความเข้าใจว่า Sticky Session ให้ละเอียดยิ่งขึ้น และอธิบายถึงปัญหาที่มักจะเกิดขึ้นในการใช้ Sticky Session&lt;/p></description></item><item><title>โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี (ภาค 2)</title><link>https://www.notaboutcode.com/post/07-career-start-non-technical/</link><pubDate>Tue, 31 Oct 2017 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/07-career-start-non-technical/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/career-02.jpg" alt="Photo by Olu Eletu, from Unsplash.com">&lt;/p>
-&lt;p>ใน&lt;a href="https://www.notaboutcode.com/post/06-career-start/">ภาคแรก&lt;/a>เราคุยกันในเรื่องของ Technical Skills ทีเป็นพื้นฐานไว้ใช้ในระยะยาว&lt;/p>
-&lt;p>สำหรับภาคนี้ เราจะมาโฟกัสในส่วนของ Non-technical กันบ้าง ซึ่งเป็นครอบคลุมค่อนข้างหลากหลายเรื่อง โดยผมคัดเฉพาะหัวข้อที่ผมคิดว่าสำคัญๆ เพื่อไม่ให้ยาวเกินไป&lt;/p>
-&lt;p>บทความนี้มีความคิดเห็นส่วนตัวเยอะมาก ผมเลยแยกออกมาจากภาคแรก&lt;/p>
-&lt;p>ใครที่มีความเห็นแตกต่าง หรืออ่านแล้วรู้สึกจี้ด ไม่เห็นด้วยมากๆ ลองมาแลกเปลี่ยนความเห็นกันใน&lt;a href="https://www.facebook.com/notaboutcode/">เฟสบุ้คเพจ&lt;/a>ได้ครับ เผื่อบทความนี้อาจจะมีภาค3 ผมเองก็อยากเก็บรายละเอียด ให้ได้มากที่สุด เพราะบล็อคนี้ตั้งใจจะเขียนทิ้งไว้นาน&lt;/p>
-&lt;p>สำหรับโปรแกรมเมอร์มือใหม่ที่ยังไม่มีความคิดเห็น อ่านแล้วก็ฟังหูไว้หู ใช้เป็นแนวทางแต่อย่ายึดมั่นกับมันมาก ยังมีคนที่เก่งกว่าผมอีกมากที่ใช้แนวทางอื่นในการพัฒนาตนเอง&lt;/p></description></item><item><title>โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี ภาค 1</title><link>https://www.notaboutcode.com/post/06-career-start/</link><pubDate>Thu, 19 Oct 2017 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/06-career-start/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/career-01.jpg" alt="Photo by Jake Hills, from Unsplash.com">&lt;/p>
-&lt;p>ความยากลำบากของโปรแกรมเมอร์สมัยนี้คือมีเรื่องที่ต้องเรียนรู้เยอะมาก&amp;hellip;&lt;/p>
-&lt;p>มากจนไม่รู้ว่าจะเริ่มต้นที่ไหนดี&lt;/p>
-&lt;p>บทความนี้รวมสิ่งที่ผมคิดว่าสำหรับโปรแกรมเมอร์มือใหม่ ควรจะเรียนรู้เอาไว้ ไม่ว่าจะเป็นสาย Frontend, Backend, หรือ Fullstack เรื่องพวกนี้ได้ใช้แน่ๆ และได้ใช้นานด้วย&lt;/p>
-&lt;p>ผมเชื่อว่าความรู้พวกนี้ ในอีก 20 ปีข้างหน้า โปรแกรมเมอร์ยุคนั้นก็ยังต้องรู้กัน (ถ้าไม่โดน AI แย่งงานไปก่อน)&lt;/p>
-&lt;p>แทนที่จะเอาเวลาไปเรียนรู้พวกเฟรมเวิร์ค ภาษา หรือไลบรารี่ที่เปลี่ยนใหม่ทุกๆ 3-5 ปี เรียนรู้พวกนี้ดีกว่าครับ เรียนรอบเดียว ใช้ยาว&lt;/p>
-&lt;p>มาดูกันครับว่ามีอะไรบ้าง&lt;/p></description></item><item><title>Retry ยังไงให้ปลอดภัย</title><link>https://www.notaboutcode.com/post/05-retry/</link><pubDate>Sat, 14 Oct 2017 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/05-retry/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/spiral-stairs-01.jpg" alt="Photo by Nick Morris, from Unsplash.com">&lt;/p>
-&lt;p>วันนี้นั่งคุยกับเพื่อนเรื่อง Retry รู้สึกว่าเป็นหัวข้อที่น่าสนใจดี&lt;/p>
-&lt;p>โจทย์คือเรามี External service ที่ไม่ค่อยสเถียรเท่าไร เวลาส่ง Request ไป วันดีคืนดีก็อาจจะ:&lt;/p>
-&lt;ol>
-&lt;li>พังแบบส่งสาเหตุการพังกลับมาให้ เช่น 5xx พร้อม error code&lt;/li>
-&lt;li>พังแบบไม่มีอะไรตอบกลับมา ซึ่งสาเหตุอาจจะมาจากที่ระบบนั้นเดี้ยงไประหว่างการทำงาน หรือเน็ตเวิร์คเน่า&lt;/li>
-&lt;/ol>
-&lt;p>กรณีนี้ เรามีหลายทางเลือก&lt;/p>
-&lt;ol>
-&lt;li>
-&lt;p>เลือกที่จะจบการทำงาน แล้วแสดงผลให้ฝั่งผู้ใช้ของเรา (Client) รู้ว่าระบบมีปัญหา พร้อม Error code ซึ่งก็ถือว่ายอมรับได้ เพราะหากเราจำเป็นต้องการใช้ข้อมูลจาก External Service ยังไงก็ทำอะไรไม่ได้&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>ทำการ Retry คือการส่ง Request ซ้ำโดยอัตโนมัติ หากเกิดข้อผิดพลาดในฝั่งของ External service ที่เราเรียกใช้&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Decouple ให้สองระบบเรียกกับแบบ Asynchronous โดยเอา Request ที่ไม่สำเร็จของเราไปเก็บไว้ใน Queue แล้ว Retry ใหม่ในภายหลัง&lt;/p>
-&lt;/li>
-&lt;/ol></description></item><item><title>ขึ้นโปรเจ็คใหม่ ใช้ภาษาอะไรดี</title><link>https://www.notaboutcode.com/post/04-choosing-language/</link><pubDate>Fri, 13 Oct 2017 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/04-choosing-language/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/new-project-01.jpg" alt="Photo by Nick Morris, from Unsplash.com">&lt;/p>
-&lt;p>เมื่อวันก่อน นั่งคุยกับน้องคนหนึ่งที่กำลังจะขึ้นโปรเจ็คใหม่ แต่ลังเลว่าจะใช้ภาษาอะไรดี&lt;/p>
-&lt;p>เป็นเรื่องน่าปวดหัวของโปรแกรมเมอร์สมัยใหม่ครับ เพราะมีตัวเลือกเยอะไป สมัยก่อน ตัวเลือกไม่เยอะ อย่างเก่งก็แค่ C#, Java, PHP, C แต่เดี๋ยวโผล่มาพรึ่บพรั่บกันหมด&lt;/p>
-&lt;p>พอคุยๆกันกับน้องเค้าไปสักพัก ก็มีชื่อ Python + Django, Ruby on Rail, JavaScript + NodeJS, Go, Kotlin, Scala, TypeScript, Closure อะไรไม่รู้เต็มไปหมด&lt;/p>
-&lt;p>ตัวผมเอง เคยเขียนแค่สี่ห้าภาษา แถมยังไม่ได้ลงลึกด้วย ก็พอแต่แนะนำไกด์ไลน์ไปคร่าวๆ ว่าภาษาไหนมีจุดเด่นอะไร&lt;/p></description></item><item><title>การนำ Static Code Analysis มาใช้ในทีม</title><link>https://www.notaboutcode.com/post/02-inside-ci-static-check/</link><pubDate>Sat, 07 Oct 2017 16:28:41 +0700</pubDate><guid>https://www.notaboutcode.com/post/02-inside-ci-static-check/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/code-01.jpg" alt="Photo by Ilya Pavlov, from Unsplash.com">&lt;/p>
-&lt;p>สืบเนื่องจาก&lt;a href="https://www.notaboutcode.com/post/01-ci-journey/">บันทึกที่แล้ว&lt;/a> ผมได้อธิบายไว้ ว่าหลังจากทีมเริ่มมี CI Server แล้ว ทีมก็มักจะเริ่มใส่เครื่องมือหลายๆอย่างลงไปเพื่อทำการ Automation และควบคุมคุณภาพของโค้ด&lt;/p>
-&lt;p>ในบันทึกฉบับนี้ ผมจะแนะนำเครื่องมือจำพวก Static code analysis ครับ (จากนี้ไปจะเรียกย่อๆว่า SCA)&lt;/p></description></item><item><title>การเดินทางสู่ CI (Continuous Integration)</title><link>https://www.notaboutcode.com/post/01-ci-journey/</link><pubDate>Mon, 02 Oct 2017 16:28:41 +0700</pubDate><guid>https://www.notaboutcode.com/post/01-ci-journey/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/walk-desert-01.jpg" alt="Photo by Jeremy Cai, from Unsplash">&lt;/p>
-&lt;p>ผมเคยคิดว่าการทำ CI เป็นเรื่องง่ายๆ และเป็นเบสิคของทุกทีมที่ต้องปฏิบัติกัน แต่ในความเป็นจริง น้อยทีมมากที่จะทำออกมาได้ดี เพราะมันมีรายละเอียดยุ่บยั่บที่มากกว่าแค่เรื่องทางเทคนิค&lt;/p>
-&lt;p>ในบันทึกฉบับนี้ เราจะมาดูรายละเอียดยุ่บยั่บเหล่านี้กัน โดยผมจะนำเสนอด้วยวิธีการเล่าเรื่อง ตั้งแต่ทีมเริ่มต้นทำ CI ง่ายๆ ไปจนถึงจุดทีเป็น CI ที่สมบูรณ์มากขึ้น&lt;/p>
-&lt;p>โดยเราสมมติว่ามีทีมทีมหนึ่ง เริ่มต้นจากที่ไม่มีอะไรนอกจากเลยนอกจาก Version Control แล้วลองผิดลองถูก ทำการปรับปรุงกระบวนการ เรื่อยๆ จนมาถึงจุดที่เป็น CI ที่สมบูรณ์มากขึ้น&lt;/p></description></item><item><title/><link>https://www.notaboutcode.com/post/xx-agilility-on-technical-side/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.notaboutcode.com/post/xx-agilility-on-technical-side/</guid><description>Agile is Culture, not process Why Technical foundation is important Explore how XP practices supports Agility</description></item></channel></rss>
+ Continuous Integration/Delivery System Design Technical Leadership Career Development  โดยบล็อคจะถูกจัดเรียงตามหัวข้อเหล่านี้ ในหน้า Categories
+ijemmy</description>
+    </item>
+    
+    <item>
+      <title>จะสเกลระบบหลักล้านด้วย Cache ต้องพิจารณาอะไรบ้าง</title>
+      <link>https://www.notaboutcode.com/post/31-caching/</link>
+      <pubDate>Sat, 19 Feb 2022 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/31-caching/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/desk-01.png&#34; alt=&#34;Photo by Wonderlane(@wonderlane) on Unsplash&#34;&gt;&lt;/p&gt;
+&lt;p&gt;แคช(Cache)เป็นหนึ่งในตัวเลือกที่ถูกใช้บ่อยมากในการสเกลระบบให้สามารถรับโหลดได้เยอะๆ ถ้าใครไปสัมภาษณ์งานแล้วเจอคำถามว่าระบบมีคนใช้หลักล้าน และเป็นการอ่านข้อมูลเป็นหลัก (Read-intensive) ตอบได้เลยว่าใช้แคช แต่รายละเอียดของคำตอบว่าจะใช้ยังไง ต้องพิจารณาเรื่องไหนบ้าง เราจะมาคุยกันในบทความนี้ครับ&lt;/p&gt;
+&lt;p&gt;ชี้แจงก่อนว่า เราจะคุยกันในมุมของการออกแบบระบบ (System Design) ซึ่งจะเป็นการใช้แคชในระดับของ Backend services เพราะแนวคิดของแคชนั้นถูกใช้ในทุกระดับ ยกตัวอย่างเช่น&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Structured Logging คืออะไร ทำไมถึงเป็นที่นิยม</title>
+      <link>https://www.notaboutcode.com/post/30-structured-logging/</link>
+      <pubDate>Sat, 12 Feb 2022 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/30-structured-logging/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/log-01.png&#34; alt=&#34;Photo by Atlas Kadrów(@atlaskadrow) on Unsplash&#34;&gt;&lt;/p&gt;
+&lt;p&gt;เมื่อ 6 ปีที่แล้ว สมัยผมยังทำงาน Operation คู่กับงาน Dev อยู่ หนึ่งในสิ่งที่ผมไม่ชอบมากๆคือการนั่งไล่ Log เพื่อหาว่าบั้คมันมาจากไหน&lt;/p&gt;
+&lt;p&gt;สมัยก่อนก็ไม่เคยคิดครับว่าทำไมการไล่ Log มันถึงทรมานมาก พอเวลาผ่านไป เห็น Practice ใหม่ๆมากขึ้นถึงเข้าใจ ว่าปัญหามันมาตั้งแต่การออกแบบ Log Format และวิธีการเก็บ&lt;/p&gt;
+&lt;p&gt;ปัจจุบันนี้ เวลาผมให้คำปรึกษาลูกค้า ผมจะบอกให้ทำ สิ่งที่เรียกว่า Structured Logging ซึ่งทำให้ชีวิตของการไล่ Log มันดีขึ้นมาก เวลามีบั้คก็หาต้นตอกันเร็วขึ้น&lt;/p&gt;
+&lt;p&gt;วันนี้เราจะมาคุยเรื่องนี้กัน ผมจะเริ่มเล่าให้ฟังถึงวิธีการเก็บ Log ในสมัยก่อน ชี้ให้เห็นถึงปัญหาว่าทำไมมันทำให้ไล่ยาก และจบด้วยตัวอย่างการใช้ Structured Logging ที่มาช่วยแก้ปัญหานี้ครับ&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>เถียงเรื่อง Technical Design กันไม่จบซักที ทำไงดี?</title>
+      <link>https://www.notaboutcode.com/post/29-technical-conflict-resolution/</link>
+      <pubDate>Thu, 11 Jun 2020 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/29-technical-conflict-resolution/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/fight-01.png&#34; alt=&#34;Photo by rawpixel on Unsplash&#34;&gt;&lt;/p&gt;
+&lt;p&gt;เคยตกอยู่ในสถานการณ์ที่คนในห้องประชุมเถียงเรื่องเดียวกันติดต่อเป็นระยะเวลา 30 นาทีแล้วไม่ไปไหนไหมครับ?&lt;/p&gt;
+&lt;p&gt;ส่วนใหญ่ที่ผมเจอ มักจะเป็นเรื่องของ Technical Design ว่าจะไปในทิศทางไหนดี ซึ่งเราก็รู้กันว่าการ Design มันเป็นเรื่องของการ Trade-off หลายๆครั้งมันยากมากที่จะตอบว่าแบบไหนดีกว่า&lt;/p&gt;
+&lt;p&gt;การตัดสินใจเรื่องนี้ส่งผลกระทบในระยะยาว จึงต้องพิจารณาให้รอบคอบ แต่บางครั้ง เราก็จะเจอสถานการที่คนสองคน(หรือทีมแตกเป็นสองฝ่าย)เถียงกันไม่จบเสียที วนกลับมาประเด็นเดิมซ้ำๆ แย้งกันไปมา ไม่ไปไหน&lt;/p&gt;
+&lt;p&gt;ยิ่งถ้าประชุมก่อนพักเที่ยง ผมจะหิวข้าว ไปกินข้าวสายนี่ไม่โอเคเลย เรื่องกินเรื่องใหญ่&lt;/p&gt;
+&lt;p&gt;วันนี้ผมมีวิธีมานำเสนอ ไม่รับประกันว่าได้ผลตลอด แต่เท่าที่ใช้มานี่ได้ผลดีมาก ช่วยให้ผมไม่ต้องไปกินข้าวสายได้หลายครั้ง&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Deploy ระบบอย่างไรไม่ให้ล่ม</title>
+      <link>https://www.notaboutcode.com/post/28-deployment-methods/</link>
+      <pubDate>Sun, 10 Mar 2019 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/28-deployment-methods/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/cars-01.jpg&#34; alt=&#34;Photo by rawpixel on Unsplash&#34;&gt;&lt;/p&gt;
+&lt;p&gt;สำหรับวีดีโอนี้ เราจะมาคุยกันเรื่องการ Deploy ระบบแบบให้มี High Availability คือผู้ใช้จะต้องสามารถใช้งานระบบของเราได้ตลอด และไม่ได้รับผลกระทบใดๆ เช่น ระบบช้าผิดปกติ หรือบาง Request ผิดพลาด&lt;/p&gt;
+&lt;p&gt;ส่วนแรกของวีดีโอจะคุยกันว่าระบบล่มเวลา Deploy ได้อย่างไร และส่วนที่สองจะอธิบายเรื่องการ Deploy แบบต่างๆและข้อดีข้อเสียของแต่ละแบบ&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>เขียนโปรแกรมไม่เป็น แต่ต้องคัดเลือกโปรแกรมเมอร์เข้าทีม</title>
+      <link>https://www.notaboutcode.com/post/27-hiring-a-programmer/</link>
+      <pubDate>Sun, 16 Sep 2018 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/27-hiring-a-programmer/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/interview-01.jpg&#34; alt=&#34;Photo by rawpixel on Unsplash&#34;&gt;&lt;/p&gt;
+&lt;p&gt;เมื่อวันก่อนมีน้องที่เป็น Project Manager  โทรมาขอคำแนะนำเรื่องจะจ้างโปรแกรมเมอร์ใหม่เข้าทีม&lt;/p&gt;
+&lt;p&gt;แต่ความท้าทายคือในทีมไม่มีใครที่มีประสบการณ์เรื่องเขียนโปรแกรมเลย จะคัดเลือกคนยังไงดี&lt;/p&gt;
+&lt;p&gt;หลังจากคุยเสร็จ ก็รู้สึกว่านี่เป็นปัญหาสากลที่น่าจะมีหลายๆคนเจออยู่ แม้แต่คนที่เขียนโปรแกรมเป็น ถ้าต้องคัดเลือกคนที่ในด้านที่เราไม่มีทักษะทางด้านนั้นๆ (เช่น เขียน Frontend เป็นหลัก แต่ต้องช่วยทีมจ้าง Backend Developer หรือ  Infra) เรื่องนี้ก็น่าจะยากอยู่ ยิ่งถ้านึกภาพว่าผมต้องไปสัมภาษณ์งานเพื่อคัดเลือกจ้าง Project Manager ผมเองก็คงไปไม่ถูกเหมือนกัน&lt;/p&gt;
+&lt;p&gt;ผมเอาเรื่องนี้มานั่งตกตะกอนอยู่หลายวัน แทนที่จะมานั่งลิสต์เป็นข้อๆแห้งๆ รู้สึกว่าถ้ายกเคสของน้องเค้ามาเลยน่าจะทำให้เข้าใจวิธีคิดได้ง่ายกว่า เนื่องจากโจทย์ประเภทนี้ไม่ได้มีคำถามและคำตอบที่ตายตัว หากเข้าใจวิธีคิด ก็น่าจะเอาไปประยุกต์กับกรณีของตัวเองได้&lt;/p&gt;
+&lt;p&gt;ก็เลยเป็นที่มาของบทความนี้ครับ&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>มาทำความรู้จักกับ Serverless กัน</title>
+      <link>https://www.notaboutcode.com/post/26-serverless-architecture/</link>
+      <pubDate>Sat, 01 Sep 2018 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/26-serverless-architecture/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/aurora-01.jpg&#34; alt=&#34;Photo by Nicolas J Leclercq on Unsplash&#34;&gt;&lt;/p&gt;
+&lt;p&gt;ช่วงสองปีที่ผ่านมา แนวคิดหนึ่งที่ผมจับตาดูอยู่คือเรื่องของ Serverless&lt;/p&gt;
+&lt;p&gt;ตามชื่อเลย Serverless คือไม่มีเซอร์เวอร์ ซึ่งจริงๆแล้วเซอร์เวอร์ก็ไม่ได้หายไปไหน เพียงแต่ทีมพัฒนาไม่ต้องสนใจมันเหมือนแต่ก่อนแล้ว&lt;/p&gt;
+&lt;p&gt;แนวคิดเรื่องนี้ยังถือว่าค่อนข้างใหม่ เมื่อสองปีที่แล้วผมทดลองใช้ครั้งแรกเพื่อดูว่าเอาไปใช้ทำโปรเจ็คจริงได้รึเปล่า ก็ค้นพบว่าพวก Tool และ Practices ต่างๆยังไม่พร้อมเท่าไร&lt;/p&gt;
+&lt;p&gt;ผ่านมาสองปี รู้สึกว่าเริ่มเข้าที่เข้าทางมากขึ้น จึงพึ่งได้เอามาใช้ทำโปรเจ็คจริง เลยเอามาเล่าสู่กันฟังครับ เผื่อใครอยากจะลองเอาไปใช้กัน&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>การนำ Agile มาใช้ในองค์กร</title>
+      <link>https://www.notaboutcode.com/post/25-advices-for-adopting-agile/</link>
+      <pubDate>Sat, 23 Jun 2018 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/25-advices-for-adopting-agile/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/collaboration-01.jpg&#34; alt=&#34;Photo by rawpixel on Unsplash&#34;&gt;&lt;/p&gt;
+&lt;p&gt;ผมรู้จักกับ Agile (อไจล์) เมื่อสิบกว่าปีที่แล้ว ตอนนั้นก็ไม่รู้หรอกว่ามันจะป๊อบขนาดนี้ สมัยนั้นอย่าพูดถึงอไจล์เลย ทีมไหนทำ Unit Testing ก็ถือว่าหรูแล้ว&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ฝั่ง UK จะออกเสียงว่า อา-ไจล์, ฝั่ง US จะอ่านออกเสียว่า แอ-ไจล์ ในบทความนี้จะขอใช้ทับศัพท์ว่าอไจล์ซึ่งเป็นที่นิยมใช้กันนะครับ  &amp;ndash; &lt;a href=&#34;https://dictionary.cambridge.org/pronunciation/english/agile&#34;&gt;https://dictionary.cambridge.org/pronunciation/english/agile&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;ด้วยความที่คลุกคลีอยู่กับเรื่องนี้ตั้งแต่ยุคที่อไจล์เข้ามาแรกๆ เลยได้เห็นการเปลี่ยนแปลงตั้งแต่สมัยที่ผู้บริหารรู้สึกว่าทีมที่ทำอไจล์คือการก่อกบฏ จนถึงปัจจุบันนี้ ถ้าทีมไหนไม่ทำอไจล์แล้วจะกลายเป็นกบฏแทน&lt;/p&gt;
+&lt;p&gt;ผมเชื่อว่าผู้บริหารระดับสูงที่กล้าจะเลือกใช้อไจล์นั้นมีวิสัยทัศน์ที่ดี แต่เวลาปฏิบัติจริง ผมกลับเห็นว่าหลายที่ได้ผลลัพธ์เละเทะมาก สุดท้ายก็มาจบลงที่ว่าอไจล์ไม่ดี หรือไม่เหมาะกับองค์กร (ซึ่งก็อาจจะเป็นไปได้)  หรือบางที่ก็เลือกที่จะซุกปัญหาไว้ใต้พรม แล้วทำ KPI ให้ดูสวยๆว่าผลลัพธ์ออกมาดี&lt;/p&gt;
+&lt;p&gt;สุดท้ายกลายเป็นตราบาปให้กับอไจล์ เป็นแผลเป็นให้กับพนักงานในบริษัท ที่ขยาดทุกครั้งที่ได้ยินคำนี้&lt;/p&gt;
+&lt;p&gt;ผมเลยอยากเขียนบทความนี้ไว้ให้ผู้บริหาร และหัวหน้าทีมพัฒนา (Technical Lead/ Team Lead) เพราะทัศนคติที่ถูกต้องต่ออไจล์จะส่งผลกระทบต่อการรับอไจล์เข้ามาในองค์กรมาก&lt;/p&gt;
+&lt;p&gt;บทความนี้จะพูดถึงข้อแนะนำ และตัวอย่างกรณีที่ดี/ไม่ดีแบบต่างๆ ในการนำอไจล์เข้ามาในองค์กร โดยผู้เขียนอนุมานว่าผู้อ่านรู้จักอไจล์และ Scrum แล้ว หากใครที่ยังไม่เข้าใจคำพวกนี้ แนะนำให้อ่านบทความอื่นก่อนครับ&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>วิ่งไล่ตามเทคโนโลยีไม่ทัน ทำยังไงดี</title>
+      <link>https://www.notaboutcode.com/post/24-catching-up-with-tech/</link>
+      <pubDate>Sat, 16 Jun 2018 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/24-catching-up-with-tech/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/run-01.jpg&#34; alt=&#34;Photo by Andy Beales on Unsplash&#34;&gt;&lt;/p&gt;
+&lt;p&gt;พอโปรแกรมเมอร์มีประสบการณ์มากขึ้น ก็จะค้นพบว่าตัวเองมีสิ่งที่ยังไม่รู้มากขึ้น&lt;/p&gt;
+&lt;p&gt;ผมคิดว่าหลายๆคนก็คงคล้ายผม คือจะอยากอ่าน อยากรู้ และอยากลองไปซะทุกอย่าง&lt;/p&gt;
+&lt;p&gt;ในอดีต อาจจะทำแบบนี้ได้ เพราะเทคโนโลยีแต่ก่อนไม่ได้เติบโตเร็วแบบทุกวันนี้&lt;/p&gt;
+&lt;p&gt;ผมเองเป็นคนนึงที่พยายามตามเทคโนโลยีให้ได้มากที่สุด แต่พอถึงจุดนึงก็ต้องยอมรับ ว่าปัจจุบันเทคโนโลยีที่วิ่งเร็วกว่าเรามาก&lt;/p&gt;
+&lt;p&gt;ถ้าตามแบบไม่มีหลักอะไรเลย ตามยังไงก็ไม่ไหว&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับที่ 2 System Integration Tests/End-to-End Tests)</title>
+      <link>https://www.notaboutcode.com/post/23-karma-from-bad-tests2/</link>
+      <pubDate>Sat, 05 May 2018 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/23-karma-from-bad-tests2/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/test-01.jpg&#34; alt=&#34;Photo by Chris Liverani on Unsplash&#34;&gt;&lt;/p&gt;
+&lt;p&gt;จากประสบการณ์ส่วนตัว End-to-End(E2E) Tests เป็นตัวที่สร้างความปวดหัวให้กับผมอันดับที่หนึ่งเลย รองลงมาก็ System Integration Tests ตอนเขียนบทความนี้ฉบับแรก เลยตัดสินใจแยกเทสต์สองประเภทนี้ออกมาเขียนแยกออกมา จะได้ลงรายละเอียดได้&lt;/p&gt;
+&lt;p&gt;บทความนี้ก็เหมือนบทความที่แล้วครับ คือทำผิดมาเยอะ จนพอจะสรุปข้อผิดพลาดที่เคยทำไว้มาแชร์กัน ผู้อ่านจะได้หลบเลี่ยงกันได้&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>การออกแบบระบบให้รับ Request เยอะๆ</title>
+      <link>https://www.notaboutcode.com/post/22-design-to-scale/</link>
+      <pubDate>Sun, 29 Apr 2018 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/22-design-to-scale/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/scale-01.jpg&#34; alt=&#34;Photo by Immo Wegmann on Unsplash&#34;&gt;&lt;/p&gt;
+&lt;p&gt;เมื่อเดือนที่แล้ว มีโอกาสกลับไปเป็น Guest Speaker ที่ภาค ในวิชา System Analysis and Design&lt;/p&gt;
+&lt;p&gt;อาจารย์ให้อิสระในเรื่องของหัวข้อ เลยตัดสินใจว่าอยากเล่าเรื่องที่มันสนุกๆ เผื่อน้องๆจะสนใจสาย Technical กันมากขึ้น หลังจากคิดอยู่หลายวัน ก็มาจบลงที่เรื่องนี้&lt;/p&gt;
+&lt;p&gt;ด้วยเวลาที่จำกัด รู้สึกว่าถ่ายทอดเนื้อหาได้ไม่ครบเท่าที่ควร เลยเอาเนื้อหามาเขียนเป็นบทความซะเลย จะได้ไม่ค้างคาใจ&lt;/p&gt;
+&lt;p&gt;เราจะเริ่มตั้งแต่การรับ Requirement การกะปริมาณ Load ของระบบ ไล่ไปจนถึงเทคนิคเบื้องที่ใช้ในการออกแบบให้รับ Request ได้เยอะขึ้น และสามารถโตตามปริมาณคนใช้ในอนาคตได้&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับ Unit/Component Tests)</title>
+      <link>https://www.notaboutcode.com/post/21-karma-from-bad-tests/</link>
+      <pubDate>Sat, 14 Apr 2018 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/21-karma-from-bad-tests/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/candle-01.jpg&#34; alt=&#34;Photo by Sharon McCutcheon on Unsplash&#34;&gt;&lt;/p&gt;
+&lt;p&gt;ปกติผมไม่ค่อยเชื่อเรื่องบาปบุญเท่าไร แต่เวลาเห็นโปรเจ็คไม่เขียนเทสต์ หรือเขียนเทสต์ไม่ดี ผมพูดเรื่องบาปบุญขึ้นมาทันที&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;การไม่เขียนเทสต์ (หรือเขียนเทสต์ไม่ดี)เป็นบาปอย่างหนึ่ง เป็นเวรกรรมจะตามทันทีมในระยะเวลาไม่เกิน 3 เดือน&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;เวลาทำงานกับชาวต่างชาติที่ไม่เข้าใจคอนเซ็บเรื่องบาปบุญ ผมชอบอธิบายให้เค้าฟังแบบนี้&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Writing code without tests (or low-quality tests) is like having one-night stand everyday without protection. You will eventually regret it.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;เน้นนิดนึงว่าไม่ใช่แค่เรื่องไม่เขียนเทสต์ แต่รวมถึงกรณีเขียนเทสต์ไม่มีคุณภาพด้วย&lt;/p&gt;
+&lt;p&gt;บางทีมอาจจะบอกว่าเขียนแล้ว มี Coverage ครบ 100% เลยด้วย บาปเบิบอะไรไม่มีหรอก&lt;/p&gt;
+&lt;p&gt;แต่ก่อนคนเขียนก็คิดงี้ครับ จนกระทั่งได้มาเจอกับสถานการณ์ &amp;ldquo;เทสต์ท่วมหัว เอาตัวไม่รอด&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;บทความนี้จะเล่าสู่กันฟังเรื่องตัวอย่างการเขียนเทสต์ที่ไม่ดีครับ ผู้อ่านจะได้หลีกเลี่ยงกัน โดยบทความนี้จะเน้นไปในส่วนของ Unit/Component Test เป็นหลัก&lt;/p&gt;
+&lt;p&gt;แต่ก่อนจะเข้าเรื่องเขียนเทสต์ให้ดี ผมขอยกปัญหาจากการไม่เขียนเทสต์ก่อนครับ&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Gender Bias ในวงการโปรแกรมเมอร์</title>
+      <link>https://www.notaboutcode.com/post/20-gender-bias/</link>
+      <pubDate>Sun, 25 Mar 2018 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/20-gender-bias/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/child-02.jpg&#34; alt=&#34;Photo by Brandon Day on Unsplash&#34;&gt;&lt;/p&gt;
+&lt;p&gt;เผอิญช่วงนี้กลับมาไทย ได้ไปร่วมงาน &lt;a href=&#34;https://djangogirls.org/bangkok/&#34;&gt;DjangoGirls Bangkok&lt;/a&gt;  มา และฟีดในเฟสบุ้คที่โผล่มาหาบ่อยที่สุดก็เป็นเรื่องที่เกี่ยวข้องพอดี&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;ต้องเชียร์โปรแกรมเมอร์หญิงที่จะไปเป็นไอดอลอย่างไร ให้ไม่เข้าข่ายเหยียดเพศครับ&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;กรณีไอดอลเนี่ย ผมเองก็ไม่รู้เหมือนกัน แต่เรื่องนี้ทำให้นึกถึงเรื่อง Gender Bias ที่จริงจังกันมากในต่างประเทศ&lt;/p&gt;
+&lt;p&gt;หลังจากนั่งอ่านคอมเม้นต์ในโพสต์นั้น, ได้ไปงาน DjangoGirls, รวมถึงเห็นกระแสของ&lt;a href=&#34;https://www.youtube.com/watch?v=TYHFLQtiq-M&#34;&gt;น้อง Turtle&lt;/a&gt; (น้องโปรแกรมเมอร์อินเทิร์นที่สมัคร BNK48) ผมรู้สึกว่าควรจะเขียนเรื่อง Gender Bias นี้ให้ได้อ่านกัน&lt;/p&gt;
+&lt;p&gt;บางคนอาจจะเห็นด้วย บางคนอาจจะไม่เห็นด้วย แต่การได้รับรู้ว่าเรามีประเด็นในเรื่องนี้อยู่ น่าจะมีประโยชน์ต่อวงการโปรแกรมเมอร์บ้านเรา&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>จะ Deploy Frontend หรือ Backend ก่อนดี</title>
+      <link>https://www.notaboutcode.com/post/19-deploy-order/</link>
+      <pubDate>Sun, 18 Feb 2018 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/19-deploy-order/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/child-01.jpg&#34; alt=&#34;Photo by Jelleke Vanooteghem on Unsplash&#34;&gt;&lt;/p&gt;
+&lt;p&gt;ความน่ารักของ Web Developer สมัยนี้คือมีการแยก Frontend กับ Backend ออกอย่างชัดเจน ถ้าใครย้อนกลับไปสมัยสิบปีก่อน เราไม่มีตำแหน่ง Frontend Developer ด้วยซ้ำ มีแต่เรียกรวมๆว่า Web Developer&lt;/p&gt;
+&lt;p&gt;การแยกกันของโค้ดสองส่วน ทำให้การ Deployment ทำแยกกันด้วย คำถามที่เกิดขึ้นคือ เวลาจะ Deploy เราจะเอา Frontend ขึ้นก่อน หรือ Backend ขึ้นก่อนดี&lt;/p&gt;
+&lt;p&gt;แม้จะเป็นคำถามง่ายๆ แต่รายละเอียดข้างในนั้นค่อนข้างเยอะ ถ้าไม่คิดให้ถี่ถ้วน อาจจะเจออาการเว็บพังขณะ Deploy เป็นประจำ&lt;/p&gt;
+&lt;p&gt;บทความนี้จะมาวิเคราะห์เจาะลึกกันในเรื่องนี้&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>คุณสมบัติของเทสต์ในการกำหนด Testing Strategy</title>
+      <link>https://www.notaboutcode.com/post/18-test-properties/</link>
+      <pubDate>Fri, 12 Jan 2018 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/18-test-properties/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/bug-01.jpg&#34; alt=&#34;Photo by Michel Bosma on Unsplash&#34;&gt;&lt;/p&gt;
+&lt;p&gt;ช่วงนี้ทีมขึ้นโปรเจ็คใหม่ ผมต้องคุยกับ QA Engineer เกี่ยวกับเรื่อง Testing Strategy บ่อยๆ&lt;/p&gt;
+&lt;p&gt;โดยเนื้อหาที่คุยหลักๆคือ&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;จะเทสต์อะไรบ้าง&lt;/li&gt;
+&lt;li&gt;จะเทสต์ด้วยเทสต์ชนิดไหน (ex. Unit, Component, Integration)&lt;/li&gt;
+&lt;li&gt;เราจะใช้เทสต์แต่ละชนิดในกรณีไหนบ้าง&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;พอคุยกันเรื่องนี้เยอะๆ ก็ค้นพบหัวข้อที่ 3 เป็นเรื่องที่ซับซ้อนพอควร  หนึ่งในเรื่องที่ตกผลึกก็คือคุณสมบัติของเทสต์แต่ละชนิด ซึ่งเป็นเรื่องที่จะนำมาเล่าในบทความนี้&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>บริษัทสุธีการจำ, CAP Theorem, และ Eventual Consistency</title>
+      <link>https://www.notaboutcode.com/post/17-cap-theorem/</link>
+      <pubDate>Sun, 07 Jan 2018 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/17-cap-theorem/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/photo-01.jpg&#34; alt=&#34;Photo by Joanna Kosinska on Unsplash&#34;&gt;&lt;/p&gt;
+&lt;p&gt;หัวข้อด้าน Distributed System เป็นอะไรที่สนุก แต่เข้าใจยากมาก&lt;/p&gt;
+&lt;p&gt;หนึ่งในเรื่องที่ผมอ่านหลายรอบกว่าจะเก็ต ก็คือเรื่องของ CAP Theorem ซึ่งเป็นแนวคิดในการ Trade-off คุณสมบัติของ Distributed System ที่เราออกแบบ&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;CAP&amp;rdquo; เป็นตัวย่อจาก Consistency, Availability, Partition Tolerant  โดย Theorem นี้ได้กล่าวไว้ว่า คุณไม่มีทางที่่จะออกแบบระบบโดยมีคุณสมบัติ 3 ข้อนี้ พร้อมกัน อย่างเก่งก็ได้แค่ 2 ใน 3&lt;/p&gt;
+&lt;p&gt;แต่ทำไมถึงเป็นอย่างนั้นล่ะ?&lt;/p&gt;
+&lt;p&gt;วันนี้เราจะมาทำความเข้าใจกับเจ้า Theorem นี้กัน ผ่านการเรื่องราวของบริษัท &amp;ldquo;สุธีการจำ&amp;rdquo; !!&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>การออกแบบ Service API ให้เป็น Idempotent</title>
+      <link>https://www.notaboutcode.com/post/16-idempotent/</link>
+      <pubDate>Tue, 26 Dec 2017 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/16-idempotent/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/pay-01.jpg&#34; alt=&#34;Photo by William Iven on Unsplash&#34;&gt;&lt;/p&gt;
+&lt;p&gt;ใครเคยเรียกใช้งานเซอร์วิซครั้งเดียว (เช่น การโอนเงิน สั่งซื้อของ ฯลฯ) แล้วเจอ Transaction ตัดซ้ำสองครั้งไหมครับ?&lt;/p&gt;
+&lt;p&gt;ถ้าใช่ คุณเจอปัญหาเรื่อง Idempotent เข้าให้แล้วล่ะ&lt;/p&gt;
+&lt;p&gt;เราเคยคุยกันในเรื่องของ&lt;a href=&#34;https://www.notaboutcode.com/post/05-retry/&#34;&gt;Retry&lt;/a&gt;ไปแล้ว ว่าอาจจะถล่มเซอร์วิซตัวเองได้ หากไม่จัดการให้ดี&lt;/p&gt;
+&lt;p&gt;มานั่งตรึกตรองดูอีกที จริงๆแล้วผมลืมอีกคอนเซ็บหนึ่งที่สำคัญมากเวลาเราใช้ Retry นั่นก็คือเรื่อง Idempotent ซึ่งเป็นที่มาของ เคส Transaction เกิดขึ้นสองที&lt;/p&gt;
+&lt;p&gt;บทความนี้จะเริ่มต้นจากต้นตอของปัญหานี้ก่อน เพื่ออธิบายให้เห็นภาพว่าเกิดอะไรขึ้น และเสนอวิธีการแก้ปัญหาในตอนท้ายครับ&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>การออกแบบ Service API ให้ Backward-Compatible</title>
+      <link>https://www.notaboutcode.com/post/15-service-api-versioning/</link>
+      <pubDate>Fri, 15 Dec 2017 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/15-service-api-versioning/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/lego-01.jpg&#34; alt=&#34;Photo by Iker Urteaga on Unsplash&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;APIs, like diamonds, are forever&amp;rdquo; &amp;ndash; Xebia Essentials&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;เรานิยมเลือกใช้เพชรในแหวนแต่งงาน เพื่อแสดงความเป็นนิรันดร์&lt;/p&gt;
+&lt;p&gt;เวลาออกแบบ Service API ผมแนะนำให้ใส่ความโรแมนติกนี้ลงไปหน่อย ลองคิดว่านี่แหละคือแหวนแต่งงาน ระหว่างคุณและผู้ใช้เซอร์วิซของคุณ ที่จะอยู่ต่อไปตลอดจนชั่วเซอร์วิซสลาย&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>วิธีการวัด Technical Skill ในการสัมภาษณ์งาน</title>
+      <link>https://www.notaboutcode.com/post/14-technical-interview/</link>
+      <pubDate>Sat, 09 Dec 2017 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/14-technical-interview/</guid>
+      <description>&lt;p&gt;ใน&lt;a href=&#34;https://www.notaboutcode.com/post/13-behavioral-interview/&#34;&gt;บทความที่แล้ว&lt;/a&gt; เราคุยกันในเรื่อง Soft skill ของผู้สมัครด้วย Behavioral Interview&lt;/p&gt;
+&lt;p&gt;บทความนี้จะพูดถึงรูปแบบในการวัด Technical Skill กันบ้าง โดยผมจะยกตัวอย่างวิธีการวัด Technical Skill ต่างๆที่ผมเคยเจอมา ซึ่งแต่ละแบบก็จะมีข้อดีข้อเสียแตกต่างกัน&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/meeting-03.jpg&#34; alt=&#34;Photo by Helloquence on Unsplash&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>สัมภาษณ์งานด้วย Behavioral Interview</title>
+      <link>https://www.notaboutcode.com/post/13-behavioral-interview/</link>
+      <pubDate>Sun, 03 Dec 2017 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/13-behavioral-interview/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/meeting-02.jpg&#34; alt=&#34;Photo by Alejandro Escamilla on Unsplash&#34;&gt;&lt;/p&gt;
+&lt;p&gt;ในบทความที่แล้ว เราคุยกันไปในเรื่องกระบวนการสัมภาษณ์งานโดยรวม (Process)&lt;/p&gt;
+&lt;p&gt;สำหรับบทความนี้ เราจะมาเจาะลึกลงไปในเรื่องการถามคำถามกัน&lt;/p&gt;
+&lt;p&gt;โดยหลักๆแล้ว คำถามในการสัมภาษณ์งานโปรแกรมเมอร์  จะวัดเกณฑ์สองด้าน คือ Technical skill
+และ Soft skill&lt;/p&gt;
+&lt;p&gt;บทความนี้จะคุยกันเรื่องการวัด Soft skill ด้วยเทคนิคที่เรียกว่า Behavioral Interview ครับ&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>ปัญหาในการสัมภาษณ์งานโปรแกรมเมอร์</title>
+      <link>https://www.notaboutcode.com/post/12-interviewer-bad-practices/</link>
+      <pubDate>Sat, 18 Nov 2017 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/12-interviewer-bad-practices/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/meeting-01.jpg&#34; alt=&#34;Photo by Nik MacMillan on Unsplash&#34;&gt;&lt;/p&gt;
+&lt;p&gt;ผมมีงานอันน่าท้าทายมาให้ทุกคนลองทำครับ&lt;/p&gt;
+&lt;p&gt;ผมจะให้คุณคุยกับคนแปลกหน้าเป็นเวลา 1 ชั่วโมง&lt;/p&gt;
+&lt;p&gt;หลังจากนั้นคุณจะต้องตัดสินใจว่า คุณอยากจะใช้เวลาร่วมกับคนคนนี้ 8 ชั่วโมงต่อวัน เป็นระยะเวลาอย่างต่ำ 1 ปี หรือไม่&lt;/p&gt;
+&lt;p&gt;ฟังดูยากไหมครับ?&lt;/p&gt;
+&lt;p&gt;งานนี้เรียกว่า &amp;ldquo;การสัมภาษณ์งาน&amp;rdquo;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>ปกป้องระบบไม่ให้ล่มหมดด้วย Bulkhead</title>
+      <link>https://www.notaboutcode.com/post/11-bulkhead/</link>
+      <pubDate>Sun, 12 Nov 2017 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/11-bulkhead/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/ship-01.jpg&#34; alt=&#34;Photo by Abraham Wiebe, from Unsplash.com&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Bulkhead เป็นเทคนิคการออกแบบที่เหมาะกับ Critical System คือ ถ้าล่มปุ๊บ คนในองค์กรจะไม่สามารถทำงานต่อได้เลย&lt;/p&gt;
+&lt;p&gt;ถ้าใครเปิดดิกดู ศัพท์นี้จริงๆใช้เรียกการออกแบบพาหนะครับ&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Bulkhead (n.) a dividing wall or barrier between separate compartments inside a ship, aircraft, or other vehicle.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;ไอเดียของ Bulkhead คือการออกแบบให้พาหนะแยกออกเป็นส่วนๆ (Compartmentalisation) หากมีส่วนใดส่วนหนึ่งมีปัญหา ผลกระทบจะต้องไม่รุนแรงจนทำให้ทั้งพาหนะล่มหมด&lt;/p&gt;
+&lt;p&gt;ยกตัวอย่างเช่น สมมติว่าเรือของเรามีจุดรั่วจุดหนึ่ง หากเราไม่ได้มีการแบ่งโซนเป็นส่วน น้ำจะกระจายไปทั่วท้องเรือ เรือก็จะจมแน่นอน&lt;/p&gt;
+&lt;p&gt;การใช้ Bulkhead คือการกั้นส่วนท้องเรือออกเป็นส่วนๆ หากน้ำรั่วขึ้นมา น้ำก็จะเข้ามาจนเต็มแค่ส่วนหนึ่งๆ โดยไม่หนักพอทำให้เรือล่มทั้งลำ (ถ้ายังนึกภาพไม่ออก ลองดู&lt;a href=&#34;https://www.google.nl/search?dcr=0&amp;amp;biw=1832&amp;amp;bih=989&amp;amp;tbm=isch&amp;amp;sa=1&amp;amp;q=bulkhead&amp;amp;oq=bulkhead&#34;&gt;ภาพในกูเกิ้ล&lt;/a&gt;ครับ)&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>ปกป้องเซอร์วิซจากผู้ใช้มักมากด้วย Throttling</title>
+      <link>https://www.notaboutcode.com/post/10-throttle/</link>
+      <pubDate>Thu, 09 Nov 2017 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/10-throttle/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/limit-01.jpg&#34; alt=&#34;Photo by Ksenia Kudelkina, from Unsplash.com&#34;&gt;&lt;/p&gt;
+&lt;p&gt;ลองนึกภาพว่าเรามีระบบที่ถูกออกแบบเป็น Service-Oriented Architecture (SOA)&lt;/p&gt;
+&lt;p&gt;ในบรรดาเซอร์วิซทั้งหมด จะมีบางเซอร์วิซทีเป็น Dependency ของเซอร์วิซอื่นๆ ผมจะเรียกเซอร์วิซนี้ว่าเซอร์วิซ A&lt;/p&gt;
+&lt;p&gt;ถ้าเซอร์วิซ A พังขึ้นมา เซอร์วิซอื่นที่ต้องเรียกใช้ข้อมูลนี้ทั้งหมดก็จะทำงานไม่ได้&lt;/p&gt;
+&lt;p&gt;ตัวอย่างเช่นในภาพข้างล่าง หากเซอร์วิซ A พัง  เซอร์วิซ B, และ C จะทำงานไม่ได้&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>ปัญหาของ Sticky Session</title>
+      <link>https://www.notaboutcode.com/post/08-sticky-session/</link>
+      <pubDate>Thu, 02 Nov 2017 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/08-sticky-session/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/traffic-01.jpg&#34; alt=&#34;Photo by Denys Nevozhai, from Unsplash.com&#34;&gt;&lt;/p&gt;
+&lt;p&gt;ใครที่เคยใช้ Load Balancer (LB) คงจะเคยได้ยินคำว่า Sticky Session (หรือ Session Affinity) กันมาบ้าง&lt;/p&gt;
+&lt;p&gt;แนวคิดของ Sticky Session คือการให้ LB ส่ง Request ที่มาจากผู้ใช้ (Client) คนเดียวยัง ไปยังเซอร์เวอร์ตัวเดียวกันตลอด&lt;/p&gt;
+&lt;p&gt;ตัวอย่างเช่น เรามีเซอร์เวอร์ 3 ตัว ชื่อว่า S1, S2, และ S3 วางอยู่ข้างหลัง LB  แล้วมีผู้ใช้ส่ง Request เข้ามายังเว็บเรา&lt;/p&gt;
+&lt;figure class=&#34;center&#34; &gt;
+  &lt;img  src=&#34;https://www.notaboutcode.com/img/diagrams/loadbalancer.png&#34;
+        alt=&#34;Load Balancer with 3 servers&#34;
+        &gt;
+  &lt;figcaption&gt;
+    Load Balancer with 3 servers
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;ในครั้งแรก Request ถูกส่งไปให้ S1 แต่พอผู้ใช้ส่ง Request ถัดๆไป LB อาจส่ง Request นั้นไปยัง S2 หรือ S3 แทน&lt;/p&gt;
+&lt;p&gt;แต่หากเราเปิด Sticky Session แล้วล่ะก็ ตัว LB จะส่ง Request จากผู้ใช้คนเดิมไปยัง S1 ตลอด โดยไม่ส่งไปที่ S2 หรือ S3 เลย&lt;/p&gt;
+&lt;p&gt;ในบทความนี้ เราจะมาทำความเข้าใจว่า Sticky Session ให้ละเอียดยิ่งขึ้น และอธิบายถึงปัญหาที่มักจะเกิดขึ้นในการใช้ Sticky Session&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี (ภาค 2)</title>
+      <link>https://www.notaboutcode.com/post/07-career-start-non-technical/</link>
+      <pubDate>Tue, 31 Oct 2017 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/07-career-start-non-technical/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/career-02.jpg&#34; alt=&#34;Photo by Olu Eletu, from Unsplash.com&#34;&gt;&lt;/p&gt;
+&lt;p&gt;ใน&lt;a href=&#34;https://www.notaboutcode.com/post/06-career-start/&#34;&gt;ภาคแรก&lt;/a&gt;เราคุยกันในเรื่องของ Technical Skills ทีเป็นพื้นฐานไว้ใช้ในระยะยาว&lt;/p&gt;
+&lt;p&gt;สำหรับภาคนี้ เราจะมาโฟกัสในส่วนของ Non-technical กันบ้าง ซึ่งเป็นครอบคลุมค่อนข้างหลากหลายเรื่อง โดยผมคัดเฉพาะหัวข้อที่ผมคิดว่าสำคัญๆ เพื่อไม่ให้ยาวเกินไป&lt;/p&gt;
+&lt;p&gt;บทความนี้มีความคิดเห็นส่วนตัวเยอะมาก ผมเลยแยกออกมาจากภาคแรก&lt;/p&gt;
+&lt;p&gt;ใครที่มีความเห็นแตกต่าง หรืออ่านแล้วรู้สึกจี้ด ไม่เห็นด้วยมากๆ ลองมาแลกเปลี่ยนความเห็นกันใน&lt;a href=&#34;https://www.facebook.com/notaboutcode/&#34;&gt;เฟสบุ้คเพจ&lt;/a&gt;ได้ครับ เผื่อบทความนี้อาจจะมีภาค3 ผมเองก็อยากเก็บรายละเอียด ให้ได้มากที่สุด เพราะบล็อคนี้ตั้งใจจะเขียนทิ้งไว้นาน&lt;/p&gt;
+&lt;p&gt;สำหรับโปรแกรมเมอร์มือใหม่ที่ยังไม่มีความคิดเห็น อ่านแล้วก็ฟังหูไว้หู ใช้เป็นแนวทางแต่อย่ายึดมั่นกับมันมาก ยังมีคนที่เก่งกว่าผมอีกมากที่ใช้แนวทางอื่นในการพัฒนาตนเอง&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี ภาค 1</title>
+      <link>https://www.notaboutcode.com/post/06-career-start/</link>
+      <pubDate>Thu, 19 Oct 2017 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/06-career-start/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/career-01.jpg&#34; alt=&#34;Photo by Jake Hills, from Unsplash.com&#34;&gt;&lt;/p&gt;
+&lt;p&gt;ความยากลำบากของโปรแกรมเมอร์สมัยนี้คือมีเรื่องที่ต้องเรียนรู้เยอะมาก&amp;hellip;&lt;/p&gt;
+&lt;p&gt;มากจนไม่รู้ว่าจะเริ่มต้นที่ไหนดี&lt;/p&gt;
+&lt;p&gt;บทความนี้รวมสิ่งที่ผมคิดว่าสำหรับโปรแกรมเมอร์มือใหม่ ควรจะเรียนรู้เอาไว้ ไม่ว่าจะเป็นสาย Frontend, Backend, หรือ Fullstack เรื่องพวกนี้ได้ใช้แน่ๆ และได้ใช้นานด้วย&lt;/p&gt;
+&lt;p&gt;ผมเชื่อว่าความรู้พวกนี้ ในอีก 20 ปีข้างหน้า โปรแกรมเมอร์ยุคนั้นก็ยังต้องรู้กัน (ถ้าไม่โดน AI แย่งงานไปก่อน)&lt;/p&gt;
+&lt;p&gt;แทนที่จะเอาเวลาไปเรียนรู้พวกเฟรมเวิร์ค ภาษา หรือไลบรารี่ที่เปลี่ยนใหม่ทุกๆ 3-5 ปี  เรียนรู้พวกนี้ดีกว่าครับ เรียนรอบเดียว ใช้ยาว&lt;/p&gt;
+&lt;p&gt;มาดูกันครับว่ามีอะไรบ้าง&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Retry ยังไงให้ปลอดภัย</title>
+      <link>https://www.notaboutcode.com/post/05-retry/</link>
+      <pubDate>Sat, 14 Oct 2017 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/05-retry/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/spiral-stairs-01.jpg&#34; alt=&#34;Photo by Nick Morris, from Unsplash.com&#34;&gt;&lt;/p&gt;
+&lt;p&gt;วันนี้นั่งคุยกับเพื่อนเรื่อง Retry รู้สึกว่าเป็นหัวข้อที่น่าสนใจดี&lt;/p&gt;
+&lt;p&gt;โจทย์คือเรามี External service ที่ไม่ค่อยสเถียรเท่าไร เวลาส่ง Request ไป วันดีคืนดีก็อาจจะ:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;พังแบบส่งสาเหตุการพังกลับมาให้ เช่น 5xx พร้อม error code&lt;/li&gt;
+&lt;li&gt;พังแบบไม่มีอะไรตอบกลับมา ซึ่งสาเหตุอาจจะมาจากที่ระบบนั้นเดี้ยงไประหว่างการทำงาน หรือเน็ตเวิร์คเน่า&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;กรณีนี้ เรามีหลายทางเลือก&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;เลือกที่จะจบการทำงาน แล้วแสดงผลให้ฝั่งผู้ใช้ของเรา (Client) รู้ว่าระบบมีปัญหา พร้อม Error code ซึ่งก็ถือว่ายอมรับได้ เพราะหากเราจำเป็นต้องการใช้ข้อมูลจาก External Service ยังไงก็ทำอะไรไม่ได้&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ทำการ Retry คือการส่ง Request ซ้ำโดยอัตโนมัติ หากเกิดข้อผิดพลาดในฝั่งของ External service ที่เราเรียกใช้&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Decouple ให้สองระบบเรียกกับแบบ Asynchronous โดยเอา Request ที่ไม่สำเร็จของเราไปเก็บไว้ใน Queue แล้ว Retry ใหม่ในภายหลัง&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    
+    <item>
+      <title>ขึ้นโปรเจ็คใหม่ ใช้ภาษาอะไรดี</title>
+      <link>https://www.notaboutcode.com/post/04-choosing-language/</link>
+      <pubDate>Fri, 13 Oct 2017 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/04-choosing-language/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/new-project-01.jpg&#34; alt=&#34;Photo by Nick Morris, from Unsplash.com&#34;&gt;&lt;/p&gt;
+&lt;p&gt;เมื่อวันก่อน นั่งคุยกับน้องคนหนึ่งที่กำลังจะขึ้นโปรเจ็คใหม่ แต่ลังเลว่าจะใช้ภาษาอะไรดี&lt;/p&gt;
+&lt;p&gt;เป็นเรื่องน่าปวดหัวของโปรแกรมเมอร์สมัยใหม่ครับ เพราะมีตัวเลือกเยอะไป สมัยก่อน ตัวเลือกไม่เยอะ อย่างเก่งก็แค่ C#, Java, PHP, C แต่เดี๋ยวโผล่มาพรึ่บพรั่บกันหมด&lt;/p&gt;
+&lt;p&gt;พอคุยๆกันกับน้องเค้าไปสักพัก ก็มีชื่อ Python + Django, Ruby on Rail, JavaScript + NodeJS, Go, Kotlin, Scala, TypeScript, Closure อะไรไม่รู้เต็มไปหมด&lt;/p&gt;
+&lt;p&gt;ตัวผมเอง เคยเขียนแค่สี่ห้าภาษา แถมยังไม่ได้ลงลึกด้วย ก็พอแต่แนะนำไกด์ไลน์ไปคร่าวๆ ว่าภาษาไหนมีจุดเด่นอะไร&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>การนำ Static Code Analysis มาใช้ในทีม</title>
+      <link>https://www.notaboutcode.com/post/02-inside-ci-static-check/</link>
+      <pubDate>Sat, 07 Oct 2017 16:28:41 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/02-inside-ci-static-check/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/code-01.jpg&#34; alt=&#34;Photo by Ilya Pavlov, from Unsplash.com&#34;&gt;&lt;/p&gt;
+&lt;p&gt;สืบเนื่องจาก&lt;a href=&#34;https://www.notaboutcode.com/post/01-ci-journey/&#34;&gt;บันทึกที่แล้ว&lt;/a&gt; ผมได้อธิบายไว้ ว่าหลังจากทีมเริ่มมี CI Server แล้ว ทีมก็มักจะเริ่มใส่เครื่องมือหลายๆอย่างลงไปเพื่อทำการ Automation  และควบคุมคุณภาพของโค้ด&lt;/p&gt;
+&lt;p&gt;ในบันทึกฉบับนี้ ผมจะแนะนำเครื่องมือจำพวก Static code analysis ครับ (จากนี้ไปจะเรียกย่อๆว่า SCA)&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>การเดินทางสู่ CI (Continuous Integration)</title>
+      <link>https://www.notaboutcode.com/post/01-ci-journey/</link>
+      <pubDate>Mon, 02 Oct 2017 16:28:41 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/01-ci-journey/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/walk-desert-01.jpg&#34; alt=&#34;Photo by Jeremy Cai, from Unsplash&#34;&gt;&lt;/p&gt;
+&lt;p&gt;ผมเคยคิดว่าการทำ CI เป็นเรื่องง่ายๆ และเป็นเบสิคของทุกทีมที่ต้องปฏิบัติกัน แต่ในความเป็นจริง น้อยทีมมากที่จะทำออกมาได้ดี เพราะมันมีรายละเอียดยุ่บยั่บที่มากกว่าแค่เรื่องทางเทคนิค&lt;/p&gt;
+&lt;p&gt;ในบันทึกฉบับนี้ เราจะมาดูรายละเอียดยุ่บยั่บเหล่านี้กัน โดยผมจะนำเสนอด้วยวิธีการเล่าเรื่อง ตั้งแต่ทีมเริ่มต้นทำ CI ง่ายๆ ไปจนถึงจุดทีเป็น CI ที่สมบูรณ์มากขึ้น&lt;/p&gt;
+&lt;p&gt;โดยเราสมมติว่ามีทีมทีมหนึ่ง เริ่มต้นจากที่ไม่มีอะไรนอกจากเลยนอกจาก Version Control แล้วลองผิดลองถูก ทำการปรับปรุงกระบวนการ เรื่อยๆ จนมาถึงจุดที่เป็น CI ที่สมบูรณ์มากขึ้น&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.notaboutcode.com/post/xx-agilility-on-technical-side/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/xx-agilility-on-technical-side/</guid>
+      <description>Agile is Culture, not process Why Technical foundation is important Explore how XP practices supports Agility </description>
+    </item>
+    
+  </channel>
+</rss>

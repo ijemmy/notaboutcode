@@ -1,155 +1,211 @@
-<!doctype html><html lang=th>
+<!DOCTYPE html>
+<html lang="th">
 <head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>บริษัทสุธีการจำ, CAP Theorem, และ Eventual Consistency - Not About Code - Technical Leadership</title>
-<meta name=renderer content="webkit">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta http-equiv=cache-control content="no-transform">
-<meta http-equiv=cache-control content="no-siteapp">
-<meta name=theme-color content="#f8f5ec">
-<meta name=msapplication-navbutton-color content="#f8f5ec">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
-<meta name=author content="ijemmy"><meta name=description content="หัวข้อด้าน Distributed System เป็นอะไรที่สนุก แต่เข้าใจยากมาก
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>บริษัทสุธีการจำ, CAP Theorem, และ Eventual Consistency - Not About Code - Technical Leadership</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ijemmy" /><meta name="description" content="หัวข้อด้าน Distributed System เป็นอะไรที่สนุก แต่เข้าใจยากมาก
 หนึ่งในเรื่องที่ผมอ่านหลายรอบกว่าจะเก็ต ก็คือเรื่องของ CAP Theorem ซึ่งเป็นแนวคิดในการ Trade-off คุณสมบัติของ Distributed System ที่เราออกแบบ
 &amp;ldquo;CAP&amp;rdquo; เป็นตัวย่อจาก Consistency, Availability, Partition Tolerant โดย Theorem นี้ได้กล่าวไว้ว่า คุณไม่มีทางที่่จะออกแบบระบบโดยมีคุณสมบัติ 3 ข้อนี้ พร้อมกัน อย่างเก่งก็ได้แค่ 2 ใน 3
 แต่ทำไมถึงเป็นอย่างนั้นล่ะ?
 วันนี้เราจะมาทำความเข้าใจกับเจ้า Theorem นี้กัน ผ่านการเรื่องราวของบริษัท &amp;ldquo;สุธีการจำ&amp;rdquo; !!
-"><meta name=keywords content="Hugo,theme,even">
-<meta name=generator content="Hugo 0.89.4 with theme even">
-<link rel=canonical href=https://www.notaboutcode.com/post/17-cap-theorem/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=manifest href=/manifest.json>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
-<link rel=stylesheet href=/css/custom.css>
-<meta property="og:title" content="บริษัทสุธีการจำ, CAP Theorem, และ Eventual Consistency">
+" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://www.notaboutcode.com/post/17-cap-theorem/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/custom.css">
+
+
+<meta property="og:title" content="บริษัทสุธีการจำ, CAP Theorem, และ Eventual Consistency" />
 <meta property="og:description" content="
 หัวข้อด้าน Distributed System เป็นอะไรที่สนุก แต่เข้าใจยากมาก
 หนึ่งในเรื่องที่ผมอ่านหลายรอบกว่าจะเก็ต ก็คือเรื่องของ CAP Theorem ซึ่งเป็นแนวคิดในการ Trade-off คุณสมบัติของ Distributed System ที่เราออกแบบ
 &ldquo;CAP&rdquo; เป็นตัวย่อจาก Consistency, Availability, Partition Tolerant  โดย Theorem นี้ได้กล่าวไว้ว่า คุณไม่มีทางที่่จะออกแบบระบบโดยมีคุณสมบัติ 3 ข้อนี้ พร้อมกัน อย่างเก่งก็ได้แค่ 2 ใน 3
 แต่ทำไมถึงเป็นอย่างนั้นล่ะ?
-วันนี้เราจะมาทำความเข้าใจกับเจ้า Theorem นี้กัน ผ่านการเรื่องราวของบริษัท &ldquo;สุธีการจำ&rdquo; !!">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://www.notaboutcode.com/post/17-cap-theorem/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2018-01-07T12:04:02+07:00">
-<meta property="article:modified_time" content="2018-01-07T12:04:02+07:00">
-<meta itemprop=name content="บริษัทสุธีการจำ, CAP Theorem, และ Eventual Consistency">
-<meta itemprop=description content="
+วันนี้เราจะมาทำความเข้าใจกับเจ้า Theorem นี้กัน ผ่านการเรื่องราวของบริษัท &ldquo;สุธีการจำ&rdquo; !!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.notaboutcode.com/post/17-cap-theorem/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-01-07T12:04:02+07:00" />
+<meta property="article:modified_time" content="2018-01-07T12:04:02+07:00" />
+
+<meta itemprop="name" content="บริษัทสุธีการจำ, CAP Theorem, และ Eventual Consistency">
+<meta itemprop="description" content="
 หัวข้อด้าน Distributed System เป็นอะไรที่สนุก แต่เข้าใจยากมาก
 หนึ่งในเรื่องที่ผมอ่านหลายรอบกว่าจะเก็ต ก็คือเรื่องของ CAP Theorem ซึ่งเป็นแนวคิดในการ Trade-off คุณสมบัติของ Distributed System ที่เราออกแบบ
 &ldquo;CAP&rdquo; เป็นตัวย่อจาก Consistency, Availability, Partition Tolerant  โดย Theorem นี้ได้กล่าวไว้ว่า คุณไม่มีทางที่่จะออกแบบระบบโดยมีคุณสมบัติ 3 ข้อนี้ พร้อมกัน อย่างเก่งก็ได้แค่ 2 ใน 3
 แต่ทำไมถึงเป็นอย่างนั้นล่ะ?
-วันนี้เราจะมาทำความเข้าใจกับเจ้า Theorem นี้กัน ผ่านการเรื่องราวของบริษัท &ldquo;สุธีการจำ&rdquo; !!"><meta itemprop=datePublished content="2018-01-07T12:04:02+07:00">
-<meta itemprop=dateModified content="2018-01-07T12:04:02+07:00">
-<meta itemprop=wordCount content="533">
-<meta itemprop=keywords content="distributed system,design,"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="บริษัทสุธีการจำ, CAP Theorem, และ Eventual Consistency">
-<meta name=twitter:description content="
+วันนี้เราจะมาทำความเข้าใจกับเจ้า Theorem นี้กัน ผ่านการเรื่องราวของบริษัท &ldquo;สุธีการจำ&rdquo; !!"><meta itemprop="datePublished" content="2018-01-07T12:04:02+07:00" />
+<meta itemprop="dateModified" content="2018-01-07T12:04:02+07:00" />
+<meta itemprop="wordCount" content="533">
+<meta itemprop="keywords" content="distributed system,design," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="บริษัทสุธีการจำ, CAP Theorem, และ Eventual Consistency"/>
+<meta name="twitter:description" content="
 หัวข้อด้าน Distributed System เป็นอะไรที่สนุก แต่เข้าใจยากมาก
 หนึ่งในเรื่องที่ผมอ่านหลายรอบกว่าจะเก็ต ก็คือเรื่องของ CAP Theorem ซึ่งเป็นแนวคิดในการ Trade-off คุณสมบัติของ Distributed System ที่เราออกแบบ
 &ldquo;CAP&rdquo; เป็นตัวย่อจาก Consistency, Availability, Partition Tolerant  โดย Theorem นี้ได้กล่าวไว้ว่า คุณไม่มีทางที่่จะออกแบบระบบโดยมีคุณสมบัติ 3 ข้อนี้ พร้อมกัน อย่างเก่งก็ได้แค่ 2 ใน 3
 แต่ทำไมถึงเป็นอย่างนั้นล่ะ?
-วันนี้เราจะมาทำความเข้าใจกับเจ้า Theorem นี้กัน ผ่านการเรื่องราวของบริษัท &ldquo;สุธีการจำ&rdquo; !!"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
-<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+วันนี้เราจะมาทำความเข้าใจกับเจ้า Theorem นี้กัน ผ่านการเรื่องราวของบริษัท &ldquo;สุธีการจำ&rdquo; !!"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
 </head>
 <body>
-<div id=mobile-navbar class=mobile-navbar>
-<div class=mobile-header-logo>
-<a href=/ class=logo>Not About Code</a>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Not About Code</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
-<div class=mobile-navbar-icon>
-<span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-<nav id=mobile-menu class="mobile-menu slideout-menu">
-<ul class=mobile-menu-list>
-<a href=/>
-<li class=mobile-menu-item>Home</li>
-</a><a href=/post/>
-<li class=mobile-menu-item>Archives</li>
-</a><a href=/tags/>
-<li class=mobile-menu-item>Tags</li>
-</a><a href=/categories/>
-<li class=mobile-menu-item>Categories</li>
-</a><a href=/about/>
-<li class=mobile-menu-item>About</li>
-</a>
-</ul>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
 </nav>
-<div class=container id=mobile-panel>
-<header id=header class=header>
-<div class=logo-wrapper>
-<a href=/ class=logo>Not About Code</a>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Not About Code</a>
 </div>
-<nav class=site-navbar>
-<ul id=menu class=menu>
-<li class=menu-item>
-<a class=menu-item-link href=/>Home</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/post/>Archives</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/tags/>Tags</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/categories/>Categories</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/about/>About</a>
-</li>
-</ul>
-<a href=https://webring.wonderful.software#notaboutcode.com title=วงแหวนเว็บ>
-<img alt=วงแหวนเว็บ width=32 height=32 src=https://webring.wonderful.software/webring.black.svg>
-</a>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+
+  
+  <a href="https://webring.wonderful.software#notaboutcode.com" title="วงแหวนเว็บ">
+    <img
+        alt="วงแหวนเว็บ"
+        width="32"
+        height="32"
+        src="https://webring.wonderful.software/webring.black.svg"
+    />
+  </a>
 </nav>
-</header>
-<main id=main class=main>
-<div class=content-wrapper>
-<div id=content class=content>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title>บริษัทสุธีการจำ, CAP Theorem, และ Eventual Consistency</h1>
-<div class=post-meta>
-<span class=post-time> 2018-01-07 </span>
-<div class=post-category>
-<a href=/categories/system-design/> System Design </a>
-</div>
-</div>
-</header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title></h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#บรษทสธการจำ>บริษัทสุธีการจำ</a></li>
-<li><a href=#ธรกจไปไดสวย>ธุรกิจไปได้สวย</a></li>
-<li><a href=#ลกคาไมไดขอมลทใหจำไว>ลูกค้าไม่ได้ข้อมูลที่ให้จำไว้</a></li>
-<li><a href=#เหตเกดเมอนทไปข>เหตุเกิดเมื่อนัทไปขี้</a></li>
-<li><a href=#วกกลบมาท-cap-theorem>วกกลับมาที่ CAP Theorem</a></li>
-<li><a href=#แลวจะเลอก-consistency-หรอ-availability>แล้วจะเลือก Consistency หรือ Availability?</a></li>
-<li><a href=#หากยอมเสย-response-time-แทนละ>หากยอมเสีย Response Time แทนล่ะ?</a></li>
-<li><a href=#สรป>สรุป</a></li>
-<li><a href=#reference>Reference:</a></li>
-<li><a href=#acknowledgement>Acknowledgement</a></li>
-</ul>
+
+
+
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">บริษัทสุธีการจำ, CAP Theorem, และ Eventual Consistency</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-01-07 </span>
+        <div class="post-category">
+            <a href="/categories/system-design/"> System Design </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title"></h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#บรษทสธการจำ">บริษัทสุธีการจำ</a></li>
+    <li><a href="#ธรกจไปไดสวย">ธุรกิจไปได้สวย</a></li>
+    <li><a href="#ลกคาไมไดขอมลทใหจำไว">ลูกค้าไม่ได้ข้อมูลที่ให้จำไว้</a></li>
+    <li><a href="#เหตเกดเมอนทไปข">เหตุเกิดเมื่อนัทไปขี้</a></li>
+    <li><a href="#วกกลบมาท-cap-theorem">วกกลับมาที่ CAP Theorem</a></li>
+    <li><a href="#แลวจะเลอก-consistency-หรอ-availability">แล้วจะเลือก Consistency หรือ Availability?</a></li>
+    <li><a href="#หากยอมเสย-response-time-แทนละ">หากยอมเสีย Response Time แทนล่ะ?</a></li>
+    <li><a href="#สรป">สรุป</a></li>
+    <li><a href="#reference">Reference:</a></li>
+    <li><a href="#acknowledgement">Acknowledgement</a></li>
+  </ul>
 </nav>
+  </div>
 </div>
-</div>
-<div class=post-content>
-<p><img src=/img/covers/photo-01.jpg alt="Photo by Joanna Kosinska on Unsplash"></p>
+    <div class="post-content">
+      <p><img src="/img/covers/photo-01.jpg" alt="Photo by Joanna Kosinska on Unsplash"></p>
 <p>หัวข้อด้าน Distributed System เป็นอะไรที่สนุก แต่เข้าใจยากมาก</p>
 <p>หนึ่งในเรื่องที่ผมอ่านหลายรอบกว่าจะเก็ต ก็คือเรื่องของ CAP Theorem ซึ่งเป็นแนวคิดในการ Trade-off คุณสมบัติของ Distributed System ที่เราออกแบบ</p>
-<p>&ldquo;CAP&rdquo; เป็นตัวย่อจาก Consistency, Availability, Partition Tolerant โดย Theorem นี้ได้กล่าวไว้ว่า คุณไม่มีทางที่่จะออกแบบระบบโดยมีคุณสมบัติ 3 ข้อนี้ พร้อมกัน อย่างเก่งก็ได้แค่ 2 ใน 3</p>
+<p>&ldquo;CAP&rdquo; เป็นตัวย่อจาก Consistency, Availability, Partition Tolerant  โดย Theorem นี้ได้กล่าวไว้ว่า คุณไม่มีทางที่่จะออกแบบระบบโดยมีคุณสมบัติ 3 ข้อนี้ พร้อมกัน อย่างเก่งก็ได้แค่ 2 ใน 3</p>
 <p>แต่ทำไมถึงเป็นอย่างนั้นล่ะ?</p>
 <p>วันนี้เราจะมาทำความเข้าใจกับเจ้า Theorem นี้กัน ผ่านการเรื่องราวของบริษัท &ldquo;สุธีการจำ&rdquo; !!</p>
 <blockquote>
-<p>Credit: บทความนี้ใช้ไอเดียจาก<a href=http://ksat.me/a-plain-english-introduction-to-cap-theorem/>บล็อคของ Kaushik Sathupadi</a> ผมเปลี่ยนลำดับการเล่าเรื่องกับเนื้อหาพอสมควร แต่ใจความเดียวกัน</p>
+<p>Credit: บทความนี้ใช้ไอเดียจาก<a href="http://ksat.me/a-plain-english-introduction-to-cap-theorem/">บล็อคของ Kaushik Sathupadi</a>  ผมเปลี่ยนลำดับการเล่าเรื่องกับเนื้อหาพอสมควร แต่ใจความเดียวกัน</p>
 </blockquote>
-<h1 id=บรษทสธการจำ>บริษัทสุธีการจำ</h1>
+<h1 id="บรษทสธการจำ">บริษัทสุธีการจำ</h1>
 <p>สุธีเป็นคนที่มีความจำเป็นเลิศ ตั้งแต่สมัยเรียน เขาได้ท็อบวิชาท่องจำมาตลอด</p>
 <p>แต่พอเข้าสู่โลกแห่งการทำงาน เค้าค้นพบว่า ทักษะการจำของเค้าไม่มีประโยชน์มากนัก หรือจะพูดให้ถูก ไม่มีงานในตลาดที่สามารถนำศักยภาพของเค้ามาใช้ได้อย่างเต็มที่</p>
 <p>สุธีจึงตัดสินใจเดินตาม Passion ของตัวเอง โดยเปิดบริษัทสตาร์ทอัพชื่อ &ldquo;สุธีการจำ&rdquo;</p>
@@ -160,25 +216,25 @@
 <thead>
 <tr>
 <th>ชื่อลูกค้า</th>
-<th style=text-align:right>ประโยคที่จำ</th>
+<th style="text-align:right">ประโยคที่จำ</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>อรุช</td>
-<td style=text-align:right>เบอร์น้องกิ๊ก 085-123-4567</td>
+<td style="text-align:right">เบอร์น้องกิ๊ก 085-123-4567</td>
 </tr>
 <tr>
 <td>กุ๊กไก่</td>
-<td style=text-align:right>ไหสมบัติของคุณปู่ฝังไว้ที่ 55° 20' 15'' W</td>
+<td style="text-align:right">ไหสมบัติของคุณปู่ฝังไว้ที่ 55° 20' 15'' W</td>
 </tr>
 <tr>
 <td>ไข่เจียว</td>
-<td style=text-align:right>เจอแฟนครั้งแรกวันที่ 15 ธันวา 2559</td>
+<td style="text-align:right">เจอแฟนครั้งแรกวันที่ 15 ธันวา 2559</td>
 </tr>
 <tr>
-<td>&mldr;</td>
-<td style=text-align:right>&mldr;</td>
+<td>&hellip;</td>
+<td style="text-align:right">&hellip;</td>
 </tr>
 </tbody>
 </table>
@@ -188,12 +244,12 @@
 <blockquote>
 <p>ณ จุดนี้ ถ้าเปรียบเทียบกับระบบคอมพิวเตอร์ เรามีคอมพิวเตอร์ในการเก็บช้อมูลแค่เครื่องเดียว เราสามารถให้บริการที่มี Consistency กับ Availability พร้อมกันได้โดยไม่มีข้อจำกัดใดๆ สังเกตนิดนึงว่า เรื่องของ Availability เราตั้งนิยามว่าจะเกิดขึ้นเมื่อโทรติด ถ้าโทรไม่ติดนี่ไม่เข้านิยามนะครับ</p>
 </blockquote>
-<h1 id=ธรกจไปไดสวย>ธุรกิจไปได้สวย</h1>
-<p>บริษัทสุธีการจำ ได้รับการตอบรับจากลูกค้าเป็นอย่างดี คนโทรหาสุธีเยอะมากจนรับไม่ทัน</p>
+<h1 id="ธรกจไปไดสวย">ธุรกิจไปได้สวย</h1>
+<p>บริษัทสุธีการจำ ได้รับการตอบรับจากลูกค้าเป็นอย่างดี  คนโทรหาสุธีเยอะมากจนรับไม่ทัน</p>
 <p>แต่ละชั่วโมง สุธีสามารถตอบลูกค้า (ทั้งการจำสิ่งใหม่ๆ และตอบสิ่งที่จำไว้) ได้แค่ประมาณ 60 คน แต่โดยเฉลี่ย มีลูกค้าโทรมาประมาณ 100 คนต่อชั่วโมง ทำให้สูญเสียโอกาสทางธุรกิจไปเยอะมาก</p>
-<p>สุธีจึงจ้าง"นักจำ"อีกคนมาช่วย ชื่อนัท</p>
+<p>สุธีจึงจ้าง&quot;นักจำ&quot;อีกคนมาช่วย ชื่อนัท</p>
 <p>นัทนั้นมีความจำเป็นเลิศเช่นเดียวกับสุธี การได้นัทมาช่วยทำให้สุธีอุ่นใจมาก แต่การเข้ามาของนัท ทำให้เกิดปัญหา Consistency ขึ้น</p>
-<h1 id=ลกคาไมไดขอมลทใหจำไว>ลูกค้าไม่ได้ข้อมูลที่ให้จำไว้</h1>
+<h1 id="ลกคาไมไดขอมลทใหจำไว">ลูกค้าไม่ได้ข้อมูลที่ให้จำไว้</h1>
 <p>เหตุเกิดเมื่อมีลูกค้าอีกคนโทรมาหาสุธีเพื่อทำการจำเบอร์โทรกิ๊ก หลังจากนั้นไม่นาน ลูกค้าคนนั้นก็โทรกลับมาเพื่อถามเบอร์โทร</p>
 <p>ในเวลานั้น สุธีกำลังติดสายลูกค้าอีกคนอยู่ นัทจึงรับสายแทน ซึ่งแน่นอน นัทไม่เคยจำเบอร์โทรของลูกค้าคนนี้ จึงตอบกลับไปว่าไม่มีข้อมูล</p>
 <p>ลูกค้าคนนี้โกรธมาก และไปโพสต์ด่าในพันทิพย์ ส่งผลกระทบต่อชื่อเสียงของบริษัทสุธีการจำมาก</p>
@@ -202,19 +258,19 @@
 <p>วิธีนี้การันตีว่าทั้งสุธีกับนัทจะจำข้อมูลของลูกค้าทุกคนได้ ดังนั้น ไม่ว่าใครรับสาย ก็จะสามารถตอบข้อมูลกับไปได้เสมอ</p>
 <blockquote>
 <p>การจ้างนัทเข้ามา เหมือนกับการเพิ่มคอมพิวเตอร์ที่ใช้เก็บข้อมูลเข้ามาอีกหนึ่งเครื่อง ทำให้ระบบเป็น Distributed System ที่ต้องสื่อสารและส่งข้อมูลหากัน
-<br>
-<br>
+<br />
+<br />
 วิธีการแก้ปัญหาโดยให้เครื่องคอมพิวเตอร์ทั้งสองเครื่อง (สุธีกับนัทในที่นี้) จำข้อมูลเดียวกันซ้ำ เป็นเทคนิคที่เรียกว่า Replication ซึ่งใช้การันตี Consistency ในการ Read ข้อมูล โดยไม่ว่า Request จะถูกส่งไปยังเครื่องไหน เราก็จะต้องได้ข้อมูลที่ถูกต้องกลับมาเสมอ</p>
 </blockquote>
 <p>สุธีกับนัทใช้เทคนิคนี้ไป 2-3 วัน ค้นพบว่าผลลัพธ์เป็นที่น่าพอใจมาก บริษัทสามารถรักษาคุณสมบัติ Consistency กับ Availability ได้ตามที่โฆษณาไว้กับลูกค้า</p>
-<h1 id=เหตเกดเมอนทไปข>เหตุเกิดเมื่อนัทไปขี้</h1>
+<h1 id="เหตเกดเมอนทไปข">เหตุเกิดเมื่อนัทไปขี้</h1>
 <p>เหตุเกิดเมื่อวันหนึ่ง นัทปวดท้องกระทันหัน เลยเดินไปขี้</p>
 <p>แต่นัทเป็นคนที่รับผิดชอบงาน นัทไม่ได้ไปขี้เปล่าๆ นัทเอาโทรศัพท์ไปด้วย และให้บริการลูกค้าขณะกำลังขี้อยู่นี่แหละ</p>
 <p>ระหว่างนั้นเอง สุธีได้รับโทรศัพท์จากลูกค้าอีกคน ให้จำข้อมูลใหม่</p>
-<p>ระหว่างที่กำลังคุยกับลูกค้าอยู่ สุธีได้ค้นพบปัญหาอันยิ่งใหญ่&mldr;</p>
+<p>ระหว่างที่กำลังคุยกับลูกค้าอยู่ สุธีได้ค้นพบปัญหาอันยิ่งใหญ่&hellip;</p>
 <ol>
 <li>
-<p>หากสุธีตกลงจำข้อมูลนี้ สุธีต้องรอให้นัทกลับมาจากห้องน้ำก่อนที่จะได้จำข้อมูลนี้ เพราะในช่วงเวลาที่รอนัทขี้เสร็จ หากลูกค้าโทรมา แล้วเครื่องตอบโทรศัพท์โอนสายไปให้นัท นัทจะไม่มีข้อมูลของลูกค้าคนนี้ ทำให้เกิดปัญหา Consistency แบบคราวที่แล้ว</p>
+<p>หากสุธีตกลงจำข้อมูลนี้ สุธีต้องรอให้นัทกลับมาจากห้องน้ำก่อนที่จะได้จำข้อมูลนี้    เพราะในช่วงเวลาที่รอนัทขี้เสร็จ หากลูกค้าโทรมา แล้วเครื่องตอบโทรศัพท์โอนสายไปให้นัท นัทจะไม่มีข้อมูลของลูกค้าคนนี้ ทำให้เกิดปัญหา Consistency แบบคราวที่แล้ว</p>
 </li>
 <li>
 <p>อีกทางเลือกหนึ่ง คือสุธีเลือกที่จะรักษา Consistency เป็นหลัก จึงบอกให้ลูกค้าโทรกลับมาทีหลัง เพราะพนักงานขี้อยู่ ยังจำไม่ได้ แต่หากเลือกทางนี้ สุธีจะผิดสัญญาเรื่อง Availability ทันที</p>
@@ -225,18 +281,18 @@
 </blockquote>
 <p>ในเคสนี้ สุธีตัดสินใจที่จะเลือก Availability ก่อน</p>
 <p>โชคดีที่คราวนี้นัทขี้ไม่นาน กลับมาจำข้อมูลใหม่ทันก่อนลูกค้าคนนั้นโทรมาหาอีกครั้ง</p>
-<p>แต่นั่นก็ทำให้สุธีค้นพบว่า เค้าไม่สามารถให้บริการที่มีทั้ง Consistency และ Availability ได้&mldr;</p>
+<p>แต่นั่นก็ทำให้สุธีค้นพบว่า เค้าไม่สามารถให้บริการที่มีทั้ง Consistency และ Availability ได้&hellip;</p>
 <p>หากนัทเดินไปขี้ !!</p>
-<h1 id=วกกลบมาท-cap-theorem>วกกลับมาที่ CAP Theorem</h1>
+<h1 id="วกกลบมาท-cap-theorem">วกกลับมาที่ CAP Theorem</h1>
 <p>เหตุการ &ldquo;นัทไปขี้&rdquo; นั้นเชื่อมโยงกับตัว &ldquo;P&rdquo; ใน CAP Theorem ที่เรียกว่า Partition Tolerant</p>
 <p>Partition Tolerant หมายความว่า ระบบยังทำงานได้ แม้ว่าแต่ละเครื่องใน Distrubuted System จะไม่สามารถติดต่อกันได้</p>
 <p>ในกรณีข้างต้น หากบริษัทสุธีการจำต้องการจะมี Partition Tolerant สุธีจะต้องหาวิธีให้บริการลูกค้า ในช่วงเวลาที่สุธีกันนัทไม่สามารถติดต่อสื่อสารกันได้</p>
-<p>คอมมอนเซนส์ เราพอจะเห็นแล้วว่ามันเป็นไปไม่ได้ (มี <a href=https://mwhittaker.github.io/blog/an_illustrated_proof_of_the_cap_theorem/>Proof ด้วย Contradiction</a> หากใครสนใจ)</p>
+<p>คอมมอนเซนส์ เราพอจะเห็นแล้วว่ามันเป็นไปไม่ได้  (มี <a href="https://mwhittaker.github.io/blog/an_illustrated_proof_of_the_cap_theorem/">Proof ด้วย Contradiction</a> หากใครสนใจ)</p>
 <p>CAP Theorem จึงกล่าวไว้ว่า เราเลือกคุณสมบัติได้แค่ 2 ใน 3 อย่าง</p>
-<p>การที่นัทต้องไปขี้นั้นเป็นเรื่องที่เลี่ยงไม่ได้ เหมือนกับระบบจริง ที่ Network นั้นไม่ Reliable เราไม่มีทางการันตีได้ว่า ข้อมูลที่ส่งผ่านเน็ตเวิร์คจากเครื่องสองเครื่องจะไปถึงกันได้ตลอด ข้อมูลอาจจะหล่นหายกลางทาง</p>
+<p>การที่นัทต้องไปขี้นั้นเป็นเรื่องที่เลี่ยงไม่ได้ เหมือนกับระบบจริง ที่ Network นั้นไม่ Reliable เราไม่มีทางการันตีได้ว่า  ข้อมูลที่ส่งผ่านเน็ตเวิร์คจากเครื่องสองเครื่องจะไปถึงกันได้ตลอด ข้อมูลอาจจะหล่นหายกลางทาง</p>
 <p>จุดนี้นี่เอง ที่ทำให้แนวคิดเรื่อง CAP Theorem มีความสำคัญต่อการออกแบบ Distributed System มาก</p>
 <p>เพราะเราไม่มีทางที่จะได้ Consistency กับ Availability พร้อมกัน 100% ได้</p>
-<h1 id=แลวจะเลอก-consistency-หรอ-availability>แล้วจะเลือก Consistency หรือ Availability?</h1>
+<h1 id="แลวจะเลอก-consistency-หรอ-availability">แล้วจะเลือก Consistency หรือ Availability?</h1>
 <p>เนื่องจากเราไม่ได้อยู่ในโลกที่มีแค่ขาวกับดำ ในทางปฏิบัติ เราสามารถต่อรอง Requirement ของระบบได้</p>
 <p>ในกรณีนี้ สุธีสามารถเขียนโน้ตข้อมูลใหม่ไปแปะไว้ที่โต้ะทำงานนัท และตกลงกันว่า หากนัทต้องเดินไปทำอะไรอย่างอื่น เวลากลับมา ให้อ่านโน้ตนี้เพื่อให้ทำการจำเป็นอย่างแรก</p>
 <p>เทคนิคนี้เรียกว่า Asynchronous Replication คือการส่งต่อข้อมูลโดยไม่การันตีว่าเมื่อไรข้อมูลจะถึงเมื่อไร แต่ยังไงก็จะถึงแน่นอน เพราะโน้ตบนโต้ะนัทไม่หายไปไหน</p>
@@ -245,7 +301,7 @@
 <p>การลดเงื่อนไขให้เป็น Eventual Consistency ถือว่าดีมากในกรณีนี้ เพราะลูกค้าส่วนใหญ่ของสุธีไม่โทรกลับมาใน 10 นาทีแน่นอน ทำให้สุธีได้ทั้ง (A)vailability, (P)artition Tolerant, และเกือบจะได้ (C)onsistency</p>
 <p>กลับมามองที่ระบบคอมพิวเตอร์ ถ้าเรามั่นใจว่าจะไม่มีการ Read หลัง Write ทันทีทันใด การยอมใช้ Eventual Consistency จะเป็น Trade-off ที่ดีมาก (เช่น โพสต์ฟีดในเฟสบุ้ค ถ้าช้าไปวินึงก็ไม่เป็นไร)</p>
 <p>ในทางตรงกันข้าม หากเป็นระบบที่การ Read หลัง Write ทันทีเกิดขึ้นได้ และความแม่นยำของข้อมูลสำคัญมาก แล้วเราไม่สามารถการันตีได้ว่า Request ถัดไปที่ Read จะไปลงที่เซอร์เวอร์เดิมที่เก็บข้อมูลไว้ เราอาจจะต้องเลือก Consistency ก่อน</p>
-<h1 id=หากยอมเสย-response-time-แทนละ>หากยอมเสีย Response Time แทนล่ะ?</h1>
+<h1 id="หากยอมเสย-response-time-แทนละ">หากยอมเสีย Response Time แทนล่ะ?</h1>
 <p>ลองคิดในอีกมุมหนึ่ง เราอาจจะเลือก Trade-off ตัว Response Time แทน</p>
 <p>อย่างในตัวอย่างข้างต้น สุธีสามารถให้ลูกค้ารอสาย 10 นาที จนกระทั่งนัทขี้เสร็จและกลับมาจำ จึงค่อยตอบกลับลูกค้าว่าจำเสร็จแล้ว</p>
 <p>วิธีนี้ทำให้ลูกค้าต้องรอนานขึ้น (Response Time ช้าลง) แต่การันตีได้ว่ามี Consistency แน่นอน และ Availability ด้วย แค่ช้า(มากๆ)เท่านั้น</p>
@@ -254,106 +310,166 @@
 <li>สุธีจะไม่สามารถรับสายใหม่ได้ ต้องรอจนนัทขี้เสร็จ</li>
 <li>หากนัทท้องเสีย เข้าห้องน้ำนาน (หรือท้องร่วง ต้องไปโรงพยาบาลต่อ) ลูกค้าอาจจะได้รอหลายชั่วโมง</li>
 </ul>
-<p>หากเทียบกับระบบคอมพิวเตอร์ คือหลังจากรับ Request มาแล้ว ยังไม่ตอบกลับจนกว่าจะติดต่ออีกเครื่องได้ (รอให้ Network กลับมาทำงานตามปกติ โดยการทำ Retry ไปเรื่อยๆ)</p>
+<p>หากเทียบกับระบบคอมพิวเตอร์ คือหลังจากรับ Request มาแล้ว ยังไม่ตอบกลับจนกว่าจะติดต่ออีกเครื่องได้  (รอให้ Network กลับมาทำงานตามปกติ โดยการทำ Retry ไปเรื่อยๆ)</p>
 <p>ซึ่งนั่นทำให้เสียประโยชน์ในการ Scale ที่เราควรจะได้จากคอมพิวเตอร์อีกหนึ่งเครื่องไป</p>
 <p>และระบบจะไม่สามารถทำงานได้ หากเกิด Partitioning ขึ้น (Network พังนานๆ, หรืออีกเครื่องเกิดล่มไปชั่วคราว)</p>
 <p>วิธีนี้ เราก็คงได้แต่ภาวนาว่าจะไม่ให้ Partition เกิดขึ้น หรือสละ P เพื่อให้ได้ C กับ A นั่นเอง</p>
-<h1 id=สรป>สรุป</h1>
+<h1 id="สรป">สรุป</h1>
 <p>เรายกตัวอย่าง Distributed System ทีมีเครื่องอยู่สองเครื่อง (สุธีกับนัท) และแสดงให้เห็นว่า เราไม่สามารถจะได้ Consistency, Availability, และ Partition Tolerant พร้อมๆกันได้</p>
 <p>ซึ่งนี่คือสิ่งที่ CAP Theorem บอกนั่นเอง</p>
 <p>ในทางปฏิบัติ เราไม่จำเป็นต้องเลือกขาวหรือดำ เราสามารถเลือกให้ระบบมี Availability และมี Eventual Consistency ได้ คือ ผู้ใช้ต้องรอสักพักเพื่อให้ระบบกระจายข้อมูลให้ทั่วถึง เพื่อจะได้ Consistency</p>
-<p>ดังนั้น เราต้องเข้าใจ Requirement ของระบบให้ดี ว่ายอมรับดีเลย์ในการ Consistency ได้แค่ไหน หรือการยอมเสีย Availability ได้ไหม</p>
+<p>ดังนั้น เราต้องเข้าใจ Requirement ของระบบให้ดี ว่ายอมรับดีเลย์ในการ Consistency ได้แค่ไหน  หรือการยอมเสีย Availability ได้ไหม</p>
 <p>หรือหากทั้งสองอย่างสำคัญ เราก็ต้องหาวิธีที่ทำให้ไม่เกิด Partitioning ขึ้นได้</p>
 <blockquote>
 <p>แต่คุณจะหวังให้ Network เสถียรตลอดเวลา หรือเครื่องอีกเครื่องไม่ล่มเลยไม่ได้หรอก
-<br>
-<br>
+<br />
+<br />
 หรือคุณห้ามนัทไม่ให้ขี้ได้ ?!</p>
 </blockquote>
-<h1 id=reference>Reference:</h1>
+<h1 id="reference">Reference:</h1>
 <ul>
-<li>บล็อคที่ผมใช้มาเป็นไอเดียในการอธิบาย <a href=http://ksat.me/a-plain-english-introduction-to-cap-theorem/>http://ksat.me/a-plain-english-introduction-to-cap-theorem/</a></li>
-<li>Proof ด้วย Contradiction <a href=https://mwhittaker.github.io/blog/an_illustrated_proof_of_the_cap_theorem/>https://mwhittaker.github.io/blog/an_illustrated_proof_of_the_cap_theorem/</a></li>
+<li>บล็อคที่ผมใช้มาเป็นไอเดียในการอธิบาย <a href="http://ksat.me/a-plain-english-introduction-to-cap-theorem/">http://ksat.me/a-plain-english-introduction-to-cap-theorem/</a></li>
+<li>Proof ด้วย Contradiction <a href="https://mwhittaker.github.io/blog/an_illustrated_proof_of_the_cap_theorem/">https://mwhittaker.github.io/blog/an_illustrated_proof_of_the_cap_theorem/</a></li>
 </ul>
-<h1 id=acknowledgement>Acknowledgement</h1>
+<h1 id="acknowledgement">Acknowledgement</h1>
 <p>บล็อคนี้ได้ผ่านการรีวิวจากเพื่อนนัทแล้ว ผู้เขียนขอขอบคุณเพื่อนรักที่อนุญาติให้ใช้ชื่อนี้ และขอชี้แจงว่า นัทในเรื่องเป็นตัวละครสมมติ ไม่เกี่ยวกับบุคคลจริงใดๆทั้งสิ้น</p>
-<div class=fb-page data-href=https://www.facebook.com/notaboutcode/ data-tabs data-small-header=false data-adapt-container-width=true data-hide-cover=false data-show-facepile=true>
-<blockquote cite=https://www.facebook.com/notaboutcode/ class=fb-xfbml-parse-ignore>
-<a href=https://www.facebook.com/notaboutcode/>Not about code</a>
-</blockquote>
+
+
+      
+      <div  class="fb-page"
+            data-href="https://www.facebook.com/notaboutcode/"
+            data-tabs=""
+            data-small-header="false"
+            data-adapt-container-width="true"
+            data-hide-cover="false"
+            data-show-facepile="true">
+
+            <blockquote cite="https://www.facebook.com/notaboutcode/" class="fb-xfbml-parse-ignore">
+              <a href="https://www.facebook.com/notaboutcode/">Not about code</a>
+            </blockquote>
+      </div>
+
+    </div>
+
+    
+    <div id="fb-root"></div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content">ijemmy</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content">
+        2018-01-07
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
 </div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/distributed-system/">distributed system</a>
+          <a href="/tags/design/">design</a>
+          </div>
+      <div class="fb-comments" data-numposts="5"></div>
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/18-test-properties/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">คุณสมบัติของเทสต์ในการกำหนด Testing Strategy</span>
+            <span class="prev-text nav-mobile"></span>
+          </a>
+        <a class="next" href="/post/16-idempotent/">
+            <span class="next-text nav-default">การออกแบบ Service API ให้เป็น Idempotent</span>
+            <span class="next-text nav-mobile"></span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://www.facebook.com/notaboutcode/" class="iconfont icon-facebook" title="facebook"></a>
+  <a href="https://www.notaboutcode.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-<div id=fb-root></div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span class=item-title></span>
-<span class=item-content>ijemmy</span>
-</p>
-<p class=copyright-item>
-<span class=item-title></span>
-<span class=item-content>
-2018-01-07
-</span>
-</p>
-<p class=copyright-item>
-<span class=item-title></span>
-<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
-</p>
+
+<div class="copyright">
+  <span class="power-by">
+    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+     - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+  </span>
 </div>
-<footer class=post-footer>
-<div class=post-tags>
-<a href=/tags/distributed-system/>distributed system</a>
-<a href=/tags/design/>design</a>
-</div>
-<div class=fb-comments data-numposts=5></div>
-<nav class=post-nav>
-<a class=prev href=/post/18-test-properties/>
-<i class="iconfont icon-left"></i>
-<span class="prev-text nav-default">คุณสมบัติของเทสต์ในการกำหนด Testing Strategy</span>
-<span class="prev-text nav-mobile"></span>
-</a>
-<a class=next href=/post/16-idempotent/>
-<span class="next-text nav-default">การออกแบบ Service API ให้เป็น Idempotent</span>
-<span class="next-text nav-mobile"></span>
-<i class="iconfont icon-right"></i>
-</a>
-</nav>
-</footer>
-</article>
-</div>
-</div>
-</main>
-<footer id=footer class=footer>
-<div class=social-links>
-<a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
-<a href=https://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
-</div>
-<div class=copyright>
-<span class=power-by>
-%!(EXTRA string=<a class=hexo-link href=https://gohugo.io>Hugo</a>)
-</span>
-<span class=division>|</span>
-<span class=theme-info>
--
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
-</span>
-<span class=copyright-year>
-&copy;
-2017 -
-2022<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
-</span>
-</div>
-</footer>
-<div class=back-to-top id=back-to-top>
-<i class="iconfont icon-up"></i>
-</div>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
-<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
-<script async src=https://www.google-analytics.com/analytics.js></script>
-<script>(function(b,c,d){var a,e=b.getElementsByTagName(c)[0];if(b.getElementById(d))return;a=b.createElement(c),a.id=d,a.src='https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676',e.parentNode.insertBefore(a,e)})(document,'script','facebook-jssdk')</script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-108239205-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 </body>
 </html>

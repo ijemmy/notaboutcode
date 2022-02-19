@@ -1,151 +1,207 @@
-<!doctype html><html lang=th>
+<!DOCTYPE html>
+<html lang="th">
 <head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>มาทำความรู้จักกับ Serverless กัน - Not About Code - Technical Leadership</title>
-<meta name=renderer content="webkit">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta http-equiv=cache-control content="no-transform">
-<meta http-equiv=cache-control content="no-siteapp">
-<meta name=theme-color content="#f8f5ec">
-<meta name=msapplication-navbutton-color content="#f8f5ec">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
-<meta name=author content="ijemmy"><meta name=description content="ช่วงสองปีที่ผ่านมา แนวคิดหนึ่งที่ผมจับตาดูอยู่คือเรื่องของ Serverless
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>มาทำความรู้จักกับ Serverless กัน - Not About Code - Technical Leadership</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ijemmy" /><meta name="description" content="ช่วงสองปีที่ผ่านมา แนวคิดหนึ่งที่ผมจับตาดูอยู่คือเรื่องของ Serverless
 ตามชื่อเลย Serverless คือไม่มีเซอร์เวอร์ ซึ่งจริงๆแล้วเซอร์เวอร์ก็ไม่ได้หายไปไหน เพียงแต่ทีมพัฒนาไม่ต้องสนใจมันเหมือนแต่ก่อนแล้ว
 แนวคิดเรื่องนี้ยังถือว่าค่อนข้างใหม่ เมื่อสองปีที่แล้วผมทดลองใช้ครั้งแรกเพื่อดูว่าเอาไปใช้ทำโปรเจ็คจริงได้รึเปล่า ก็ค้นพบว่าพวก Tool และ Practices ต่างๆยังไม่พร้อมเท่าไร
 ผ่านมาสองปี รู้สึกว่าเริ่มเข้าที่เข้าทางมากขึ้น จึงพึ่งได้เอามาใช้ทำโปรเจ็คจริง เลยเอามาเล่าสู่กันฟังครับ เผื่อใครอยากจะลองเอาไปใช้กัน
-"><meta name=keywords content="Hugo,theme,even">
-<meta name=generator content="Hugo 0.89.4 with theme even">
-<link rel=canonical href=https://www.notaboutcode.com/post/26-serverless-architecture/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=manifest href=/manifest.json>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
-<link rel=stylesheet href=/css/custom.css>
-<meta property="og:title" content="มาทำความรู้จักกับ Serverless กัน">
+" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://www.notaboutcode.com/post/26-serverless-architecture/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/custom.css">
+
+
+<meta property="og:title" content="มาทำความรู้จักกับ Serverless กัน" />
 <meta property="og:description" content="
 ช่วงสองปีที่ผ่านมา แนวคิดหนึ่งที่ผมจับตาดูอยู่คือเรื่องของ Serverless
 ตามชื่อเลย Serverless คือไม่มีเซอร์เวอร์ ซึ่งจริงๆแล้วเซอร์เวอร์ก็ไม่ได้หายไปไหน เพียงแต่ทีมพัฒนาไม่ต้องสนใจมันเหมือนแต่ก่อนแล้ว
 แนวคิดเรื่องนี้ยังถือว่าค่อนข้างใหม่ เมื่อสองปีที่แล้วผมทดลองใช้ครั้งแรกเพื่อดูว่าเอาไปใช้ทำโปรเจ็คจริงได้รึเปล่า ก็ค้นพบว่าพวก Tool และ Practices ต่างๆยังไม่พร้อมเท่าไร
-ผ่านมาสองปี รู้สึกว่าเริ่มเข้าที่เข้าทางมากขึ้น จึงพึ่งได้เอามาใช้ทำโปรเจ็คจริง เลยเอามาเล่าสู่กันฟังครับ เผื่อใครอยากจะลองเอาไปใช้กัน">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://www.notaboutcode.com/post/26-serverless-architecture/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2018-09-01T12:04:02+07:00">
-<meta property="article:modified_time" content="2018-09-01T12:04:02+07:00">
-<meta itemprop=name content="มาทำความรู้จักกับ Serverless กัน">
-<meta itemprop=description content="
+ผ่านมาสองปี รู้สึกว่าเริ่มเข้าที่เข้าทางมากขึ้น จึงพึ่งได้เอามาใช้ทำโปรเจ็คจริง เลยเอามาเล่าสู่กันฟังครับ เผื่อใครอยากจะลองเอาไปใช้กัน" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.notaboutcode.com/post/26-serverless-architecture/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-09-01T12:04:02+07:00" />
+<meta property="article:modified_time" content="2018-09-01T12:04:02+07:00" />
+
+<meta itemprop="name" content="มาทำความรู้จักกับ Serverless กัน">
+<meta itemprop="description" content="
 ช่วงสองปีที่ผ่านมา แนวคิดหนึ่งที่ผมจับตาดูอยู่คือเรื่องของ Serverless
 ตามชื่อเลย Serverless คือไม่มีเซอร์เวอร์ ซึ่งจริงๆแล้วเซอร์เวอร์ก็ไม่ได้หายไปไหน เพียงแต่ทีมพัฒนาไม่ต้องสนใจมันเหมือนแต่ก่อนแล้ว
 แนวคิดเรื่องนี้ยังถือว่าค่อนข้างใหม่ เมื่อสองปีที่แล้วผมทดลองใช้ครั้งแรกเพื่อดูว่าเอาไปใช้ทำโปรเจ็คจริงได้รึเปล่า ก็ค้นพบว่าพวก Tool และ Practices ต่างๆยังไม่พร้อมเท่าไร
-ผ่านมาสองปี รู้สึกว่าเริ่มเข้าที่เข้าทางมากขึ้น จึงพึ่งได้เอามาใช้ทำโปรเจ็คจริง เลยเอามาเล่าสู่กันฟังครับ เผื่อใครอยากจะลองเอาไปใช้กัน"><meta itemprop=datePublished content="2018-09-01T12:04:02+07:00">
-<meta itemprop=dateModified content="2018-09-01T12:04:02+07:00">
-<meta itemprop=wordCount content="774">
-<meta itemprop=keywords content="Architecture,Serverless,"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="มาทำความรู้จักกับ Serverless กัน">
-<meta name=twitter:description content="
+ผ่านมาสองปี รู้สึกว่าเริ่มเข้าที่เข้าทางมากขึ้น จึงพึ่งได้เอามาใช้ทำโปรเจ็คจริง เลยเอามาเล่าสู่กันฟังครับ เผื่อใครอยากจะลองเอาไปใช้กัน"><meta itemprop="datePublished" content="2018-09-01T12:04:02+07:00" />
+<meta itemprop="dateModified" content="2018-09-01T12:04:02+07:00" />
+<meta itemprop="wordCount" content="774">
+<meta itemprop="keywords" content="Architecture,Serverless," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="มาทำความรู้จักกับ Serverless กัน"/>
+<meta name="twitter:description" content="
 ช่วงสองปีที่ผ่านมา แนวคิดหนึ่งที่ผมจับตาดูอยู่คือเรื่องของ Serverless
 ตามชื่อเลย Serverless คือไม่มีเซอร์เวอร์ ซึ่งจริงๆแล้วเซอร์เวอร์ก็ไม่ได้หายไปไหน เพียงแต่ทีมพัฒนาไม่ต้องสนใจมันเหมือนแต่ก่อนแล้ว
 แนวคิดเรื่องนี้ยังถือว่าค่อนข้างใหม่ เมื่อสองปีที่แล้วผมทดลองใช้ครั้งแรกเพื่อดูว่าเอาไปใช้ทำโปรเจ็คจริงได้รึเปล่า ก็ค้นพบว่าพวก Tool และ Practices ต่างๆยังไม่พร้อมเท่าไร
-ผ่านมาสองปี รู้สึกว่าเริ่มเข้าที่เข้าทางมากขึ้น จึงพึ่งได้เอามาใช้ทำโปรเจ็คจริง เลยเอามาเล่าสู่กันฟังครับ เผื่อใครอยากจะลองเอาไปใช้กัน"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
-<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+ผ่านมาสองปี รู้สึกว่าเริ่มเข้าที่เข้าทางมากขึ้น จึงพึ่งได้เอามาใช้ทำโปรเจ็คจริง เลยเอามาเล่าสู่กันฟังครับ เผื่อใครอยากจะลองเอาไปใช้กัน"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
 </head>
 <body>
-<div id=mobile-navbar class=mobile-navbar>
-<div class=mobile-header-logo>
-<a href=/ class=logo>Not About Code</a>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Not About Code</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
-<div class=mobile-navbar-icon>
-<span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-<nav id=mobile-menu class="mobile-menu slideout-menu">
-<ul class=mobile-menu-list>
-<a href=/>
-<li class=mobile-menu-item>Home</li>
-</a><a href=/post/>
-<li class=mobile-menu-item>Archives</li>
-</a><a href=/tags/>
-<li class=mobile-menu-item>Tags</li>
-</a><a href=/categories/>
-<li class=mobile-menu-item>Categories</li>
-</a><a href=/about/>
-<li class=mobile-menu-item>About</li>
-</a>
-</ul>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
 </nav>
-<div class=container id=mobile-panel>
-<header id=header class=header>
-<div class=logo-wrapper>
-<a href=/ class=logo>Not About Code</a>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Not About Code</a>
 </div>
-<nav class=site-navbar>
-<ul id=menu class=menu>
-<li class=menu-item>
-<a class=menu-item-link href=/>Home</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/post/>Archives</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/tags/>Tags</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/categories/>Categories</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/about/>About</a>
-</li>
-</ul>
-<a href=https://webring.wonderful.software#notaboutcode.com title=วงแหวนเว็บ>
-<img alt=วงแหวนเว็บ width=32 height=32 src=https://webring.wonderful.software/webring.black.svg>
-</a>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+
+  
+  <a href="https://webring.wonderful.software#notaboutcode.com" title="วงแหวนเว็บ">
+    <img
+        alt="วงแหวนเว็บ"
+        width="32"
+        height="32"
+        src="https://webring.wonderful.software/webring.black.svg"
+    />
+  </a>
 </nav>
-</header>
-<main id=main class=main>
-<div class=content-wrapper>
-<div id=content class=content>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title>มาทำความรู้จักกับ Serverless กัน</h1>
-<div class=post-meta>
-<span class=post-time> 2018-09-01 </span>
-<div class=post-category>
-<a href=/categories/software-engineering/> Software Engineering </a>
-</div>
-</div>
-</header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title></h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#กอนจะม-serverless>ก่อนจะมี Serverless</a></li>
-<li><a href=#abstraction-ขนถดไปคอ-serverless>Abstraction ขั้นถัดไปคือ Serverless</a></li>
-<li><a href=#ขางใน-serverless>ข้างใน Serverless</a></li>
-<li><a href=#นยามของ-serverless>นิยามของ Serverless</a></li>
-<li><a href=#ประโยชนหลกๆ>ประโยชน์หลักๆ</a>
-<ul>
-<li><a href=#1-เพมความเรวในการพฒนา><strong>1. เพิ่มความเร็วในการพัฒนา</strong></a></li>
-<li><a href=#2-ลดคาใชจาย><strong>2. ลดค่าใช้จ่าย</strong></a></li>
-<li><a href=#3-ลดความรกบทรพยากรมนษยทจำเปน><strong>3. ลดความรู้กับทรัพยากรมนุษย์ที่จำเป็น</strong></a></li>
-</ul>
-</li>
-<li><a href=#แต-serverless-ไมใชยาวเศษสำหรบทกปญหา>แต่ Serverless ไม่ใช่ยาวิเศษสำหรับทุกปัญหา</a></li>
-<li><a href=#และการเขยนโคดกอาจจะเปลยนไป>และการเขียนโค้ดก็อาจจะเปลี่ยนไป</a></li>
-<li><a href=#แลวอนาคตละ>แล้วอนาคตล่ะ?</a></li>
-</ul>
+
+
+
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">มาทำความรู้จักกับ Serverless กัน</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-09-01 </span>
+        <div class="post-category">
+            <a href="/categories/software-engineering/"> Software Engineering </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title"></h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#กอนจะม-serverless">ก่อนจะมี Serverless</a></li>
+    <li><a href="#abstraction-ขนถดไปคอ-serverless">Abstraction ขั้นถัดไปคือ Serverless</a></li>
+    <li><a href="#ขางใน-serverless">ข้างใน Serverless</a></li>
+    <li><a href="#นยามของ-serverless">นิยามของ Serverless</a></li>
+    <li><a href="#ประโยชนหลกๆ">ประโยชน์หลักๆ</a>
+      <ul>
+        <li><a href="#1-เพมความเรวในการพฒนา"><strong>1. เพิ่มความเร็วในการพัฒนา</strong></a></li>
+        <li><a href="#2-ลดคาใชจาย"><strong>2. ลดค่าใช้จ่าย</strong></a></li>
+        <li><a href="#3-ลดความรกบทรพยากรมนษยทจำเปน"><strong>3. ลดความรู้กับทรัพยากรมนุษย์ที่จำเป็น</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#แต-serverless-ไมใชยาวเศษสำหรบทกปญหา">แต่ Serverless ไม่ใช่ยาวิเศษสำหรับทุกปัญหา</a></li>
+    <li><a href="#และการเขยนโคดกอาจจะเปลยนไป">และการเขียนโค้ดก็อาจจะเปลี่ยนไป</a></li>
+    <li><a href="#แลวอนาคตละ">แล้วอนาคตล่ะ?</a></li>
+  </ul>
 </nav>
+  </div>
 </div>
-</div>
-<div class=post-content>
-<p><img src=/img/covers/aurora-01.jpg alt="Photo by Nicolas J Leclercq on Unsplash"></p>
+    <div class="post-content">
+      <p><img src="/img/covers/aurora-01.jpg" alt="Photo by Nicolas J Leclercq on Unsplash"></p>
 <p>ช่วงสองปีที่ผ่านมา แนวคิดหนึ่งที่ผมจับตาดูอยู่คือเรื่องของ Serverless</p>
 <p>ตามชื่อเลย Serverless คือไม่มีเซอร์เวอร์ ซึ่งจริงๆแล้วเซอร์เวอร์ก็ไม่ได้หายไปไหน เพียงแต่ทีมพัฒนาไม่ต้องสนใจมันเหมือนแต่ก่อนแล้ว</p>
 <p>แนวคิดเรื่องนี้ยังถือว่าค่อนข้างใหม่ เมื่อสองปีที่แล้วผมทดลองใช้ครั้งแรกเพื่อดูว่าเอาไปใช้ทำโปรเจ็คจริงได้รึเปล่า ก็ค้นพบว่าพวก Tool และ Practices ต่างๆยังไม่พร้อมเท่าไร</p>
 <p>ผ่านมาสองปี รู้สึกว่าเริ่มเข้าที่เข้าทางมากขึ้น จึงพึ่งได้เอามาใช้ทำโปรเจ็คจริง เลยเอามาเล่าสู่กันฟังครับ เผื่อใครอยากจะลองเอาไปใช้กัน</p>
-<h1 id=กอนจะม-serverless>ก่อนจะมี Serverless</h1>
+<h1 id="กอนจะม-serverless">ก่อนจะมี Serverless</h1>
 <p>ก่อนจะคุยเรื่อง Serverless ผมขอเล่าความเป็นมาก่อน</p>
 <p>ในโลกของ Software Engineering เราทำการ Abstraction กันอยู่ตลอดเวลา ตัวอย่างเช่นเวลาเราเรียกใช้ฟังก์ชั่นใน API เราไม่รู้ว่าข้างในมันทำงานอย่างไร</p>
 <p>ในฝั่งของ Infrastructure ก็คล้ายๆกัน</p>
@@ -154,7 +210,7 @@
 <p>แต่หากบริษัทต้องการระบบที่มี High Availability ก็จะต้องคิดถึงกรณีที่ Data Center เกิดมีปัญหาขึ้นมา (ไฟดับ แผ่นดินไหว ไฟไหม้ ฯลฯ) กรณีนี้ บริษัทต้องมีมีี Data Center มากกว่าหนึ่งที่ในระยะที่ห่างกันพอประมาณ หากเกิดเหตุไม่คาดฝันขึ้น อีก Data Center ก็ต้องสามารถทำงานได้</p>
 <p>รายละเอียดพวกนี้ ทำให้เวลาทีมพัฒนาขอเครื่อง กินเวลาเป็นหลายเดือนกว่าจะจัดซื้อ และติดตั้งใน Data Center เสร็จให้ทีมได้ใช้งานจริงๆ</p>
 <p>บางบริษัทก็จะวางแผนไว้ล่วงหน้า (Capacity Planning) มีการเผื่อเครื่องไว้ แต่ก็เป็นค่าใช้จ่ายที่ต้องมีเครื่องที่ไม่ได้ใช้งานไว้พร้อมอยู่เสมอ</p>
-<p>พอเกิดการทำ Virtualization ขึ้น ชีวิตก็สะดวกขึ้นสำหรับทั้งสองฝ่ายอีกนิด ฝั่งที่ดูแล Data Center ก็สามารถ"หั่น"เครื่องคอมพิวเตอร์เครื่องหนึ่ง มาเป็นเครื่องย่อยๆมาให้ทีมพัฒนาใช้ได้ มาเป็น Virtual Machine ไม่ต้องจัดการเป็นเครื่องๆเหมือนแต่ก่อน</p>
+<p>พอเกิดการทำ Virtualization ขึ้น ชีวิตก็สะดวกขึ้นสำหรับทั้งสองฝ่ายอีกนิด ฝั่งที่ดูแล Data Center ก็สามารถ&quot;หั่น&quot;เครื่องคอมพิวเตอร์เครื่องหนึ่ง มาเป็นเครื่องย่อยๆมาให้ทีมพัฒนาใช้ได้ มาเป็น Virtual Machine ไม่ต้องจัดการเป็นเครื่องๆเหมือนแต่ก่อน</p>
 <p>ทีมพัฒนาเองก็ไม่ต้องสนใจแล้วว่ามีเครื่องจริงๆรึเปล่า แค่ทดสอบดูว่าซอฟต์แวร์และ Configuration ต่างๆทำงานถูกต้องใน Virtual Machine ก็พอแล้ว</p>
 <p>แต่ก็ยังหนีการจัดการเครื่องและ Data Center ไม่ได้อยู่ดี</p>
 <p>ราว 10 ปีที่แล้ว เราเลยเริ่มมี Cloud Computing ขึ้น แทนที่จะต้องจัดการ Data Center เอง ก็โยนให้บริษัทที่เชี่ยวชาญทำไป บริษัทสามารถใช้ทรัพยากรไปกับงานอื่นๆแทน</p>
@@ -163,25 +219,25 @@
 <p>Cloud Computing ก็เริ่มกลายเป็น New Normal</p>
 <p>ถึงจุดนี้ เราอาจจะเซอร์เวอร์กลายสภาพไปใกล้เคียงกับ Commodity มากขึ้น</p>
 <p>หลังจากนั้น Cloud Computing ก็เริ่มขยายไปถึงพวก Managed Services ด้วย นอกจากไม่ต้องดูแลเครื่องจริงๆแล้ว พวก Storage, Database, Messaging queue, in-memory database หรือ Authentication System ที่ทุกระบบต้องใช้เหมือนกัน เราก็สามารถซื้อเอาได้ ถ้าใช้ค่า Default แล้วกดไม่กี่ปุ่ม สิบนาทีก็ได้มาใช้แล้ว</p>
-<p>ใครที่เคยเซ็ตพวก Services เหล่านี้กับมือเองจะเข้าใจว่ามันเป็นงานละเอียดมาก ถึงไม่ได้ยากขนาด Rocket Science แต่มันก็กินพลังงานเยอะ เสียเวลาและทรัพยากร(มนุษย์) ที่สามารถไปสร้างแอพพลิเคชั่นที่สร้างประโยชน์ให้กับผู้ใช้ได้จริงๆ</p>
+<p>ใครที่เคยเซ็ตพวก Services เหล่านี้กับมือเองจะเข้าใจว่ามันเป็นงานละเอียดมาก ถึงไม่ได้ยากขนาด Rocket Science แต่มันก็กินพลังงานเยอะ  เสียเวลาและทรัพยากร(มนุษย์) ที่สามารถไปสร้างแอพพลิเคชั่นที่สร้างประโยชน์ให้กับผู้ใช้ได้จริงๆ</p>
 <p>จะเห็นได้ว่า Abstraction ในแต่ละขั้น มีประโยชน์ต่อทีมพัฒนามาก ทำให้ทีมสามารถทำงานได้เร็วขึ้น เพราะ</p>
 <ol>
 <li>ความรู้ที่ต้องใช้น้อยลง ไม่ต้องรู้ละเอียดทุกเรื่อง</li>
 <li>ปริมาณคนที่เกี่ยวข้องเพื่อจะสร้าง/ดูแลเซอร์เวอร์หรือพวกซอฟต์แวร์พื้นฐานลดลง พอปริมาณคนที่เกี่ยวข้องน้อย Overhead ในการสื่อสารและกระบวนการก็น้อยลง (ลองนึกว่าขอซื้อเครื่องทีต้องไปขอผ่านแผนกจัดซื้อ รออนุมัติกันยาวนาน)</li>
 </ol>
-<h1 id=abstraction-ขนถดไปคอ-serverless>Abstraction ขั้นถัดไปคือ Serverless</h1>
+<h1 id="abstraction-ขนถดไปคอ-serverless">Abstraction ขั้นถัดไปคือ Serverless</h1>
 <p>กลับมาที่เรื่องของ Serverless กัน</p>
 <p>ถ้าหากเราใช้ Cloud Computing เราก็ยังมี Virtual Machine อยู่ เรายังต้อง Monitor CPU, I/O หรือต้องมานั่ง Patch ตัวระบบ Operating System อยู่ดี</p>
 <p>หากต้องการให้ระบบของเรามี High Availability (ถ้ามีเครื่องพังไปบางเครื่อง ระบบยังทำงานได้) เราก็จะต้องมีเครื่องมือที่ใช้ในการทำ Self Healing หรือออกแบบ Architecture ให้มี Redundancy ในระดับหนึ่ง</p>
 <p>ถ้าต้องการให้ระบบเรามี Scalability เราก็ต้องมีเครื่องมือหรือสคริปต์ที่่ใช้ในการปรับจำนวนเครื่องขึ้นลง ตามปริมาณ Load ในระบบในขณะนั้นๆ</p>
 <p>จะเห็นได้ว่า ถึงแม้เราไม่ต้องกับยุ่งกับเครื่องที่จับต้องได้จริงๆ ทีมพัฒนายังต้องมีความเข้าใจในระดับที่ต่ำกว่า Application Layer ที่ค่อนข้างลึกอยู่</p>
 <p>ต้องรู้ว่า &ldquo;มันมีเครื่องจริงๆ&rdquo; อยู่ที่ไหนสักแห่ง และต้องจัดการกับมันให้ดี</p>
-<p>แต่ทว่า&mldr;</p>
+<p>แต่ทว่า&hellip;</p>
 <blockquote>
 <p>แท่น แทน แท๊น</p>
 </blockquote>
 <p>เรามีตัวเลือกของ Serverless แล้ว !!</p>
-<p>Serverless เป็นอีกขั้นหนึ่งของ Abstraction ที่จะมาช่วย"ซ่อน"เรื่องพวกนี้จากทีมพัฒนา</p>
+<p>Serverless เป็นอีกขั้นหนึ่งของ Abstraction ที่จะมาช่วย&quot;ซ่อน&quot;เรื่องพวกนี้จากทีมพัฒนา</p>
 <p>จริงๆชื่อนี้ค่อนข้างตลกนิดนึง เพราะตรงตัวคือ &ldquo;ไม่มีเซอร์เวอร์&rdquo; แต่ในทางปฏิบัติจริง เซอร์เวอร์นั้นก็ไม่ได้หายไปไหน เพียงแต่เราไม่ต้องคิดถึงมันมากเหมือนแต่ก่อน</p>
 <p>แต่แทนที่จะต้องคิดเรื่องต่างๆข้างบน ทีมพัฒนาแค่อัพโหลดโค้ดขึ้นไป ไม่ต้องสนใจว่ามันจะไปรันที่ไหน จะเสกลยังไง เรื่องพวกนี้ให้ Provider จัดการให้หมด</p>
 <p>โปรแกรมเมอร์ที่ไม่ถูกโรคกับเซอร์เวอร์แบบผมก็จะมีความสุขมาก เพราะสามารถเอาเวลาไปโฟกัสกับโค้ดและตัวแอพพลิเคชั่นได้มากขึ้น</p>
@@ -189,7 +245,7 @@
 <p>อะไรที่ลงจากเลเยอร์ของโค้ดลงไป ผมเคยทำพังมาหมด ไม่ใช่แค่คอนฟิค รัน rm -rf / ก็เคยพลาดมาแล้ว</p>
 </blockquote>
 <p>ส่วน Provider ก็คิดเงินตาม &ldquo;ปริมาณการคำนวน&rdquo; ซึ่งอาจจะเป็นปริมาณ RAM, CPU, และเวลาที่ใช้ในการทำงานของโปรแกรม แล้วแต่ Provider ที่ใช้</p>
-<h1 id=ขางใน-serverless>ข้างใน Serverless</h1>
+<h1 id="ขางใน-serverless">ข้างใน Serverless</h1>
 <p>ส่วนประกอบหลักๆของ Serverless Architecture มีอยู่สองส่วน</p>
 <ol>
 <li>Function-as-a-Services (FaaS) ส่วนนี้ทำหน้าที่รันโค้ดที่เราเขียนและอัพโหลดขึ้น ทาง Provider ก็จะจัดการดูแลเรื่อง Provision, Availability, Scaling ให้หมด</li>
@@ -204,8 +260,8 @@
 </ul>
 <p>กรณีนี้ Architecture ก็ไม่ได้ต่างไปจากปกติมาก แค่เราไม่ต้องดูแลเรื่องเซอร์เวอร์แล้ว ไม่ต้องมานั่งกังวลว่าโหลด CPU จะสูงไปรึเปล่า, Disk จะเต็มรึยัง, ถ้าคนใช้เยอะๆจะเสกลยังไง, แปะ Security Patch ใน OS ยัง, แล้วถ้าเครื่องที่รันอยู่เกิดพังไปสักเครื่องสองเครื่อง เราจะเรียกเครื่องใหม่ขึ้นมายังไง</p>
 <p>BaaS เองนี่มีหรือไม่มีเซอร์เวอร์ก็ใช้กันได้ ถ้าเทียบกัน Architecture ทั่วไปส่วนที่ใหม่ๆมากๆก็คือ FaaS</p>
-<h1 id=นยามของ-serverless>นิยามของ Serverless</h1>
-<p>คำว่า Serverless นั้นยังใหม่อยู่ นิยามก็ยังไม่ชัดเจนสำหรับหลายๆคน ผมจะใช้สรุปคุณลักษณะ 5 ข้อของ <a href=https://blog.symphonia.io/defining-serverless-part-1-704d72bc8a32>Mike Robert</a> แทน เพื่อให้เข้าใจคำนี้มากขึ้น</p>
+<h1 id="นยามของ-serverless">นิยามของ Serverless</h1>
+<p>คำว่า Serverless นั้นยังใหม่อยู่ นิยามก็ยังไม่ชัดเจนสำหรับหลายๆคน ผมจะใช้สรุปคุณลักษณะ 5 ข้อของ <a href="https://blog.symphonia.io/defining-serverless-part-1-704d72bc8a32">Mike Robert</a> แทน เพื่อให้เข้าใจคำนี้มากขึ้น</p>
 <ol>
 <li><strong>Requires no management of Server hosts or Server processes</strong> - อันนี้เป็นแก่นหลักเลย คือทีมพัฒนาไม่ต้องสนใจว่าโค้ดหรือเซอร์วิซจะรันอยู่บน Virtual Machine, Physical Machine ตัวไหน</li>
 <li><strong>Self auto-scales and auto-provisions, based on Load</strong> - นอกจากไม่ต้องคิดถึงเซอร์เวอร์แล้ว เราก็ไม่ต้องสนด้วยว่าเซอร์เวอร์จะถูกสร้างขึ้นมาอย่างไร เวลาที่คนใช้เยอะๆ ปริมาณเซอร์เวอร์จะปรับเปลี่ยนเพื่อรองรับ Load ได้เองโดยอัตโนมัติ</li>
@@ -213,118 +269,178 @@
 <li><strong>Has performance capabilities defined in terms other than host size/count</strong> - เวลาที่ต้องการใช้งานมากขึ้น เราไม่ได้ใช้วิธีการเพิ่มจำนวนเครื่อง แต่กำหนดเป็น &ldquo;ปริมาณการคำนวน&rdquo; แทน ในกรณีของ Managed Services ก็จะมีหน่วยอื่นที่ใช้วัดคำนวณการใช้งานแทน</li>
 <li><strong>Has implicit High Availability</strong> - โดยส่วนใหญ่ FaaS กับ BaaS จะมีการทำ Redundancy เพื่อให้ระบบมี High Availability โดยอัตโนมัติอยู่แล้ว พอเราใช้บริการเหล่านี้ เราก็จะได้คุณสมบัติเหล่านี้โดยอัตโนมัติ</li>
 </ol>
-<h1 id=ประโยชนหลกๆ>ประโยชน์หลักๆ</h1>
+<h1 id="ประโยชนหลกๆ">ประโยชน์หลักๆ</h1>
 <p>หลังจากทำความเข้าใจแล้ว ก็มาดูกันว่ามีประโยชน์อะไรบ้าง</p>
-<h2 id=1-เพมความเรวในการพฒนา><strong>1. เพิ่มความเร็วในการพัฒนา</strong></h2>
+<h2 id="1-เพมความเรวในการพฒนา"><strong>1. เพิ่มความเร็วในการพัฒนา</strong></h2>
 <p>ลองนึกภาพว่าคุณมีไอเดียแอพใหม่ที่จะมีมูลค่าเป็นร้อยล้านในอนาคตได้ คุณต้องอยากให้แอพนี้ถูกสร้างขึ้นและเข้าสู่ตลาดให้เร็วที่สุด จริงไหมครับ?</p>
 <p>แต่แทนที่เราจะได้ลงมือโค้ดเพื่อทำแอพนี้ทันที เราต้องใช้เวลาไปกับการสร้างเซอร์เวอร์ เซ็ตอัพพวก Middleware, Database และอะไรต่อมิอะไร สิ่งเหล่านี้กินเวลามาก หลังเซ็ตอัพเสร็จแล้วก็ต้องมาดูแล (maintain) ด้วย ดีไม่ดีต้องจ้างคนมาเพิ่มอีกคนเพื่อดูแลเรื่องพวกนี้โดยเฉพาะ</p>
-<p>แม้ใน Layer ของ Application ทีมก็ไม่ต้องโค้ดอะไรที่ไม่ได้เป็นคุณสมบัติหลัก เช่น User Management System, Data syncing พวกนี้ก็ใช้วิธีหันไปใช้ Managed Services (BaaS) เอาแทน นอกจากจะลดเวลาในการพัฒนาแล้ว ยังลดเวลาในการดูแล(เก็บบั้ค)ไปได้มากด้วย (User Management System ดีๆ ปลอดภัยๆ เขียนยากมาก)</p>
-<h2 id=2-ลดคาใชจาย><strong>2. ลดค่าใช้จ่าย</strong></h2>
+<p>แม้ใน Layer ของ Application  ทีมก็ไม่ต้องโค้ดอะไรที่ไม่ได้เป็นคุณสมบัติหลัก เช่น User Management System, Data syncing  พวกนี้ก็ใช้วิธีหันไปใช้ Managed Services (BaaS) เอาแทน นอกจากจะลดเวลาในการพัฒนาแล้ว ยังลดเวลาในการดูแล(เก็บบั้ค)ไปได้มากด้วย (User Management System ดีๆ ปลอดภัยๆ เขียนยากมาก)</p>
+<h2 id="2-ลดคาใชจาย"><strong>2. ลดค่าใช้จ่าย</strong></h2>
 <p>Serverless ได้ข้อดีของ Cloud Computing มาในด้านของการลด Upfront cost</p>
 <p>และเนื่องด้วยค่าใช้จ่ายคิดตามการใช้จริง เราก็ไม่ต้องเสียเงินตลอดเวลาที่มีการเปิดเครื่อง จ่ายเฉพาะตอนที่เครื่องมีการทำงานจริงเท่านั้น (นึกภาพพวกเซอร์เวอร์ที่เราใช้ใน Dev กับ Test Environment, หรือระบบที่คนใช้จะใช้เยอะมากแค่ในบางช่วงเวลา อันนี้ประหยัดเงินเยอะมาก)</p>
 <p>ในกรณีของ Managed Services ส่วนใหญ่ ค่าใช้จ่ายก็จะคิดตามการใช้งาน เช่น User Management System ก็อาจจะคิดตามจำนวนผู้ใช้หรือจำนวน API Call ทำให้ค่าใช้จ่ายช่วงแรกๆที่ยังมีผู้ใช้จำนวนน้อยๆนั้นต่ำกว่า</p>
 <p>อย่างไรก็ตาม ข้อนี้ไม่ได้เป็นจริง 100% ทุกกรณี ต้องคำนวนให้ดีๆว่าจะคุ้มจริงหรือเปล่า เพราะถ้าแอพพลิเคชั่นของเรามีการใช้งานสม่ำเสมอตลอดเวลา 24 ชั่วโมง ค่าใช้จ่ายอาจจะไม่ต่างกัน หรืออาจจะมากกว่าก็ได้ ถ้าเรากะจำนวนผู้ใช้คร่าวๆได้ (หรือมีระบบที่มีผู้ใช้อยู่แล้ว) การคำนวนค่าใช้จ่ายฝั่ง Serverless จะง่ายกว่ามาก ไม่ต้องมานั่งทำ Load Test ดูว่าเครื่องนึงรับได้เท่าไร ต้องใช้กี่เครื่อง</p>
 <p>แต่อีกมุมนึง ก็ต้องคำนวนด้วยว่า เราลดใช้จ่ายในด้านของจำนวนคนที่จะต้องดูแลเซอร์เวอร์พวกนี้</p>
-<h2 id=3-ลดความรกบทรพยากรมนษยทจำเปน><strong>3. ลดความรู้กับทรัพยากรมนุษย์ที่จำเป็น</strong></h2>
+<h2 id="3-ลดความรกบทรพยากรมนษยทจำเปน"><strong>3. ลดความรู้กับทรัพยากรมนุษย์ที่จำเป็น</strong></h2>
 <p>ในชีวิตการทำงาน เคยเห็นคนที่เซ็ต Nginx เป็น, เซ็ต Database เป็น, เซ็ต RabbitMQ เป็น, ใช้ Docker กับ k8s เป็น, แล้วยังเขียนโค้ดได้ด้วยกี่คนครับ?</p>
 <p>เรื่องพวกนี้ไม่ใช่เรื่องที่ยากสุดๆ ด้วยเซิร์ชเอ็นจินและ StackOverflow ถ้าใช้เวลาก็สามารถเรียนรู้และทำได้ แต่ก็ต้องเสียเวลาตามข้อที่ 1</p>
-<p>แต่ถ้าจะทำให้ได้แบบเป๊ะๆเลย Optimize ได้ Scale ได้ ส่วนใหญ่ก็ต้องเป็นคนที่มีประสบการณ์ตรง ซึ่งในตลาดแรงงานที่ขาดแคลนในปัจจุบัน กว่าจะหาคนที่เหมาะ(และเค้าตกลงมาทำงานด้วย) อาจจะใช้เวลาหลายเดือน</p>
+<p>แต่ถ้าจะทำให้ได้แบบเป๊ะๆเลย Optimize ได้  Scale ได้ ส่วนใหญ่ก็ต้องเป็นคนที่มีประสบการณ์ตรง ซึ่งในตลาดแรงงานที่ขาดแคลนในปัจจุบัน กว่าจะหาคนที่เหมาะ(และเค้าตกลงมาทำงานด้วย) อาจจะใช้เวลาหลายเดือน</p>
 <p>การลดความรู้ที่จำเป็นลง จึงเป็นปัจจัยที่สำคัญมาก</p>
-<h1 id=แต-serverless-ไมใชยาวเศษสำหรบทกปญหา>แต่ Serverless ไม่ใช่ยาวิเศษสำหรับทุกปัญหา</h1>
+<h1 id="แต-serverless-ไมใชยาวเศษสำหรบทกปญหา">แต่ Serverless ไม่ใช่ยาวิเศษสำหรับทุกปัญหา</h1>
 <p>ปัจจุบัน Serverless เองก็ยังมีข้อจำกัดอยู่ แต่ละ Provider ก็จะมีข้อจำกัดไม่เหมือนกัน</p>
 <p>ในวงการก็มีการถกเถียงกันมากว่ากรณีไหนที่ใช้ Serverless แล้วเหมาะ อันไหนไม่เหมาะ กรณีที่เห็นพ้องกันก็มี</p>
 <p>งานจำพวก Asynchronous คือ ทำแล้วเสร็จเมื่อไรก็ได้ มีการ Trigger งานให้ทำครั้งเดียวแล้วก็รองานจบไป Trigger งานถัดไปอีกที พวกนี้เหมาะกับ Serverless มาก โดยเฉพาะงานที่นานๆทีทำที เราไม่ต้องมาเปิด Server ทิ้งไว้ตลอดเวลาให้เปลืองเงิน</p>
 <p>พวก Startup ที่มีคนน้อย ต้องการลดเวลากับเรื่อง Infrastructure ให้น้อยที่สุดก็ดูจะเหมาะกับการใช้ Serverless</p>
 <p>แต่อย่างกรณีของงานที่ต้องรันนานๆ เช่นต้องมีการทำ Web Socket อยู่ตลอดเวลา หรือ Batch Job ที่ต้องรันหลายชั่วโมง อันนี้พวก FaaS ก็จะมีข้อจำกัดว่ามันไม่สามารถรันได้นาน กรณีนั้นสู้รันเซอร์เวอร์กับคอนเทนเนอร์เอง ก็คงเหมาะกว่า</p>
 <p>หรืองานที่ต้องการ Latency ต่ำมากๆ เพราะข้างในของ Serverless ก็เป็น Container อยู่เบื้องหลัง หากไม่มีการเรียกใช้นานๆ ทาง Provider ก็จะแช่แข็ง Container พวกนี้ไว้ พอมี Request เข้ามาก็ต้องเสียเวลาปลุก Container ขึ้นมาใหม่ ศัพท์เทคนิคเรียกว่า Cold Start ซึ่งทำให้ Latency ในจังหวะนั้นสูงผิดปกติ</p>
-<h1 id=และการเขยนโคดกอาจจะเปลยนไป>และการเขียนโค้ดก็อาจจะเปลี่ยนไป</h1>
+<h1 id="และการเขยนโคดกอาจจะเปลยนไป">และการเขียนโค้ดก็อาจจะเปลี่ยนไป</h1>
 <p>อีกเรื่องหนึ่งที่ผมรู้สึกว่าสำคัญมาก คือการออกแบบโค้ดให้อยู่ในลักษณะที่ Maintain ได้ง่าย</p>
 <p>เนื่องจากโค้ดที่เราเขียนส่วนใหญ่อยู่ใน FaaS เพราะถ้าโค้ดทุกส่วนเป็นฟังก์ชั่นเล็กๆ แล้วต้องเรียกกันไปมาเยอะมาก การ Track Request จะยากมากๆ (Observability) มีปัญหาขึ้นมาก็จะค้นหาต้นตอของบั๊กได้ลำบาก</p>
 <p>ในทางตรงกันข้าม ถ้าเรายัดทุกอย่างเข้าไปใน FaaS ฟังก์ชั่นเดียว (แล้วใส่ Switch Case เพื่อทำทุกอย่าง) เวลาที่ใช้ในการโหลดฟังก์ชั่นนั้นๆก็จะนาน ทำให้ Latency สูง และเสียเงินเพิ่มขึ้นไปด้วย</p>
 <p>และเนื่องด้วย Serverless ไม่มีเซอร์เวอร์ เราไม่มีหน่วย Storage ที่เก็บค้างไว้ได้ (Stateless) การเก็บ State ในการทางานต่างๆก็จะต้องไปอยู่ที่อื่นแทน</p>
-<h1 id=แลวอนาคตละ>แล้วอนาคตล่ะ?</h1>
+<h1 id="แลวอนาคตละ">แล้วอนาคตล่ะ?</h1>
 <p>ถ้าผมต้องแทงพนัน ผมแทงข้าง Serverless นะ แต่ก็คงไม่ได้ออกมาในรูปแบบว่าทุกอย่างจะเป็น Serverless 100%</p>
 <p>ผมคิดว่า Serverless จะเป็น Abstraction ใน Layer ถัดไปในอนาคต เพราะการตัดเซอร์เวอร์ออกไปทำให้ทำงานได้เร็ว</p>
-<p>ในบรรดาประโยชน์ที่ว่ามาทั้งหมด ผมคิดว่า"ความเร็ว"เป็นเรื่องที่สำคัญที่สุด เพราะโลกในปัจจุบัน ธุรกิจแข่งขันและเปลี่ยนแปลงเร็วมาก ยิ่งงาน ​Operation กับ Set up น้อย เราก็ยิ่งใช้เวลาของทีมไปกับการพัฒนาอะไรที่สร้างคุณค่าให้กับผู้ใช้ได้มากขึ้น การตัด Layer ของเซอร์เวอร์ไป ไม่ใช่แค่ให้ผลดีกับทีมพัฒนา แต่รวมไปถึงฝั่งธุรกิจด้วย</p>
+<p>ในบรรดาประโยชน์ที่ว่ามาทั้งหมด ผมคิดว่า&quot;ความเร็ว&quot;เป็นเรื่องที่สำคัญที่สุด เพราะโลกในปัจจุบัน ธุรกิจแข่งขันและเปลี่ยนแปลงเร็วมาก ยิ่งงาน ​Operation กับ Set up น้อย  เราก็ยิ่งใช้เวลาของทีมไปกับการพัฒนาอะไรที่สร้างคุณค่าให้กับผู้ใช้ได้มากขึ้น การตัด Layer ของเซอร์เวอร์ไป ไม่ใช่แค่ให้ผลดีกับทีมพัฒนา แต่รวมไปถึงฝั่งธุรกิจด้วย</p>
 <p>เทคโนโลยีต่างๆของ Serverless เองนั้นถือว่าใหม่ ข้อจำกัดที่มีอยู่ในปัจจุบันก็ยังมีโอกาสถูกพัฒนาไปได้อีก</p>
 <p>แต่ก็ไม่ใช่ว่า Serverless จะแก้ปัญหาได้ทุกอย่าง ผมคิดว่าในอนาคต อะไรที่เป็น Serverless ได้ก็จะเป็นไป ส่วนที่ไม่ได้ก็จะอยู่บนฝั่ง Container ที่จัดการกันด้วย Orchestrator กัน (ซึ่งก็ k8s ก็เข้ายึดพื้นที่สำเร็จแล้ว)</p>
-<div class=fb-page data-href=https://www.facebook.com/notaboutcode/ data-tabs data-small-header=false data-adapt-container-width=true data-hide-cover=false data-show-facepile=true>
-<blockquote cite=https://www.facebook.com/notaboutcode/ class=fb-xfbml-parse-ignore>
-<a href=https://www.facebook.com/notaboutcode/>Not about code</a>
-</blockquote>
+
+
+      
+      <div  class="fb-page"
+            data-href="https://www.facebook.com/notaboutcode/"
+            data-tabs=""
+            data-small-header="false"
+            data-adapt-container-width="true"
+            data-hide-cover="false"
+            data-show-facepile="true">
+
+            <blockquote cite="https://www.facebook.com/notaboutcode/" class="fb-xfbml-parse-ignore">
+              <a href="https://www.facebook.com/notaboutcode/">Not about code</a>
+            </blockquote>
+      </div>
+
+    </div>
+
+    
+    <div id="fb-root"></div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content">ijemmy</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content">
+        2018-09-01
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
 </div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/architecture/">Architecture</a>
+          <a href="/tags/serverless/">Serverless</a>
+          </div>
+      <div class="fb-comments" data-numposts="5"></div>
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/27-hiring-a-programmer/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">เขียนโปรแกรมไม่เป็น แต่ต้องคัดเลือกโปรแกรมเมอร์เข้าทีม</span>
+            <span class="prev-text nav-mobile"></span>
+          </a>
+        <a class="next" href="/post/25-advices-for-adopting-agile/">
+            <span class="next-text nav-default">การนำ Agile มาใช้ในองค์กร</span>
+            <span class="next-text nav-mobile"></span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://www.facebook.com/notaboutcode/" class="iconfont icon-facebook" title="facebook"></a>
+  <a href="https://www.notaboutcode.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-<div id=fb-root></div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span class=item-title></span>
-<span class=item-content>ijemmy</span>
-</p>
-<p class=copyright-item>
-<span class=item-title></span>
-<span class=item-content>
-2018-09-01
-</span>
-</p>
-<p class=copyright-item>
-<span class=item-title></span>
-<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
-</p>
+
+<div class="copyright">
+  <span class="power-by">
+    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+     - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+  </span>
 </div>
-<footer class=post-footer>
-<div class=post-tags>
-<a href=/tags/architecture/>Architecture</a>
-<a href=/tags/serverless/>Serverless</a>
-</div>
-<div class=fb-comments data-numposts=5></div>
-<nav class=post-nav>
-<a class=prev href=/post/27-hiring-a-programmer/>
-<i class="iconfont icon-left"></i>
-<span class="prev-text nav-default">เขียนโปรแกรมไม่เป็น แต่ต้องคัดเลือกโปรแกรมเมอร์เข้าทีม</span>
-<span class="prev-text nav-mobile"></span>
-</a>
-<a class=next href=/post/25-advices-for-adopting-agile/>
-<span class="next-text nav-default">การนำ Agile มาใช้ในองค์กร</span>
-<span class="next-text nav-mobile"></span>
-<i class="iconfont icon-right"></i>
-</a>
-</nav>
-</footer>
-</article>
-</div>
-</div>
-</main>
-<footer id=footer class=footer>
-<div class=social-links>
-<a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
-<a href=https://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
-</div>
-<div class=copyright>
-<span class=power-by>
-%!(EXTRA string=<a class=hexo-link href=https://gohugo.io>Hugo</a>)
-</span>
-<span class=division>|</span>
-<span class=theme-info>
--
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
-</span>
-<span class=copyright-year>
-&copy;
-2017 -
-2022<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
-</span>
-</div>
-</footer>
-<div class=back-to-top id=back-to-top>
-<i class="iconfont icon-up"></i>
-</div>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
-<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
-<script async src=https://www.google-analytics.com/analytics.js></script>
-<script>(function(b,c,d){var a,e=b.getElementsByTagName(c)[0];if(b.getElementById(d))return;a=b.createElement(c),a.id=d,a.src='https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676',e.parentNode.insertBefore(a,e)})(document,'script','facebook-jssdk')</script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-108239205-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 </body>
 </html>

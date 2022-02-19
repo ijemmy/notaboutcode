@@ -1,3 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>performance on Not About Code - Technical Leadership</title><link>https://www.notaboutcode.com/tags/performance/</link><description>Recent content in performance on Not About Code - Technical Leadership</description><generator>Hugo -- gohugo.io</generator><language>th</language><lastBuildDate>Sat, 19 Feb 2022 12:04:02 +0700</lastBuildDate><atom:link href="https://www.notaboutcode.com/tags/performance/index.xml" rel="self" type="application/rss+xml"/><item><title>จะสเกลระบบหลักล้านด้วย Cache ต้องพิจารณาอะไรบ้าง</title><link>https://www.notaboutcode.com/post/31-caching/</link><pubDate>Sat, 19 Feb 2022 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/31-caching/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/desk-01.png" alt="Photo by Wonderlane(@wonderlane) on Unsplash">&lt;/p>
-&lt;p>แคช(Cache)เป็นหนึ่งในตัวเลือกที่ถูกใช้บ่อยมากในการสเกลระบบให้สามารถรับโหลดได้เยอะๆ ถ้าใครไปสัมภาษณ์งานแล้วเจอคำถามว่าระบบมีคนใช้หลักล้าน และเป็นการอ่านข้อมูลเป็นหลัก (Read-intensive) ตอบได้เลยว่าใช้แคช แต่รายละเอียดของคำตอบว่าจะใช้ยังไง ต้องพิจารณาเรื่องไหนบ้าง เราจะมาคุยกันในบทความนี้ครับ&lt;/p>
-&lt;p>ชี้แจงก่อนว่า เราจะคุยกันในมุมของการออกแบบระบบ (System Design) ซึ่งจะเป็นการใช้แคชในระดับของ Backend services เพราะแนวคิดของแคชนั้นถูกใช้ในทุกระดับ ยกตัวอย่างเช่น&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>performance on Not About Code - Technical Leadership</title>
+    <link>https://www.notaboutcode.com/tags/performance/</link>
+    <description>Recent content in performance on Not About Code - Technical Leadership</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>th</language>
+    <lastBuildDate>Sat, 19 Feb 2022 12:04:02 +0700</lastBuildDate><atom:link href="https://www.notaboutcode.com/tags/performance/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>จะสเกลระบบหลักล้านด้วย Cache ต้องพิจารณาอะไรบ้าง</title>
+      <link>https://www.notaboutcode.com/post/31-caching/</link>
+      <pubDate>Sat, 19 Feb 2022 12:04:02 +0700</pubDate>
+      
+      <guid>https://www.notaboutcode.com/post/31-caching/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/desk-01.png&#34; alt=&#34;Photo by Wonderlane(@wonderlane) on Unsplash&#34;&gt;&lt;/p&gt;
+&lt;p&gt;แคช(Cache)เป็นหนึ่งในตัวเลือกที่ถูกใช้บ่อยมากในการสเกลระบบให้สามารถรับโหลดได้เยอะๆ ถ้าใครไปสัมภาษณ์งานแล้วเจอคำถามว่าระบบมีคนใช้หลักล้าน และเป็นการอ่านข้อมูลเป็นหลัก (Read-intensive) ตอบได้เลยว่าใช้แคช แต่รายละเอียดของคำตอบว่าจะใช้ยังไง ต้องพิจารณาเรื่องไหนบ้าง เราจะมาคุยกันในบทความนี้ครับ&lt;/p&gt;
+&lt;p&gt;ชี้แจงก่อนว่า เราจะคุยกันในมุมของการออกแบบระบบ (System Design) ซึ่งจะเป็นการใช้แคชในระดับของ Backend services เพราะแนวคิดของแคชนั้นถูกใช้ในทุกระดับ ยกตัวอย่างเช่น&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
