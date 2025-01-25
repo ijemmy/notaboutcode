@@ -4,10 +4,10 @@ date: 2022-02-26T15:05:28+01:00
 lastmod: 2025-01-25T15:06:41+01:00
 draft: false
 tags: ["technical", "good-practice"]
-categories: ["system-engineering"]
+categories: ["software engineering"]
 ---
 
-![Photo by Wonderlane(@wonderlane) on Unsplash](/img/covers/turtle-01.png)
+![Photo by Tanguy Sauvin on Unsplash](/img/covers/turtle-01.png)
 
 สำหรับคนที่พึ่งเขียนโค้ดใหม่ๆ ผมแนะนำว่าให้พยายามเขียนโค้ดทีละนิด อย่าเขียนรวดเดียวครับ
 
@@ -16,6 +16,8 @@ categories: ["system-engineering"]
 แต่ละรอบ เค้าจะแก้โค้ดแค่ไม่เกินห้าบรรทัด
 
 ตัวอย่างเช่น ผมอยากจะเขียน API เพื่อรับค่าจาก Array มาคำนวนแล้วส่งค่า Sum กลับไป ผมจะเขียนแต่ละรอบดังนี้
+
+<!--more-->
 
 1. เขียน API เพื่อรับค่า Array แล้ว print ค่าที่รับไปออกมา แล้วเขียนโค้ดเพื่อเทสต์ดูว่าค่าถูกต้อง ชนิดของตัวแปรที่รับเข้ามาเป็นตัวเลข ก่อนจะไปต่อ
 2. ลอง return ค่า 0 กลับไปดู แล้วเรียก API อีกรอบ ดูว่าได้ค่าที่รีเทิร์นตรงไหม
