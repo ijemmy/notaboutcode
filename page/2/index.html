@@ -91,6 +91,29 @@
 <section id=posts class=posts>
 <article class=post>
 <header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/30-structured-logging/>Structured Logging คืออะไร ทำไมถึงเป็นที่นิยม</a></h1>
+<div class=post-meta>
+<span class=post-time> 2022-02-12 </span>
+<div class=post-category>
+<a href=/categories/devops/> devops </a>
+</div>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+<p><img src=/img/covers/log-01.png alt="Photo by Atlas Kadrów(@atlaskadrow) on Unsplash"></p>
+<p>เมื่อ 6 ปีที่แล้ว สมัยผมยังทำงาน Operation คู่กับงาน Dev อยู่ หนึ่งในสิ่งที่ผมไม่ชอบมากๆคือการนั่งไล่ Log เพื่อหาว่าบั้คมันมาจากไหน</p>
+<p>สมัยก่อนก็ไม่เคยคิดครับว่าทำไมการไล่ Log มันถึงทรมานมาก พอเวลาผ่านไป เห็น Practice ใหม่ๆมากขึ้นถึงเข้าใจ ว่าปัญหามันมาตั้งแต่การออกแบบ Log Format และวิธีการเก็บ</p>
+<p>ปัจจุบันนี้ เวลาผมให้คำปรึกษาลูกค้า ผมจะบอกให้ทำ สิ่งที่เรียกว่า Structured Logging ซึ่งทำให้ชีวิตของการไล่ Log มันดีขึ้นมาก เวลามีบั้คก็หาต้นตอกันเร็วขึ้น</p>
+<p>วันนี้เราจะมาคุยเรื่องนี้กัน ผมจะเริ่มเล่าให้ฟังถึงวิธีการเก็บ Log ในสมัยก่อน ชี้ให้เห็นถึงปัญหาว่าทำไมมันทำให้ไล่ยาก และจบด้วยตัวอย่างการใช้ Structured Logging ที่มาช่วยแก้ปัญหานี้ครับ</p>
+</div>
+<div class=read-more>
+<a href=/post/30-structured-logging/ class=read-more-link></a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
 <h1 class=post-title><a class=post-link href=/post/29-technical-conflict-resolution/>เถียงเรื่อง Technical Design กันไม่จบซักที ทำไงดี?</a></h1>
 <div class=post-meta>
 <span class=post-time> 2020-06-11 </span>
@@ -179,34 +202,6 @@
 </div>
 <div class=read-more>
 <a href=/post/26-serverless-architecture/ class=read-more-link></a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/25-advices-for-adopting-agile/>การนำ Agile มาใช้ในองค์กร</a></h1>
-<div class=post-meta>
-<span class=post-time> 2018-06-23 </span>
-<div class=post-category>
-<a href=/categories/software-engineering/> Software Engineering </a>
-</div>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-<p><img src=/img/covers/collaboration-01.jpg alt="Photo by rawpixel on Unsplash"></p>
-<p>ผมรู้จักกับ Agile (อไจล์) เมื่อสิบกว่าปีที่แล้ว ตอนนั้นก็ไม่รู้หรอกว่ามันจะป๊อบขนาดนี้ สมัยนั้นอย่าพูดถึงอไจล์เลย ทีมไหนทำ Unit Testing ก็ถือว่าหรูแล้ว</p>
-<blockquote>
-<p>ฝั่ง UK จะออกเสียงว่า อา-ไจล์, ฝั่ง US จะอ่านออกเสียว่า แอ-ไจล์ ในบทความนี้จะขอใช้ทับศัพท์ว่าอไจล์ซึ่งเป็นที่นิยมใช้กันนะครับ &ndash; <a href=https://dictionary.cambridge.org/pronunciation/english/agile>https://dictionary.cambridge.org/pronunciation/english/agile</a></p>
-</blockquote>
-<p>ด้วยความที่คลุกคลีอยู่กับเรื่องนี้ตั้งแต่ยุคที่อไจล์เข้ามาแรกๆ เลยได้เห็นการเปลี่ยนแปลงตั้งแต่สมัยที่ผู้บริหารรู้สึกว่าทีมที่ทำอไจล์คือการก่อกบฏ จนถึงปัจจุบันนี้ ถ้าทีมไหนไม่ทำอไจล์แล้วจะกลายเป็นกบฏแทน</p>
-<p>ผมเชื่อว่าผู้บริหารระดับสูงที่กล้าจะเลือกใช้อไจล์นั้นมีวิสัยทัศน์ที่ดี แต่เวลาปฏิบัติจริง ผมกลับเห็นว่าหลายที่ได้ผลลัพธ์เละเทะมาก สุดท้ายก็มาจบลงที่ว่าอไจล์ไม่ดี หรือไม่เหมาะกับองค์กร (ซึ่งก็อาจจะเป็นไปได้) หรือบางที่ก็เลือกที่จะซุกปัญหาไว้ใต้พรม แล้วทำ KPI ให้ดูสวยๆว่าผลลัพธ์ออกมาดี</p>
-<p>สุดท้ายกลายเป็นตราบาปให้กับอไจล์ เป็นแผลเป็นให้กับพนักงานในบริษัท ที่ขยาดทุกครั้งที่ได้ยินคำนี้</p>
-<p>ผมเลยอยากเขียนบทความนี้ไว้ให้ผู้บริหาร และหัวหน้าทีมพัฒนา (Technical Lead/ Team Lead) เพราะทัศนคติที่ถูกต้องต่ออไจล์จะส่งผลกระทบต่อการรับอไจล์เข้ามาในองค์กรมาก</p>
-<p>บทความนี้จะพูดถึงข้อแนะนำ และตัวอย่างกรณีที่ดี/ไม่ดีแบบต่างๆ ในการนำอไจล์เข้ามาในองค์กร โดยผู้เขียนอนุมานว่าผู้อ่านรู้จักอไจล์และ Scrum แล้ว หากใครที่ยังไม่เข้าใจคำพวกนี้ แนะนำให้อ่านบทความอื่นก่อนครับ</p>
-</div>
-<div class=read-more>
-<a href=/post/25-advices-for-adopting-agile/ class=read-more-link></a>
 </div>
 </div>
 </article>

@@ -91,6 +91,29 @@
 <section id=posts class=posts>
 <article class=post>
 <header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/10-throttle/>ปกป้องเซอร์วิซจากผู้ใช้มักมากด้วย Throttling</a></h1>
+<div class=post-meta>
+<span class=post-time> 2017-11-09 </span>
+<div class=post-category>
+<a href=/categories/system-design/> System Design </a>
+</div>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+<p><img src=/img/covers/limit-01.jpg alt="Photo by Ksenia Kudelkina, from Unsplash.com"></p>
+<p>ลองนึกภาพว่าเรามีระบบที่ถูกออกแบบเป็น Service-Oriented Architecture (SOA)</p>
+<p>ในบรรดาเซอร์วิซทั้งหมด จะมีบางเซอร์วิซทีเป็น Dependency ของเซอร์วิซอื่นๆ ผมจะเรียกเซอร์วิซนี้ว่าเซอร์วิซ A</p>
+<p>ถ้าเซอร์วิซ A พังขึ้นมา เซอร์วิซอื่นที่ต้องเรียกใช้ข้อมูลนี้ทั้งหมดก็จะทำงานไม่ได้</p>
+<p>ตัวอย่างเช่นในภาพข้างล่าง หากเซอร์วิซ A พัง เซอร์วิซ B, และ C จะทำงานไม่ได้</p>
+</div>
+<div class=read-more>
+<a href=/post/10-throttle/ class=read-more-link></a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
 <h1 class=post-title><a class=post-link href=/post/08-sticky-session/>ปัญหาของ Sticky Session</a></h1>
 <div class=post-meta>
 <span class=post-time> 2017-11-02 </span>
@@ -203,29 +226,6 @@ Load Balancer with 3 servers
 </div>
 <div class=read-more>
 <a href=/post/05-retry/ class=read-more-link></a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/04-choosing-language/>ขึ้นโปรเจ็คใหม่ ใช้ภาษาอะไรดี</a></h1>
-<div class=post-meta>
-<span class=post-time> 2017-10-13 </span>
-<div class=post-category>
-<a href=/categories/technical-leadership/> Technical Leadership </a>
-</div>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-<p><img src=/img/covers/new-project-01.jpg alt="Photo by Nick Morris, from Unsplash.com"></p>
-<p>เมื่อวันก่อน นั่งคุยกับน้องคนหนึ่งที่กำลังจะขึ้นโปรเจ็คใหม่ แต่ลังเลว่าจะใช้ภาษาอะไรดี</p>
-<p>เป็นเรื่องน่าปวดหัวของโปรแกรมเมอร์สมัยใหม่ครับ เพราะมีตัวเลือกเยอะไป สมัยก่อน ตัวเลือกไม่เยอะ อย่างเก่งก็แค่ C#, Java, PHP, C แต่เดี๋ยวโผล่มาพรึ่บพรั่บกันหมด</p>
-<p>พอคุยๆกันกับน้องเค้าไปสักพัก ก็มีชื่อ Python + Django, Ruby on Rail, JavaScript + NodeJS, Go, Kotlin, Scala, TypeScript, Closure อะไรไม่รู้เต็มไปหมด</p>
-<p>ตัวผมเอง เคยเขียนแค่สี่ห้าภาษา แถมยังไม่ได้ลงลึกด้วย ก็พอแต่แนะนำไกด์ไลน์ไปคร่าวๆ ว่าภาษาไหนมีจุดเด่นอะไร</p>
-</div>
-<div class=read-more>
-<a href=/post/04-choosing-language/ class=read-more-link></a>
 </div>
 </div>
 </article>
