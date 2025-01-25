@@ -91,6 +91,26 @@
 <section id=posts class=posts>
 <article class=post>
 <header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/33-think-before-code/>คิดและวางแผนก่อน(แก้)โค้ด</a></h1>
+<div class=post-meta>
+<span class=post-time> 2022-02-26 </span>
+<div class=post-category>
+<a href=/categories/software-engineering/> software engineering </a>
+</div>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+อีกหนึ่งในนิสัยที่ผมเห็นโปรแกรมเมอร์เก่งๆมีกัน คือเค้าจะคิดค่อนข้างถี่ถ้วนลงมือเขียน(หรือแก้)โค้ด พอคุยกันเสร็จ เค้าจะหยิบสมุดหรือกระดาษขึ้นมาขีดๆเขียนๆไดอะแกรม เพื่อเช็คความเข้าใจก่อนก่อน เพื่อให้มีแผนคร่าวๆในหัวก่อนจะเริ่มเขียน . ในทางตรงกันข้าม จูเนียร์โปรแกรมเมอร์หลายคน พอคุยกันยังไม่ทันเสร็จดี จะเปิดไฟล์ขึ้นมา คิดอะไรไม่ออกใส่ For loop ทันทีเลย ไม่ได้เช็คดูด้วยซ้ำว่าไอ้โค้ดที่จะแก้นี่มันรันผ่านอยู่รึเปล่า . อันนี้ผมเจอบ่อยมาก พอผ่านไปสองช.ม. ก็จะเห็นว่านั่งงมบั๊ก ไม่แน่ใจว่าพังตรงไหน . คำถามคือ ควรจะคิดอะไร วางแผนอะไรบ้าง?​ ผมเสนอดังนี้ครับ .
+ทำความเข้าใจโค้ดปัจจุบันก่อน . ถ้าไม่ใช่โค้ดที่เค้าเขียนประจำ สิ่งแรกที่ต้องทำคือเริ่มคุ้ยโค้ดครับ ถ้าส่วนที่ต้องแก้จะโดนหลาย Object เราควรจะเริ่มจากเขียนคลาสต่างๆลงในกระดาษ แล้วขีดเส้นโยงกันไปมาว่ามันมีความสัมพันธ์กันยังไง . ถ้าโค้ดตรงไหนอ่านยาก ไม่ค่อยเข้าใจ ลองจะหยิบเทสต์มานั่งรันดู หรือเติมเทสต์เพื่อลองเช็คสมมติฐานว่าเข้าใจโค้ดส่วนที่จะแก้จริงๆ ถ้าไม่มีเทสต์โค้ด ก็ลองปริ้นท์ค่าต่างๆออกมานั่งดู หรือกดไล่ใน Debugger ดูก่อน . . กำหนด input และ output ของโค้ดส่วนที่จะแก้ . ถ้ายังไม่รู้ว่าข้อมูลขาเข้าและขาออกเป็นอะไร เขียนโค้ดให้ถูกไม่ได้หรอกครับ . กรณีที่เราเติม Method ใหม่เข้าไป Input กับ Output ก็คือ Method signature นั่นเอง พยายามกำหนดให้ชัดเจนก่อนเขียนไส้ในลงไป ส่วน . กรณีที่มีหลาย Object ก็พยายามกำหนดให้ interface ว่าแค่ละ Object จะรับส่งค่าอะไร ผ่าน Method ไหนบ้าง ลำดับการเรียกเป็นยังไง ถ้าซับซ้อนมาก ลองเขียน Sequence diagram ออกมาก่อนก็ดี .
+</div>
+<div class=read-more>
+<a href=/post/33-think-before-code/ class=read-more-link></a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
 <h1 class=post-title><a class=post-link href=/post/32-code-slowly-to-be-fast/>เขียนโค้ดให้เหมือนเต่า จะไปได้เร็วกว่ากระต่าย</a></h1>
 <div class=post-meta>
 <span class=post-time> 2022-02-26 </span>
@@ -177,28 +197,6 @@
 </div>
 <div class=read-more>
 <a href=/post/29-technical-conflict-resolution/ class=read-more-link></a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/28-deployment-methods/>Deploy ระบบอย่างไรไม่ให้ล่ม</a></h1>
-<div class=post-meta>
-<span class=post-time> 2019-03-10 </span>
-<div class=post-category>
-<a href=/categories/devops/> DevOps </a>
-<a href=/categories/deployment/> Deployment </a>
-</div>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-<p><img src=/img/covers/cars-01.jpg alt="Photo by rawpixel on Unsplash"></p>
-<p>สำหรับวีดีโอนี้ เราจะมาคุยกันเรื่องการ Deploy ระบบแบบให้มี High Availability คือผู้ใช้จะต้องสามารถใช้งานระบบของเราได้ตลอด และไม่ได้รับผลกระทบใดๆ เช่น ระบบช้าผิดปกติ หรือบาง Request ผิดพลาด</p>
-<p>ส่วนแรกของวีดีโอจะคุยกันว่าระบบล่มเวลา Deploy ได้อย่างไร และส่วนที่สองจะอธิบายเรื่องการ Deploy แบบต่างๆและข้อดีข้อเสียของแต่ละแบบ</p>
-</div>
-<div class=read-more>
-<a href=/post/28-deployment-methods/ class=read-more-link></a>
 </div>
 </div>
 </article>
