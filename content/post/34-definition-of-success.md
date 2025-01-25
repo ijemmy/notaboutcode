@@ -1,14 +1,14 @@
 ---
-title: "คิดและวางแผนก่อน(แก้)โค้ด"
+title: "จาก Definition of Done สู่ Definition of Success"
 date: 2022-03-03T15:05:28+01:00
 lastmod: 2025-01-25T15:06:41+01:00
 draft: false
-tags: ["technical", "good-practice"]
-categories: ["software engineering"]
+tags: ["career", "mindset"]
+categories: ["thoughts"]
 ---
 
-![Photo by Minh Pham on Unsplash
-](/img/covers/get-shit-done-01.png)
+
+![Photo by Minh Pham on Unsplash](/img/covers/get-shit-done-01.png)
 
 
 วันนี้คุยกับเมนเตอร์เรื่องทำอย่างไรเราถึงจะสร้าง Impact จากงานที่เราทำได้ ทำยังไงให้เราก้าวจาก Senior เป็นระดับ Staff หรือ Principal

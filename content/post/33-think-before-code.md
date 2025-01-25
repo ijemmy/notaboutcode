@@ -7,8 +7,8 @@ tags: ["technical", "good-practice"]
 categories: ["software engineering"]
 ---
 
-![Photo by KOBU Agency on Unsplash
-](/img/covers/notebook-01.png)
+
+![Photo by KOBU Agency on Unsplash](/img/covers/notebook-01.png)
 
 อีกหนึ่งในนิสัยที่ผมเห็นโปรแกรมเมอร์เก่งๆมีกัน คือเค้าจะคิดค่อนข้างถี่ถ้วนลงมือเขียน(หรือแก้)โค้ด พอคุยกันเสร็จ เค้าจะหยิบสมุดหรือกระดาษขึ้นมาขีดๆเขียนๆไดอะแกรม เพื่อเช็คความเข้าใจก่อนก่อน เพื่อให้มีแผนคร่าวๆในหัวก่อนจะเริ่มเขียน
 .
