@@ -91,21 +91,24 @@
 <section id=posts class=posts>
 <article class=post>
 <header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/32-test-if-hook-is-still-alive/>Test hook</a></h1>
+<h1 class=post-title><a class=post-link href=/post/32-code-slowly-to-be-fast/>เขียนโค้ดให้เหมือนเต่า จะไปได้เร็วกว่ากระต่าย</a></h1>
 <div class=post-meta>
-<span class=post-time> 2025-01-25 </span>
+<span class=post-time> 2022-02-26 </span>
 <div class=post-category>
-<a href=/categories/system-design/> system design </a>
+<a href=/categories/system-engineering/> system-engineering </a>
 </div>
 </div>
 </header>
 <div class=post-content>
 <div class=post-summary>
-Just testing
---- ติดตามบทความสำหรับโปรแกรมเมอร์ทั้งด้านได้ที่ Facebook page Not about code หรือ Twitter @notaboutcode บทความของเพจจะเน้นเนื้อหาที่นำไปใช้ได้กับชีวิตจริง แต่ไม่ยึดติดกับเทคโนโลยีหรือภาษา เช่น System Design, Continuous Delivery, Testing, Career, etc. สำหรับท่านที่อยากสนับสนุนผู้เขียน รบกวนช่วยแชร์โพสต์ในเฟสบุ้คให้กับเพื่อนๆที่น่าจะสนใจหัวข้อพวกนี้ด้วยครับ
+สำหรับคนที่พึ่งเขียนโค้ดใหม่ๆ ผมแนะนำว่าให้พยายามเขียนโค้ดทีละนิด อย่าเขียนรวดเดียวครับ
+ผมสังเกตว่าคนที่เขียนโค้ดได้ดี จะมีพฤติกรรมหลายอย่างคล้ายๆกัน หนึ่งในพฤติกรรมที่ผมเห็นบ่อย คือเค้าจะแก้โค้ดทีละนิด แล้วค่อยๆรันดูว่าทำงานถูกต้องตามที่คิดไว้ไหม พอทำถูกแล้ว ก็จะค่อยเติมโค้ดเข้าไปต่อ
+แต่ละรอบ เค้าจะแก้โค้ดแค่ไม่เกินห้าบรรทัด
+ตัวอย่างเช่น ผมอยากจะเขียน API เพื่อรับค่าจาก Array มาคำนวนแล้วส่งค่า Sum กลับไป ผมจะเขียนแต่ละรอบดังนี้
+เขียน API เพื่อรับค่า Array แล้ว print ค่าที่รับไปออกมา แล้วเขียนโค้ดเพื่อเทสต์ดูว่าค่าถูกต้อง ชนิดของตัวแปรที่รับเข้ามาเป็นตัวเลข ก่อนจะไปต่อ ลอง return ค่า 0 กลับไปดู แล้วเรียก API อีกรอบ ดูว่าได้ค่าที่รีเทิร์นตรงไหม วนลูปแล้วลองพิมพ์ค่าใน Array ออกมาในว่าเราวนลูปถูกไหม คำนวนค่า Sum แล้ว return กลับ ลองเทสต์พวก Edge case ทีละตัว (เช่น Array ว่างเปล่า หรือมีค่าแค่ตัวเดียว) คนที่ใช้ TDD (Test Driven Development) จะคุ้นกับการทำงานในลักษณะนี้ ดูคร่าวๆเหมือนจะช้ากว่า แต่ในทางปฏิบัติ ผมรู้สึกว่ามันเร็วกว่าเพราะถ้าผมทำอะไรผิดนิดนึง ผมรู้เลยว่ามันต้องผิดใน 2-3 บรรทัดที่ผมพึ่งใส่เข้าไป จะหาบั๊กได้เร็วมาก
 </div>
 <div class=read-more>
-<a href=/post/32-test-if-hook-is-still-alive/ class=read-more-link></a>
+<a href=/post/32-code-slowly-to-be-fast/ class=read-more-link></a>
 </div>
 </div>
 </article>
