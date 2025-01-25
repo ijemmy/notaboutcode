@@ -91,6 +91,30 @@
 <section id=posts class=posts>
 <article class=post>
 <header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/16-idempotent/>การออกแบบ Service API ให้เป็น Idempotent</a></h1>
+<div class=post-meta>
+<span class=post-time> 2017-12-26 </span>
+<div class=post-category>
+<a href=/categories/system-design/> System Design </a>
+</div>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+<p><img src=/img/covers/pay-01.jpg alt="Photo by William Iven on Unsplash"></p>
+<p>ใครเคยเรียกใช้งานเซอร์วิซครั้งเดียว (เช่น การโอนเงิน สั่งซื้อของ ฯลฯ) แล้วเจอ Transaction ตัดซ้ำสองครั้งไหมครับ?</p>
+<p>ถ้าใช่ คุณเจอปัญหาเรื่อง Idempotent เข้าให้แล้วล่ะ</p>
+<p>เราเคยคุยกันในเรื่องของ<a href=/post/05-retry/>Retry</a>ไปแล้ว ว่าอาจจะถล่มเซอร์วิซตัวเองได้ หากไม่จัดการให้ดี</p>
+<p>มานั่งตรึกตรองดูอีกที จริงๆแล้วผมลืมอีกคอนเซ็บหนึ่งที่สำคัญมากเวลาเราใช้ Retry นั่นก็คือเรื่อง Idempotent ซึ่งเป็นที่มาของ เคส Transaction เกิดขึ้นสองที</p>
+<p>บทความนี้จะเริ่มต้นจากต้นตอของปัญหานี้ก่อน เพื่ออธิบายให้เห็นภาพว่าเกิดอะไรขึ้น และเสนอวิธีการแก้ปัญหาในตอนท้ายครับ</p>
+</div>
+<div class=read-more>
+<a href=/post/16-idempotent/ class=read-more-link></a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
 <h1 class=post-title><a class=post-link href=/post/15-service-api-versioning/>การออกแบบ Service API ให้ Backward-Compatible</a></h1>
 <div class=post-meta>
 <span class=post-time> 2017-12-15 </span>
@@ -179,33 +203,6 @@
 </div>
 <div class=read-more>
 <a href=/post/12-interviewer-bad-practices/ class=read-more-link></a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/11-bulkhead/>ปกป้องระบบไม่ให้ล่มหมดด้วย Bulkhead</a></h1>
-<div class=post-meta>
-<span class=post-time> 2017-11-12 </span>
-<div class=post-category>
-<a href=/categories/system-design/> System Design </a>
-</div>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-<p><img src=/img/covers/ship-01.jpg alt="Photo by Abraham Wiebe, from Unsplash.com"></p>
-<p>Bulkhead เป็นเทคนิคการออกแบบที่เหมาะกับ Critical System คือ ถ้าล่มปุ๊บ คนในองค์กรจะไม่สามารถทำงานต่อได้เลย</p>
-<p>ถ้าใครเปิดดิกดู ศัพท์นี้จริงๆใช้เรียกการออกแบบพาหนะครับ</p>
-<blockquote>
-<p>Bulkhead (n.) a dividing wall or barrier between separate compartments inside a ship, aircraft, or other vehicle.</p>
-</blockquote>
-<p>ไอเดียของ Bulkhead คือการออกแบบให้พาหนะแยกออกเป็นส่วนๆ (Compartmentalisation) หากมีส่วนใดส่วนหนึ่งมีปัญหา ผลกระทบจะต้องไม่รุนแรงจนทำให้ทั้งพาหนะล่มหมด</p>
-<p>ยกตัวอย่างเช่น สมมติว่าเรือของเรามีจุดรั่วจุดหนึ่ง หากเราไม่ได้มีการแบ่งโซนเป็นส่วน น้ำจะกระจายไปทั่วท้องเรือ เรือก็จะจมแน่นอน</p>
-<p>การใช้ Bulkhead คือการกั้นส่วนท้องเรือออกเป็นส่วนๆ หากน้ำรั่วขึ้นมา น้ำก็จะเข้ามาจนเต็มแค่ส่วนหนึ่งๆ โดยไม่หนักพอทำให้เรือล่มทั้งลำ (ถ้ายังนึกภาพไม่ออก ลองดู<a href="https://www.google.nl/search?dcr=0&biw=1832&bih=989&tbm=isch&sa=1&q=bulkhead&oq=bulkhead">ภาพในกูเกิ้ล</a>ครับ)</p>
-</div>
-<div class=read-more>
-<a href=/post/11-bulkhead/ class=read-more-link></a>
 </div>
 </div>
 </article>

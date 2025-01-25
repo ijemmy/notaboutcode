@@ -91,6 +91,38 @@
 <section id=posts class=posts>
 <article class=post>
 <header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/21-karma-from-bad-tests/>เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับ Unit/Component Tests)</a></h1>
+<div class=post-meta>
+<span class=post-time> 2018-04-14 </span>
+<div class=post-category>
+<a href=/categories/continuous-delivery/> Continuous Delivery </a>
+</div>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+<p><img src=/img/covers/candle-01.jpg alt="Photo by Sharon McCutcheon on Unsplash"></p>
+<p>ปกติผมไม่ค่อยเชื่อเรื่องบาปบุญเท่าไร แต่เวลาเห็นโปรเจ็คไม่เขียนเทสต์ หรือเขียนเทสต์ไม่ดี ผมพูดเรื่องบาปบุญขึ้นมาทันที</p>
+<blockquote>
+<p>การไม่เขียนเทสต์ (หรือเขียนเทสต์ไม่ดี)เป็นบาปอย่างหนึ่ง เป็นเวรกรรมจะตามทันทีมในระยะเวลาไม่เกิน 3 เดือน</p>
+</blockquote>
+<p>เวลาทำงานกับชาวต่างชาติที่ไม่เข้าใจคอนเซ็บเรื่องบาปบุญ ผมชอบอธิบายให้เค้าฟังแบบนี้</p>
+<blockquote>
+<p>Writing code without tests (or low-quality tests) is like having one-night stand everyday without protection. You will eventually regret it.</p>
+</blockquote>
+<p>เน้นนิดนึงว่าไม่ใช่แค่เรื่องไม่เขียนเทสต์ แต่รวมถึงกรณีเขียนเทสต์ไม่มีคุณภาพด้วย</p>
+<p>บางทีมอาจจะบอกว่าเขียนแล้ว มี Coverage ครบ 100% เลยด้วย บาปเบิบอะไรไม่มีหรอก</p>
+<p>แต่ก่อนคนเขียนก็คิดงี้ครับ จนกระทั่งได้มาเจอกับสถานการณ์ &ldquo;เทสต์ท่วมหัว เอาตัวไม่รอด&rdquo;</p>
+<p>บทความนี้จะเล่าสู่กันฟังเรื่องตัวอย่างการเขียนเทสต์ที่ไม่ดีครับ ผู้อ่านจะได้หลีกเลี่ยงกัน โดยบทความนี้จะเน้นไปในส่วนของ Unit/Component Test เป็นหลัก</p>
+<p>แต่ก่อนจะเข้าเรื่องเขียนเทสต์ให้ดี ผมขอยกปัญหาจากการไม่เขียนเทสต์ก่อนครับ</p>
+</div>
+<div class=read-more>
+<a href=/post/21-karma-from-bad-tests/ class=read-more-link></a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
 <h1 class=post-title><a class=post-link href=/post/20-gender-bias/>Gender Bias ในวงการโปรแกรมเมอร์</a></h1>
 <div class=post-meta>
 <span class=post-time> 2018-03-25 </span>
@@ -186,30 +218,6 @@
 </div>
 <div class=read-more>
 <a href=/post/17-cap-theorem/ class=read-more-link></a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/16-idempotent/>การออกแบบ Service API ให้เป็น Idempotent</a></h1>
-<div class=post-meta>
-<span class=post-time> 2017-12-26 </span>
-<div class=post-category>
-<a href=/categories/system-design/> System Design </a>
-</div>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-<p><img src=/img/covers/pay-01.jpg alt="Photo by William Iven on Unsplash"></p>
-<p>ใครเคยเรียกใช้งานเซอร์วิซครั้งเดียว (เช่น การโอนเงิน สั่งซื้อของ ฯลฯ) แล้วเจอ Transaction ตัดซ้ำสองครั้งไหมครับ?</p>
-<p>ถ้าใช่ คุณเจอปัญหาเรื่อง Idempotent เข้าให้แล้วล่ะ</p>
-<p>เราเคยคุยกันในเรื่องของ<a href=/post/05-retry/>Retry</a>ไปแล้ว ว่าอาจจะถล่มเซอร์วิซตัวเองได้ หากไม่จัดการให้ดี</p>
-<p>มานั่งตรึกตรองดูอีกที จริงๆแล้วผมลืมอีกคอนเซ็บหนึ่งที่สำคัญมากเวลาเราใช้ Retry นั่นก็คือเรื่อง Idempotent ซึ่งเป็นที่มาของ เคส Transaction เกิดขึ้นสองที</p>
-<p>บทความนี้จะเริ่มต้นจากต้นตอของปัญหานี้ก่อน เพื่ออธิบายให้เห็นภาพว่าเกิดอะไรขึ้น และเสนอวิธีการแก้ปัญหาในตอนท้ายครับ</p>
-</div>
-<div class=read-more>
-<a href=/post/16-idempotent/ class=read-more-link></a>
 </div>
 </div>
 </article>

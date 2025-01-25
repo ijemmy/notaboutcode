@@ -91,6 +91,25 @@
 <section id=posts class=posts>
 <article class=post>
 <header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/36-tech-decision-on-ambiguity/>Technical decision on ambiguity/ ตัดสินใจบนความกำกวม</a></h1>
+<div class=post-meta>
+<span class=post-time> 2022-03-11 </span>
+<div class=post-category>
+<a href=/categories/software-engineering/> software engineering </a>
+</div>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+เมื่อวานก่อนบังเอิญเจอเพื่อนร่วมงานเก่าที่ไม่ได้เจอกันสองปีกว่า เค้าบอกว่าพรุ่งนี้จะบินไปทำงานที่ ​US แล้ว . ผมก็ถามต่อว่างานมีรายละเอียดยังไง ต้องทำอะไรต่างจากเดิมไหม เค้าก็บอกว่าไม่เลย ทำระบบเดิม ขอบเขตงานเหมือนเดิม เพียงแต่ที่ฝั่ง US มีจ้างโปรแกรมเมอร์เพิ่ม แต่เป็นเด็กใหม่หมด พึ่งจบจากมหาวิทยาลัย ทีมเลยอยากให้มีโปรแกรมเมอร์ที่อาวุโสหน่อยไปช่วยสอน ซึ่งเค้าก็ชอบสอนคนอื่นอยู่แล้ว (และสอนได้ดีด้วย คนนี้ใจเย็น อารมณ์ดี) . แสดงความยินดี คุยกันจบ ทำให้ผมกลับมาคิด . อย่างแรกเลยคือปริมาณโปรแกรมเมอร์จบใหม่ทั่วโลก และที่เปลี่ยนสายมากำลังเพิ่มขึ้นมาก เพราะเงินเดือนที่ดีขึ้น คุณภาพงานที่ดีกว่า (ทำ remote หรือ Work From Home ได้) . แต่ปริมาณความต้องการก็เพิ่มขึ้นไม่แพ้กัน . โดยเฉพาะอย่างยิ่งโปรแกรมเมอร์ที่ประสบการณ์ระดับ 10 ปีขึ้น เคยทำและออกแบบระบบใหญ่ๆ สามารถคุมโปรเจ็ค สอนโปรแกรมเมอร์ใหม่ๆ จำนวนยังมีอยู่จำกัด บริษัทใน US แย่งซื้อตัวกันเยอะมาก ทำให้ขาดแคลน บริษัทถึงเริ่มดึงคนจากต่างประเทศไปในช่วงหลายปีที่ผ่านมา . ประเด็นต่อมาคือหนังสือที่ผมเคยอ่านสรุป ชื่อว่า What Got You Here Won&rsquo;t Get You There . หนังสือเรื่องนี้เล่าถึงผู้จัดการที่ติดอยู่ในระดับ Early/Middle management แต่ไปต่อไม่ได้ สาเหตุนึงเพราะเค้าเชื่อมั่นในพฤติกรรมหลายๆอย่างของเค้า ที่ทำให้เค้าได้รับการโปรโมทมาอยู่ในตำแหน่งนี้ และยังยึดอยู่กับพฤติกรรมนั้นโดยไม่เปลี่ยน .
+</div>
+<div class=read-more>
+<a href=/post/36-tech-decision-on-ambiguity/ class=read-more-link></a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
 <h1 class=post-title><a class=post-link href=/post/35-what-got-you-here/>What Got You Here Won't Get You There / อย่าคิดว่าทำแบบเดิมแล้วจะสำเร็จไปตลอด</a></h1>
 <div class=post-meta>
 <span class=post-time> 2022-03-06 </span>
@@ -174,27 +193,6 @@
 </div>
 <div class=read-more>
 <a href=/post/32-code-slowly-to-be-fast/ class=read-more-link></a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/31-caching/>จะสเกลระบบหลักล้านด้วย Cache ต้องพิจารณาอะไรบ้าง</a></h1>
-<div class=post-meta>
-<span class=post-time> 2022-02-19 </span>
-<div class=post-category>
-<a href=/categories/system-design/> system design </a>
-</div>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-<p><img src=/img/covers/desk-01.png alt="Photo by Wonderlane(@wonderlane) on Unsplash"></p>
-<p>แคช(Cache)เป็นหนึ่งในตัวเลือกที่ถูกใช้บ่อยมากในการสเกลระบบให้สามารถรับโหลดได้เยอะๆ ถ้าใครไปสัมภาษณ์งานแล้วเจอคำถามว่าระบบมีคนใช้หลักล้าน และเป็นการอ่านข้อมูลเป็นหลัก (Read-intensive) ตอบได้เลยว่าใช้แคช แต่รายละเอียดของคำตอบว่าจะใช้ยังไง ต้องพิจารณาเรื่องไหนบ้าง เราจะมาคุยกันในบทความนี้ครับ</p>
-<p>ชี้แจงก่อนว่า เราจะคุยกันในมุมของการออกแบบระบบ (System Design) ซึ่งจะเป็นการใช้แคชในระดับของ Backend services เพราะแนวคิดของแคชนั้นถูกใช้ในทุกระดับ ยกตัวอย่างเช่น</p>
-</div>
-<div class=read-more>
-<a href=/post/31-caching/ class=read-more-link></a>
 </div>
 </div>
 </article>
