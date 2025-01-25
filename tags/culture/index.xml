@@ -1,29 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Culture on Not About Code - Technical Leadership</title>
-    <link>https://www.notaboutcode.com/tags/culture/</link>
-    <description>Recent content in Culture on Not About Code - Technical Leadership</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>th</language>
-    <lastBuildDate>Sat, 23 Jun 2018 12:04:02 +0700</lastBuildDate><atom:link href="https://www.notaboutcode.com/tags/culture/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>การนำ Agile มาใช้ในองค์กร</title>
-      <link>https://www.notaboutcode.com/post/25-advices-for-adopting-agile/</link>
-      <pubDate>Sat, 23 Jun 2018 12:04:02 +0700</pubDate>
-      
-      <guid>https://www.notaboutcode.com/post/25-advices-for-adopting-agile/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/collaboration-01.jpg&#34; alt=&#34;Photo by rawpixel on Unsplash&#34;&gt;&lt;/p&gt;
-&lt;p&gt;ผมรู้จักกับ Agile (อไจล์) เมื่อสิบกว่าปีที่แล้ว ตอนนั้นก็ไม่รู้หรอกว่ามันจะป๊อบขนาดนี้ สมัยนั้นอย่าพูดถึงอไจล์เลย ทีมไหนทำ Unit Testing ก็ถือว่าหรูแล้ว&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;ฝั่ง UK จะออกเสียงว่า อา-ไจล์, ฝั่ง US จะอ่านออกเสียว่า แอ-ไจล์ ในบทความนี้จะขอใช้ทับศัพท์ว่าอไจล์ซึ่งเป็นที่นิยมใช้กันนะครับ  &amp;ndash; &lt;a href=&#34;https://dictionary.cambridge.org/pronunciation/english/agile&#34;&gt;https://dictionary.cambridge.org/pronunciation/english/agile&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;ด้วยความที่คลุกคลีอยู่กับเรื่องนี้ตั้งแต่ยุคที่อไจล์เข้ามาแรกๆ เลยได้เห็นการเปลี่ยนแปลงตั้งแต่สมัยที่ผู้บริหารรู้สึกว่าทีมที่ทำอไจล์คือการก่อกบฏ จนถึงปัจจุบันนี้ ถ้าทีมไหนไม่ทำอไจล์แล้วจะกลายเป็นกบฏแทน&lt;/p&gt;
-&lt;p&gt;ผมเชื่อว่าผู้บริหารระดับสูงที่กล้าจะเลือกใช้อไจล์นั้นมีวิสัยทัศน์ที่ดี แต่เวลาปฏิบัติจริง ผมกลับเห็นว่าหลายที่ได้ผลลัพธ์เละเทะมาก สุดท้ายก็มาจบลงที่ว่าอไจล์ไม่ดี หรือไม่เหมาะกับองค์กร (ซึ่งก็อาจจะเป็นไปได้)  หรือบางที่ก็เลือกที่จะซุกปัญหาไว้ใต้พรม แล้วทำ KPI ให้ดูสวยๆว่าผลลัพธ์ออกมาดี&lt;/p&gt;
-&lt;p&gt;สุดท้ายกลายเป็นตราบาปให้กับอไจล์ เป็นแผลเป็นให้กับพนักงานในบริษัท ที่ขยาดทุกครั้งที่ได้ยินคำนี้&lt;/p&gt;
-&lt;p&gt;ผมเลยอยากเขียนบทความนี้ไว้ให้ผู้บริหาร และหัวหน้าทีมพัฒนา (Technical Lead/ Team Lead) เพราะทัศนคติที่ถูกต้องต่ออไจล์จะส่งผลกระทบต่อการรับอไจล์เข้ามาในองค์กรมาก&lt;/p&gt;
-&lt;p&gt;บทความนี้จะพูดถึงข้อแนะนำ และตัวอย่างกรณีที่ดี/ไม่ดีแบบต่างๆ ในการนำอไจล์เข้ามาในองค์กร โดยผู้เขียนอนุมานว่าผู้อ่านรู้จักอไจล์และ Scrum แล้ว หากใครที่ยังไม่เข้าใจคำพวกนี้ แนะนำให้อ่านบทความอื่นก่อนครับ&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Culture on Not About Code - Technical Leadership</title><link>https://www.notaboutcode.com/tags/culture/</link><description>Recent content in Culture on Not About Code - Technical Leadership</description><generator>Hugo -- gohugo.io</generator><language>th</language><lastBuildDate>Sat, 23 Jun 2018 12:04:02 +0700</lastBuildDate><atom:link href="https://www.notaboutcode.com/tags/culture/index.xml" rel="self" type="application/rss+xml"/><item><title>การนำ Agile มาใช้ในองค์กร</title><link>https://www.notaboutcode.com/post/25-advices-for-adopting-agile/</link><pubDate>Sat, 23 Jun 2018 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/25-advices-for-adopting-agile/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/collaboration-01.jpg" alt="Photo by rawpixel on Unsplash">&lt;/p>
+&lt;p>ผมรู้จักกับ Agile (อไจล์) เมื่อสิบกว่าปีที่แล้ว ตอนนั้นก็ไม่รู้หรอกว่ามันจะป๊อบขนาดนี้ สมัยนั้นอย่าพูดถึงอไจล์เลย ทีมไหนทำ Unit Testing ก็ถือว่าหรูแล้ว&lt;/p>
+&lt;blockquote>
+&lt;p>ฝั่ง UK จะออกเสียงว่า อา-ไจล์, ฝั่ง US จะอ่านออกเสียว่า แอ-ไจล์ ในบทความนี้จะขอใช้ทับศัพท์ว่าอไจล์ซึ่งเป็นที่นิยมใช้กันนะครับ &amp;ndash; &lt;a href="https://dictionary.cambridge.org/pronunciation/english/agile">https://dictionary.cambridge.org/pronunciation/english/agile&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>ด้วยความที่คลุกคลีอยู่กับเรื่องนี้ตั้งแต่ยุคที่อไจล์เข้ามาแรกๆ เลยได้เห็นการเปลี่ยนแปลงตั้งแต่สมัยที่ผู้บริหารรู้สึกว่าทีมที่ทำอไจล์คือการก่อกบฏ จนถึงปัจจุบันนี้ ถ้าทีมไหนไม่ทำอไจล์แล้วจะกลายเป็นกบฏแทน&lt;/p>
+&lt;p>ผมเชื่อว่าผู้บริหารระดับสูงที่กล้าจะเลือกใช้อไจล์นั้นมีวิสัยทัศน์ที่ดี แต่เวลาปฏิบัติจริง ผมกลับเห็นว่าหลายที่ได้ผลลัพธ์เละเทะมาก สุดท้ายก็มาจบลงที่ว่าอไจล์ไม่ดี หรือไม่เหมาะกับองค์กร (ซึ่งก็อาจจะเป็นไปได้) หรือบางที่ก็เลือกที่จะซุกปัญหาไว้ใต้พรม แล้วทำ KPI ให้ดูสวยๆว่าผลลัพธ์ออกมาดี&lt;/p>
+&lt;p>สุดท้ายกลายเป็นตราบาปให้กับอไจล์ เป็นแผลเป็นให้กับพนักงานในบริษัท ที่ขยาดทุกครั้งที่ได้ยินคำนี้&lt;/p>
+&lt;p>ผมเลยอยากเขียนบทความนี้ไว้ให้ผู้บริหาร และหัวหน้าทีมพัฒนา (Technical Lead/ Team Lead) เพราะทัศนคติที่ถูกต้องต่ออไจล์จะส่งผลกระทบต่อการรับอไจล์เข้ามาในองค์กรมาก&lt;/p>
+&lt;p>บทความนี้จะพูดถึงข้อแนะนำ และตัวอย่างกรณีที่ดี/ไม่ดีแบบต่างๆ ในการนำอไจล์เข้ามาในองค์กร โดยผู้เขียนอนุมานว่าผู้อ่านรู้จักอไจล์และ Scrum แล้ว หากใครที่ยังไม่เข้าใจคำพวกนี้ แนะนำให้อ่านบทความอื่นก่อนครับ&lt;/p></description></item></channel></rss>

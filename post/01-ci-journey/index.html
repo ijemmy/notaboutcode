@@ -1,204 +1,148 @@
-<!DOCTYPE html>
-<html lang="th">
+<!doctype html><html lang=th>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>การเดินทางสู่ CI (Continuous Integration) - Not About Code - Technical Leadership</title>
-  <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
-
-
-<meta name="author" content="ijemmy" /><meta name="description" content="ผมเคยคิดว่าการทำ CI เป็นเรื่องง่ายๆ และเป็นเบสิคของทุกทีมที่ต้องปฏิบัติกัน แต่ในความเป็นจริง น้อยทีมมากที่จะทำออกมาได้ดี เพราะมันมีรายละเอียดยุ่บยั่บที่มากกว่าแค่เรื่องทางเทคนิค
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>การเดินทางสู่ CI (Continuous Integration) - Not About Code - Technical Leadership</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="ijemmy"><meta name=description content="ผมเคยคิดว่าการทำ CI เป็นเรื่องง่ายๆ และเป็นเบสิคของทุกทีมที่ต้องปฏิบัติกัน แต่ในความเป็นจริง น้อยทีมมากที่จะทำออกมาได้ดี เพราะมันมีรายละเอียดยุ่บยั่บที่มากกว่าแค่เรื่องทางเทคนิค
 ในบันทึกฉบับนี้ เราจะมาดูรายละเอียดยุ่บยั่บเหล่านี้กัน โดยผมจะนำเสนอด้วยวิธีการเล่าเรื่อง ตั้งแต่ทีมเริ่มต้นทำ CI ง่ายๆ ไปจนถึงจุดทีเป็น CI ที่สมบูรณ์มากขึ้น
 โดยเราสมมติว่ามีทีมทีมหนึ่ง เริ่มต้นจากที่ไม่มีอะไรนอกจากเลยนอกจาก Version Control แล้วลองผิดลองถูก ทำการปรับปรุงกระบวนการ เรื่อยๆ จนมาถึงจุดที่เป็น CI ที่สมบูรณ์มากขึ้น
-" /><meta name="keywords" content="Hugo, theme, even" />
-
-
-
-
-
-
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
-
-
-<link rel="canonical" href="https://www.notaboutcode.com/post/01-ci-journey/" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-
-
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/custom.css">
-
-
-<meta property="og:title" content="การเดินทางสู่ CI (Continuous Integration)" />
+"><meta name=keywords content="Hugo,theme,even">
+<meta name=generator content="Hugo 0.89.4 with theme even">
+<link rel=canonical href=https://www.notaboutcode.com/post/01-ci-journey/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<link rel=stylesheet href=/css/custom.css>
+<meta property="og:title" content="การเดินทางสู่ CI (Continuous Integration)">
 <meta property="og:description" content="
 ผมเคยคิดว่าการทำ CI เป็นเรื่องง่ายๆ และเป็นเบสิคของทุกทีมที่ต้องปฏิบัติกัน แต่ในความเป็นจริง น้อยทีมมากที่จะทำออกมาได้ดี เพราะมันมีรายละเอียดยุ่บยั่บที่มากกว่าแค่เรื่องทางเทคนิค
 ในบันทึกฉบับนี้ เราจะมาดูรายละเอียดยุ่บยั่บเหล่านี้กัน โดยผมจะนำเสนอด้วยวิธีการเล่าเรื่อง ตั้งแต่ทีมเริ่มต้นทำ CI ง่ายๆ ไปจนถึงจุดทีเป็น CI ที่สมบูรณ์มากขึ้น
-โดยเราสมมติว่ามีทีมทีมหนึ่ง เริ่มต้นจากที่ไม่มีอะไรนอกจากเลยนอกจาก Version Control แล้วลองผิดลองถูก ทำการปรับปรุงกระบวนการ เรื่อยๆ จนมาถึงจุดที่เป็น CI ที่สมบูรณ์มากขึ้น" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.notaboutcode.com/post/01-ci-journey/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2017-10-02T16:28:41+07:00" />
-<meta property="article:modified_time" content="2017-10-02T16:28:41+07:00" />
-
-<meta itemprop="name" content="การเดินทางสู่ CI (Continuous Integration)">
-<meta itemprop="description" content="
+โดยเราสมมติว่ามีทีมทีมหนึ่ง เริ่มต้นจากที่ไม่มีอะไรนอกจากเลยนอกจาก Version Control แล้วลองผิดลองถูก ทำการปรับปรุงกระบวนการ เรื่อยๆ จนมาถึงจุดที่เป็น CI ที่สมบูรณ์มากขึ้น">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.notaboutcode.com/post/01-ci-journey/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2017-10-02T16:28:41+07:00">
+<meta property="article:modified_time" content="2017-10-02T16:28:41+07:00">
+<meta itemprop=name content="การเดินทางสู่ CI (Continuous Integration)">
+<meta itemprop=description content="
 ผมเคยคิดว่าการทำ CI เป็นเรื่องง่ายๆ และเป็นเบสิคของทุกทีมที่ต้องปฏิบัติกัน แต่ในความเป็นจริง น้อยทีมมากที่จะทำออกมาได้ดี เพราะมันมีรายละเอียดยุ่บยั่บที่มากกว่าแค่เรื่องทางเทคนิค
 ในบันทึกฉบับนี้ เราจะมาดูรายละเอียดยุ่บยั่บเหล่านี้กัน โดยผมจะนำเสนอด้วยวิธีการเล่าเรื่อง ตั้งแต่ทีมเริ่มต้นทำ CI ง่ายๆ ไปจนถึงจุดทีเป็น CI ที่สมบูรณ์มากขึ้น
-โดยเราสมมติว่ามีทีมทีมหนึ่ง เริ่มต้นจากที่ไม่มีอะไรนอกจากเลยนอกจาก Version Control แล้วลองผิดลองถูก ทำการปรับปรุงกระบวนการ เรื่อยๆ จนมาถึงจุดที่เป็น CI ที่สมบูรณ์มากขึ้น"><meta itemprop="datePublished" content="2017-10-02T16:28:41+07:00" />
-<meta itemprop="dateModified" content="2017-10-02T16:28:41+07:00" />
-<meta itemprop="wordCount" content="686">
-<meta itemprop="keywords" content="CI,CD," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="การเดินทางสู่ CI (Continuous Integration)"/>
-<meta name="twitter:description" content="
+โดยเราสมมติว่ามีทีมทีมหนึ่ง เริ่มต้นจากที่ไม่มีอะไรนอกจากเลยนอกจาก Version Control แล้วลองผิดลองถูก ทำการปรับปรุงกระบวนการ เรื่อยๆ จนมาถึงจุดที่เป็น CI ที่สมบูรณ์มากขึ้น"><meta itemprop=datePublished content="2017-10-02T16:28:41+07:00">
+<meta itemprop=dateModified content="2017-10-02T16:28:41+07:00">
+<meta itemprop=wordCount content="686">
+<meta itemprop=keywords content="CI,CD,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="การเดินทางสู่ CI (Continuous Integration)">
+<meta name=twitter:description content="
 ผมเคยคิดว่าการทำ CI เป็นเรื่องง่ายๆ และเป็นเบสิคของทุกทีมที่ต้องปฏิบัติกัน แต่ในความเป็นจริง น้อยทีมมากที่จะทำออกมาได้ดี เพราะมันมีรายละเอียดยุ่บยั่บที่มากกว่าแค่เรื่องทางเทคนิค
 ในบันทึกฉบับนี้ เราจะมาดูรายละเอียดยุ่บยั่บเหล่านี้กัน โดยผมจะนำเสนอด้วยวิธีการเล่าเรื่อง ตั้งแต่ทีมเริ่มต้นทำ CI ง่ายๆ ไปจนถึงจุดทีเป็น CI ที่สมบูรณ์มากขึ้น
-โดยเราสมมติว่ามีทีมทีมหนึ่ง เริ่มต้นจากที่ไม่มีอะไรนอกจากเลยนอกจาก Version Control แล้วลองผิดลองถูก ทำการปรับปรุงกระบวนการ เรื่อยๆ จนมาถึงจุดที่เป็น CI ที่สมบูรณ์มากขึ้น"/>
-
-<!--[if lte IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
-<![endif]-->
-
-<!--[if lt IE 9]>
-  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
-
-
-
+โดยเราสมมติว่ามีทีมทีมหนึ่ง เริ่มต้นจากที่ไม่มีอะไรนอกจากเลยนอกจาก Version Control แล้วลองผิดลองถูก ทำการปรับปรุงกระบวนการ เรื่อยๆ จนมาถึงจุดที่เป็น CI ที่สมบูรณ์มากขึ้น"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
 </head>
 <body>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/" class="logo">Not About Code</a>
-  </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Not About Code</a>
 </div>
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    <a href="/">
-        <li class="mobile-menu-item">Home</li>
-      </a><a href="/post/">
-        <li class="mobile-menu-item">Archives</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">Tags</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
-      </a><a href="/about/">
-        <li class="mobile-menu-item">About</li>
-      </a>
-  </ul>
-
-  
-
-
-</nav>
-
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
-  <a href="/" class="logo">Not About Code</a>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
 </div>
-
-
-
-
-
-<nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
-        <a class="menu-item-link" href="/">Home</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/post/">Archives</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">Tags</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/about/">About</a>
-      </li>
-  </ul>
-
-  
-  <a href="https://webring.wonderful.software#notaboutcode.com" title="วงแหวนเว็บ">
-    <img
-        alt="วงแหวนเว็บ"
-        width="32"
-        height="32"
-        src="https://webring.wonderful.software/webring.black.svg"
-    />
-  </a>
-</nav>
-
-
-
-
-    </header>
-
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">การเดินทางสู่ CI (Continuous Integration)</h1>
-
-      <div class="post-meta">
-        <span class="post-time"> 2017-10-02 </span>
-        <div class="post-category">
-            <a href="/categories/continuous-delivery/"> Continuous Delivery </a>
-            </div>
-        
-      </div>
-    </header>
-
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title"></h2>
-  <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#ภาค-1-เรมตนจากบก">ภาค 1: เริ่มต้นจากบั้ก</a></li>
-    <li><a href="#ภาค-2-เหยยบเทากนเอง">ภาค 2: เหยียบเท้ากันเอง</a></li>
-    <li><a href="#ภาค-3-it-works-on-my-machine-">ภาค 3: &ldquo;It works on my machine !!&rdquo;</a></li>
-    <li><a href="#ภาค-4-build--automated-testing-พงตลอด-เหนอยใจจะแก">ภาค 4: Build + Automated Testing พังตลอด เหนื่อยใจจะแก้</a></li>
-    <li><a href="#ภาค-5-เพมคณภาพของ-automated-testing">ภาค 5: เพิ่มคุณภาพของ Automated Testing</a></li>
-    <li><a href="#ภาค-6-build-นานเปนชาต-พงทไมรวามาจาก-commit-ไหน">ภาค 6: Build นานเป็นชาติ พังทีไม่รู้ว่ามาจาก Commit ไหน</a></li>
-    <li><a href="#ภาค-7-แกโคดของทมเรา-แตดนทำทมอนพง">ภาค 7: แก้โค้ดของทีมเรา แต่ดันทำทีมอื่นพัง</a></li>
-    <li><a href="#สรป-การทำ-ci-continuous-integration-เปน-ci-continuous-improvement">สรุป: การทำ CI (Continuous integration) เป็น CI (Continuous improvement)</a></li>
-  </ul>
-</nav>
-  </div>
 </div>
-    <div class="post-content">
-      <p><img src="/img/covers/walk-desert-01.jpg" alt="Photo by Jeremy Cai, from Unsplash"></p>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+<a href=https://webring.wonderful.software#notaboutcode.com title=วงแหวนเว็บ>
+<img alt=วงแหวนเว็บ width=32 height=32 src=https://webring.wonderful.software/webring.black.svg>
+</a>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>การเดินทางสู่ CI (Continuous Integration)</h1>
+<div class=post-meta>
+<span class=post-time> 2017-10-02 </span>
+<div class=post-category>
+<a href=/categories/continuous-delivery/> Continuous Delivery </a>
+</div>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title></h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#ภาค-1-เรมตนจากบก>ภาค 1: เริ่มต้นจากบั้ก</a></li>
+<li><a href=#ภาค-2-เหยยบเทากนเอง>ภาค 2: เหยียบเท้ากันเอง</a></li>
+<li><a href=#ภาค-3-it-works-on-my-machine->ภาค 3: &ldquo;It works on my machine !!&rdquo;</a></li>
+<li><a href=#ภาค-4-build--automated-testing-พงตลอด-เหนอยใจจะแก>ภาค 4: Build + Automated Testing พังตลอด เหนื่อยใจจะแก้</a></li>
+<li><a href=#ภาค-5-เพมคณภาพของ-automated-testing>ภาค 5: เพิ่มคุณภาพของ Automated Testing</a></li>
+<li><a href=#ภาค-6-build-นานเปนชาต-พงทไมรวามาจาก-commit-ไหน>ภาค 6: Build นานเป็นชาติ พังทีไม่รู้ว่ามาจาก Commit ไหน</a></li>
+<li><a href=#ภาค-7-แกโคดของทมเรา-แตดนทำทมอนพง>ภาค 7: แก้โค้ดของทีมเรา แต่ดันทำทีมอื่นพัง</a></li>
+<li><a href=#สรป-การทำ-ci-continuous-integration-เปน-ci-continuous-improvement>สรุป: การทำ CI (Continuous integration) เป็น CI (Continuous improvement)</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p><img src=/img/covers/walk-desert-01.jpg alt="Photo by Jeremy Cai, from Unsplash"></p>
 <p>ผมเคยคิดว่าการทำ CI เป็นเรื่องง่ายๆ และเป็นเบสิคของทุกทีมที่ต้องปฏิบัติกัน แต่ในความเป็นจริง น้อยทีมมากที่จะทำออกมาได้ดี เพราะมันมีรายละเอียดยุ่บยั่บที่มากกว่าแค่เรื่องทางเทคนิค</p>
 <p>ในบันทึกฉบับนี้ เราจะมาดูรายละเอียดยุ่บยั่บเหล่านี้กัน โดยผมจะนำเสนอด้วยวิธีการเล่าเรื่อง ตั้งแต่ทีมเริ่มต้นทำ CI ง่ายๆ ไปจนถึงจุดทีเป็น CI ที่สมบูรณ์มากขึ้น</p>
 <p>โดยเราสมมติว่ามีทีมทีมหนึ่ง เริ่มต้นจากที่ไม่มีอะไรนอกจากเลยนอกจาก Version Control แล้วลองผิดลองถูก ทำการปรับปรุงกระบวนการ เรื่อยๆ จนมาถึงจุดที่เป็น CI ที่สมบูรณ์มากขึ้น</p>
-<h1 id="ภาค-1-เรมตนจากบก">ภาค 1: เริ่มต้นจากบั้ก</h1>
+<h1 id=ภาค-1-เรมตนจากบก>ภาค 1: เริ่มต้นจากบั้ก</h1>
 <p>เคยเจอสถานการณ์นี้ไหมครับ? แก้บั๊กหนึ่งตัว แต่วันถัดไปมีบั้กโผล่ขึ้นมา 3 ตัว</p>
 <p>พอนั่งดีบั้กไปเรื่อยๆ ก็ค้นพบว่า ไอ้บั้ก 3 ตัวนี้เกิดขึ้นจากการแก้บั๊กของเราเมื่อวาน เพราะโค้ดที่เราแก้ดันไปส่งผลกระทบต่อโค้ดส่วนอื่น</p>
 <p>เราเรียกบั๊กพวกนี้ว่า Regression bug</p>
 <p>สถานการณ์นี้เกิดขึ้นบ่อย เวลาที่เราไม่มี Automated Testing ที่ครอบคลุมโค้ดของเราได้อย่างเพียงพอ ทุกๆครั้งที่เราแก้โค้ด เรามีความเสี่ยงที่จะสร้างบั๊กได้โดยไม่รู้ตัว เพราะระหว่างที่เราพัฒนาฟีเจอร์หรือแก้บั๊ก เราโฟกัสอยู่ที่ฟีเจอร์หรือบั๊กนั้นๆ โดยไม่ได้คิดว่าผลกระทบต่อส่วนอื่นในโปรแกรมจะเป็นอย่างไร</p>
 <p>เพื่อแก้ปัญหานี้ ทีมจึงต้องมี Automated Testing เพื่อที่จะสามารถรันเทสต์ได้บ่อยๆโดยไม่ต้องรอผลจากเทสเตอร์อีกวันสองวัน (ซึ่งถึงจุดนั้น อาจจะแก้โค้ดไปเยอะแล้ว ทำให้หาบั๊กยากขึ้น)</p>
-<p>หากเรามี Automated Testing ที่ครอบคลุมฟีเจอร์ที่เคยทำเสร็จไปแล้ว (หรือบั้กที่แก้ไปแล้ว)  การทดสอบนี้จะช่วยเตือนเราทันที หากโค้ดที่เราแก้ไปมีผลกระทบตรงจุดอื่น</p>
+<p>หากเรามี Automated Testing ที่ครอบคลุมฟีเจอร์ที่เคยทำเสร็จไปแล้ว (หรือบั้กที่แก้ไปแล้ว) การทดสอบนี้จะช่วยเตือนเราทันที หากโค้ดที่เราแก้ไปมีผลกระทบตรงจุดอื่น</p>
 <p>คนในทีมเลยตกลงกันว่าก่อนจะ Commit/Push โค้ด เราจะต้องการรัน Build + Automated Testing ให้ผ่านก่อน</p>
-<h1 id="ภาค-2-เหยยบเทากนเอง">ภาค 2: เหยียบเท้ากันเอง</h1>
+<h1 id=ภาค-2-เหยยบเทากนเอง>ภาค 2: เหยียบเท้ากันเอง</h1>
 <p>สืบเนื่องจากกรณีที่แล้ว เราจึงตกลงว่าจะมี Automated Testing นาย A กับนาย B ก็พัฒนาโปรแกรมแยกกันไป ก่อน Commit/Push เข้า Repository กลางก็ทำการรันเทสต์ผ่านเรียบร้อย</p>
 <p>วันถัดมา นาย C เอาโค้ดล่าสุดมารัน Automated Testing ปรากฏว่าไม่ผ่าน พังไปเรียบร้อยแล้ว</p>
 <p>ปัญหาเกิดขึ้นเนื่องจากเวอร์ชั่นที่นาย A กับ นาย B อาจจะมีโค้ดที่ขัดแย้งกัน พอเอามาทำงานร่วมกันก็เลยพัง เหมือนเหยียบเท้ากันเอง เนื่องจากเราให้นาย A กับ นาย B รันเทสต์กันเอง ระหว่างที่รันอยู่ ต่างฝ่ายต่างก็มีแค่โค้ดที่เพิ่มเข้ามาของตัวเอง พอรวมเสร็จ ก็ไม่ได้มีการรันเทสต์อีกครั้ง</p>
@@ -207,205 +151,145 @@
 <p>ในปัจจุบัน มีซอฟท์แวร์ที่ใช้ทำหน้าที่นี้เยอะมาก ตัวที่เก่าแต่คลาสสิคสุดก็คงจะเป็น Jenkins หรือใครที่มาสาย Microsoft ก็จะมี Team Foundation Server สาย Open source ก็จะมี Travis หรือฝั่งคลาวด์เอง AWS ก็จะมี CodePipeline</p>
 <p>เพื่อไม่ให้เป็นการเชียร์ฝั่งไหนอย่างออกหน้าออกตา ผมขอเรียกมันว่า CI Server เฉยๆ ส่วนไส้ใน ใครจะใช้อะไรก็แล้วแต่นะครับ เพราะคอนเซ็บยังเหมือนกัน</p>
 <p>พอมี CI Server ทำหน้าที่กลาง ในกรณีที่แล้ว ถ้านาย A Push โค้ดก่อนก็จะรันเทสต์ผ่าน ส่วนนาย B ที่ตามมาทีหลังก็จะถูกรันบนเวอร์ชั่นที่รวมกันเรียบร้อยแล้ว พอนาย B Push เข้าไปใน Git ก็จะพังทันที นาย B ต้อง revert โค้ดตัวเองก่อนแล้วกลับไปแก้ให้เรียบร้อย (ไม่ก็เรียกนาย A มานั่งคุยปรับความเข้าใจกัน)</p>
-<h1 id="ภาค-3-it-works-on-my-machine-">ภาค 3: &ldquo;It works on my machine !!&rdquo;</h1>
+<h1 id=ภาค-3-it-works-on-my-machine->ภาค 3: &ldquo;It works on my machine !!&rdquo;</h1>
 <p>หลังจากมี CI Server แล้ว ปัญหาที่มักจะเจอกันบ่อยๆคือ Automated Testing ผ่านบนเครื่องตัวเอง แต่ดันไปพังบน CI</p>
 <p>หรือที่แย่กว่าคือผ่านบนเครื่องตัวเอง ผ่านบน CI Server แต่ดันไปพังในระบบจริง (Production)</p>
 <p>สถานการณ์นี้เกิดขึ้นบ่อย จนกลายเป็นที่มาของประโยคสุดคลาสสิคในว่า &ldquo;It works on my machine&rdquo;</p>
-<p>ณ จุดนี้ทีมต้องเริ่มพิจารณาตัวเองแล้วว่ามีการจัดการเซ็ตอัพระบบยังไง  ปัญหาอยู่ที่ส่วนไหน ซึ่งหลักๆก็จะมี</p>
+<p>ณ จุดนี้ทีมต้องเริ่มพิจารณาตัวเองแล้วว่ามีการจัดการเซ็ตอัพระบบยังไง ปัญหาอยู่ที่ส่วนไหน ซึ่งหลักๆก็จะมี</p>
 <ol>
 <li><strong>Libraries/Dependencies</strong>
 หากโปรแกรมเมอร์ต้องมานั่งลง Library หรือ Dependency บนเครื่องตัวเองเอง อันนี้การันตีได้ว่าจะเร็วจะช้าก็ต้องเจอปัญหานี้ เพราะ Library ที่ใช้ในแต่ละเครื่องอาจจะมีเวอร์ชั่นไม่ตรงกัน อันนี้ก็ต้องมีการพึ่งนำ Dependency Management Tool เข้ามา ซึ่งเครื่องมือพวกนี้สามารถกำหนด Dependency/Library ในเวอร์ชั่นที่ต้องการลงใน Text file แล้ว Commit เข้าไปใน Repository ด้วย</li>
 <li><strong>Operating System</strong> กรณีนี้อาจจะต้องพึ่ง Docker หรือ VirtualMachine เพิ่อให้ทุกทีมสามารันเทสต์ในระบบที่ใกล้เคียงกับระบบจริงมากที่สุด</li>
 <li><strong>Configurations</strong> ค่าคอนฟิกต่างๆ หรือ Environment Variable ที่ใช้ในแต่ละระบบ (Dev/Testing/Production) ไม่ตรงกัน</li>
-<li><strong>External Components</strong>  เช่น ตอนรันบนเทสต์อาจจะรันบนบนอีก DB นึง แต่พอรันในระบบจริงอาจจะใช้ DB อีกตัว   หรืออาจจะใช้ Load Balancer คนละชนิดเพื่อประหยัดค่าใช้จ่ายใน Testing environment</li>
+<li><strong>External Components</strong> เช่น ตอนรันบนเทสต์อาจจะรันบนบนอีก DB นึง แต่พอรันในระบบจริงอาจจะใช้ DB อีกตัว หรืออาจจะใช้ Load Balancer คนละชนิดเพื่อประหยัดค่าใช้จ่ายใน Testing environment</li>
 </ol>
-<h1 id="ภาค-4-build--automated-testing-พงตลอด-เหนอยใจจะแก">ภาค 4: Build + Automated Testing พังตลอด เหนื่อยใจจะแก้</h1>
+<h1 id=ภาค-4-build--automated-testing-พงตลอด-เหนอยใจจะแก>ภาค 4: Build + Automated Testing พังตลอด เหนื่อยใจจะแก้</h1>
 <p>ถึงจุดนี้ เราอาจจะเรียกได้ว่าทีมทำ CI ได้สำเร็จแล้ว</p>
 <p>จากประสบการณ์ แทบจะทุกทีม จะต้องมีช่วงเวลาถัดมา ช่วงเวลาที่เหมือนจะทำ CI แต่ความจริงไม่ได้ทำ เพราะ Build กับ Automated Testing พังตลอด</p>
 <p>สาเหตุหลักๆมักจะมาจากการขาดวินัยภายในทีม</p>
 <p>จริงๆแล้วการทำ CI ไม่ได้สำคัญแค่ที่ Tool อย่างเดียวครับ ทุกคนต้องมีวินัยด้วย</p>
 <p>วินัยอย่างแรกเลย คือถ้าโค้ดพังอยู่ ห้ามส่งโค้ดใหม่เข้าไป เรื่องนี้สำคัญมาก เพราะทำให้การแก้บั้ก หรือทำให้กลับไปอยู่ในสภาพที่โค้ดยังทำงานได้ จะทำได้ยากขึ้นเมื่อมีจำนวนโค้ดทับเข้าไปมากขึ้นเรื่อยๆ จากเดิมที่มีเทสต์พังแค่สองสามอัน อาจจะเพิ่มขึ้นเป็นสี่ห้าอัน</p>
-<p>ถ้าเราปฏิบัติตามนี้ เวลาโค้ดพังอยู่ ทีมจะทำอะไรไม่ได้ ต้องรออย่างเดียว  ซึ่งเป็นเรื่องที่ถูกต้องแล้วนะครับ เหมือนเวลาเข้าส้วมแล้วเจอคนอื่นลืมกดชักโครก อย่าขี้ทับขี้ กดชักโครกให้สะอาดก่อน</p>
+<p>ถ้าเราปฏิบัติตามนี้ เวลาโค้ดพังอยู่ ทีมจะทำอะไรไม่ได้ ต้องรออย่างเดียว ซึ่งเป็นเรื่องที่ถูกต้องแล้วนะครับ เหมือนเวลาเข้าส้วมแล้วเจอคนอื่นลืมกดชักโครก อย่าขี้ทับขี้ กดชักโครกให้สะอาดก่อน</p>
 <p>เพราะเขียนเพิ่มไปก็เอาไปขึ้นระบบจริง (Production) ไม่ได้ แถมทำให้เละเทะกว่าเดิม</p>
-<p>ดังนั้น ในทีมต้องมีการตกลงกันว่าหากโค้ดที่ตัวเอง Push ไปทำให้ Build พัง  ถ้าแก้ไม่ได้ในห้านาที ควรจะเอาออกให้กลับไปสู่สถานะเดิมทันที (Revert)</p>
+<p>ดังนั้น ในทีมต้องมีการตกลงกันว่าหากโค้ดที่ตัวเอง Push ไปทำให้ Build พัง ถ้าแก้ไม่ได้ในห้านาที ควรจะเอาออกให้กลับไปสู่สถานะเดิมทันที (Revert)</p>
 <p>วินัยถัดมาคือ หากใครรู้ตัวว่ากำลังจะกลับบ้านหรือไปทานข้าว ก็ยังไม่ควร Push Code เพราะหากพังแล้ว คนอื่นจะทำงานต่อไม่ได้ ต้องรอคน Push กลับมาแก้</p>
 <p>ถ้าเกิดกลับบ้านแล้วป่วยขึ้นมา สัปดาห์หน้าไม่มาทำงาน คนอื่นก็ต้องตามมากดขี้ให้อีก</p>
 <p>สังเกตว่านี่ไม่ใช่เรื่องทางเทคนิคเลย เป็นเรื่องของวินัยเพียงอย่างเดียว ซึ่งบางครั้งการแก้นิสัยคนนี่มันยากกว่าการแก้บั้กเยอะ ผมเห็นทีมจำนวนมากที่มี CI แต่บิ้ลด์พังแทบจะตลอดเวลา</p>
-<h1 id="ภาค-5-เพมคณภาพของ-automated-testing">ภาค 5: เพิ่มคุณภาพของ Automated Testing</h1>
+<h1 id=ภาค-5-เพมคณภาพของ-automated-testing>ภาค 5: เพิ่มคุณภาพของ Automated Testing</h1>
 <p>ใครที่เขียนเทสต์ คงเคยได้ยินถึงคำว่า Coverage กันมาบ้าง ซึ่งส่วนใหญ่ที่ใช้กันจะเป็น Line Coverage หรือ Branch Coverage</p>
-<p>Coverage เป็นตัวชี้วัดว่าเทสต์ที่เรามีอยู่ ครอบคลุมโค้ดของเรามากแค่ไหน โดยตัวเลขนี้จะนับเป็นเปอร์เซ็นต์ ถ้าค่า Line Coverage เป็น 60%  แปลว่าถ้ามีโค้ดอยู่100 บรรทัด เทสต์ได้รันผ่าน 60 บรรทัด</p>
+<p>Coverage เป็นตัวชี้วัดว่าเทสต์ที่เรามีอยู่ ครอบคลุมโค้ดของเรามากแค่ไหน โดยตัวเลขนี้จะนับเป็นเปอร์เซ็นต์ ถ้าค่า Line Coverage เป็น 60% แปลว่าถ้ามีโค้ดอยู่100 บรรทัด เทสต์ได้รันผ่าน 60 บรรทัด</p>
 <p>หรืออีกนัยหนึ่งคือ ถ้าหากมีบั้กอยู่ใน 40 บรรทัดที่ไม่ได้รันผ่าน บั้กพวกนี้จะหลุดผ่านขั้นตอนการ CI ขึ้นไปถึงระบบจริงได้ (หรืออาจจะไปเจอตอน User Acceptance Testing)</p>
-<p>ซึ่งระบบ CI Server ใหม่ๆ เราสามารถตั้งค่าได้ว่าหาก Coverage ต่ำกว่าที่กำหนดไว้  หรือค่า Coverage ลดลงจากเดิม ก็ให้ทำการพังบิ้ลด์ทันที เพื่อรักษาคุณภาพของการทดสอบ</p>
+<p>ซึ่งระบบ CI Server ใหม่ๆ เราสามารถตั้งค่าได้ว่าหาก Coverage ต่ำกว่าที่กำหนดไว้ หรือค่า Coverage ลดลงจากเดิม ก็ให้ทำการพังบิ้ลด์ทันที เพื่อรักษาคุณภาพของการทดสอบ</p>
 <p>อย่างไรก็ตาม ไอ้ค่า Coverage นี่ก็อย่าไปเชื่อมันมากนะครับ ผมเคยทำงานอยู่ทีมนึง โค้ดบางส่วนให้เวนเดอร์ (Vendor) เขียน โดยมีข้อตกลงกันว่าโค้ดจะต้องมี Coverage ไม่ต่ำกว่า 80%</p>
 <p>วันดีคืนดี หัวหน้าเรียกให้ผมเข้าไปดูโค้ดที่ Vendor เขียน</p>
-<p>ดูๆไป ผมไม่แน่ใจว่าจะขำหรือโมโหดี เพราะโค้ดที่เขียนมีการเรียกใช้ทุกฟังก์ชั่น ทำให้ Coverage ออกมาค่าเกิน 80%  แต่ไม่มีการทำ Assertion (คือ การเช็คว่าผลลัพธ์ที่ออกมาถูกรึเปล่า) ไปเสียเกินครึ่ง  ดังนั้น ต่อให้โค้ดทำงานผิดพลาด เทสต์ก็จะผ่าน (เพราะไม่มีการเช็ค) Coverage ที่ได้ออกมาก็มีค่าสูง</p>
+<p>ดูๆไป ผมไม่แน่ใจว่าจะขำหรือโมโหดี เพราะโค้ดที่เขียนมีการเรียกใช้ทุกฟังก์ชั่น ทำให้ Coverage ออกมาค่าเกิน 80% แต่ไม่มีการทำ Assertion (คือ การเช็คว่าผลลัพธ์ที่ออกมาถูกรึเปล่า) ไปเสียเกินครึ่ง ดังนั้น ต่อให้โค้ดทำงานผิดพลาด เทสต์ก็จะผ่าน (เพราะไม่มีการเช็ค) Coverage ที่ได้ออกมาก็มีค่าสูง</p>
 <p>ในทีมเลยมีบางคนพยายามจะเพิ่ม Mutation Testing ซึ่งเป็นอีกทดสอบนึงที่ใช้ทดสอบคุณภาพของ Test Coverage</p>
 <p>Mutation Testing คือการแก้โค้ดในขณะที่ทำงานอยู่ให้ส่งค่าผิดๆ แล้วดูว่าเทสต์จะพังรึเปล่า ถ้าพัง แปลว่าเทสต์โค้ดนั้นใช้ได้ แต่ถ้าไม่พัง แปลว่าเทสต์โค้ดห่วย (เพราะถึงค่าจะผิดเทสต์ก็ยังผ่านอยู่ดี)</p>
 <p>(โดยส่วนตัว ผมว่าน่าจะเปลี่ยนเวนเดอร์มากกว่า แต่เอาเถอะ)</p>
 <p>กล่าวโดยสรุป ตอนนี้ทีมได้มาถึงจุดที่พึ่ง CI เยอะมาก และต้องการให้ Automated Testing สามารถดักบั้กให้เยอะในระดับนึง เพื่อเพิ่มคุณภาพของโค้ด</p>
 <p>นอกเหนือจาก Testing ตามปกติ บางทีมอาจจะเพิ่ม Smoke testing, Performance testing, Load testing, End2End Testing, Code quality check, Code security scan/Fuzz Testing เข้าไปด้วย ซึ่งก็แล้วแต่ทีมไป เนื้อหาอันนี้เอาไปเขียนเป็นหนังสือได้เลย ผมขอยกยอดไปเขียนในบันทึกอื่นๆนะครับ</p>
-<h1 id="ภาค-6-build-นานเปนชาต-พงทไมรวามาจาก-commit-ไหน">ภาค 6: Build นานเป็นชาติ พังทีไม่รู้ว่ามาจาก Commit ไหน</h1>
+<h1 id=ภาค-6-build-นานเปนชาต-พงทไมรวามาจาก-commit-ไหน>ภาค 6: Build นานเป็นชาติ พังทีไม่รู้ว่ามาจาก Commit ไหน</h1>
 <p>เมื่อเราเริ่มเพิ่มปริมาณของ Automated Testing (หรือทำอย่างอื่นนอกเหนือจากแค่เทสต์) ช่วงเวลาที่ CI Server ต้องใช้ในการรันทุกอย่าง ก่อนจะแสดงผลว่าผ่านหรือไม่ผ่านก็จะนานไปด้วย</p>
 <p>ในบางทีม ช่วงเวลานี้อาจจะแค่ครึ่งช.ม. หรือบางทีม อาจจะต้องใช้เวลาเป็นวัน</p>
 <p>เมื่อทีมมาถึงจุดนี้ ปัญหาที่ตามมาคือกว่าบิ้ลด์จะแสดงผล มีคน Push Commit เข้าไปหลายอันแล้ว พอพัง ในทีมก็ไม่แน่ใจว่ามันเกิดจาก Commit ไหน อาจจะเกิดอาการเกี่ยงกัน (โค้ดผมไม่ผิดหรอก คุณนั่นแหละเช็คโค้ดคุณก่อนสิ) เสียเวลาให้รันเทสต์แยกที Commit บนเครื่องตัวเอง</p>
 <p>พอจะ Revert ทีก็ยุ่งยากขึ้นอีก เพราะต้องไปเช็คว่ามันพังตั้งแต่รวม Commit ไหนเข้าไป</p>
 <p>ถ้าทีมมีคนเยอะขึ้น ปัญหาก็จะยิ่งเกิดขึ้นถี่</p>
 <p>ปัญหานี้นอกจากจะเสียเวลาแล้ว ยังทำให้คนในทีมหลีกเลี่ยงการ Push Commit บ่อยๆ เพราะต้องรอนาน Commit จะมีขนาดใหญ่ขึ้น บางคนรอหลายวันกว่าจะ Push ที หากเกิดปัญหาก็ทำให้แก้ยากขึ้นไปอีก</p>
-<p>เป็นวงจรอุบาทว์ไปไม่สิ้น&hellip;</p>
+<p>เป็นวงจรอุบาทว์ไปไม่สิ้น&mldr;</p>
 <p>โดยหลักการแล้ว CI ควรจะแสดงผลลัพธ์ในการ Push ให้ได้ในระยะเวลาไม่เกิน 10 นาที หรือยิ่งเร็วยิ่งดี ถ้าใช้เวลานานกว่านั้น โอกาสที่จะเกิดปัญหาเบื้องต้นก็จะมากยิ่งขึ้น</p>
 <p>เมื่อมาถึงจุดนี้แล้ว ทีมจะต้องเริ่มหาวิธีการทำให้ CI Server แสดงผลให้เร็วขึ้น ซึ่งวิธีหลักๆที่ผมเคยเจอมี ดังนี้</p>
 <ol>
 <li>แยกรันบนหลายเครื่อง (Parallel) เพื่อลดระยะเวลาการทำงาน</li>
-<li>แยกขั้นในการทดสอบออกเป็นหลายเฟส โดยเฟสแรกควรจะครอบคลุมให้ได้มากที่สุด แต่ใช้เวลาไม่เกิน 10 นาที (อาจจะเป็นแค่ Unit testing กับ Smoke testing) ส่วนพวกการทดสอบที่ใช้เวลานาน (End2End testing, Code security scan,ฯลฯ) ให้ทำในเฟสถัดไป   ซึ่งถ้ามีการแยกเฟสแรกออกมาดี 80% ของการพังทั้งหมดควรจะถูกตรวจจับได้ตั้งแต่เฟสแรก ซึ่งใช้เวลาแค่ 10 นาทีก็รู้ผล</li>
+<li>แยกขั้นในการทดสอบออกเป็นหลายเฟส โดยเฟสแรกควรจะครอบคลุมให้ได้มากที่สุด แต่ใช้เวลาไม่เกิน 10 นาที (อาจจะเป็นแค่ Unit testing กับ Smoke testing) ส่วนพวกการทดสอบที่ใช้เวลานาน (End2End testing, Code security scan,ฯลฯ) ให้ทำในเฟสถัดไป ซึ่งถ้ามีการแยกเฟสแรกออกมาดี 80% ของการพังทั้งหมดควรจะถูกตรวจจับได้ตั้งแต่เฟสแรก ซึ่งใช้เวลาแค่ 10 นาทีก็รู้ผล</li>
 <li>ทำการพังเทสต์ทันทีถ้าหากรันนานเกิน เพื่อป้องกันพวกเทสต์ที่ไม่มีคุณภาพ ใช้เวลานาน</li>
 </ol>
 <p>ช่วงนี้เป็นช่วงที่ยากลำบากครับ ทีมต้องยอมรับว่าทุกอย่างในโลกไม่มีอะไรที่สมบูรณ์แบบครับ ถ้าไม่แลกด้วยเม็ดเงินและแรงงาน (ใส่เครื่องเพิ่มเพื่อทำรันแบบ Parallel) ก็ต้องยอมรับว่าเราอาจจะทดสอบในเฟสแรกให้ละเอียดน้อยลง และยอมรับความเสี่ยงที่จะตรวจจับบั้คได้ช้าลง ซึ่งยังดีกว่าต้องรอเป็นเวลานาน กว่าจะได้ผลลัพธ์</p>
-<h1 id="ภาค-7-แกโคดของทมเรา-แตดนทำทมอนพง">ภาค 7: แก้โค้ดของทีมเรา แต่ดันทำทีมอื่นพัง</h1>
+<h1 id=ภาค-7-แกโคดของทมเรา-แตดนทำทมอนพง>ภาค 7: แก้โค้ดของทีมเรา แต่ดันทำทีมอื่นพัง</h1>
 <p>สมมติว่าธุรกิจไปได้สวย ระบบต้องการขยายตัวอย่างรวดเร็ว ทีมโปรแกรมเมอร์มีจำนวนเพิ่มขึ้น ถึงจุดนึง เราจะต้องเริ่มทำการแตกทีม โดยแยกให้แต่ละทีมดูแลโค้ดแต่ละส่วนแยกกัน (เป็น Component หรือ Service)</p>
 <p>เมื่อถึงจุดนี้ แต่ละทีมอาจจะเลือกทำ CI แยกกัน (ไม่งั้นเวลารันเทสต์จะนานมาก) แล้วนำโค้ดมารวมกันทีหลัง</p>
-<p>แต่เนื่องจากแต่ละส่วนต้องทำงานร่วมกัน เราจะเริ่มเห็นอาการที่แก้โค้ดทีมนึงแล้วอีกทีมพัง ซึ่งสาเหตุอาจจะมาจากเรื่องของการขาด Backward Compatibility  หรือเรื่องของ Dependency Management ที่ไม่ดีพอ</p>
-<p>ดังนั้นใน CI ควรจะมีขั้นตอนที่เอาระบบจริงมาทดสอบกันหมดด้วย (End2End testing)  หรือบางครั้ง หากเรารู้ว่าโค้ดส่วนของเรามีใครเรียกใช้บ้าง เราก็สามารถเอา End2End testing ของทีมนั้นๆมาใส่ไว้ใน CI ของเรา</p>
-<h1 id="สรป-การทำ-ci-continuous-integration-เปน-ci-continuous-improvement">สรุป: การทำ CI (Continuous integration) เป็น CI (Continuous improvement)</h1>
+<p>แต่เนื่องจากแต่ละส่วนต้องทำงานร่วมกัน เราจะเริ่มเห็นอาการที่แก้โค้ดทีมนึงแล้วอีกทีมพัง ซึ่งสาเหตุอาจจะมาจากเรื่องของการขาด Backward Compatibility หรือเรื่องของ Dependency Management ที่ไม่ดีพอ</p>
+<p>ดังนั้นใน CI ควรจะมีขั้นตอนที่เอาระบบจริงมาทดสอบกันหมดด้วย (End2End testing) หรือบางครั้ง หากเรารู้ว่าโค้ดส่วนของเรามีใครเรียกใช้บ้าง เราก็สามารถเอา End2End testing ของทีมนั้นๆมาใส่ไว้ใน CI ของเรา</p>
+<h1 id=สรป-การทำ-ci-continuous-integration-เปน-ci-continuous-improvement>สรุป: การทำ CI (Continuous integration) เป็น CI (Continuous improvement)</h1>
 <p>การพัฒนาควรเป็นไปทีละขั้นอย่างต่อเนื่อง ไม่ใช่ทำตู้มเดียวจบ ที่ผมเล่ามาทั้งหมดนี้ ไม่ได้จำเป็นว่าทีมคุณจะต้องผ่านเหตุการณ์เดียวกัน เพราะแต่ละทีมก็มีเงื่อนไขไม่เหมือนกัน ขนาดของทีมก็ไม่เท่ากัน</p>
 <p>การเพิ่มคุณภาพของ CI หมายถึงเวลาที่ต้องลงทุนกับมันมากขึ้น และเวลาที่ใช้ในการดูแลมันก็จะเพิ่มขึ้นเป็นเงาตามตัว ท้ายที่สุดแล้ว เราทำ CI เพื่อให้เราพัฒนาได้เร็วขึ้น(ในระยะยาว) ไม่ใช่ช้าลง</p>
 <p>ขอให้สนุกกับการเดินทางไปกับ CI ครับ</p>
-
-
-      
-      <div  class="fb-page"
-            data-href="https://www.facebook.com/notaboutcode/"
-            data-tabs=""
-            data-small-header="false"
-            data-adapt-container-width="true"
-            data-hide-cover="false"
-            data-show-facepile="true">
-
-            <blockquote cite="https://www.facebook.com/notaboutcode/" class="fb-xfbml-parse-ignore">
-              <a href="https://www.facebook.com/notaboutcode/">Not about code</a>
-            </blockquote>
-      </div>
-
-    </div>
-
-    
-    <div id="fb-root"></div>
-
-    <div class="post-copyright">
-  <p class="copyright-item">
-    <span class="item-title"></span>
-    <span class="item-content">ijemmy</span>
-  </p>
-  <p class="copyright-item">
-    <span class="item-title"></span>
-    <span class="item-content">
-        2017-10-02
-        
-    </span>
-  </p>
-  
-  <p class="copyright-item">
-    <span class="item-title"></span>
-    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
-  </p>
+<div class=fb-page data-href=https://www.facebook.com/notaboutcode/ data-tabs data-small-header=false data-adapt-container-width=true data-hide-cover=false data-show-facepile=true>
+<blockquote cite=https://www.facebook.com/notaboutcode/ class=fb-xfbml-parse-ignore>
+<a href=https://www.facebook.com/notaboutcode/>Not about code</a>
+</blockquote>
 </div>
-<footer class="post-footer">
-      <div class="post-tags">
-          <a href="/tags/ci/">CI</a>
-          <a href="/tags/cd/">CD</a>
-          </div>
-      <div class="fb-comments" data-numposts="5"></div>
-      
-      <nav class="post-nav">
-        <a class="prev" href="/post/02-inside-ci-static-check/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">การนำ Static Code Analysis มาใช้ในทีม</span>
-            <span class="prev-text nav-mobile"></span>
-          </a>
-        <a class="next" href="/post/xx-agilility-on-technical-side/">
-            <span class="next-text nav-default"></span>
-            <span class="next-text nav-mobile"></span>
-            <i class="iconfont icon-right"></i>
-          </a>
-      </nav>
-    </footer>
-  </article>
-        </div>
-        
-
-  
-
-  
-
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="social-links">
-      <a href="https://www.facebook.com/notaboutcode/" class="iconfont icon-facebook" title="facebook"></a>
-  <a href="https://www.notaboutcode.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-
-<div class="copyright">
-  <span class="power-by">
-    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
-  </span>
-  <span class="division">|</span>
-  <span class="theme-info">
-     - 
-    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
-  </span>
-
-  
-
-  <span class="copyright-year">
-    &copy; 
-    2017 - 
-    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
-  </span>
+<div id=fb-root></div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content>ijemmy</span>
+</p>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content>
+2017-10-02
+</span>
+</p>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
+</p>
 </div>
-
-    </footer>
-
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
-    </div>
-  </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-
-
-
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-108239205-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-
-
-
-
-
-
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/ci/>CI</a>
+<a href=/tags/cd/>CD</a>
+</div>
+<div class=fb-comments data-numposts=5></div>
+<nav class=post-nav>
+<a class=prev href=/post/02-inside-ci-static-check/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">การนำ Static Code Analysis มาใช้ในทีม</span>
+<span class="prev-text nav-mobile"></span>
+</a>
+<a class=next href=/post/xx-agilility-on-technical-side/>
+<span class="next-text nav-default"></span>
+<span class="next-text nav-mobile"></span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
+<a href=https://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+%!(EXTRA string=<a class=hexo-link href=https://gohugo.io>Hugo</a>)
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+-
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<span class=copyright-year>
+&copy;
+2017 -
+2025<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<script>(function(b,c,d){var a,e=b.getElementsByTagName(c)[0];if(b.getElementById(d))return;a=b.createElement(c),a.id=d,a.src='https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676',e.parentNode.insertBefore(a,e)})(document,'script','facebook-jssdk')</script>
 </body>
 </html>

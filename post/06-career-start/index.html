@@ -1,210 +1,154 @@
-<!DOCTYPE html>
-<html lang="th">
+<!doctype html><html lang=th>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี ภาค 1 - Not About Code - Technical Leadership</title>
-  <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
-
-
-<meta name="author" content="ijemmy" /><meta name="description" content="ความยากลำบากของโปรแกรมเมอร์สมัยนี้คือมีเรื่องที่ต้องเรียนรู้เยอะมาก&amp;hellip;
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี ภาค 1 - Not About Code - Technical Leadership</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="ijemmy"><meta name=description content="ความยากลำบากของโปรแกรมเมอร์สมัยนี้คือมีเรื่องที่ต้องเรียนรู้เยอะมาก&amp;hellip;
 มากจนไม่รู้ว่าจะเริ่มต้นที่ไหนดี
 บทความนี้รวมสิ่งที่ผมคิดว่าสำหรับโปรแกรมเมอร์มือใหม่ ควรจะเรียนรู้เอาไว้ ไม่ว่าจะเป็นสาย Frontend, Backend, หรือ Fullstack เรื่องพวกนี้ได้ใช้แน่ๆ และได้ใช้นานด้วย
 ผมเชื่อว่าความรู้พวกนี้ ในอีก 20 ปีข้างหน้า โปรแกรมเมอร์ยุคนั้นก็ยังต้องรู้กัน (ถ้าไม่โดน AI แย่งงานไปก่อน)
 แทนที่จะเอาเวลาไปเรียนรู้พวกเฟรมเวิร์ค ภาษา หรือไลบรารี่ที่เปลี่ยนใหม่ทุกๆ 3-5 ปี เรียนรู้พวกนี้ดีกว่าครับ เรียนรอบเดียว ใช้ยาว
 มาดูกันครับว่ามีอะไรบ้าง
-" /><meta name="keywords" content="Hugo, theme, even" />
-
-
-
-
-
-
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
-
-
-<link rel="canonical" href="https://www.notaboutcode.com/post/06-career-start/" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-
-
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/custom.css">
-
-
-<meta property="og:title" content="โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี ภาค 1" />
+"><meta name=keywords content="Hugo,theme,even">
+<meta name=generator content="Hugo 0.89.4 with theme even">
+<link rel=canonical href=https://www.notaboutcode.com/post/06-career-start/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<link rel=stylesheet href=/css/custom.css>
+<meta property="og:title" content="โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี ภาค 1">
 <meta property="og:description" content="
-ความยากลำบากของโปรแกรมเมอร์สมัยนี้คือมีเรื่องที่ต้องเรียนรู้เยอะมาก&hellip;
+ความยากลำบากของโปรแกรมเมอร์สมัยนี้คือมีเรื่องที่ต้องเรียนรู้เยอะมาก&mldr;
 มากจนไม่รู้ว่าจะเริ่มต้นที่ไหนดี
 บทความนี้รวมสิ่งที่ผมคิดว่าสำหรับโปรแกรมเมอร์มือใหม่ ควรจะเรียนรู้เอาไว้ ไม่ว่าจะเป็นสาย Frontend, Backend, หรือ Fullstack เรื่องพวกนี้ได้ใช้แน่ๆ และได้ใช้นานด้วย
 ผมเชื่อว่าความรู้พวกนี้ ในอีก 20 ปีข้างหน้า โปรแกรมเมอร์ยุคนั้นก็ยังต้องรู้กัน (ถ้าไม่โดน AI แย่งงานไปก่อน)
 แทนที่จะเอาเวลาไปเรียนรู้พวกเฟรมเวิร์ค ภาษา หรือไลบรารี่ที่เปลี่ยนใหม่ทุกๆ 3-5 ปี  เรียนรู้พวกนี้ดีกว่าครับ เรียนรอบเดียว ใช้ยาว
-มาดูกันครับว่ามีอะไรบ้าง" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.notaboutcode.com/post/06-career-start/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2017-10-19T12:04:02+07:00" />
-<meta property="article:modified_time" content="2017-10-19T12:04:02+07:00" />
-
-<meta itemprop="name" content="โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี ภาค 1">
-<meta itemprop="description" content="
-ความยากลำบากของโปรแกรมเมอร์สมัยนี้คือมีเรื่องที่ต้องเรียนรู้เยอะมาก&hellip;
+มาดูกันครับว่ามีอะไรบ้าง">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.notaboutcode.com/post/06-career-start/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2017-10-19T12:04:02+07:00">
+<meta property="article:modified_time" content="2017-10-19T12:04:02+07:00">
+<meta itemprop=name content="โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี ภาค 1">
+<meta itemprop=description content="
+ความยากลำบากของโปรแกรมเมอร์สมัยนี้คือมีเรื่องที่ต้องเรียนรู้เยอะมาก&mldr;
 มากจนไม่รู้ว่าจะเริ่มต้นที่ไหนดี
 บทความนี้รวมสิ่งที่ผมคิดว่าสำหรับโปรแกรมเมอร์มือใหม่ ควรจะเรียนรู้เอาไว้ ไม่ว่าจะเป็นสาย Frontend, Backend, หรือ Fullstack เรื่องพวกนี้ได้ใช้แน่ๆ และได้ใช้นานด้วย
 ผมเชื่อว่าความรู้พวกนี้ ในอีก 20 ปีข้างหน้า โปรแกรมเมอร์ยุคนั้นก็ยังต้องรู้กัน (ถ้าไม่โดน AI แย่งงานไปก่อน)
 แทนที่จะเอาเวลาไปเรียนรู้พวกเฟรมเวิร์ค ภาษา หรือไลบรารี่ที่เปลี่ยนใหม่ทุกๆ 3-5 ปี  เรียนรู้พวกนี้ดีกว่าครับ เรียนรอบเดียว ใช้ยาว
-มาดูกันครับว่ามีอะไรบ้าง"><meta itemprop="datePublished" content="2017-10-19T12:04:02+07:00" />
-<meta itemprop="dateModified" content="2017-10-19T12:04:02+07:00" />
-<meta itemprop="wordCount" content="413">
-<meta itemprop="keywords" content="career,learning," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี ภาค 1"/>
-<meta name="twitter:description" content="
-ความยากลำบากของโปรแกรมเมอร์สมัยนี้คือมีเรื่องที่ต้องเรียนรู้เยอะมาก&hellip;
+มาดูกันครับว่ามีอะไรบ้าง"><meta itemprop=datePublished content="2017-10-19T12:04:02+07:00">
+<meta itemprop=dateModified content="2017-10-19T12:04:02+07:00">
+<meta itemprop=wordCount content="413">
+<meta itemprop=keywords content="career,learning,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี ภาค 1">
+<meta name=twitter:description content="
+ความยากลำบากของโปรแกรมเมอร์สมัยนี้คือมีเรื่องที่ต้องเรียนรู้เยอะมาก&mldr;
 มากจนไม่รู้ว่าจะเริ่มต้นที่ไหนดี
 บทความนี้รวมสิ่งที่ผมคิดว่าสำหรับโปรแกรมเมอร์มือใหม่ ควรจะเรียนรู้เอาไว้ ไม่ว่าจะเป็นสาย Frontend, Backend, หรือ Fullstack เรื่องพวกนี้ได้ใช้แน่ๆ และได้ใช้นานด้วย
 ผมเชื่อว่าความรู้พวกนี้ ในอีก 20 ปีข้างหน้า โปรแกรมเมอร์ยุคนั้นก็ยังต้องรู้กัน (ถ้าไม่โดน AI แย่งงานไปก่อน)
 แทนที่จะเอาเวลาไปเรียนรู้พวกเฟรมเวิร์ค ภาษา หรือไลบรารี่ที่เปลี่ยนใหม่ทุกๆ 3-5 ปี  เรียนรู้พวกนี้ดีกว่าครับ เรียนรอบเดียว ใช้ยาว
-มาดูกันครับว่ามีอะไรบ้าง"/>
-
-<!--[if lte IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
-<![endif]-->
-
-<!--[if lt IE 9]>
-  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
-
-
-
+มาดูกันครับว่ามีอะไรบ้าง"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
 </head>
 <body>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/" class="logo">Not About Code</a>
-  </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Not About Code</a>
 </div>
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    <a href="/">
-        <li class="mobile-menu-item">Home</li>
-      </a><a href="/post/">
-        <li class="mobile-menu-item">Archives</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">Tags</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
-      </a><a href="/about/">
-        <li class="mobile-menu-item">About</li>
-      </a>
-  </ul>
-
-  
-
-
-</nav>
-
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
-  <a href="/" class="logo">Not About Code</a>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
 </div>
-
-
-
-
-
-<nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
-        <a class="menu-item-link" href="/">Home</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/post/">Archives</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">Tags</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/about/">About</a>
-      </li>
-  </ul>
-
-  
-  <a href="https://webring.wonderful.software#notaboutcode.com" title="วงแหวนเว็บ">
-    <img
-        alt="วงแหวนเว็บ"
-        width="32"
-        height="32"
-        src="https://webring.wonderful.software/webring.black.svg"
-    />
-  </a>
-</nav>
-
-
-
-
-    </header>
-
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี ภาค 1</h1>
-
-      <div class="post-meta">
-        <span class="post-time"> 2017-10-19 </span>
-        <div class="post-category">
-            <a href="/categories/career/"> Career  </a>
-            </div>
-        
-      </div>
-    </header>
-
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title"></h2>
-  <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#git">Git</a></li>
-    <li><a href="#linux--command-line-interface-cli">Linux + Command Line Interface (CLI)</a></li>
-    <li><a href="#shortcut-ของ-ideeditor-ทใชอย">Shortcut ของ IDE/Editor ที่ใช้อยู่</a></li>
-    <li><a href="#สำหรบ-web-dev-chrome-developer-tool">(สำหรับ Web Dev) Chrome Developer Tool</a></li>
-    <li><a href="#design-patterns">Design Patterns</a></li>
-    <li><a href="#docker">Docker</a></li>
-    <li><a href="#สรป">สรุป</a></li>
-  </ul>
-</nav>
-  </div>
 </div>
-    <div class="post-content">
-      <p><img src="/img/covers/career-01.jpg" alt="Photo by Jake Hills, from Unsplash.com"></p>
-<p>ความยากลำบากของโปรแกรมเมอร์สมัยนี้คือมีเรื่องที่ต้องเรียนรู้เยอะมาก&hellip;</p>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+<a href=https://webring.wonderful.software#notaboutcode.com title=วงแหวนเว็บ>
+<img alt=วงแหวนเว็บ width=32 height=32 src=https://webring.wonderful.software/webring.black.svg>
+</a>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี ภาค 1</h1>
+<div class=post-meta>
+<span class=post-time> 2017-10-19 </span>
+<div class=post-category>
+<a href=/categories/career/> Career </a>
+</div>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title></h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#git>Git</a></li>
+<li><a href=#linux--command-line-interface-cli>Linux + Command Line Interface (CLI)</a></li>
+<li><a href=#shortcut-ของ-ideeditor-ทใชอย>Shortcut ของ IDE/Editor ที่ใช้อยู่</a></li>
+<li><a href=#สำหรบ-web-dev-chrome-developer-tool>(สำหรับ Web Dev) Chrome Developer Tool</a></li>
+<li><a href=#design-patterns>Design Patterns</a></li>
+<li><a href=#docker>Docker</a></li>
+<li><a href=#สรป>สรุป</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p><img src=/img/covers/career-01.jpg alt="Photo by Jake Hills, from Unsplash.com"></p>
+<p>ความยากลำบากของโปรแกรมเมอร์สมัยนี้คือมีเรื่องที่ต้องเรียนรู้เยอะมาก&mldr;</p>
 <p>มากจนไม่รู้ว่าจะเริ่มต้นที่ไหนดี</p>
 <p>บทความนี้รวมสิ่งที่ผมคิดว่าสำหรับโปรแกรมเมอร์มือใหม่ ควรจะเรียนรู้เอาไว้ ไม่ว่าจะเป็นสาย Frontend, Backend, หรือ Fullstack เรื่องพวกนี้ได้ใช้แน่ๆ และได้ใช้นานด้วย</p>
 <p>ผมเชื่อว่าความรู้พวกนี้ ในอีก 20 ปีข้างหน้า โปรแกรมเมอร์ยุคนั้นก็ยังต้องรู้กัน (ถ้าไม่โดน AI แย่งงานไปก่อน)</p>
-<p>แทนที่จะเอาเวลาไปเรียนรู้พวกเฟรมเวิร์ค ภาษา หรือไลบรารี่ที่เปลี่ยนใหม่ทุกๆ 3-5 ปี  เรียนรู้พวกนี้ดีกว่าครับ เรียนรอบเดียว ใช้ยาว</p>
+<p>แทนที่จะเอาเวลาไปเรียนรู้พวกเฟรมเวิร์ค ภาษา หรือไลบรารี่ที่เปลี่ยนใหม่ทุกๆ 3-5 ปี เรียนรู้พวกนี้ดีกว่าครับ เรียนรอบเดียว ใช้ยาว</p>
 <p>มาดูกันครับว่ามีอะไรบ้าง</p>
-<h1 id="git">Git</h1>
+<h1 id=git>Git</h1>
 <p>ยังไงโปรแกรมเมอร์ก็ต้องใช้ Version Control ครับ</p>
 <p>ผมหวังว่าในทีมที่ทำงานอยู่ คงใช้ Version Control กันนะครับ ถ้าไม่ใช้นี่เป็นสัญญาที่แย่มากๆ อยากให้พิจารณาย้ายที่ได้เลย</p>
 <p>ถ้าไม่ได้กะอยู่กับเทคโนโลยีของ Microsoft แต่อย่างเดียว ตัว Version Control ที่ใช้ ยังไงก็หนีไม่พ้น Git</p>
@@ -220,9 +164,9 @@
 <p>พวกนี้เป็นคอนเซ็บที่ถ้าไม่รู้ไว้ว่าทำได้ ต่อให้มี Google ก็ไม่รู้จะหาด้วยคีย์เวิร์ดอะไร ซึ่งมักจะจบที่ต้องหาท่าแปลกๆ ประหลาดๆ มาทำ ทั้งๆที่มีคำสั่งให้ใช้อยู่แล้ว</p>
 <p>ถ้ามีเวลา ไม่ต้องคิดอะไรมาก อ่านเล่มนี้เลยครับ เล่มเดียวจบ</p>
 <ul>
-<li><a href="https://git-scm.com/book/en/v2">Pro Git</a></li>
+<li><a href=https://git-scm.com/book/en/v2>Pro Git</a></li>
 </ul>
-<h1 id="linux--command-line-interface-cli">Linux + Command Line Interface (CLI)</h1>
+<h1 id=linux--command-line-interface-cli>Linux + Command Line Interface (CLI)</h1>
 <p>สำหรับคนที่โตมากับวินโดว์อย่างผม การใช้ Command Line เป็นอะไรที่น่ากลัวมากในช่วงแรกๆ</p>
 <p>ยิ่งผมทำ Frontend เป็นหลักในช่วงแรก เวลามีอะไรพังใน Backend นี่เซ็งมาก ชีวิตจะวนลูปประมาณนี้</p>
 <ul>
@@ -239,22 +183,22 @@
 </ul>
 <p>ผมแนะนำหนังสือสองเล่มนี้ครับ อ่านง่าย ไม่ทฤษฏีมากเกิน</p>
 <ul>
-<li><a href="https://www.nostarch.com/howlinuxworks2">How Linux Works</a></li>
-<li><a href="https://www.nostarch.com/tlcl">Linux Command Line</a></li>
+<li><a href=https://www.nostarch.com/howlinuxworks2>How Linux Works</a></li>
+<li><a href=https://www.nostarch.com/tlcl>Linux Command Line</a></li>
 </ul>
 <p>จริงๆ วิธีการที่จะทำให้เป็น Linux เร็ว คือเลิกใช้ Windows ครับ ซึ่งผมแนะนำมากนะ กัดฟันทนไปสักเดือน ชีวิตจะดีขึ้นมาก</p>
 <p>เพราะพอทำทุกอย่างผ่าน Command Line ได้ คุณจะรู้สึกว่า UI นี่เป็นอะไรที่ทำงานได้ช้ามาก พอเวลาผ่านไปอีกสักพัก คุณจะเริ่มเขียน Bash Script ง่ายๆเองเพื่อประหยัดเวลา ซึ่งเป็นพื้นฐานที่สำคัญมากสำหรับการทำ Operation ในอนาคต</p>
-<h1 id="shortcut-ของ-ideeditor-ทใชอย">Shortcut ของ IDE/Editor ที่ใช้อยู่</h1>
+<h1 id=shortcut-ของ-ideeditor-ทใชอย>Shortcut ของ IDE/Editor ที่ใช้อยู่</h1>
 <p>วันวันนึง เราใช้เวลากับ IDE/Editor เยอะมากนะครับ</p>
 <p>ไม่ใช่แก้การเขียนอย่างเดียว แต่รวมไปถึงการอ่านโค้ด กระโดดไปไฟล์นู้นไฟล์นี้</p>
 <p>ดังนั้น ใช้เวลาเรียนรู้ Shortcut มันให้คล่องครับ</p>
 <p>การทำงานด้วย Keyboard อย่างเดียวเร็วกว่าใช้เม้าส์มาก IDE/Editor ใหม่ๆ สามารถ Config ให้ทำทุกอย่างผ่าน Keyboard ได้กว่า 90%</p>
 <p>นอกเหนือจากเรื่องว่ามันเร็วขึ้นแล้ว มันทำให้เราโฟกัสกับงานได้ง่ายขึ้นด้วย</p>
 <p>โดยปกติ ความจำระยะสั้นของมนุษย์เราจะได้ประมาณ 3-7 อย่าง แต่ Shortcut จะจำด้วย Muscle memory (เหมือนเวลาเราพิมพ์สัมผัส) ทำให้ไม่ต้องทำ Context Switching ในสมอง</p>
-<p>ตัวอย่างเช่น เราจะ Extract Method ทีนึง ถ้าต้องมานั่งไล่เม้าส์ไปตามเมนูแล้วกด Edit-&gt;Refactor-&gt;Extract Method&hellip;</p>
-<p>เทียบกับกด Shortcut ทีเดียวจบเลย  เหมือนกดคีย์บอร์ดหนึ่งจึ้ก</p>
+<p>ตัวอย่างเช่น เราจะ Extract Method ทีนึง ถ้าต้องมานั่งไล่เม้าส์ไปตามเมนูแล้วกด Edit->Refactor->Extract Method&mldr;</p>
+<p>เทียบกับกด Shortcut ทีเดียวจบเลย เหมือนกดคีย์บอร์ดหนึ่งจึ้ก</p>
 <p>เอาพื้นที่ในสมองไปโฟกัสกับงานที่เราต้องทำจริงๆดีกว่าครับ</p>
-<h1 id="สำหรบ-web-dev-chrome-developer-tool">(สำหรับ Web Dev) Chrome Developer Tool</h1>
+<h1 id=สำหรบ-web-dev-chrome-developer-tool>(สำหรับ Web Dev) Chrome Developer Tool</h1>
 <p>สำหรับใครที่ทำเว็บ ใช้เวลาสักสิบนาทีทุกวันเรียนรู้ Chrome Dev Tool ให้ละเอียดเลยครับ นี่เป็นความรู้ที่จะได้ใช้ไปอีกนานแน่นอน</p>
 <p>จากประสบการณ์ Tool ตัวนี้ถ้าใช้เป็น สามารถลดเวลาดีบั้กได้สองสามเท่าเลยนะครับ เวลาผมประเมิน Web Dev ว่าเก่งแค่ไหน ผมดูจากการใช้ Chrome Developer Tool นี่แหละ</p>
 <p>ตัวอย่างเช่น</p>
@@ -265,169 +209,109 @@
 <li>Profiling</li>
 </ol>
 <p>วิธีการจำเทคนิคต่างๆของ Chrome Developer Tool คือต้องใช้จริงครับ อย่าอ่านอย่างเดียว ลองสร้างสถานการดูว่าเทคนิคต่างๆที่พึ่งเรียนรู้ จะเอามาใช้กับงานที่เราทำอยู่ได้อย่างไร</p>
-<h1 id="design-patterns">Design Patterns</h1>
+<h1 id=design-patterns>Design Patterns</h1>
 <p>เวลาเขียนโปรแกรมไปสักพักหนึ่ง ความยากจะไม่ได้อยู่ในเรื่องของตัวภาษา แต่ไปตกในเรื่องของการออกแบบมากกว่า</p>
 <p>ถ้าเป็นในโลกของ Object-oriented Programming ความยากคือจะออกแบบคลาสยังไงให้ทำงานแต่พอดี ไม่มากไม่น้อยไป แล้วทำยังไงให้คนอื่นที่มาอ่านโค้ดเราเข้าใจการออกแบบของเราได้ง่าย</p>
 <p>Design Patterns เป็นรูปแบบการออกแบบที่ใช้กันบ่อย เป็นคอนเซ็บที่ได้ใช้ไม่ว่าจะเขียนภาษา Object-oriented ภาษาอะไร</p>
 <p>การเรียนรู้ Design Patterns ทำให้เราเข้าใจ &ldquo;ภาษากลางในการออกแบบ&rdquo; ซึ่งสะดวกในการสื่อสารระหว่างโปรแกรมเมอร์</p>
-<p>เวลาผมคุยกับโปรแกรมเมอร์อื่นๆ ก็เรียกทับศัพท์เลย  &ldquo;ตรงนี้ใช้ Adapter pattern ดีไหม?&rdquo; ไม่ต้องอธิบายเพิ่ม ก็จะเป็นอันรู้กันเลยว่ากำลังจะให้ออกแบบแบบไหน</p>
+<p>เวลาผมคุยกับโปรแกรมเมอร์อื่นๆ ก็เรียกทับศัพท์เลย &ldquo;ตรงนี้ใช้ Adapter pattern ดีไหม?&rdquo; ไม่ต้องอธิบายเพิ่ม ก็จะเป็นอันรู้กันเลยว่ากำลังจะให้ออกแบบแบบไหน</p>
 <p>ผมเลยถือว่านี่เป็นหัวข้อพื้นฐานที่ไม่ว่าเขียนภาษา Object-oriented ภาษาไหนก็ควรจะเข้าใจ</p>
 <ul>
-<li><a href="https://www.amazon.com/Design-Patterns-Object-Oriented-Addison-Wesley-Professional-ebook/dp/B000SEIBB8">Desing Patterns by GoF</a> เล่มต้นฉบับ</li>
-<li><a href="http://shop.oreilly.com/product/9780596007126.do">Head First Design Patterns</a> ถ้าดูเล่มต้นฉบับแล้วงง ผมแนะนำเล่มนี้ครับ อ่านง่ายกว่า</li>
+<li><a href=https://www.amazon.com/Design-Patterns-Object-Oriented-Addison-Wesley-Professional-ebook/dp/B000SEIBB8>Desing Patterns by GoF</a> เล่มต้นฉบับ</li>
+<li><a href=http://shop.oreilly.com/product/9780596007126.do>Head First Design Patterns</a> ถ้าดูเล่มต้นฉบับแล้วงง ผมแนะนำเล่มนี้ครับ อ่านง่ายกว่า</li>
 </ul>
-<h1 id="docker">Docker</h1>
+<h1 id=docker>Docker</h1>
 <p>ผมเป็นคนที่ไม่ค่อยชอบใช้เวลากับเทคโนโลยีใหม่ๆมาก เพราะส่วนใหญ่ไม่ได้แก้ปัญหาที่แท้จริง และหากคนไม่ใช้กัน เราก็จะกลายเป็นเรียนรู้ฟรี</p>
 <p>แต่ Docker เป็นข้อยกเว้น นี่เป็นหนึ่งในเทคโนโลยีที่ผมไม่ชอบการ Implement ของมันมากๆ บั้กเยอะ คอนเซ็บสับสนสุดๆ แต่ก็ใช้มันทุกวัน เพราะประโยชน์มันอยู่เหนือความไม่ชอบ</p>
 <p>มันเอาไปใช้ทำ Dev Environment ได้ดี เอาไปทำ CI ก็ได้ เดี๋ยวนี้คนก็ใช้ใน Prod กันเยอะแล้ว</p>
-<p>ยิ่งในโลกปัจจุบันที่นิยม MicroService กัน  ผมเชื่อว่า Docker ยังอยู่กับเราไปอีกนานครับ</p>
+<p>ยิ่งในโลกปัจจุบันที่นิยม MicroService กัน ผมเชื่อว่า Docker ยังอยู่กับเราไปอีกนานครับ</p>
 <p>เล่มที่แนะนำครับ</p>
 <ul>
-<li><a href="https://www.manning.com/books/docker-in-action">Docker In Action</a></li>
+<li><a href=https://www.manning.com/books/docker-in-action>Docker In Action</a></li>
 </ul>
 <p>เดี๋ยวนี้นอกจาก Docker เองแล้ว อาจจะต้องรู้เรื่อง Orchastration Tool ด้วย ซึ่งตอนนี้ Swarm, Kubernetes, Mesos ยังแข่งขันกันอยู่ ถ้าไม่ได้ต้องเซ็ตอัพอะไรใหญ่ๆเอง รอให้ชัดเจนก่อนว่าใครชนะแล้วค่อยเรียนรู้ก็ได้ครับ</p>
-<h1 id="สรป">สรุป</h1>
+<h1 id=สรป>สรุป</h1>
 <p>สำหรับคนที่เริ่มต้นเขียนโปรแกรม ถ้าจะเรียนรู้อะไร เรียนอันที่ใช้ได้นาน และได้ใช้ชัวร์ๆดีกว่า</p>
-<p>เวลาเจอน้องที่ถามว่า &ldquo;พี่ครับ เทคโนโลยี/เฟรมเวิร์ค xxx นี่มันจะมาไหม&rdquo;  ก็ต้องตอบว่าไม่รู้ครับ</p>
-<p>และจะถามกลับว่า น้อง rebase ใน Git เป็นยัง  ถ้าเซอร์เวอร์เดี้ยงควรจะเช็คอะไรบ้าง ถ้ายังไม่รู้พวกนี้ เอาเรื่องพวกนี้ก่อนเลยดีกว่า ได้ใช้ชัวร์ๆ</p>
+<p>เวลาเจอน้องที่ถามว่า &ldquo;พี่ครับ เทคโนโลยี/เฟรมเวิร์ค xxx นี่มันจะมาไหม&rdquo; ก็ต้องตอบว่าไม่รู้ครับ</p>
+<p>และจะถามกลับว่า น้อง rebase ใน Git เป็นยัง ถ้าเซอร์เวอร์เดี้ยงควรจะเช็คอะไรบ้าง ถ้ายังไม่รู้พวกนี้ เอาเรื่องพวกนี้ก่อนเลยดีกว่า ได้ใช้ชัวร์ๆ</p>
 <p>ชื่อมันอาจจะไม่ค่อยเท่เหมือนเทคโนโลยีใหม่ๆ แต่จะเร็วจะช้า ยังไงก็ต้องเรียนรู้อยู่ดี</p>
-
-
-      
-      <div  class="fb-page"
-            data-href="https://www.facebook.com/notaboutcode/"
-            data-tabs=""
-            data-small-header="false"
-            data-adapt-container-width="true"
-            data-hide-cover="false"
-            data-show-facepile="true">
-
-            <blockquote cite="https://www.facebook.com/notaboutcode/" class="fb-xfbml-parse-ignore">
-              <a href="https://www.facebook.com/notaboutcode/">Not about code</a>
-            </blockquote>
-      </div>
-
-    </div>
-
-    
-    <div id="fb-root"></div>
-
-    <div class="post-copyright">
-  <p class="copyright-item">
-    <span class="item-title"></span>
-    <span class="item-content">ijemmy</span>
-  </p>
-  <p class="copyright-item">
-    <span class="item-title"></span>
-    <span class="item-content">
-        2017-10-19
-        
-    </span>
-  </p>
-  
-  <p class="copyright-item">
-    <span class="item-title"></span>
-    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
-  </p>
+<div class=fb-page data-href=https://www.facebook.com/notaboutcode/ data-tabs data-small-header=false data-adapt-container-width=true data-hide-cover=false data-show-facepile=true>
+<blockquote cite=https://www.facebook.com/notaboutcode/ class=fb-xfbml-parse-ignore>
+<a href=https://www.facebook.com/notaboutcode/>Not about code</a>
+</blockquote>
 </div>
-<footer class="post-footer">
-      <div class="post-tags">
-          <a href="/tags/career/">career</a>
-          <a href="/tags/learning/">learning</a>
-          </div>
-      <div class="fb-comments" data-numposts="5"></div>
-      
-      <nav class="post-nav">
-        <a class="prev" href="/post/07-career-start-non-technical/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี (ภาค 2)</span>
-            <span class="prev-text nav-mobile"></span>
-          </a>
-        <a class="next" href="/post/05-retry/">
-            <span class="next-text nav-default">Retry ยังไงให้ปลอดภัย</span>
-            <span class="next-text nav-mobile"></span>
-            <i class="iconfont icon-right"></i>
-          </a>
-      </nav>
-    </footer>
-  </article>
-        </div>
-        
-
-  
-
-  
-
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="social-links">
-      <a href="https://www.facebook.com/notaboutcode/" class="iconfont icon-facebook" title="facebook"></a>
-  <a href="https://www.notaboutcode.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-
-<div class="copyright">
-  <span class="power-by">
-    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
-  </span>
-  <span class="division">|</span>
-  <span class="theme-info">
-     - 
-    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
-  </span>
-
-  
-
-  <span class="copyright-year">
-    &copy; 
-    2017 - 
-    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
-  </span>
+<div id=fb-root></div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content>ijemmy</span>
+</p>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content>
+2017-10-19
+</span>
+</p>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
+</p>
 </div>
-
-    </footer>
-
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
-    </div>
-  </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-
-
-
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-108239205-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-
-
-
-
-
-
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/career/>career</a>
+<a href=/tags/learning/>learning</a>
+</div>
+<div class=fb-comments data-numposts=5></div>
+<nav class=post-nav>
+<a class=prev href=/post/07-career-start-non-technical/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี (ภาค 2)</span>
+<span class="prev-text nav-mobile"></span>
+</a>
+<a class=next href=/post/05-retry/>
+<span class="next-text nav-default">Retry ยังไงให้ปลอดภัย</span>
+<span class="next-text nav-mobile"></span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
+<a href=https://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+%!(EXTRA string=<a class=hexo-link href=https://gohugo.io>Hugo</a>)
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+-
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<span class=copyright-year>
+&copy;
+2017 -
+2025<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<script>(function(b,c,d){var a,e=b.getElementsByTagName(c)[0];if(b.getElementById(d))return;a=b.createElement(c),a.id=d,a.src='https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676',e.parentNode.insertBefore(a,e)})(document,'script','facebook-jssdk')</script>
 </body>
 </html>

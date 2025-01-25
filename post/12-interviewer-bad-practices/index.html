@@ -1,208 +1,152 @@
-<!DOCTYPE html>
-<html lang="th">
+<!doctype html><html lang=th>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>ปัญหาในการสัมภาษณ์งานโปรแกรมเมอร์ - Not About Code - Technical Leadership</title>
-  <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
-
-
-<meta name="author" content="ijemmy" /><meta name="description" content="ผมมีงานอันน่าท้าทายมาให้ทุกคนลองทำครับ
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>ปัญหาในการสัมภาษณ์งานโปรแกรมเมอร์ - Not About Code - Technical Leadership</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="ijemmy"><meta name=description content="ผมมีงานอันน่าท้าทายมาให้ทุกคนลองทำครับ
 ผมจะให้คุณคุยกับคนแปลกหน้าเป็นเวลา 1 ชั่วโมง
 หลังจากนั้นคุณจะต้องตัดสินใจว่า คุณอยากจะใช้เวลาร่วมกับคนคนนี้ 8 ชั่วโมงต่อวัน เป็นระยะเวลาอย่างต่ำ 1 ปี หรือไม่
 ฟังดูยากไหมครับ?
 งานนี้เรียกว่า &amp;ldquo;การสัมภาษณ์งาน&amp;rdquo;
-" /><meta name="keywords" content="Hugo, theme, even" />
-
-
-
-
-
-
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
-
-
-<link rel="canonical" href="https://www.notaboutcode.com/post/12-interviewer-bad-practices/" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-
-
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/custom.css">
-
-
-<meta property="og:title" content="ปัญหาในการสัมภาษณ์งานโปรแกรมเมอร์" />
+"><meta name=keywords content="Hugo,theme,even">
+<meta name=generator content="Hugo 0.89.4 with theme even">
+<link rel=canonical href=https://www.notaboutcode.com/post/12-interviewer-bad-practices/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<link rel=stylesheet href=/css/custom.css>
+<meta property="og:title" content="ปัญหาในการสัมภาษณ์งานโปรแกรมเมอร์">
 <meta property="og:description" content="
 ผมมีงานอันน่าท้าทายมาให้ทุกคนลองทำครับ
 ผมจะให้คุณคุยกับคนแปลกหน้าเป็นเวลา 1 ชั่วโมง
 หลังจากนั้นคุณจะต้องตัดสินใจว่า คุณอยากจะใช้เวลาร่วมกับคนคนนี้ 8 ชั่วโมงต่อวัน เป็นระยะเวลาอย่างต่ำ 1 ปี หรือไม่
 ฟังดูยากไหมครับ?
-งานนี้เรียกว่า &ldquo;การสัมภาษณ์งาน&rdquo;" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.notaboutcode.com/post/12-interviewer-bad-practices/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2017-11-18T12:04:02+07:00" />
-<meta property="article:modified_time" content="2017-11-18T12:04:02+07:00" />
-
-<meta itemprop="name" content="ปัญหาในการสัมภาษณ์งานโปรแกรมเมอร์">
-<meta itemprop="description" content="
+งานนี้เรียกว่า &ldquo;การสัมภาษณ์งาน&rdquo;">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.notaboutcode.com/post/12-interviewer-bad-practices/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2017-11-18T12:04:02+07:00">
+<meta property="article:modified_time" content="2017-11-18T12:04:02+07:00">
+<meta itemprop=name content="ปัญหาในการสัมภาษณ์งานโปรแกรมเมอร์">
+<meta itemprop=description content="
 ผมมีงานอันน่าท้าทายมาให้ทุกคนลองทำครับ
 ผมจะให้คุณคุยกับคนแปลกหน้าเป็นเวลา 1 ชั่วโมง
 หลังจากนั้นคุณจะต้องตัดสินใจว่า คุณอยากจะใช้เวลาร่วมกับคนคนนี้ 8 ชั่วโมงต่อวัน เป็นระยะเวลาอย่างต่ำ 1 ปี หรือไม่
 ฟังดูยากไหมครับ?
-งานนี้เรียกว่า &ldquo;การสัมภาษณ์งาน&rdquo;"><meta itemprop="datePublished" content="2017-11-18T12:04:02+07:00" />
-<meta itemprop="dateModified" content="2017-11-18T12:04:02+07:00" />
-<meta itemprop="wordCount" content="435">
-<meta itemprop="keywords" content="interview,recruitment,process,pitfalls," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="ปัญหาในการสัมภาษณ์งานโปรแกรมเมอร์"/>
-<meta name="twitter:description" content="
+งานนี้เรียกว่า &ldquo;การสัมภาษณ์งาน&rdquo;"><meta itemprop=datePublished content="2017-11-18T12:04:02+07:00">
+<meta itemprop=dateModified content="2017-11-18T12:04:02+07:00">
+<meta itemprop=wordCount content="435">
+<meta itemprop=keywords content="interview,recruitment,process,pitfalls,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="ปัญหาในการสัมภาษณ์งานโปรแกรมเมอร์">
+<meta name=twitter:description content="
 ผมมีงานอันน่าท้าทายมาให้ทุกคนลองทำครับ
 ผมจะให้คุณคุยกับคนแปลกหน้าเป็นเวลา 1 ชั่วโมง
 หลังจากนั้นคุณจะต้องตัดสินใจว่า คุณอยากจะใช้เวลาร่วมกับคนคนนี้ 8 ชั่วโมงต่อวัน เป็นระยะเวลาอย่างต่ำ 1 ปี หรือไม่
 ฟังดูยากไหมครับ?
-งานนี้เรียกว่า &ldquo;การสัมภาษณ์งาน&rdquo;"/>
-
-<!--[if lte IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
-<![endif]-->
-
-<!--[if lt IE 9]>
-  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
-
-
-
+งานนี้เรียกว่า &ldquo;การสัมภาษณ์งาน&rdquo;"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
 </head>
 <body>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/" class="logo">Not About Code</a>
-  </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Not About Code</a>
 </div>
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    <a href="/">
-        <li class="mobile-menu-item">Home</li>
-      </a><a href="/post/">
-        <li class="mobile-menu-item">Archives</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">Tags</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
-      </a><a href="/about/">
-        <li class="mobile-menu-item">About</li>
-      </a>
-  </ul>
-
-  
-
-
-</nav>
-
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
-  <a href="/" class="logo">Not About Code</a>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
 </div>
-
-
-
-
-
-<nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
-        <a class="menu-item-link" href="/">Home</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/post/">Archives</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">Tags</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/about/">About</a>
-      </li>
-  </ul>
-
-  
-  <a href="https://webring.wonderful.software#notaboutcode.com" title="วงแหวนเว็บ">
-    <img
-        alt="วงแหวนเว็บ"
-        width="32"
-        height="32"
-        src="https://webring.wonderful.software/webring.black.svg"
-    />
-  </a>
-</nav>
-
-
-
-
-    </header>
-
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">ปัญหาในการสัมภาษณ์งานโปรแกรมเมอร์</h1>
-
-      <div class="post-meta">
-        <span class="post-time"> 2017-11-18 </span>
-        <div class="post-category">
-            <a href="/categories/technical-leadership/"> Technical Leadership </a>
-            </div>
-        
-      </div>
-    </header>
-
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title"></h2>
-  <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#ทำไมถงเขยนเรองน">ทำไมถึงเขียนเรื่องนี้</a></li>
-    <li><a href="#ทมไมเหนความสำคญของการสมภาษณงาน">ทีมไม่เห็นความสำคัญของการสัมภาษณ์งาน</a></li>
-    <li><a href="#ไมกำหนดเกณฑการวดผลใหชดเจน">ไม่กำหนดเกณฑ์การวัดผลให้ชัดเจน</a></li>
-    <li><a href="#ผสมภาษณแตละคนมมาตรวดของเกณฑไมตรงกน">ผู้สัมภาษณ์แต่ละคนมีมาตรวัดของเกณฑ์ไม่ตรงกัน</a></li>
-    <li><a href="#ผสมภาษณไมมทกษะในการสมภาษณ">ผู้สัมภาษณ์ไม่มีทักษะในการสัมภาษณ์</a></li>
-    <li><a href="#ไมจดบนทก">ไม่จดบันทึก</a></li>
-    <li><a href="#ใหอำนาจผจดการในการตดสนใจ">ให้อำนาจผู้จัดการในการตัดสินใจ</a></li>
-    <li><a href="#สรป">สรุป</a></li>
-  </ul>
-</nav>
-  </div>
 </div>
-    <div class="post-content">
-      <p><img src="/img/covers/meeting-01.jpg" alt="Photo by Nik MacMillan on Unsplash"></p>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+<a href=https://webring.wonderful.software#notaboutcode.com title=วงแหวนเว็บ>
+<img alt=วงแหวนเว็บ width=32 height=32 src=https://webring.wonderful.software/webring.black.svg>
+</a>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>ปัญหาในการสัมภาษณ์งานโปรแกรมเมอร์</h1>
+<div class=post-meta>
+<span class=post-time> 2017-11-18 </span>
+<div class=post-category>
+<a href=/categories/technical-leadership/> Technical Leadership </a>
+</div>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title></h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#ทำไมถงเขยนเรองน>ทำไมถึงเขียนเรื่องนี้</a></li>
+<li><a href=#ทมไมเหนความสำคญของการสมภาษณงาน>ทีมไม่เห็นความสำคัญของการสัมภาษณ์งาน</a></li>
+<li><a href=#ไมกำหนดเกณฑการวดผลใหชดเจน>ไม่กำหนดเกณฑ์การวัดผลให้ชัดเจน</a></li>
+<li><a href=#ผสมภาษณแตละคนมมาตรวดของเกณฑไมตรงกน>ผู้สัมภาษณ์แต่ละคนมีมาตรวัดของเกณฑ์ไม่ตรงกัน</a></li>
+<li><a href=#ผสมภาษณไมมทกษะในการสมภาษณ>ผู้สัมภาษณ์ไม่มีทักษะในการสัมภาษณ์</a></li>
+<li><a href=#ไมจดบนทก>ไม่จดบันทึก</a></li>
+<li><a href=#ใหอำนาจผจดการในการตดสนใจ>ให้อำนาจผู้จัดการในการตัดสินใจ</a></li>
+<li><a href=#สรป>สรุป</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p><img src=/img/covers/meeting-01.jpg alt="Photo by Nik MacMillan on Unsplash"></p>
 <p>ผมมีงานอันน่าท้าทายมาให้ทุกคนลองทำครับ</p>
 <p>ผมจะให้คุณคุยกับคนแปลกหน้าเป็นเวลา 1 ชั่วโมง</p>
 <p>หลังจากนั้นคุณจะต้องตัดสินใจว่า คุณอยากจะใช้เวลาร่วมกับคนคนนี้ 8 ชั่วโมงต่อวัน เป็นระยะเวลาอย่างต่ำ 1 ปี หรือไม่</p>
 <p>ฟังดูยากไหมครับ?</p>
 <p>งานนี้เรียกว่า &ldquo;การสัมภาษณ์งาน&rdquo;</p>
-<h1 id="ทำไมถงเขยนเรองน">ทำไมถึงเขียนเรื่องนี้</h1>
+<h1 id=ทำไมถงเขยนเรองน>ทำไมถึงเขียนเรื่องนี้</h1>
 <p>ช่วงสามปีที่ผ่านมา ผมทำหน้าที่เป็นคนสัมภาษณ์งาน นับรวมๆกันน่าจะเกือบร้อยครั้งแล้ว</p>
-<p>เป็นอะไรที่ค่อนข้างแปลกใหม่ที่ต้องมาอยู่อีกฟากของโต้ะสัมภาษณ์ แต่ก็ทำให้เรียนรู้อะไรหลายๆอย่าง อย่างแรกก็คือ&hellip;</p>
+<p>เป็นอะไรที่ค่อนข้างแปลกใหม่ที่ต้องมาอยู่อีกฟากของโต้ะสัมภาษณ์ แต่ก็ทำให้เรียนรู้อะไรหลายๆอย่าง อย่างแรกก็คือ&mldr;</p>
 <blockquote>
 <p>การสัมภาษณ์งานให้มีประสิทธิภาพนี่มันยากเหี้ยๆเลยครับ</p>
 </blockquote>
@@ -211,17 +155,17 @@
 <p>ในบทความนี้ ผมจะยกตัวอย่างปัญหาที่พบเห็นได้บ่อยในกระบวนการสัมภาษณ์งาน พร้อมวิธีแก้ไข</p>
 <p>จุดประสงค์ของบทความนี้ คือให้คุณได้มองย้อนไปในการสัมภาษณ์งานของทีม ว่ายังมีจุดที่พัฒนาได้อีกหรือเปล่า</p>
 <p>เริ่มกันเลยครับ</p>
-<h1 id="ทมไมเหนความสำคญของการสมภาษณงาน">ทีมไม่เห็นความสำคัญของการสัมภาษณ์งาน</h1>
+<h1 id=ทมไมเหนความสำคญของการสมภาษณงาน>ทีมไม่เห็นความสำคัญของการสัมภาษณ์งาน</h1>
 <p>เรื่องแรก ผมอยากจะเน้นย้ำถึงความสำคัญของการสัมภาษณ์งานก่อน</p>
 <p>ถ้าถามว่าอะไรคือสิ่งที่สำคัญลำดับต้นๆในงานพัฒนาซอฟท์แวร์ ผมจะตอบอย่างมั่นใจว่าโปรแกรมเมอร์ ซึ่งผมเชื่อว่าผู้อ่านคงเห็นด้วยกับผม</p>
 <p>ดังนั้น ถ้าผมจะบอกว่า หนึ่งในกระบวนการที่สำคัญที่สุดในการพัฒนาซอฟท์แวร์ คือการคัดเลือกคนเข้ามาร่วมทีม คงเห็นด้วยกับผมนะครับ?</p>
 <p>ถ้าเราเริ่มต้นที่การคัดคนผิด จ้างคนที่ไม่เหมาะสมกับงานหรือกับทีมมา เราจะคาดหวังอะไรกับสิ่งที่ตามมาได้?</p>
-<p>ในฐานะผู้ร่วมทีม เราควรจะทำทุกอย่างให้กระบวนการนี้ออกมาดีที่สุด โดยไม่โบ้ยว่าเป็นหน้าที่ของ HR หรือผู้จัดการ  เพราะเรานั่นแหละ ที่จะได้รับผลกระทบจากการสัมภาษณืงานมากที่สุด</p>
-<h1 id="ไมกำหนดเกณฑการวดผลใหชดเจน">ไม่กำหนดเกณฑ์การวัดผลให้ชัดเจน</h1>
+<p>ในฐานะผู้ร่วมทีม เราควรจะทำทุกอย่างให้กระบวนการนี้ออกมาดีที่สุด โดยไม่โบ้ยว่าเป็นหน้าที่ของ HR หรือผู้จัดการ เพราะเรานั่นแหละ ที่จะได้รับผลกระทบจากการสัมภาษณืงานมากที่สุด</p>
+<h1 id=ไมกำหนดเกณฑการวดผลใหชดเจน>ไม่กำหนดเกณฑ์การวัดผลให้ชัดเจน</h1>
 <blockquote>
 <p>การสัมภาษณ์งานที่ล้มเหลว คือเมื่อสัมภาษณ์จบแล้ว ผู้สัมภาษณ์ตอบไม่ได้ ว่าจะจ้างหรือปฏิเสธ</p>
 </blockquote>
-<p>เหมือนเป็นเรื่องง่ายนะครับ แต่ถ้าใครเคยสัมภาษณ์งาน จะเจอกรณีนี้บ่อยมาก  สาเหตุหนึ่งคือทีม (หรือบริษัท) ไม่มีเกณฑ์ในการวัดให้ชัดเจน ว่าต้องการวัดอะไรจากผู้สมัคร</p>
+<p>เหมือนเป็นเรื่องง่ายนะครับ แต่ถ้าใครเคยสัมภาษณ์งาน จะเจอกรณีนี้บ่อยมาก สาเหตุหนึ่งคือทีม (หรือบริษัท) ไม่มีเกณฑ์ในการวัดให้ชัดเจน ว่าต้องการวัดอะไรจากผู้สมัคร</p>
 <p>ผลลัพธ์ที่ตามมา คือคนสัมภาษณ์ต้องนั่งเทียน หาคำถามเองตามความชอบ แล้วใช้ความรู้สึกตัดสินเอง</p>
 <p>การใช้ความรู้สึกตัดสินเป็นอะไรที่อันตรายมาก เพราะเราอาจได้คนนิสัยดีน่าคบหา แต่เขียนโค้ดไม่เป็น มานั่งอยู่ข้างๆและใส่บั๊กเข้าระบบรัวๆ</p>
 <p>การกำหนดเกณฑ์ควรจะละเอียดและชัดเจน ไม่ใช่ก็อบแปะมาจาก Job Description เช่น</p>
@@ -231,7 +175,7 @@
 <li>มีพื้นฐานด้าน Computer Science (เรื่องไหนบ้าง เอาครบสี่ปีเลยไหม?)</li>
 <li>รักการเรียนรู้ (คือต้องมีงานอดิเรกเป็นการเขียนโปรแกรมในช่วงวันหยุดหรืออย่างไร?)</li>
 <li>สามารถทำงานร่วมกับผู้อื่นได้ (คือไม่เถียง ไม่ทะเลาะกับเพื่อร่วมทีมเหรอ?)</li>
-<li>&hellip;</li>
+<li>&mldr;</li>
 </ul>
 <p>เกณฑ์ประเภทนี้ จะทำให้ผู้สมัครต้องนั่งเทียนเอง ทำให้เกณฑ์ของแต่ละคนไม่ตรงกัน</p>
 <p>นำมาเขียนใหม่ให้ละเอียด</p>
@@ -240,10 +184,10 @@
 <ul>
 <li>สามารถแก้ปัญหาที่ใช้ if/else กับ for/while loop หลายชั้นได้</li>
 <li>รู้จักแยกโค้ดเป็น Function เพื่อให้อ่านง่าย</li>
-<li>สามารถอธิบายได้ว่า Big O notation ของโปรแกรมคืออะไร ถ้าไม่ได้จบด้าน Computer Science มา  ก็ต้องอธิบายได้ว่าโค้ดบรรทัดไหนถูกเรียกใช้มากที่สุด และถูกเรียกใช้กี่ครั้ง</li>
+<li>สามารถอธิบายได้ว่า Big O notation ของโปรแกรมคืออะไร ถ้าไม่ได้จบด้าน Computer Science มา ก็ต้องอธิบายได้ว่าโค้ดบรรทัดไหนถูกเรียกใช้มากที่สุด และถูกเรียกใช้กี่ครั้ง</li>
 <li>อธิบาย HashTable, LinkedList, Array, Tree ได้ ว่าต่างกันยังไง เมื่อไรควรใช้อันไหน</li>
 <li>เขียน Recursive ง่ายๆ (เช่น Factorial) ได้ แปลงเป็น Iterative ได้</li>
-<li>&hellip;</li>
+<li>&mldr;</li>
 </ul>
 </li>
 <li>ด้าน Soft skill
@@ -251,13 +195,13 @@
 <li>มีตัวอย่างงานเขียนโปรแกรม นอกเหนือจาก Assignment ในวิชาเรียน</li>
 <li>สามารถยอมรับความผิดพลาดของตัวเองได้ และนำไปปรับปรุงแก้ไข</li>
 <li>กล้าที่จะเถียงถ้าตัวเองไม่ผิด</li>
-<li>&hellip;</li>
+<li>&mldr;</li>
 </ul>
 </li>
 </ul>
 <p>ซึ่งถ้าทีมมีเกณฑ์ตรงนี้ชัดเจน ผู้สัมภาษณ์จะสามารถออกแบบคำถามได้ง่าย</p>
 <p>และไม่ว่าใครจะสัมภาษณ์ เราก็มั่นใจได้ว่าคนที่รับเข้ามา จะมีมาตรฐานตรงตามที่เรากำหนดไว้</p>
-<h1 id="ผสมภาษณแตละคนมมาตรวดของเกณฑไมตรงกน">ผู้สัมภาษณ์แต่ละคนมีมาตรวัดของเกณฑ์ไม่ตรงกัน</h1>
+<h1 id=ผสมภาษณแตละคนมมาตรวดของเกณฑไมตรงกน>ผู้สัมภาษณ์แต่ละคนมีมาตรวัดของเกณฑ์ไม่ตรงกัน</h1>
 <blockquote>
 <p>&ldquo;เห้ย โหดไปรึเปล่า น้องเค้าก็เขียนโปรแกรมได้ ผิดนิดผิดหน่อยไม่เห็นต้องให้ตกเลย&rdquo;</p>
 </blockquote>
@@ -275,16 +219,16 @@
 <td>ให้เขียนโปรแกรมเพื่อนับจำนวนบรรทัดของไฟล์ทั้งหมดในโฟลเดอร์ โดยไม่นับบรรทัดว่างที่ไม่มีตัวอักษร</td>
 </tr>
 <tr>
-<td>&hellip;</td>
-<td>&hellip;</td>
+<td>&mldr;</td>
+<td>&mldr;</td>
 </tr>
 <tr>
 <td>สามารถยอมรับความผิดพลาดของตัวเองได้ และนำไปปรับปรุงแก้ไข</td>
 <td>ให้ยกตัวอย่างเวลาที่ทำโปรเจ็คที่มีบั้กหลุดถึงผู้ใช้ในครั้งล่าสุด และถามต่อว่ามีการจัดการกับข้อผิดพลาดนั้นอย่างไร</td>
 </tr>
 <tr>
-<td>&hellip;</td>
-<td>&hellip;</td>
+<td>&mldr;</td>
+<td>&mldr;</td>
 </tr>
 </tbody>
 </table>
@@ -297,12 +241,12 @@
 <li>เขียนโปรแกรมได้ไม่ทัน ได้แค่ส่วนของการอ่านไฟล์และโฟลเดอร์ แต่ไม่มีบั้กเลยเพราะเขียน Test case ตั้งแต่ก่อนเขียนโค้ดครบถ้วน</li>
 <li>ตอบเป็น CLI ได้ แต่เขียนเป็นโค้ดในภาษาอื่นๆไม่ได้ เช่น</li>
 </ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="k">for</span> file in <span class="sb">`</span>find . -type f<span class="sb">`</span><span class="p">;</span> <span class="k">do</span> cat <span class="nv">$file</span><span class="p">;</span> <span class="k">done</span> <span class="p">|</span> sed <span class="s1">&#39;/^\s*$/d&#39;</span> <span class="p">|</span> wc -l
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=k>for</span> file in <span class=sb>`</span>find . -type f<span class=sb>`</span><span class=p>;</span> <span class=k>do</span> cat <span class=nv>$file</span><span class=p>;</span> <span class=k>done</span> <span class=p>|</span> sed <span class=s1>&#39;/^\s*$/d&#39;</span> <span class=p>|</span> wc -l
 </code></pre></td></tr></table>
 </div>
 </div><p>อย่างนี้ผู้สัมภาษณ์คนไหนผ่านบ้างครับ?</p>
@@ -316,7 +260,7 @@
 <li>ให้ผู้สัมภาษณ์คนใหม่ๆมานั่งคู่กับคนที่สัมภาษณ์มานานแล้ว อย่างน้อยสัก 2-3 ครั้ง ก่อนสัมภาษณ์เอง เพื่อจะได้ปรับเกณฑ์ให้ตรงกันทั้งทีม (เหมือน Pair Programming)</li>
 <li>ให้มีผู้สัมภาษณ์มากกว่าหนึ่งคน และส่งผลการสัมภาษณ์พร้อมเหตุผลแยกกัน แล้วค่อยมานั่งดูด้วยกันทีหลังว่าขัดแย้งกันหรือเปล่า</li>
 </ol>
-<h1 id="ผสมภาษณไมมทกษะในการสมภาษณ">ผู้สัมภาษณ์ไม่มีทักษะในการสัมภาษณ์</h1>
+<h1 id=ผสมภาษณไมมทกษะในการสมภาษณ>ผู้สัมภาษณ์ไม่มีทักษะในการสัมภาษณ์</h1>
 <blockquote>
 <p>การสัมภาษณ์ที่ล้มเหลวสุดๆ คือหลังสัมภาษณ์เสร็จ ผู้สมัครไม่อยากทำงานในบริษัทนี้แล้ว</p>
 </blockquote>
@@ -332,24 +276,24 @@
 <p>กรณีแย่ที่สุดคือสัมภาษณ์เสร็จปุ๊บ อยากรับคนนี้เข้าทำงาน แต่ผู้สมัครไม่อยากทำงานด้วยแล้ว เพราะคนสัมภาษณ์ทำตัวห่วยมาก</p>
 <p>ไม่จบแค่นั้น ผู้สมัครมีเพื่อน มีเฟสบุ้ค เวลาคนบ่น เค้าบ่นเหมาะรวมทั้งบริษัทนะครับ ฉาวโฉ่กันเลยทีเดียว หาคนยากกว่าเดิมอีก</p>
 <p>เพื่อหลีกเลี่ยงข้อนี้ ทีมควรจะมีกระบวนการฝึกอบรมคนในทีมก่อนให้เป็นผู้สัมภาษณ์จริง มีการซ้อมเพื่อดูว่าผู้สัมภาษณ์ทำได้ดีหรือไม่ และมีอะไรที่จะต้องปรับปรุงบ้าง</p>
-<h1 id="ไมจดบนทก">ไม่จดบันทึก</h1>
+<h1 id=ไมจดบนทก>ไม่จดบันทึก</h1>
 <p>ถ้ามีผู้สัมภาษณ์มากกว่าหนึ่งคน แล้วมีความเห็นไม่ตรงกัน สุดท้ายจะต้องมานั่งคุยกันเพื่อหาข้อตกลง</p>
 <p>ตรงนี้ การจดบันทึกจะมีประโยชน์มาก เพราะกว่าจะได้นั่งคุยกัน เวลาอาจผ่านไปหลายวันแล้ว เชื่อผมเถอะ ลืมแน่นอน ยิ่งถ้าสัมภาษณ์หลายคนระหว่างช่วงนั้น ดีไม่ดีจะจำสลับกันอีก</p>
 <p>อย่างน้อย ที่ต้องจดไว้ก็คือโค้ดที่เขียนและคำตอบครับ</p>
 <p>เวลาผู้สัมภาษณ์คนอื่นถามว่าทำไมถึงตัดสินใจอย่างนั้น เราจะได้มีข้อมูลให้ทีมสัมภาษณ์ช่วยกันตัดสินใจได้</p>
 <p>หรือถ้าผู้สมัครไม่เห็นด้วยกับผลการตัดสินและร้องเรียนมา เราก็จะมีข้อมูลชี้แจงด้วย</p>
-<h1 id="ใหอำนาจผจดการในการตดสนใจ">ให้อำนาจผู้จัดการในการตัดสินใจ</h1>
+<h1 id=ใหอำนาจผจดการในการตดสนใจ>ให้อำนาจผู้จัดการในการตัดสินใจ</h1>
 <p>ถึงแม้จะมีเกณฑ์ชัดเจน แต่หากผู้มีอำนาจสามารถล็อบบี้ให้จ้างเลย แม้ไม่ผ่านเกณฑ์ ไอ้ที่ทำไปทั้งหมดข้างต้นทั้งหมดจะสูญเปล่าครับ</p>
 <p>ฟังดูเหมือนตลกร้าย แต่ผู้จัดการหรือหัวหน้าทีมหลายคนทำแบบนั้นจริงๆครับ</p>
 <p>เพราะเดี๋ยวนี้โปรแกรมเมอร์ดีๆหายาก ถ้าจะรอคนที่ผ่านเกณฑ์ อาจจะต้องรอหลายเดือนกว่าจะเจอ ฝั่งผู้จัดการหลายๆคนจึงอยากเอาคนใส่เข้ามาให้เร็วที่สุด โดยไม่คิดถึงเรื่องคุณภาพ</p>
 <p>ตัวอย่างพอเป็นน้ำจิ้มครับ</p>
 <blockquote>
 <p>&ldquo;ผมว่าคนนี้โอเคแล้วนะ ก็พอเขียนโปรแกรมได้นิ แหม จะให้เขียนได้ถูกหมดนี่เป็นไปไม่ได้หรอก&rdquo;
-<br /><br />
+<br><br>
 &ldquo;เฮ้ย คุณคาดหวังมากไปเปล่า เด็กจบใหม่เองนะ หยวนๆหน่อยเถอะ&rdquo;
-<br /><br />
+<br><br>
 &ldquo;ถึงเค้าจะเขียนโปรแกรมไม่ได้เลย แต่เค้าตอบคำถามอื่นๆดีมากเลยนะ พูดจาฉะฉาน เอาเข้ามาแล้วให้เวลาเค้าเรียนรู้หน่อยเถอะ&rdquo;
-<br /><br />
+<br><br>
 &ldquo;คุณปฏิเสธอไปกี่คนแล้ว? ถ้าไม่รับคนนี้ เราก็มีคนไม่พอปิดโปรเจ็คนะ คุณรับผิดชอบไหวเหรอ&rdquo;</p>
 </blockquote>
 <p>พอเอาคนที่ทำงานไม่ได้มา ต้องเสียเวลาเทรนใหม่ ใส่บั้กเข้าระบบ เขียนโค้ดแล้วอ่านไม่รู้เรื่อง</p>
@@ -362,157 +306,97 @@
 <p>อุ้ย มือลั่น ตอบแบบนี้ครับ</p>
 <blockquote>
 <p>นี่เป็นเกณฑ์ที่ทุกคนในทีมตกลงกันครับ เราเช็คกันแล้วว่าไม่ได้สูงไป ถ้าหัวหน้าคิดว่าเกณฑ์สูงไป อยากให้หัวหน้าฟังความเห็นคนในทีมให้ครบก่อนนะครับ
-<br /><br />
+<br><br>
 ส่วนเรื่องโปรเจ็คเลท ถ้าเราเอาคนที่ไม่เหมาะกับงานเข้ามา ยังไงก็เลทอยู่ดี พอไปถึงจุดนั้น เราจะเปลี่ยนคนก็ไม่ได้แล้ว จะยิ่งมีปัญหาหนักกว่าเดิมนะครับ</p>
 </blockquote>
 <p>อันนี้ผมเข้าใจนะว่าที่ไทยอาจจะยากหน่อย เพราะบางบริษัทหัวหน้ายิ่งใหญ่เหลือเกิน เถียงไม่ได้ แต่เรื่องบางเรื่องที่มีผลกระทบหนักๆ เราไม่ควรจะนิ่งเฉยไม่ดูดำดูดี</p>
 <p>สำหรับคนที่อึดอัด ถ้าคุณขึ้นถึงระดับผู้ที่มีอำนาจแล้ว อย่าทำแบบนี้เลยครับ ไม่งาม คนไม่ด่าต่อหน้าก็ด่าลับหลัง</p>
-<h1 id="สรป">สรุป</h1>
+<h1 id=สรป>สรุป</h1>
 <p>งานสัมภาษณ์เป็นงานที่ยากและมีผลกระทบต่อทีมมาก ถ้าพลาดรับคนผิดเข้ามา ต้องอยู่ด้วยกันนานเป็นปี ถ้าพลาดคนที่เหมาะสมไป ก็อาจต้องรออีกหลายเดือน</p>
-<p>ผมเข้าใจว่า<a href="https://blog.panjmp.com/%E0%B8%AA%E0%B9%88%E0%B8%AD%E0%B8%87%E0%B8%9B%E0%B8%B1%E0%B8%8D%E0%B8%AB%E0%B8%B2%E0%B8%A7%E0%B8%B4%E0%B8%81%E0%B8%A4%E0%B8%95%E0%B8%B4%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%81%E0%B8%81%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%A1%E0%B8%AD%E0%B8%A3%E0%B9%8C%E0%B9%84%E0%B8%97%E0%B8%A2-%E0%B9%81%E0%B8%81%E0%B9%89%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%84%E0%B8%A3%E0%B8%94%E0%B8%B5-48dde2e49da6">ตอนนี้หาโปรแกรมเมอร์ดีๆยาก</a> แต่เราต้องมองถึงผลกระทบในระยะยาว เพราะการได้คนที่ไม่เหมาะสมเข้าทีม จะส่งผลกระทบต่อเนื่องไปเป็นปี การอดทนรอไปอีกเดือนสองเดือนจะมีผลดีในระยะยาวมากกว่า</p>
+<p>ผมเข้าใจว่า<a href=https://blog.panjmp.com/%E0%B8%AA%E0%B9%88%E0%B8%AD%E0%B8%87%E0%B8%9B%E0%B8%B1%E0%B8%8D%E0%B8%AB%E0%B8%B2%E0%B8%A7%E0%B8%B4%E0%B8%81%E0%B8%A4%E0%B8%95%E0%B8%B4%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%81%E0%B8%81%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%A1%E0%B8%AD%E0%B8%A3%E0%B9%8C%E0%B9%84%E0%B8%97%E0%B8%A2-%E0%B9%81%E0%B8%81%E0%B9%89%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%84%E0%B8%A3%E0%B8%94%E0%B8%B5-48dde2e49da6>ตอนนี้หาโปรแกรมเมอร์ดีๆยาก</a> แต่เราต้องมองถึงผลกระทบในระยะยาว เพราะการได้คนที่ไม่เหมาะสมเข้าทีม จะส่งผลกระทบต่อเนื่องไปเป็นปี การอดทนรอไปอีกเดือนสองเดือนจะมีผลดีในระยะยาวมากกว่า</p>
 <p>ดังนั้น เป็นหน้าที่ของทุกคนในทีมที่ต้องช่วยกันให้กระบวนการสัมภาษณ์ดีที่สุด</p>
 <p>เรื่องแรกที่ทีมสัมภาษณ์ควรตกลงร่วมกัน คือกเกณฑ์การวัดผล และมาตรวัดของแต่ละคน ทุกคนควรมีสองอย่างนี้ตรงกัน</p>
 <p>หากมีผู้สัมภาษณ์ใหม่เพิ่ม ต้องมีการอบรมและโค้ชให้ดีก่อนส่งไปสัมภาษณ์จริง ฝึกให้ทุกคนจดบันทึก เพื่อให้มั่นใจว่าการตัดสินใจนั้นอยู่บนข้อมูลที่ถูกต้อง</p>
 <p>และท้ายที่สุด อย่ายอมให้หัวหน้ามาบีบให้เปลี่ยนเกณฑ์ เพราะเราคือคนที่ได้รับผลกระทบจากการจ้างงานที่ผิดพลาดมากที่สุด</p>
-
-
-      
-      <div  class="fb-page"
-            data-href="https://www.facebook.com/notaboutcode/"
-            data-tabs=""
-            data-small-header="false"
-            data-adapt-container-width="true"
-            data-hide-cover="false"
-            data-show-facepile="true">
-
-            <blockquote cite="https://www.facebook.com/notaboutcode/" class="fb-xfbml-parse-ignore">
-              <a href="https://www.facebook.com/notaboutcode/">Not about code</a>
-            </blockquote>
-      </div>
-
-    </div>
-
-    
-    <div id="fb-root"></div>
-
-    <div class="post-copyright">
-  <p class="copyright-item">
-    <span class="item-title"></span>
-    <span class="item-content">ijemmy</span>
-  </p>
-  <p class="copyright-item">
-    <span class="item-title"></span>
-    <span class="item-content">
-        2017-11-18
-        
-    </span>
-  </p>
-  
-  <p class="copyright-item">
-    <span class="item-title"></span>
-    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
-  </p>
+<div class=fb-page data-href=https://www.facebook.com/notaboutcode/ data-tabs data-small-header=false data-adapt-container-width=true data-hide-cover=false data-show-facepile=true>
+<blockquote cite=https://www.facebook.com/notaboutcode/ class=fb-xfbml-parse-ignore>
+<a href=https://www.facebook.com/notaboutcode/>Not about code</a>
+</blockquote>
 </div>
-<footer class="post-footer">
-      <div class="post-tags">
-          <a href="/tags/interview/">interview</a>
-          <a href="/tags/recruitment/">recruitment</a>
-          <a href="/tags/process/">process</a>
-          <a href="/tags/pitfalls/">pitfalls</a>
-          </div>
-      <div class="fb-comments" data-numposts="5"></div>
-      
-      <nav class="post-nav">
-        <a class="prev" href="/post/13-behavioral-interview/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">สัมภาษณ์งานด้วย Behavioral Interview</span>
-            <span class="prev-text nav-mobile"></span>
-          </a>
-        <a class="next" href="/post/11-bulkhead/">
-            <span class="next-text nav-default">ปกป้องระบบไม่ให้ล่มหมดด้วย Bulkhead</span>
-            <span class="next-text nav-mobile"></span>
-            <i class="iconfont icon-right"></i>
-          </a>
-      </nav>
-    </footer>
-  </article>
-        </div>
-        
-
-  
-
-  
-
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="social-links">
-      <a href="https://www.facebook.com/notaboutcode/" class="iconfont icon-facebook" title="facebook"></a>
-  <a href="https://www.notaboutcode.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-
-<div class="copyright">
-  <span class="power-by">
-    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
-  </span>
-  <span class="division">|</span>
-  <span class="theme-info">
-     - 
-    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
-  </span>
-
-  
-
-  <span class="copyright-year">
-    &copy; 
-    2017 - 
-    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
-  </span>
+<div id=fb-root></div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content>ijemmy</span>
+</p>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content>
+2017-11-18
+</span>
+</p>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
+</p>
 </div>
-
-    </footer>
-
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
-    </div>
-  </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-
-
-
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-108239205-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-
-
-
-
-
-
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/interview/>interview</a>
+<a href=/tags/recruitment/>recruitment</a>
+<a href=/tags/process/>process</a>
+<a href=/tags/pitfalls/>pitfalls</a>
+</div>
+<div class=fb-comments data-numposts=5></div>
+<nav class=post-nav>
+<a class=prev href=/post/13-behavioral-interview/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">สัมภาษณ์งานด้วย Behavioral Interview</span>
+<span class="prev-text nav-mobile"></span>
+</a>
+<a class=next href=/post/11-bulkhead/>
+<span class="next-text nav-default">ปกป้องระบบไม่ให้ล่มหมดด้วย Bulkhead</span>
+<span class="next-text nav-mobile"></span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
+<a href=https://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+%!(EXTRA string=<a class=hexo-link href=https://gohugo.io>Hugo</a>)
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+-
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<span class=copyright-year>
+&copy;
+2017 -
+2025<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<script>(function(b,c,d){var a,e=b.getElementsByTagName(c)[0];if(b.getElementById(d))return;a=b.createElement(c),a.id=d,a.src='https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676',e.parentNode.insertBefore(a,e)})(document,'script','facebook-jssdk')</script>
 </body>
 </html>

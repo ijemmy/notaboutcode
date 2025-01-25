@@ -1,68 +1,31 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>reliability on Not About Code - Technical Leadership</title>
-    <link>https://www.notaboutcode.com/tags/reliability/</link>
-    <description>Recent content in reliability on Not About Code - Technical Leadership</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>th</language>
-    <lastBuildDate>Sun, 12 Nov 2017 12:04:02 +0700</lastBuildDate><atom:link href="https://www.notaboutcode.com/tags/reliability/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>ปกป้องระบบไม่ให้ล่มหมดด้วย Bulkhead</title>
-      <link>https://www.notaboutcode.com/post/11-bulkhead/</link>
-      <pubDate>Sun, 12 Nov 2017 12:04:02 +0700</pubDate>
-      
-      <guid>https://www.notaboutcode.com/post/11-bulkhead/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/ship-01.jpg&#34; alt=&#34;Photo by Abraham Wiebe, from Unsplash.com&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Bulkhead เป็นเทคนิคการออกแบบที่เหมาะกับ Critical System คือ ถ้าล่มปุ๊บ คนในองค์กรจะไม่สามารถทำงานต่อได้เลย&lt;/p&gt;
-&lt;p&gt;ถ้าใครเปิดดิกดู ศัพท์นี้จริงๆใช้เรียกการออกแบบพาหนะครับ&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Bulkhead (n.) a dividing wall or barrier between separate compartments inside a ship, aircraft, or other vehicle.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;ไอเดียของ Bulkhead คือการออกแบบให้พาหนะแยกออกเป็นส่วนๆ (Compartmentalisation) หากมีส่วนใดส่วนหนึ่งมีปัญหา ผลกระทบจะต้องไม่รุนแรงจนทำให้ทั้งพาหนะล่มหมด&lt;/p&gt;
-&lt;p&gt;ยกตัวอย่างเช่น สมมติว่าเรือของเรามีจุดรั่วจุดหนึ่ง หากเราไม่ได้มีการแบ่งโซนเป็นส่วน น้ำจะกระจายไปทั่วท้องเรือ เรือก็จะจมแน่นอน&lt;/p&gt;
-&lt;p&gt;การใช้ Bulkhead คือการกั้นส่วนท้องเรือออกเป็นส่วนๆ หากน้ำรั่วขึ้นมา น้ำก็จะเข้ามาจนเต็มแค่ส่วนหนึ่งๆ โดยไม่หนักพอทำให้เรือล่มทั้งลำ (ถ้ายังนึกภาพไม่ออก ลองดู&lt;a href=&#34;https://www.google.nl/search?dcr=0&amp;amp;biw=1832&amp;amp;bih=989&amp;amp;tbm=isch&amp;amp;sa=1&amp;amp;q=bulkhead&amp;amp;oq=bulkhead&#34;&gt;ภาพในกูเกิ้ล&lt;/a&gt;ครับ)&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>ปกป้องเซอร์วิซจากผู้ใช้มักมากด้วย Throttling</title>
-      <link>https://www.notaboutcode.com/post/10-throttle/</link>
-      <pubDate>Thu, 09 Nov 2017 12:04:02 +0700</pubDate>
-      
-      <guid>https://www.notaboutcode.com/post/10-throttle/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/limit-01.jpg&#34; alt=&#34;Photo by Ksenia Kudelkina, from Unsplash.com&#34;&gt;&lt;/p&gt;
-&lt;p&gt;ลองนึกภาพว่าเรามีระบบที่ถูกออกแบบเป็น Service-Oriented Architecture (SOA)&lt;/p&gt;
-&lt;p&gt;ในบรรดาเซอร์วิซทั้งหมด จะมีบางเซอร์วิซทีเป็น Dependency ของเซอร์วิซอื่นๆ ผมจะเรียกเซอร์วิซนี้ว่าเซอร์วิซ A&lt;/p&gt;
-&lt;p&gt;ถ้าเซอร์วิซ A พังขึ้นมา เซอร์วิซอื่นที่ต้องเรียกใช้ข้อมูลนี้ทั้งหมดก็จะทำงานไม่ได้&lt;/p&gt;
-&lt;p&gt;ตัวอย่างเช่นในภาพข้างล่าง หากเซอร์วิซ A พัง  เซอร์วิซ B, และ C จะทำงานไม่ได้&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Retry ยังไงให้ปลอดภัย</title>
-      <link>https://www.notaboutcode.com/post/05-retry/</link>
-      <pubDate>Sat, 14 Oct 2017 12:04:02 +0700</pubDate>
-      
-      <guid>https://www.notaboutcode.com/post/05-retry/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/spiral-stairs-01.jpg&#34; alt=&#34;Photo by Nick Morris, from Unsplash.com&#34;&gt;&lt;/p&gt;
-&lt;p&gt;วันนี้นั่งคุยกับเพื่อนเรื่อง Retry รู้สึกว่าเป็นหัวข้อที่น่าสนใจดี&lt;/p&gt;
-&lt;p&gt;โจทย์คือเรามี External service ที่ไม่ค่อยสเถียรเท่าไร เวลาส่ง Request ไป วันดีคืนดีก็อาจจะ:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;พังแบบส่งสาเหตุการพังกลับมาให้ เช่น 5xx พร้อม error code&lt;/li&gt;
-&lt;li&gt;พังแบบไม่มีอะไรตอบกลับมา ซึ่งสาเหตุอาจจะมาจากที่ระบบนั้นเดี้ยงไประหว่างการทำงาน หรือเน็ตเวิร์คเน่า&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;กรณีนี้ เรามีหลายทางเลือก&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;เลือกที่จะจบการทำงาน แล้วแสดงผลให้ฝั่งผู้ใช้ของเรา (Client) รู้ว่าระบบมีปัญหา พร้อม Error code ซึ่งก็ถือว่ายอมรับได้ เพราะหากเราจำเป็นต้องการใช้ข้อมูลจาก External Service ยังไงก็ทำอะไรไม่ได้&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;ทำการ Retry คือการส่ง Request ซ้ำโดยอัตโนมัติ หากเกิดข้อผิดพลาดในฝั่งของ External service ที่เราเรียกใช้&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Decouple ให้สองระบบเรียกกับแบบ Asynchronous โดยเอา Request ที่ไม่สำเร็จของเราไปเก็บไว้ใน Queue แล้ว Retry ใหม่ในภายหลัง&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>reliability on Not About Code - Technical Leadership</title><link>https://www.notaboutcode.com/tags/reliability/</link><description>Recent content in reliability on Not About Code - Technical Leadership</description><generator>Hugo -- gohugo.io</generator><language>th</language><lastBuildDate>Sun, 12 Nov 2017 12:04:02 +0700</lastBuildDate><atom:link href="https://www.notaboutcode.com/tags/reliability/index.xml" rel="self" type="application/rss+xml"/><item><title>ปกป้องระบบไม่ให้ล่มหมดด้วย Bulkhead</title><link>https://www.notaboutcode.com/post/11-bulkhead/</link><pubDate>Sun, 12 Nov 2017 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/11-bulkhead/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/ship-01.jpg" alt="Photo by Abraham Wiebe, from Unsplash.com">&lt;/p>
+&lt;p>Bulkhead เป็นเทคนิคการออกแบบที่เหมาะกับ Critical System คือ ถ้าล่มปุ๊บ คนในองค์กรจะไม่สามารถทำงานต่อได้เลย&lt;/p>
+&lt;p>ถ้าใครเปิดดิกดู ศัพท์นี้จริงๆใช้เรียกการออกแบบพาหนะครับ&lt;/p>
+&lt;blockquote>
+&lt;p>Bulkhead (n.) a dividing wall or barrier between separate compartments inside a ship, aircraft, or other vehicle.&lt;/p>
+&lt;/blockquote>
+&lt;p>ไอเดียของ Bulkhead คือการออกแบบให้พาหนะแยกออกเป็นส่วนๆ (Compartmentalisation) หากมีส่วนใดส่วนหนึ่งมีปัญหา ผลกระทบจะต้องไม่รุนแรงจนทำให้ทั้งพาหนะล่มหมด&lt;/p>
+&lt;p>ยกตัวอย่างเช่น สมมติว่าเรือของเรามีจุดรั่วจุดหนึ่ง หากเราไม่ได้มีการแบ่งโซนเป็นส่วน น้ำจะกระจายไปทั่วท้องเรือ เรือก็จะจมแน่นอน&lt;/p>
+&lt;p>การใช้ Bulkhead คือการกั้นส่วนท้องเรือออกเป็นส่วนๆ หากน้ำรั่วขึ้นมา น้ำก็จะเข้ามาจนเต็มแค่ส่วนหนึ่งๆ โดยไม่หนักพอทำให้เรือล่มทั้งลำ (ถ้ายังนึกภาพไม่ออก ลองดู&lt;a href="https://www.google.nl/search?dcr=0&amp;amp;biw=1832&amp;amp;bih=989&amp;amp;tbm=isch&amp;amp;sa=1&amp;amp;q=bulkhead&amp;amp;oq=bulkhead">ภาพในกูเกิ้ล&lt;/a>ครับ)&lt;/p></description></item><item><title>ปกป้องเซอร์วิซจากผู้ใช้มักมากด้วย Throttling</title><link>https://www.notaboutcode.com/post/10-throttle/</link><pubDate>Thu, 09 Nov 2017 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/10-throttle/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/limit-01.jpg" alt="Photo by Ksenia Kudelkina, from Unsplash.com">&lt;/p>
+&lt;p>ลองนึกภาพว่าเรามีระบบที่ถูกออกแบบเป็น Service-Oriented Architecture (SOA)&lt;/p>
+&lt;p>ในบรรดาเซอร์วิซทั้งหมด จะมีบางเซอร์วิซทีเป็น Dependency ของเซอร์วิซอื่นๆ ผมจะเรียกเซอร์วิซนี้ว่าเซอร์วิซ A&lt;/p>
+&lt;p>ถ้าเซอร์วิซ A พังขึ้นมา เซอร์วิซอื่นที่ต้องเรียกใช้ข้อมูลนี้ทั้งหมดก็จะทำงานไม่ได้&lt;/p>
+&lt;p>ตัวอย่างเช่นในภาพข้างล่าง หากเซอร์วิซ A พัง เซอร์วิซ B, และ C จะทำงานไม่ได้&lt;/p></description></item><item><title>Retry ยังไงให้ปลอดภัย</title><link>https://www.notaboutcode.com/post/05-retry/</link><pubDate>Sat, 14 Oct 2017 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/05-retry/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/spiral-stairs-01.jpg" alt="Photo by Nick Morris, from Unsplash.com">&lt;/p>
+&lt;p>วันนี้นั่งคุยกับเพื่อนเรื่อง Retry รู้สึกว่าเป็นหัวข้อที่น่าสนใจดี&lt;/p>
+&lt;p>โจทย์คือเรามี External service ที่ไม่ค่อยสเถียรเท่าไร เวลาส่ง Request ไป วันดีคืนดีก็อาจจะ:&lt;/p>
+&lt;ol>
+&lt;li>พังแบบส่งสาเหตุการพังกลับมาให้ เช่น 5xx พร้อม error code&lt;/li>
+&lt;li>พังแบบไม่มีอะไรตอบกลับมา ซึ่งสาเหตุอาจจะมาจากที่ระบบนั้นเดี้ยงไประหว่างการทำงาน หรือเน็ตเวิร์คเน่า&lt;/li>
+&lt;/ol>
+&lt;p>กรณีนี้ เรามีหลายทางเลือก&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>เลือกที่จะจบการทำงาน แล้วแสดงผลให้ฝั่งผู้ใช้ของเรา (Client) รู้ว่าระบบมีปัญหา พร้อม Error code ซึ่งก็ถือว่ายอมรับได้ เพราะหากเราจำเป็นต้องการใช้ข้อมูลจาก External Service ยังไงก็ทำอะไรไม่ได้&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>ทำการ Retry คือการส่ง Request ซ้ำโดยอัตโนมัติ หากเกิดข้อผิดพลาดในฝั่งของ External service ที่เราเรียกใช้&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Decouple ให้สองระบบเรียกกับแบบ Asynchronous โดยเอา Request ที่ไม่สำเร็จของเราไปเก็บไว้ใน Queue แล้ว Retry ใหม่ในภายหลัง&lt;/p>
+&lt;/li>
+&lt;/ol></description></item></channel></rss>

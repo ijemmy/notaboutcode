@@ -1,208 +1,152 @@
-<!DOCTYPE html>
-<html lang="th">
+<!doctype html><html lang=th>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>วิ่งไล่ตามเทคโนโลยีไม่ทัน ทำยังไงดี - Not About Code - Technical Leadership</title>
-  <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
-
-
-<meta name="author" content="ijemmy" /><meta name="description" content="พอโปรแกรมเมอร์มีประสบการณ์มากขึ้น ก็จะค้นพบว่าตัวเองมีสิ่งที่ยังไม่รู้มากขึ้น
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>วิ่งไล่ตามเทคโนโลยีไม่ทัน ทำยังไงดี - Not About Code - Technical Leadership</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="ijemmy"><meta name=description content="พอโปรแกรมเมอร์มีประสบการณ์มากขึ้น ก็จะค้นพบว่าตัวเองมีสิ่งที่ยังไม่รู้มากขึ้น
 ผมคิดว่าหลายๆคนก็คงคล้ายผม คือจะอยากอ่าน อยากรู้ และอยากลองไปซะทุกอย่าง
 ในอดีต อาจจะทำแบบนี้ได้ เพราะเทคโนโลยีแต่ก่อนไม่ได้เติบโตเร็วแบบทุกวันนี้
 ผมเองเป็นคนนึงที่พยายามตามเทคโนโลยีให้ได้มากที่สุด แต่พอถึงจุดนึงก็ต้องยอมรับ ว่าปัจจุบันเทคโนโลยีที่วิ่งเร็วกว่าเรามาก
 ถ้าตามแบบไม่มีหลักอะไรเลย ตามยังไงก็ไม่ไหว
-" /><meta name="keywords" content="Hugo, theme, even" />
-
-
-
-
-
-
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
-
-
-<link rel="canonical" href="https://www.notaboutcode.com/post/24-catching-up-with-tech/" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-
-
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/custom.css">
-
-
-<meta property="og:title" content="วิ่งไล่ตามเทคโนโลยีไม่ทัน ทำยังไงดี" />
+"><meta name=keywords content="Hugo,theme,even">
+<meta name=generator content="Hugo 0.89.4 with theme even">
+<link rel=canonical href=https://www.notaboutcode.com/post/24-catching-up-with-tech/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<link rel=stylesheet href=/css/custom.css>
+<meta property="og:title" content="วิ่งไล่ตามเทคโนโลยีไม่ทัน ทำยังไงดี">
 <meta property="og:description" content="
 พอโปรแกรมเมอร์มีประสบการณ์มากขึ้น ก็จะค้นพบว่าตัวเองมีสิ่งที่ยังไม่รู้มากขึ้น
 ผมคิดว่าหลายๆคนก็คงคล้ายผม คือจะอยากอ่าน อยากรู้ และอยากลองไปซะทุกอย่าง
 ในอดีต อาจจะทำแบบนี้ได้ เพราะเทคโนโลยีแต่ก่อนไม่ได้เติบโตเร็วแบบทุกวันนี้
 ผมเองเป็นคนนึงที่พยายามตามเทคโนโลยีให้ได้มากที่สุด แต่พอถึงจุดนึงก็ต้องยอมรับ ว่าปัจจุบันเทคโนโลยีที่วิ่งเร็วกว่าเรามาก
-ถ้าตามแบบไม่มีหลักอะไรเลย ตามยังไงก็ไม่ไหว" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.notaboutcode.com/post/24-catching-up-with-tech/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2018-06-16T12:04:02+07:00" />
-<meta property="article:modified_time" content="2018-06-16T12:04:02+07:00" />
-
-<meta itemprop="name" content="วิ่งไล่ตามเทคโนโลยีไม่ทัน ทำยังไงดี">
-<meta itemprop="description" content="
+ถ้าตามแบบไม่มีหลักอะไรเลย ตามยังไงก็ไม่ไหว">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.notaboutcode.com/post/24-catching-up-with-tech/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2018-06-16T12:04:02+07:00">
+<meta property="article:modified_time" content="2018-06-16T12:04:02+07:00">
+<meta itemprop=name content="วิ่งไล่ตามเทคโนโลยีไม่ทัน ทำยังไงดี">
+<meta itemprop=description content="
 พอโปรแกรมเมอร์มีประสบการณ์มากขึ้น ก็จะค้นพบว่าตัวเองมีสิ่งที่ยังไม่รู้มากขึ้น
 ผมคิดว่าหลายๆคนก็คงคล้ายผม คือจะอยากอ่าน อยากรู้ และอยากลองไปซะทุกอย่าง
 ในอดีต อาจจะทำแบบนี้ได้ เพราะเทคโนโลยีแต่ก่อนไม่ได้เติบโตเร็วแบบทุกวันนี้
 ผมเองเป็นคนนึงที่พยายามตามเทคโนโลยีให้ได้มากที่สุด แต่พอถึงจุดนึงก็ต้องยอมรับ ว่าปัจจุบันเทคโนโลยีที่วิ่งเร็วกว่าเรามาก
-ถ้าตามแบบไม่มีหลักอะไรเลย ตามยังไงก็ไม่ไหว"><meta itemprop="datePublished" content="2018-06-16T12:04:02+07:00" />
-<meta itemprop="dateModified" content="2018-06-16T12:04:02+07:00" />
-<meta itemprop="wordCount" content="428">
-<meta itemprop="keywords" content="Learning," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="วิ่งไล่ตามเทคโนโลยีไม่ทัน ทำยังไงดี"/>
-<meta name="twitter:description" content="
+ถ้าตามแบบไม่มีหลักอะไรเลย ตามยังไงก็ไม่ไหว"><meta itemprop=datePublished content="2018-06-16T12:04:02+07:00">
+<meta itemprop=dateModified content="2018-06-16T12:04:02+07:00">
+<meta itemprop=wordCount content="428">
+<meta itemprop=keywords content="Learning,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="วิ่งไล่ตามเทคโนโลยีไม่ทัน ทำยังไงดี">
+<meta name=twitter:description content="
 พอโปรแกรมเมอร์มีประสบการณ์มากขึ้น ก็จะค้นพบว่าตัวเองมีสิ่งที่ยังไม่รู้มากขึ้น
 ผมคิดว่าหลายๆคนก็คงคล้ายผม คือจะอยากอ่าน อยากรู้ และอยากลองไปซะทุกอย่าง
 ในอดีต อาจจะทำแบบนี้ได้ เพราะเทคโนโลยีแต่ก่อนไม่ได้เติบโตเร็วแบบทุกวันนี้
 ผมเองเป็นคนนึงที่พยายามตามเทคโนโลยีให้ได้มากที่สุด แต่พอถึงจุดนึงก็ต้องยอมรับ ว่าปัจจุบันเทคโนโลยีที่วิ่งเร็วกว่าเรามาก
-ถ้าตามแบบไม่มีหลักอะไรเลย ตามยังไงก็ไม่ไหว"/>
-
-<!--[if lte IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
-<![endif]-->
-
-<!--[if lt IE 9]>
-  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
-
-
-
+ถ้าตามแบบไม่มีหลักอะไรเลย ตามยังไงก็ไม่ไหว"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
 </head>
 <body>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/" class="logo">Not About Code</a>
-  </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Not About Code</a>
 </div>
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    <a href="/">
-        <li class="mobile-menu-item">Home</li>
-      </a><a href="/post/">
-        <li class="mobile-menu-item">Archives</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">Tags</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
-      </a><a href="/about/">
-        <li class="mobile-menu-item">About</li>
-      </a>
-  </ul>
-
-  
-
-
-</nav>
-
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
-  <a href="/" class="logo">Not About Code</a>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
 </div>
-
-
-
-
-
-<nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
-        <a class="menu-item-link" href="/">Home</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/post/">Archives</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">Tags</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/about/">About</a>
-      </li>
-  </ul>
-
-  
-  <a href="https://webring.wonderful.software#notaboutcode.com" title="วงแหวนเว็บ">
-    <img
-        alt="วงแหวนเว็บ"
-        width="32"
-        height="32"
-        src="https://webring.wonderful.software/webring.black.svg"
-    />
-  </a>
-</nav>
-
-
-
-
-    </header>
-
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">วิ่งไล่ตามเทคโนโลยีไม่ทัน ทำยังไงดี</h1>
-
-      <div class="post-meta">
-        <span class="post-time"> 2018-06-16 </span>
-        <div class="post-category">
-            <a href="/categories/career/"> Career </a>
-            </div>
-        
-      </div>
-    </header>
-
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title"></h2>
-  <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#ปญหาของการเรยนรในปจจบน">ปัญหาของการเรียนรู้ในปัจจุบัน</a></li>
-    <li><a href="#1-ตอบไดไหมวาเรยนรเรองนไปเพออะไร">1. ตอบได้ไหมว่าเรียนรู้เรื่องนี้ไปเพื่ออะไร</a></li>
-    <li><a href="#2-กรองเนอหาทเรยนดวยสองคำถาม">2. กรองเนื้อหาที่เรียนด้วยสองคำถาม</a></li>
-    <li><a href="#3-เชคหวขอและคณภาพกอน">3. เช็คหัวข้อและคุณภาพก่อน</a></li>
-    <li><a href="#4-เราตองการรเรองนลกแคไหน">4. เราต้องการรู้เรื่องนี้ลึกแค่ไหน</a></li>
-    <li><a href="#5-เซตเปาหมายเปนโปรเจคแทนทจะเซตเนอหา">5. เซ็ตเป้าหมายเป็นโปรเจ็คแทนที่จะเซ็ตเนื้อหา</a></li>
-    <li><a href="#6-สรางนสยพรอมกบเปาหมายในการเรยนร">6. สร้างนิสัยพร้อมกับเป้าหมายในการเรียนรู้</a></li>
-    <li><a href="#ลางเนอชอบลางยา">ลางเนื้อชอบลางยา</a></li>
-  </ul>
-</nav>
-  </div>
 </div>
-    <div class="post-content">
-      <p><img src="/img/covers/run-01.jpg" alt="Photo by Andy Beales on Unsplash"></p>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+<a href=https://webring.wonderful.software#notaboutcode.com title=วงแหวนเว็บ>
+<img alt=วงแหวนเว็บ width=32 height=32 src=https://webring.wonderful.software/webring.black.svg>
+</a>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>วิ่งไล่ตามเทคโนโลยีไม่ทัน ทำยังไงดี</h1>
+<div class=post-meta>
+<span class=post-time> 2018-06-16 </span>
+<div class=post-category>
+<a href=/categories/career/> Career </a>
+</div>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title></h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#ปญหาของการเรยนรในปจจบน>ปัญหาของการเรียนรู้ในปัจจุบัน</a></li>
+<li><a href=#1-ตอบไดไหมวาเรยนรเรองนไปเพออะไร>1. ตอบได้ไหมว่าเรียนรู้เรื่องนี้ไปเพื่ออะไร</a></li>
+<li><a href=#2-กรองเนอหาทเรยนดวยสองคำถาม>2. กรองเนื้อหาที่เรียนด้วยสองคำถาม</a></li>
+<li><a href=#3-เชคหวขอและคณภาพกอน>3. เช็คหัวข้อและคุณภาพก่อน</a></li>
+<li><a href=#4-เราตองการรเรองนลกแคไหน>4. เราต้องการรู้เรื่องนี้ลึกแค่ไหน</a></li>
+<li><a href=#5-เซตเปาหมายเปนโปรเจคแทนทจะเซตเนอหา>5. เซ็ตเป้าหมายเป็นโปรเจ็คแทนที่จะเซ็ตเนื้อหา</a></li>
+<li><a href=#6-สรางนสยพรอมกบเปาหมายในการเรยนร>6. สร้างนิสัยพร้อมกับเป้าหมายในการเรียนรู้</a></li>
+<li><a href=#ลางเนอชอบลางยา>ลางเนื้อชอบลางยา</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p><img src=/img/covers/run-01.jpg alt="Photo by Andy Beales on Unsplash"></p>
 <p>พอโปรแกรมเมอร์มีประสบการณ์มากขึ้น ก็จะค้นพบว่าตัวเองมีสิ่งที่ยังไม่รู้มากขึ้น</p>
 <p>ผมคิดว่าหลายๆคนก็คงคล้ายผม คือจะอยากอ่าน อยากรู้ และอยากลองไปซะทุกอย่าง</p>
 <p>ในอดีต อาจจะทำแบบนี้ได้ เพราะเทคโนโลยีแต่ก่อนไม่ได้เติบโตเร็วแบบทุกวันนี้</p>
 <p>ผมเองเป็นคนนึงที่พยายามตามเทคโนโลยีให้ได้มากที่สุด แต่พอถึงจุดนึงก็ต้องยอมรับ ว่าปัจจุบันเทคโนโลยีที่วิ่งเร็วกว่าเรามาก</p>
 <p>ถ้าตามแบบไม่มีหลักอะไรเลย ตามยังไงก็ไม่ไหว</p>
-<h1 id="ปญหาของการเรยนรในปจจบน">ปัญหาของการเรียนรู้ในปัจจุบัน</h1>
+<h1 id=ปญหาของการเรยนรในปจจบน>ปัญหาของการเรียนรู้ในปัจจุบัน</h1>
 <p>เพื่อให้เห็นภาพว่ามันไม่ไหวยังไง ผมขอยกหัวข้อที่ผมเคยศึกษาในช่วง 10 ปีที่ผ่านมา</p>
-<p>UX Research, UI Design, HTML/CSS, JavaScript, TypeScript, Web Performance Optimization, System Design, DDD, Design Patterns, System Architecture, Cloud Technologies (AWS), Docker, Linux CLI, Vim, Chrome Dev Tool, Distributed Systems, Algorithm, Network (L4, L7), PHP, NodeJS, Java, Spring, RESTEasy + JAX-RS, SQL, NoSQL, Shardings, Interview (Soft Skill/Technical), Security (OWASP + Architecture), Agile (Scrum, XP practices), CMMI, ITIL, DevOps (CI/CD, Culture, Process), Python, Elastic Search, Chef, ML/AI, Serverless Architecture, React Native, &hellip;</p>
+<p>UX Research, UI Design, HTML/CSS, JavaScript, TypeScript, Web Performance Optimization, System Design, DDD, Design Patterns, System Architecture, Cloud Technologies (AWS), Docker, Linux CLI, Vim, Chrome Dev Tool, Distributed Systems, Algorithm, Network (L4, L7), PHP, NodeJS, Java, Spring, RESTEasy + JAX-RS, SQL, NoSQL, Shardings, Interview (Soft Skill/Technical), Security (OWASP + Architecture), Agile (Scrum, XP practices), CMMI, ITIL, DevOps (CI/CD, Culture, Process), Python, Elastic Search, Chef, ML/AI, Serverless Architecture, React Native, &mldr;</p>
 <p>นี่แค่เท่าที่นึกออกในหัว ซึ่งยังไม่รวมฝั่ง Business Domain กับหัวข้ออื่นๆที่ไม่ Technical</p>
 <p>เหมือนจะเยอะ แต่ผมเรียนแบบเป็ดครับ จะลงลึกแค่ไม่กี่หัวข้อ (T-Shape) หลายหัวข้อผมไม่ได้ลงลึก แค่แตะกว้างๆ</p>
 <p>แต่ถึงไม่ลึก ช่วงหลังๆนี้ก็ไล่ตามไม่ไหวแล้วครับ เลยมานั่งตกตะกอนเรื่องนี้</p>
@@ -211,7 +155,7 @@
 <p>หลายๆคนมีความสุขกับการเรียนรู้เทคโนโลยีใหม่ๆ แต่ก็ต้องยอมรับว่าเรามีเวลาที่จำกัด เดี๋ยวอายุก็มากขึ้น ภาระในชีวิตก็จะมากขึ้นตาม เวลาก็จะน้อยลงเรื่อยๆ ทำอย่างไรถึงจะได้ผลลัพธ์มากที่สุดในเวลาที่จำกัด</p>
 <p>มองอีกมุม การเรียนรู้ของโปรแกรมเมอร์เป็น Optimization Problem ชนิดนึง</p>
 <p>บทความนี้จะมาแชร์แนวทางในการแก้ปัญหานี้ของผมครับ แน่นอนว่าคงไม่เหมาะกับทุกคน แต่น่าจะมีประโยชน์และนำไปปรับใช้ได้ครับ</p>
-<h1 id="1-ตอบไดไหมวาเรยนรเรองนไปเพออะไร">1. ตอบได้ไหมว่าเรียนรู้เรื่องนี้ไปเพื่ออะไร</h1>
+<h1 id=1-ตอบไดไหมวาเรยนรเรองนไปเพออะไร>1. ตอบได้ไหมว่าเรียนรู้เรื่องนี้ไปเพื่ออะไร</h1>
 <p>เรื่องแรกที่อยากให้คิดกันก่อนเริ่มเลยก็คือเราเรียนรู้หัวข้อหนึ่งๆไปเพื่ออะไร</p>
 <p>แต่ละคนมีแรงขับที่ต่างกันในอาการเอาเวลาส่วนตัวมาใช้กับการเรียนรู้ ไม่มีใครผิดใครถูก ตัวอย่างเช่น</p>
 <ol>
@@ -225,14 +169,14 @@
 <p>ส่วนตัว ผมคิดว่าคนอ่านก็คงมีข้อ 4 อยู่ในตัวเหมือนกัน ถึงมานั่งอ่านบทความนี้</p>
 <p>การเรียนรู้เทคโนโลยีหนึ่งๆนั้นมักจะมีแก่นหรือรูปแบบ (Pattern) ที่ถูกใช้ในเทคโนโลยีอื่นๆด้วย แม้จะเรียนรู้ไปแล้วไม่ได้ใช้โดยตรง แต่จะมีประโยชน์ทางอ้อม สิ่งที่เรียนรู้มันจะซึมเข้าไปอยู่ในสัญชาตญาณ (Intuition) ซึ่งจะส่งผลทางอ้อมต่อด้านอื่นๆด้วย</p>
 <p>เราจึงมักจะเห็นโปรแกรมเมอร์บางคนที่แก้ปัญหา ดีบั้ก หรือเรียนรู้อะไรต่างๆได้ไวมาก</p>
-<p>คนทั่วไปมักจะคิดว่าโปรแกรมเมอร์พวกนี้ฉลาด เรื่องนั้นผมไม่มั่นใจ  แต่ที่ผมมั่นใจชัวร์ๆคือโปรแกรมเมอร์ที่เก่งๆใช้เวลาส่วนตัวไปกับการเรียนรู้และฝึกฝนเยอะมาก</p>
+<p>คนทั่วไปมักจะคิดว่าโปรแกรมเมอร์พวกนี้ฉลาด เรื่องนั้นผมไม่มั่นใจ แต่ที่ผมมั่นใจชัวร์ๆคือโปรแกรมเมอร์ที่เก่งๆใช้เวลาส่วนตัวไปกับการเรียนรู้และฝึกฝนเยอะมาก</p>
 <p>แต่ไม่ใช่ทุกคนที่มีเวลาเยอะขนาดนั้น</p>
 <p>เราต้องมองในมุมของผลลัพธ์เทียบกับเวลา ว่าคุ้มกับเวลาที่เสียไปไหม (Return on Time Invested) ดังนั้น ก่อนจะเรียนรู้หรือใช้เวลากับอะไร ลองตั้งสติถามตัวเองดูก่อน ว่าเราจะเรียนรู้หัวข้อนี้ไปเพื่ออะไร</p>
 <p>ถ้าตอบไม่ได้ก็ควรจะเอาเวลาไปทำ(หรือเรียนรู้)อย่างอื่นแทน</p>
 <blockquote>
 <p>ลองทำอย่างแรกเลย คือคิดดูดีๆว่าควรจะอ่านบทความไปเพื่ออะไร ถ้าตอบไม่ได้ อาจจะต้องพิจารณาดูว่าอ่านต่อดีรึเปล่า</p>
 </blockquote>
-<h1 id="2-กรองเนอหาทเรยนดวยสองคำถาม">2. กรองเนื้อหาที่เรียนด้วยสองคำถาม</h1>
+<h1 id=2-กรองเนอหาทเรยนดวยสองคำถาม>2. กรองเนื้อหาที่เรียนด้วยสองคำถาม</h1>
 <p>แต่ก่อน เวลาผมเจอบทความหรือคอร์สออนไลน์ ผมแค่ถามตัวเองว่าสนใจไหม แล้วก็ลุยเลย</p>
 <p>ด้วยเวลาส่วนตัวที่น้อยลง ผมเริ่มต้องคิดก่อนอ่านว่าได้ประโยชน์แค่ไหน</p>
 <p>ปัญหาที่ตามมาคือแล้วประโยชน์ที่ว่านี่จะวัดยังไง แล้วต้องมีประโยชน์แค่ไหนถึงจะอ่าน</p>
@@ -242,15 +186,15 @@
 <li>อ่านแล้วอีก 3 ปี ความรู้นี้จะยังใช้งานได้ไหม?</li>
 </ol>
 <p>ถ้าตอบ &ldquo;ใช่&rdquo; ทั้งสองข้อ ก็ไปต่อเลย ไม่ต้องคิดอะไรมาก</p>
-<p>ถ้าคำตอบคือ&quot;ไม่&quot;ทั้งสองข้อ ก็ข้ามไปทำอย่างอื่นได้เลย</p>
+<p>ถ้าคำตอบคือ"ไม่"ทั้งสองข้อ ก็ข้ามไปทำอย่างอื่นได้เลย</p>
 <p>ถ้าตอบ &ldquo;ใช่&rdquo; แค่ในข้อที่ 2 ผมจะศึกษาแบบกว้าง ไม่ลงลึก เพราะถ้าเรียนรุ้ไปแล้วไม่ได้ใช้ ไม่กี่เดือนก็ลืมแล้ว</p>
-<h1 id="3-เชคหวขอและคณภาพกอน">3. เช็คหัวข้อและคุณภาพก่อน</h1>
+<h1 id=3-เชคหวขอและคณภาพกอน>3. เช็คหัวข้อและคุณภาพก่อน</h1>
 <p>ยกตัวอย่างว่า เจอบทความน่าสนใจ คิดว่าใช้เวลาอ่านสัก 10 นาทีจบ</p>
 <p>ก่อนอ่าน ผมจะใช้เวลานาทีแรกดูหัวข้อ (Header) ทั้งหมดก่อน เสร็จแล้วค่อยๆเลื่อนลงไปล่างสุดเพื่อดูบทสรุป (ถ้ามี) ระหว่างทางก็จะเห็นคร่าวๆว่างานเขียนดูโอเคไหม</p>
 <p>เสร็จแล้วค่อยตัดสินใจ ว่าจะอ่านดีหรือเปล่า</p>
-<p>หลายๆครั้ง แค่เลื่อนลงไปไม่กี่วินาทีก็จะรู้ได้เลยว่าเขียนไม่ดี  หรือบางทีก็จะรู้ว่าหัวข้อพวกนี้เราเข้าใจแล้ว หรือรู้เลยว่ามันลึกไป เราอ่านไม่รู้เรื่องเพราะไม่มีพื้นฐานด้านนี้</p>
+<p>หลายๆครั้ง แค่เลื่อนลงไปไม่กี่วินาทีก็จะรู้ได้เลยว่าเขียนไม่ดี หรือบางทีก็จะรู้ว่าหัวข้อพวกนี้เราเข้าใจแล้ว หรือรู้เลยว่ามันลึกไป เราอ่านไม่รู้เรื่องเพราะไม่มีพื้นฐานด้านนี้</p>
 <p>กรณีหนังสือหรือคอร์สออนไลน์ก็จะเป็น Table of Content ก่อน เสร็จแล้วก็เปิดไปอ่านหัวข้อสุดท้ายของแต่ละบท เราก็จะได้ไอเดียคร่าวๆ ไว้ใช้ตัดสินใจ</p>
-<h1 id="4-เราตองการรเรองนลกแคไหน">4. เราต้องการรู้เรื่องนี้ลึกแค่ไหน</h1>
+<h1 id=4-เราตองการรเรองนลกแคไหน>4. เราต้องการรู้เรื่องนี้ลึกแค่ไหน</h1>
 <p>ผมอยู่ฝั่งการเรียนรู้แบบ T-Shape คือรู้ลึก 1-2 หัวข้อใหญ่ๆ ส่วนหัวข้ออื่นๆจะรู้ตื้นๆ แต่รู้พอที่จะคุยกับคนที่เชี่ยวชาญด้านนั้นๆได้โดยไม่เบื่อสักสิบนาที</p>
 <p>ตัวอย่างเช่น ผมต้องการรู้เรื่อง Machine Learning ผมรู้ว่าคงไม่ได้ไปทำด้านนี้ตรงๆ แต่ก็อยากรู้ไว้เพื่อไม่ให้ตัวเองเป็นไดโนเสาร์เวลาคุยกับเด็กฝึกงาน</p>
 <p>เวลาศึกษาก็จะดูแค่มีเทคนิคอะไรบ้างที่เป็นที่นิยมในปัจจุบัน เข้าใจศัพท์ต่างๆ เข้าใจกระบวนการทำงานของ ML Engineer กับ Data Scientist เข้าใจการทำงานของแต่ละวิธีแบบคร่าวๆ แค่นี้ผมก็ต้องใช้เวลาเป็นสิบชั่วโมงแล้ว</p>
@@ -258,14 +202,14 @@
 <p>อันนี้ยอมรับว่าทำยาก และหลายๆครั้งก็หงุดหงิด เหมือนดูหนังไม่จบเรื่อง</p>
 <p>อย่างผมเป็นติ่ง Andrew Ng (ผู้สอนด้าน Machine Learning ที่ดังมาก) พอเค้าเปิดเว็บใหม่ เขียนหนังสือ ผมก็อยากอ่าน แต่ก็รู้ว่าอ่านไปก็ไม่ได้ใช้ในเร็วๆนี้ อีกไม่กี่เดือนก็ลืม</p>
 <p>ผมเลยใช้วิธีเก็บพวกนี้ไว้ในรายการ To read in the future เพื่อความสบายใจ เหมือนหลอกตัวเองนิดนึงว่าเดี๋ยวก็ได้อ่าน</p>
-<h1 id="5-เซตเปาหมายเปนโปรเจคแทนทจะเซตเนอหา">5. เซ็ตเป้าหมายเป็นโปรเจ็คแทนที่จะเซ็ตเนื้อหา</h1>
+<h1 id=5-เซตเปาหมายเปนโปรเจคแทนทจะเซตเนอหา>5. เซ็ตเป้าหมายเป็นโปรเจ็คแทนที่จะเซ็ตเนื้อหา</h1>
 <p>หนึ่งในปัญหาที่ผมเจอบ่อยๆ คืออ่าน Tutorial จบ ทำ Tutorial เป็น แต่เอาไปประยุกต์ทำอย่างอื่นไม่ได้</p>
 <p>อันนี้เห็นได้บ่อยมาก โดยเฉพาะฝั่ง Frontend ทำได้แต่ Todo List</p>
 <p>พอจะให้ทำอะไรซับซ้อนกว่านั้นนี่งงเต้กเลย เลยทำให้รู้ว่าวิธีการเรียนรู้แบบนี้ไม่ค่อยมีประสิทธิภาพเท่าไร</p>
 <p>ช่วงหลังๆนี้เลยเปลี่ยนวิธีหน่อย อย่างแต่ก่อน จะตั้งเป้าหมายว่าจะอ่านหนังสือเกี่ยวกับ React ให้จบในหนึ่งเดือน</p>
 <p>เดี๋ยวนี้ก็จะใช้วิธีว่า จะพยายามเขียน CRUD WebApp ง่ายๆด้วย React ส่วน API ก็ใช้วิธี Mock เอา</p>
 <p>พอเรามีเป้าหมายเป็นโปรเจ็ค เวลาอ่านหนังสือ เราจะไม่แค่ทำตามตัวอย่างแบบขาดสติ แต่เราจะต้องคิดและหยิบส่วนต่างๆมาใช้ ทำให้การเรียนรู้ดีขึ้น</p>
-<h1 id="6-สรางนสยพรอมกบเปาหมายในการเรยนร">6. สร้างนิสัยพร้อมกับเป้าหมายในการเรียนรู้</h1>
+<h1 id=6-สรางนสยพรอมกบเปาหมายในการเรยนร>6. สร้างนิสัยพร้อมกับเป้าหมายในการเรียนรู้</h1>
 <p>เคยสังเกตกันไหมครับ ว่าไอ้ New Year Resolution ที่เคยตั้งเป้าไว้ ผ่านมากี่ปีก็ยังไม่เคยสำเร็จสักที</p>
 <p>บางคนก็จะมีทริค ใช้วิธีให้ประกาศให้โลกรู้ จะได้มี Commitment อันนี้ก็ไม่เวิร์คครับ ผมมีหลักฐานทิ้งไว้ทุกปีเลย</p>
 <p>ตัวอย่างเช่น ผมตั้งใจจะสอบ Cert A ให้ได้ ภายในระยะเวลา 3 เดือน</p>
@@ -276,153 +220,93 @@
 <blockquote>
 <p>ตอนสอบเสร็จใหม่ๆ เวลาเข้าห้องน้ำนี่เวิ้งว้างมาก ไม่รู้จะทำอะไร</p>
 </blockquote>
-<p>ผมค้นพบว่ามันเวิร์คสำหรับผม เพราะมันใช้พลังใจน้อย  ช่วงแรกๆอาจจะต้องกลั้นใจทำ แต่พอทำทุกวันสักสองสามสัปดาห์ มันจะเริ่มติดเป็นนิสัย แล้วมันจะง่ายเอง</p>
+<p>ผมค้นพบว่ามันเวิร์คสำหรับผม เพราะมันใช้พลังใจน้อย ช่วงแรกๆอาจจะต้องกลั้นใจทำ แต่พอทำทุกวันสักสองสามสัปดาห์ มันจะเริ่มติดเป็นนิสัย แล้วมันจะง่ายเอง</p>
 <p>ที่สำคัญ พยายามผูกนิสัยเข้ากับจังหวะที่เปลี่ยนสถานที่ เพราะสมองเรามักจะผูกสิ่งต่างๆเข้ากับสถานที่ได้ดี</p>
-<p>ตัวอย่างเช่น ผมเคยพยายามอ่าน 25 นาทีก่อนเลิกงานกลับบ้าน ปรากฏว่าไม่เวิร์ค ต้องเปลี่ยนมาอ่านก่อนเริ่มงาน  พอเดินเข้าออฟฟิซ นั่งหน้าคอมปุ๊บ มันจะลอยขึ้นมาบนหัวเลย</p>
-<h1 id="ลางเนอชอบลางยา">ลางเนื้อชอบลางยา</h1>
+<p>ตัวอย่างเช่น ผมเคยพยายามอ่าน 25 นาทีก่อนเลิกงานกลับบ้าน ปรากฏว่าไม่เวิร์ค ต้องเปลี่ยนมาอ่านก่อนเริ่มงาน พอเดินเข้าออฟฟิซ นั่งหน้าคอมปุ๊บ มันจะลอยขึ้นมาบนหัวเลย</p>
+<h1 id=ลางเนอชอบลางยา>ลางเนื้อชอบลางยา</h1>
 <p>หกข้อข้างบนนี้เป็นแนวทางที่ผมใช้แล้วรู้สึกว่าได้ผลกับผม ซึ่งแต่ละคนก็ไม่เหมือนกัน ลองหยิบบางข้อไปประยุกต์ใช้ดูครับ</p>
-<p>ยิ่งสังคม Open Source และโลก IT โตขึ้นเรื่อยๆ เทคโนโลยีก็จะก้าวเร็วขึ้นเรื่อยๆ ผมเชื่อว่าปัญหานี้จะชัดเจนมากขึ้นเรื่อยๆ เดี๋ยวนี้ตลาดงานก็มีความต้องการสูง อยากได้แต่ Full-stack กัน บางที่ขอเป็น Full-stack ทำ DevOps ได้ด้วย (แต่เรตเงินเดือนเท่ากัน&hellip;)</p>
+<p>ยิ่งสังคม Open Source และโลก IT โตขึ้นเรื่อยๆ เทคโนโลยีก็จะก้าวเร็วขึ้นเรื่อยๆ ผมเชื่อว่าปัญหานี้จะชัดเจนมากขึ้นเรื่อยๆ เดี๋ยวนี้ตลาดงานก็มีความต้องการสูง อยากได้แต่ Full-stack กัน บางที่ขอเป็น Full-stack ทำ DevOps ได้ด้วย (แต่เรตเงินเดือนเท่ากัน&mldr;)</p>
 <blockquote>
 <p>บางที่นี่ขอวางสายแลนเป็นด้วย</p>
 </blockquote>
-<p>สำหรับคนที่มีภาระส่วนตัว เวลาที่ใช้กับการเรียนรู้ก็จะจำกัดกว่าคนอื่น  ผมว่าการเลือกเรื่องที่จะเรียนรู้จึงเป็นอะไรที่สำคัญมาก อยากให้คิดเรื่องนี้กันเยอะๆครับ ว่าเราจะจัดสรรค์เวลายังไงให้มีประสิทธิภาพมากที่สุด</p>
+<p>สำหรับคนที่มีภาระส่วนตัว เวลาที่ใช้กับการเรียนรู้ก็จะจำกัดกว่าคนอื่น ผมว่าการเลือกเรื่องที่จะเรียนรู้จึงเป็นอะไรที่สำคัญมาก อยากให้คิดเรื่องนี้กันเยอะๆครับ ว่าเราจะจัดสรรค์เวลายังไงให้มีประสิทธิภาพมากที่สุด</p>
 <p>เวลาเราทาแยมบนขนมปัง ยิ่งขนมปังแผ่นใหญ่ เราก็ยิ่งต้องเกลี่ยแยมให้บางขึ้น ถ้าแยมเราไม่พอ เราก็ต้องเลือกว่าจะทาตรงไหน เพราะถ้าทาหมดแผ่น แยมอาจจะบางจนไม่ต่างอะไรกับกินขนมปังเปล่าๆ</p>
-
-
-      
-      <div  class="fb-page"
-            data-href="https://www.facebook.com/notaboutcode/"
-            data-tabs=""
-            data-small-header="false"
-            data-adapt-container-width="true"
-            data-hide-cover="false"
-            data-show-facepile="true">
-
-            <blockquote cite="https://www.facebook.com/notaboutcode/" class="fb-xfbml-parse-ignore">
-              <a href="https://www.facebook.com/notaboutcode/">Not about code</a>
-            </blockquote>
-      </div>
-
-    </div>
-
-    
-    <div id="fb-root"></div>
-
-    <div class="post-copyright">
-  <p class="copyright-item">
-    <span class="item-title"></span>
-    <span class="item-content">ijemmy</span>
-  </p>
-  <p class="copyright-item">
-    <span class="item-title"></span>
-    <span class="item-content">
-        2018-06-16
-        
-    </span>
-  </p>
-  
-  <p class="copyright-item">
-    <span class="item-title"></span>
-    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
-  </p>
+<div class=fb-page data-href=https://www.facebook.com/notaboutcode/ data-tabs data-small-header=false data-adapt-container-width=true data-hide-cover=false data-show-facepile=true>
+<blockquote cite=https://www.facebook.com/notaboutcode/ class=fb-xfbml-parse-ignore>
+<a href=https://www.facebook.com/notaboutcode/>Not about code</a>
+</blockquote>
 </div>
-<footer class="post-footer">
-      <div class="post-tags">
-          <a href="/tags/learning/">Learning</a>
-          </div>
-      <div class="fb-comments" data-numposts="5"></div>
-      
-      <nav class="post-nav">
-        <a class="prev" href="/post/25-advices-for-adopting-agile/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">การนำ Agile มาใช้ในองค์กร</span>
-            <span class="prev-text nav-mobile"></span>
-          </a>
-        <a class="next" href="/post/23-karma-from-bad-tests2/">
-            <span class="next-text nav-default">เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับที่ 2 System Integration Tests/End-to-End Tests)</span>
-            <span class="next-text nav-mobile"></span>
-            <i class="iconfont icon-right"></i>
-          </a>
-      </nav>
-    </footer>
-  </article>
-        </div>
-        
-
-  
-
-  
-
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="social-links">
-      <a href="https://www.facebook.com/notaboutcode/" class="iconfont icon-facebook" title="facebook"></a>
-  <a href="https://www.notaboutcode.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-
-<div class="copyright">
-  <span class="power-by">
-    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
-  </span>
-  <span class="division">|</span>
-  <span class="theme-info">
-     - 
-    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
-  </span>
-
-  
-
-  <span class="copyright-year">
-    &copy; 
-    2017 - 
-    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
-  </span>
+<div id=fb-root></div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content>ijemmy</span>
+</p>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content>
+2018-06-16
+</span>
+</p>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
+</p>
 </div>
-
-    </footer>
-
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
-    </div>
-  </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-
-
-
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-108239205-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-
-
-
-
-
-
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/learning/>Learning</a>
+</div>
+<div class=fb-comments data-numposts=5></div>
+<nav class=post-nav>
+<a class=prev href=/post/25-advices-for-adopting-agile/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">การนำ Agile มาใช้ในองค์กร</span>
+<span class="prev-text nav-mobile"></span>
+</a>
+<a class=next href=/post/23-karma-from-bad-tests2/>
+<span class="next-text nav-default">เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับที่ 2 System Integration Tests/End-to-End Tests)</span>
+<span class="next-text nav-mobile"></span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
+<a href=https://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+%!(EXTRA string=<a class=hexo-link href=https://gohugo.io>Hugo</a>)
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+-
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<span class=copyright-year>
+&copy;
+2017 -
+2025<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<script>(function(b,c,d){var a,e=b.getElementsByTagName(c)[0];if(b.getElementById(d))return;a=b.createElement(c),a.id=d,a.src='https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676',e.parentNode.insertBefore(a,e)})(document,'script','facebook-jssdk')</script>
 </body>
 </html>

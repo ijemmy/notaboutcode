@@ -1,201 +1,145 @@
-<!DOCTYPE html>
-<html lang="th">
+<!doctype html><html lang=th>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับที่ 2 System Integration Tests/End-to-End Tests) - Not About Code - Technical Leadership</title>
-  <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
-
-
-<meta name="author" content="ijemmy" /><meta name="description" content="จากประสบการณ์ส่วนตัว End-to-End(E2E) Tests เป็นตัวที่สร้างความปวดหัวให้กับผมอันดับที่หนึ่งเลย รองลงมาก็ System Integration Tests ตอนเขียนบทความนี้ฉบับแรก เลยตัดสินใจแยกเทสต์สองประเภทนี้ออกมาเขียนแยกออกมา จะได้ลงรายละเอียดได้
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับที่ 2 System Integration Tests/End-to-End Tests) - Not About Code - Technical Leadership</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="ijemmy"><meta name=description content="จากประสบการณ์ส่วนตัว End-to-End(E2E) Tests เป็นตัวที่สร้างความปวดหัวให้กับผมอันดับที่หนึ่งเลย รองลงมาก็ System Integration Tests ตอนเขียนบทความนี้ฉบับแรก เลยตัดสินใจแยกเทสต์สองประเภทนี้ออกมาเขียนแยกออกมา จะได้ลงรายละเอียดได้
 บทความนี้ก็เหมือนบทความที่แล้วครับ คือทำผิดมาเยอะ จนพอจะสรุปข้อผิดพลาดที่เคยทำไว้มาแชร์กัน ผู้อ่านจะได้หลบเลี่ยงกันได้
-" /><meta name="keywords" content="Hugo, theme, even" />
-
-
-
-
-
-
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
-
-
-<link rel="canonical" href="https://www.notaboutcode.com/post/23-karma-from-bad-tests2/" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-
-
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/custom.css">
-
-
-<meta property="og:title" content="เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับที่ 2 System Integration Tests/End-to-End Tests)" />
+"><meta name=keywords content="Hugo,theme,even">
+<meta name=generator content="Hugo 0.89.4 with theme even">
+<link rel=canonical href=https://www.notaboutcode.com/post/23-karma-from-bad-tests2/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<link rel=stylesheet href=/css/custom.css>
+<meta property="og:title" content="เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับที่ 2 System Integration Tests/End-to-End Tests)">
 <meta property="og:description" content="
 จากประสบการณ์ส่วนตัว End-to-End(E2E) Tests เป็นตัวที่สร้างความปวดหัวให้กับผมอันดับที่หนึ่งเลย รองลงมาก็ System Integration Tests ตอนเขียนบทความนี้ฉบับแรก เลยตัดสินใจแยกเทสต์สองประเภทนี้ออกมาเขียนแยกออกมา จะได้ลงรายละเอียดได้
-บทความนี้ก็เหมือนบทความที่แล้วครับ คือทำผิดมาเยอะ จนพอจะสรุปข้อผิดพลาดที่เคยทำไว้มาแชร์กัน ผู้อ่านจะได้หลบเลี่ยงกันได้" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.notaboutcode.com/post/23-karma-from-bad-tests2/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2018-05-05T12:04:02+07:00" />
-<meta property="article:modified_time" content="2018-05-05T12:04:02+07:00" />
-
-<meta itemprop="name" content="เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับที่ 2 System Integration Tests/End-to-End Tests)">
-<meta itemprop="description" content="
+บทความนี้ก็เหมือนบทความที่แล้วครับ คือทำผิดมาเยอะ จนพอจะสรุปข้อผิดพลาดที่เคยทำไว้มาแชร์กัน ผู้อ่านจะได้หลบเลี่ยงกันได้">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.notaboutcode.com/post/23-karma-from-bad-tests2/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2018-05-05T12:04:02+07:00">
+<meta property="article:modified_time" content="2018-05-05T12:04:02+07:00">
+<meta itemprop=name content="เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับที่ 2 System Integration Tests/End-to-End Tests)">
+<meta itemprop=description content="
 จากประสบการณ์ส่วนตัว End-to-End(E2E) Tests เป็นตัวที่สร้างความปวดหัวให้กับผมอันดับที่หนึ่งเลย รองลงมาก็ System Integration Tests ตอนเขียนบทความนี้ฉบับแรก เลยตัดสินใจแยกเทสต์สองประเภทนี้ออกมาเขียนแยกออกมา จะได้ลงรายละเอียดได้
-บทความนี้ก็เหมือนบทความที่แล้วครับ คือทำผิดมาเยอะ จนพอจะสรุปข้อผิดพลาดที่เคยทำไว้มาแชร์กัน ผู้อ่านจะได้หลบเลี่ยงกันได้"><meta itemprop="datePublished" content="2018-05-05T12:04:02+07:00" />
-<meta itemprop="dateModified" content="2018-05-05T12:04:02+07:00" />
-<meta itemprop="wordCount" content="1126">
-<meta itemprop="keywords" content="CI,CD,Testing," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับที่ 2 System Integration Tests/End-to-End Tests)"/>
-<meta name="twitter:description" content="
+บทความนี้ก็เหมือนบทความที่แล้วครับ คือทำผิดมาเยอะ จนพอจะสรุปข้อผิดพลาดที่เคยทำไว้มาแชร์กัน ผู้อ่านจะได้หลบเลี่ยงกันได้"><meta itemprop=datePublished content="2018-05-05T12:04:02+07:00">
+<meta itemprop=dateModified content="2018-05-05T12:04:02+07:00">
+<meta itemprop=wordCount content="1126">
+<meta itemprop=keywords content="CI,CD,Testing,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับที่ 2 System Integration Tests/End-to-End Tests)">
+<meta name=twitter:description content="
 จากประสบการณ์ส่วนตัว End-to-End(E2E) Tests เป็นตัวที่สร้างความปวดหัวให้กับผมอันดับที่หนึ่งเลย รองลงมาก็ System Integration Tests ตอนเขียนบทความนี้ฉบับแรก เลยตัดสินใจแยกเทสต์สองประเภทนี้ออกมาเขียนแยกออกมา จะได้ลงรายละเอียดได้
-บทความนี้ก็เหมือนบทความที่แล้วครับ คือทำผิดมาเยอะ จนพอจะสรุปข้อผิดพลาดที่เคยทำไว้มาแชร์กัน ผู้อ่านจะได้หลบเลี่ยงกันได้"/>
-
-<!--[if lte IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
-<![endif]-->
-
-<!--[if lt IE 9]>
-  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
-
-
-
+บทความนี้ก็เหมือนบทความที่แล้วครับ คือทำผิดมาเยอะ จนพอจะสรุปข้อผิดพลาดที่เคยทำไว้มาแชร์กัน ผู้อ่านจะได้หลบเลี่ยงกันได้"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
 </head>
 <body>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/" class="logo">Not About Code</a>
-  </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Not About Code</a>
 </div>
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    <a href="/">
-        <li class="mobile-menu-item">Home</li>
-      </a><a href="/post/">
-        <li class="mobile-menu-item">Archives</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">Tags</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
-      </a><a href="/about/">
-        <li class="mobile-menu-item">About</li>
-      </a>
-  </ul>
-
-  
-
-
-</nav>
-
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
-  <a href="/" class="logo">Not About Code</a>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
 </div>
-
-
-
-
-
-<nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
-        <a class="menu-item-link" href="/">Home</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/post/">Archives</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">Tags</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/about/">About</a>
-      </li>
-  </ul>
-
-  
-  <a href="https://webring.wonderful.software#notaboutcode.com" title="วงแหวนเว็บ">
-    <img
-        alt="วงแหวนเว็บ"
-        width="32"
-        height="32"
-        src="https://webring.wonderful.software/webring.black.svg"
-    />
-  </a>
-</nav>
-
-
-
-
-    </header>
-
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับที่ 2 System Integration Tests/End-to-End Tests)</h1>
-
-      <div class="post-meta">
-        <span class="post-time"> 2018-05-05 </span>
-        <div class="post-category">
-            <a href="/categories/continuous-delivery/"> Continuous Delivery </a>
-            </div>
-        
-      </div>
-    </header>
-
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title"></h2>
-  <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#ควรอานอะไรมากอน">ควรอ่านอะไรมาก่อน</a></li>
-    <li><a href="#นยามของ-system-integration-testsend-to-end-tests">นิยามของ System Integration Tests/End-to-End Tests</a></li>
-    <li><a href="#1-dependencies-ไมเสถยร">1. Dependencies ไม่เสถียร</a></li>
-    <li><a href="#2-ไมคมเงอนไขตงตนใหด-incorrect-start-condition">2. ไม่คุมเงื่อนไขตั้งต้นให้ดี (Incorrect Start Condition)</a></li>
-    <li><a href="#3-เทสตชนกน-tests-interfere-with-each-other">3. เทสต์ชนกัน (Tests Interfere with each Other)</a></li>
-    <li><a href="#4-ไมแยกโคดทตองใชบอยๆออกมา-no-reusable-components">4. ไม่แยกโค้ดที่ต้องใช้บ่อยๆออกมา (No Reusable Components)</a></li>
-    <li><a href="#5-ไมรอ-asynchornous-operation-ใหด">5. ไม่รอ Asynchornous Operation ให้ดี</a></li>
-    <li><a href="#6-ไมรบแก-flaky-tests-ตงแตเนนๆ">6. ไม่รีบแก้ Flaky Tests ตั้งแต่เนิ่นๆ</a></li>
-    <li><a href="#7-เขยนเทสตมากไป-too-many-tests">7. เขียนเทสต์มากไป (Too Many Tests)</a></li>
-    <li><a href="#สรป">สรุป</a></li>
-  </ul>
-</nav>
-  </div>
 </div>
-    <div class="post-content">
-      <p><img src="/img/covers/test-01.jpg" alt="Photo by Chris Liverani on Unsplash"></p>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+<a href=https://webring.wonderful.software#notaboutcode.com title=วงแหวนเว็บ>
+<img alt=วงแหวนเว็บ width=32 height=32 src=https://webring.wonderful.software/webring.black.svg>
+</a>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับที่ 2 System Integration Tests/End-to-End Tests)</h1>
+<div class=post-meta>
+<span class=post-time> 2018-05-05 </span>
+<div class=post-category>
+<a href=/categories/continuous-delivery/> Continuous Delivery </a>
+</div>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title></h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#ควรอานอะไรมากอน>ควรอ่านอะไรมาก่อน</a></li>
+<li><a href=#นยามของ-system-integration-testsend-to-end-tests>นิยามของ System Integration Tests/End-to-End Tests</a></li>
+<li><a href=#1-dependencies-ไมเสถยร>1. Dependencies ไม่เสถียร</a></li>
+<li><a href=#2-ไมคมเงอนไขตงตนใหด-incorrect-start-condition>2. ไม่คุมเงื่อนไขตั้งต้นให้ดี (Incorrect Start Condition)</a></li>
+<li><a href=#3-เทสตชนกน-tests-interfere-with-each-other>3. เทสต์ชนกัน (Tests Interfere with each Other)</a></li>
+<li><a href=#4-ไมแยกโคดทตองใชบอยๆออกมา-no-reusable-components>4. ไม่แยกโค้ดที่ต้องใช้บ่อยๆออกมา (No Reusable Components)</a></li>
+<li><a href=#5-ไมรอ-asynchornous-operation-ใหด>5. ไม่รอ Asynchornous Operation ให้ดี</a></li>
+<li><a href=#6-ไมรบแก-flaky-tests-ตงแตเนนๆ>6. ไม่รีบแก้ Flaky Tests ตั้งแต่เนิ่นๆ</a></li>
+<li><a href=#7-เขยนเทสตมากไป-too-many-tests>7. เขียนเทสต์มากไป (Too Many Tests)</a></li>
+<li><a href=#สรป>สรุป</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p><img src=/img/covers/test-01.jpg alt="Photo by Chris Liverani on Unsplash"></p>
 <p>จากประสบการณ์ส่วนตัว End-to-End(E2E) Tests เป็นตัวที่สร้างความปวดหัวให้กับผมอันดับที่หนึ่งเลย รองลงมาก็ System Integration Tests ตอนเขียนบทความนี้ฉบับแรก เลยตัดสินใจแยกเทสต์สองประเภทนี้ออกมาเขียนแยกออกมา จะได้ลงรายละเอียดได้</p>
 <p>บทความนี้ก็เหมือนบทความที่แล้วครับ คือทำผิดมาเยอะ จนพอจะสรุปข้อผิดพลาดที่เคยทำไว้มาแชร์กัน ผู้อ่านจะได้หลบเลี่ยงกันได้</p>
-<h1 id="ควรอานอะไรมากอน">ควรอ่านอะไรมาก่อน</h1>
+<h1 id=ควรอานอะไรมากอน>ควรอ่านอะไรมาก่อน</h1>
 <p>ถ้าใครที่เขียน Unit/Component/Integration/E2E Test เป็นประจำอยู่แล้ว ข้ามส่วนนี้ไปได้เลยครับ</p>
 <p>แต่ถ้าใครที่ไม่ได้เขียนเทสต์เยอะๆ ผมแนะนำให้อ่านสองบทความนี้ก่อนครับ</p>
 <ul>
-<li><a href="/post/18-test-properties/">บทความเรื่องคุณสมบัติของเทสต์</a></li>
-<li><a href="/post/18-test-properties/">เขียนเทสต์อย่างไรให้ไม่บาป ฉบับ Unit/Component Tests</a></li>
+<li><a href=/post/18-test-properties/>บทความเรื่องคุณสมบัติของเทสต์</a></li>
+<li><a href=/post/18-test-properties/>เขียนเทสต์อย่างไรให้ไม่บาป ฉบับ Unit/Component Tests</a></li>
 </ul>
 <p>บทความนี้จะต่อขยายเนื้อหาจากสองบทความแรก เพราะปัญหาของ Unit/Component Tests ส่วนใหญ่ก็จะเกิดกับ System Integration/E2E Tests เหมือนกัน (ยกเว้นเรื่อง Mock)</p>
-<h1 id="นยามของ-system-integration-testsend-to-end-tests">นิยามของ System Integration Tests/End-to-End Tests</h1>
+<h1 id=นยามของ-system-integration-testsend-to-end-tests>นิยามของ System Integration Tests/End-to-End Tests</h1>
 <p>ก่อนอื่นมาทำความเข้าใจกันก่อนว่าเวลาผมพูดคำว่า System Integration Tests/End-to-End Tests ที่ผมพูดนี่มันหมายถึงอะไรกันแน่</p>
 <p>เริ่มจากคำว่า Integration Test ก่อน (ไม่มีคำว่า <strong>System</strong>) นี่เป็นหนึ่งในคำที่สับสนที่สุดในวงการเลย ไม่เชื่อให้ไปถามคนในแต่ละทีมทีละคนดูว่าหมายถึงอะไร จะได้คำตอบที่แตกต่างกันมาก</p>
 <ul>
@@ -211,18 +155,16 @@
 <p>นิยามไหนถูก ผมว่าไม่สำคัญ สำคัญว่าคนในทีม (หรือในบริษัท) ควรจะมีนิยามเดียวกัน ว่าเวลาเราพูดว่า Integration Tests เนี่ย เรากำลังพูดถึงการ Integrate กันในระดับไหน</p>
 <p>เพื่อเลี่ยงความสับสน ผมจะใช้คำว่า System Integration Tests (SIT) แทน ซึ่งในที่นี้ ผมหมายถึงการนำเซอร์วิซทุกอันมารันบนเซอร์เวอร์จริง (ไม่มีการ Mock เหมือนกรณี Unit/Component Tests) ให้มีการเรียกใช้งานกันระหว่างเซอร์วิซจริงระหว่างการเทสต์</p>
 <p>ถ้าระบบของเราเป็น Web Service การทดสอบนี้คือการเรียกใช้ผ่าน HTTP, RPC หรือ Protocol ที่จะต้องถูกใช้งานจริงๆบน Production</p>
-<p>หากระบบของเรามี User Interface (UI) เช่น มีหน้าเว็บไซต์ แล้วเวลาดึงข้อมูลก็จะดึงผ่าน API Call  เราจะทดสอบด้วยการใช้เฟรมเวิร์คที่สามารถ Simulate การคลิกตามตำแหน่งต่างๆของเว็บไซต์เหมือนผู้ใช้งานใช้เว็บนั้นอยู่จริงๆ เรียกว่า UI Driver (เช่น Selenium) กรณีนี้ผมขอเรียกว่า End-to-End Test (E2E)</p>
+<p>หากระบบของเรามี User Interface (UI) เช่น มีหน้าเว็บไซต์ แล้วเวลาดึงข้อมูลก็จะดึงผ่าน API Call เราจะทดสอบด้วยการใช้เฟรมเวิร์คที่สามารถ Simulate การคลิกตามตำแหน่งต่างๆของเว็บไซต์เหมือนผู้ใช้งานใช้เว็บนั้นอยู่จริงๆ เรียกว่า UI Driver (เช่น Selenium) กรณีนี้ผมขอเรียกว่า End-to-End Test (E2E)</p>
 <blockquote>
 <p>E2E ก็เป็นอีกชื่อนึงที่คลุมเครือ บางที่ก็อาจจะเรียกชื่ออื่นนะครับ</p>
 </blockquote>
 <p>ถ้าสรุปเป็นภาพ หน้าตาจะประมาณนี้ครับ</p>
-<figure class="center" >
-  <img  src="/img/diagrams/23-karma-from-bad-tests2/01-sit-vs-e2e.png"
-        alt="เปรียบเทียบว่า SIT กับ E2E อยุ่ที่ระดับไหน"
-        >
-  <figcaption>
-    เปรียบเทียบว่า SIT กับ E2E อยุ่ที่ระดับไหน
-  </figcaption>
+<figure class=center>
+<img src=/img/diagrams/23-karma-from-bad-tests2/01-sit-vs-e2e.png alt="เปรียบเทียบว่า SIT กับ E2E อยุ่ที่ระดับไหน">
+<figcaption>
+เปรียบเทียบว่า SIT กับ E2E อยุ่ที่ระดับไหน
+</figcaption>
 </figure>
 <p>ตามนิยามนี้ เราจะเห็นได้ว่า ข้อแตกต่างของการทดสอบทั้งสองแบบนี้ คือตัวนึงเทสต์ในระดับ UI, ส่วนอีกตัวคือ Service API</p>
 <p>ส่วนที่คล้ายกันคือ การทดสอบทั้งสองแบบจะใช้ระบบจริง รันบนเซอร์เวอร์จริง เรียกใช้ Dependency จริง (ซึ่งอาจจะมี Dependency ข้างหลังบ้างนอีก เช่น Service C เรียก D ต่อ)</p>
@@ -235,8 +177,8 @@
 </ol>
 <p>ทุกโปรเจ็คที่ผมทำมา ถ้าเขียน SIT/E2E Tests จะเจอปัญหานี้หมด มากน้อยไม่เหมือนกัน</p>
 <p>หลังจากเราเข้าใจนิยามของสองคำนี้แล้ว ไปดูกันต่อครับ ว่าผมทำอะไรผิดมาบ้าง ถึงเจอปัญหาพวกนี้</p>
-<h1 id="1-dependencies-ไมเสถยร">1. Dependencies ไม่เสถียร</h1>
-<p>เวลารัน SIT/E2E  เราจะต้องมีการเรียกใช้งาน Dependency ที่ถูก Deploy บนเซอร์เวอร์จริง (Service B, C, D ในภาพข้างบน) ดังนั้น ทีมที่ทำ SIT/E2E จะต้องมี Pre-Production Stage</p>
+<h1 id=1-dependencies-ไมเสถยร>1. Dependencies ไม่เสถียร</h1>
+<p>เวลารัน SIT/E2E เราจะต้องมีการเรียกใช้งาน Dependency ที่ถูก Deploy บนเซอร์เวอร์จริง (Service B, C, D ในภาพข้างบน) ดังนั้น ทีมที่ทำ SIT/E2E จะต้องมี Pre-Production Stage</p>
 <p>Pre-Production Stage ที่ดี ควรจะเหมือนระบบจริงทุกอย่าง ต่างกันแค่ปริมาณเซอร์เวอร์ที่รันเพราะต้องรับ Load ที่ต่างกัน</p>
 <p>ถ้าโชคดี ทีมเราเป็นคนคุมทุก Dependency ที่มีหมด เราก็จะสามารถจัดการจังหวะการรันเทสต์ หรือ Deploy ให้ไม่ชนกันได้ ซึ่งการันตีได้ว่าระหว่างที่รันเทสต์นั้น Dependency ทุกตัวที่เราใช้จะเสถียรหมด</p>
 <p>แต่ในทางปฏิบัติ โปรดักต์ที่ใหญ่ๆ แต่ละ Dependency มักจะถูกดูแลโดยคนละทีม ทำให้ SIT/E2E ที่เคยรันผ่านตามปกติ อยู่ดีๆก็พังขึ้นมา เพราะ Dependency เกิดไม่เสถียรระหว่างที่รันพอดี เกิดอาการ Flakiness ขึ้นมา</p>
@@ -261,144 +203,144 @@
 </blockquote>
 <p>ชีวิตจริงมันโหดร้าย กรณีที่เราแก้ไขที่ต้นเหตุไม่ได้ อาจจะต้องยอมลดเป้าหมายเราลงมาหน่อย ทางเลือกที่เป็นไปได้ก็มีอยู่สองทาง</p>
 <ol>
-<li>กรณีที่ Test Fail ครั้งแรก รอสัก 2-3 วิ แล้วรันเทสต์ใหม่อีกรอบ หากพังซ้ำ ถึงค่อยใส่ Test ให้เป็น Fail  (อันนี้ก็ต้องแงะแต่ละ Testing Framework มาดู ว่าให้ใส่โค้ด Decorator เข้าไปได้ไหม) ถ้าครั้งที่สองผ่าน ก็ให้ถือว่าผ่าน</li>
+<li>กรณีที่ Test Fail ครั้งแรก รอสัก 2-3 วิ แล้วรันเทสต์ใหม่อีกรอบ หากพังซ้ำ ถึงค่อยใส่ Test ให้เป็น Fail (อันนี้ก็ต้องแงะแต่ละ Testing Framework มาดู ว่าให้ใส่โค้ด Decorator เข้าไปได้ไหม) ถ้าครั้งที่สองผ่าน ก็ให้ถือว่าผ่าน</li>
 <li>Mock Dependency นั้นซะ อย่างน้อยก็ยังดีกว่าไม่มี Test เลย</li>
 </ol>
 <p>ที่จริงผมเคยเห็นที่โปรเจ็คทดสอบ SIT/E2E กับ Production ของ Dependency ด้วย แต่ผมแนะนำว่าอย่าเสี่ยงเลย ถ้าจำเป็นต้องทำถึงขนาดนั้นก็ยอม Mock ดีกว่า</p>
-<h1 id="2-ไมคมเงอนไขตงตนใหด-incorrect-start-condition">2. ไม่คุมเงื่อนไขตั้งต้นให้ดี (Incorrect Start Condition)</h1>
+<h1 id=2-ไมคมเงอนไขตงตนใหด-incorrect-start-condition>2. ไม่คุมเงื่อนไขตั้งต้นให้ดี (Incorrect Start Condition)</h1>
 <p>เทสต์ทุกเทสต์ เวลาเริ่มต้นจะต้องมี Pre-condition ของมันอยู่ เช่น มี User อยู่ในระบบให้ใช้งานแล้ว หรือ มีข้อมูลตั้งต้นที่เอาไว้ทดสอบการลบข้อมูล</p>
-<p>พวก Pre-condition  เหล่านี้ควรจะถูกเซ็ตตั้งแต่เริ่มต้นเทสต์ (เช่น <code>@BeforeTest</code>, <code>@BeforeClass</code> ใน Java, <code>beforeEach()</code> ใน Jamine)</p>
+<p>พวก Pre-condition เหล่านี้ควรจะถูกเซ็ตตั้งแต่เริ่มต้นเทสต์ (เช่น <code>@BeforeTest</code>, <code>@BeforeClass</code> ใน Java, <code>beforeEach()</code> ใน Jamine)</p>
 <p>หลังจากตั้งค่าเสร็จ คนส่วนใหญ่มักจะลืมทำการเคลียร์ค่า เช่นกรณีที่เทสต์รันไม่ผ่าน ลบข้อมูลไม่ได้ ข้อมูลที่เตรียมไว้ลบก็ควรจะถูกเคลียร์ออกด้วย</p>
 <p>คราวนี้พอเราลืมเคลียร์ค่าให้เรียบร้อย ค่าพวกนี้ก็จะค้างอยู่ในระบบ โชคดีหน่อยเทสต์ก็พังทันที รู้เลย แต่ถ้าโชคร้าย ค่าพวกนี้อาจจะทำให้เทสต์พังบ้าง ไม่พังบ้าง (Flakiness)</p>
 <p>เนื่องจากโปรแกรมเมอร์เป็นมนุษย์ และมนุษย์สร้างความผิดพลาดได้ ผมจะเน้นเช็ค Pre-condition ให้ละเอียดมากๆตลอด เพราะอาจจะมีมือใหม่ในทีมเขียนเทสต์แล้วลืมเคลียร์ค่าบางกรณี แล้วอยู่ดีๆค่านี้ก็มาทำให้เทสต์ผมพัง</p>
-<p>หรืออีกกรณี เราอนุมานว่าเทสต์แต่ละตัวจะรันต่อเนื่องกัน บางคนก็เขียนเทสต์แรกให้สร้าง Record  แล้วให้เทสต์ถัดไปลบ  Record นั้น กรณีนี้เคยกล่าวไว้ในบทความที่แล้วว่าอันตรายมาก เพราะเทสต์แต่ละตัวอยู่คนละ Method กัน นอกจากจะต้องพึ่ง Side Effect กันแล้ว หากเทสต์ตัวนึงเฟล เทสต์อีกตัวนึงก็จะเฟลด้วย ทำให้หาสาเหตุยาก (Failure Isolation)</p>
+<p>หรืออีกกรณี เราอนุมานว่าเทสต์แต่ละตัวจะรันต่อเนื่องกัน บางคนก็เขียนเทสต์แรกให้สร้าง Record แล้วให้เทสต์ถัดไปลบ Record นั้น กรณีนี้เคยกล่าวไว้ในบทความที่แล้วว่าอันตรายมาก เพราะเทสต์แต่ละตัวอยู่คนละ Method กัน นอกจากจะต้องพึ่ง Side Effect กันแล้ว หากเทสต์ตัวนึงเฟล เทสต์อีกตัวนึงก็จะเฟลด้วย ทำให้หาสาเหตุยาก (Failure Isolation)</p>
 <p>ดังนั้น เวลาเขียนเทสต์ พยายามอนุมานว่าเงื่อนไขตั้งต้นที่เรามีจะเป็นอะไรก็ได้ และตรวจสอบเงื่อนไขตั้งต้นให้ดีก่อนรันเทสต์</p>
 <p>ถ้าหากมีอะไรผิดปกติ (เช่น User ไม่มี) ให้รีบ Fail Test ให้เร็วที่สุด เวลาไล่โค้ดจะได้ไม่ต้องไล่เยอะเพราะมันไปพังตอนบรรทัดท้ายๆ</p>
 <p>ถ้ามั่นใจ เราอาจจะทำการล้างค่าเก่าอยู่แล้วที่เราต้องล้างทิ้งแล้วสร้างใหม่</p>
 <p>ส่วนเวลาเทสต์จบ ก็ควรเคลียร์ค่าที่เทสต์สร้างไว้ให้ครบเหมือนกัน</p>
 <p>บางคนกลัวว่าเช็คเยอะจะทำให้เทสต์ช้า แต่เชื่อผมเถอะว่าเทสต์ช้ามันแก้ทีหลังได้ แต่ถ้าเทสต์ไม่เสถียรนี่แก้ยากมากๆ</p>
-<h1 id="3-เทสตชนกน-tests-interfere-with-each-other">3. เทสต์ชนกัน (Tests Interfere with each Other)</h1>
-<p>หนึ่งในปัญหาที่ผมเคยเจอตอนเขียน SIT/E2E Test  แล้วให้ Run แบบ Parallel คือเทสต์ชนกัน</p>
+<h1 id=3-เทสตชนกน-tests-interfere-with-each-other>3. เทสต์ชนกัน (Tests Interfere with each Other)</h1>
+<p>หนึ่งในปัญหาที่ผมเคยเจอตอนเขียน SIT/E2E Test แล้วให้ Run แบบ Parallel คือเทสต์ชนกัน</p>
 <p>เช่น ผมสร้างข้อมูลใหม่ 4 Records แต่พอตรวจดู กลับกลายมี 5 Records เพราะอีกเทสต์ (ที่กำลังรันพร้อมกัน) สร้างอีก Record มาไว้ทดสอบการลบ</p>
 <p>เทคนิคในการแก้มีหลายแบบ แล้วแต่กรณี เช่น</p>
 <ol>
 <li>เวลาสร้าง Record ให้ใส่ Prefix + Random Value ทิ้งไว้ และเวลาตรวจสอบ ก็ให้ Filter เฉพาะตัวที่ Prefix ของ Record ตรงกัน</li>
 <li>ให้เทสต์แต่ละกลุ่มมี User ของตัวเอง โดยต้องมั้่นใจว่าแต่ละกลุ่มไม่มี Test ที่รันแล้วชนกัน</li>
-<li>การันตีให้แต่ละเทสต์ที่รันพร้อมกันมี User คนละตัวตลอด เช่น แยก User Pool ออกมา เวลาเทสต์แต่ละตัวเริ่มรัน ก็ให้ขอ User ใหม่มาจาก Pool นี้  ตัว Pool จะคอยคุมไม่ให้เทสต์ได้ User ตัวเดียวกันไปรันพร้อมกัน พอรันเทสต์เสร็จก็จะต้องคืน User กลับเข้า Pool (วิธีนี้ซับซ้อนกว่า แต่เซฟกว่า ก็ต้องเรื่อง Trade-off เอา)</li>
+<li>การันตีให้แต่ละเทสต์ที่รันพร้อมกันมี User คนละตัวตลอด เช่น แยก User Pool ออกมา เวลาเทสต์แต่ละตัวเริ่มรัน ก็ให้ขอ User ใหม่มาจาก Pool นี้ ตัว Pool จะคอยคุมไม่ให้เทสต์ได้ User ตัวเดียวกันไปรันพร้อมกัน พอรันเทสต์เสร็จก็จะต้องคืน User กลับเข้า Pool (วิธีนี้ซับซ้อนกว่า แต่เซฟกว่า ก็ต้องเรื่อง Trade-off เอา)</li>
 </ol>
-<h1 id="4-ไมแยกโคดทตองใชบอยๆออกมา-no-reusable-components">4. ไม่แยกโค้ดที่ต้องใช้บ่อยๆออกมา (No Reusable Components)</h1>
+<h1 id=4-ไมแยกโคดทตองใชบอยๆออกมา-no-reusable-components>4. ไม่แยกโค้ดที่ต้องใช้บ่อยๆออกมา (No Reusable Components)</h1>
 <p>ปกติ Test Code นี่คล้ายๆเป็นลูกเมียน้อย ไม่ค่อยมีคนแคร์เรื่องการดูแลรักษากันมาก</p>
 <p>บางทีมที่โหดๆ คือก็อบเทสต์โค้ดจากไฟล์ข้างๆแล้วมานั่งแก้ ทำแบบนี้ซ้ำๆกัน พอทำไปสัก 20-30 ไฟล์ จะมี Logic ส่วนที่ซ้ำกันเยอะมาก</p>
-<p>ยกตัวอย่าง E2E Testing  ส่วนที่ซ้ำกันมากๆคือการเลือก UI Element เพื่ออ่านค่า หรือเซ็ตค่าต่างๆ ซึ่งจะต้องมีการใส่ Wait และเช็ค Condition ให้ดีว่า Element นั้นโผล่ขึ้นมาบนหน้าจอแล้ว ก่อนที่จะอ่านค่า</p>
-<p>พอเวลาผ่านไป เทสต์จะแก้ไขยากมาก ตัวอย่างเช่น ถ้า UI Element นั้นเกิดเปลี่ยนชื่อขึ้นมา เราจะต้องไปตามแก้ในทุกไฟล์เลย  Search Replace กันระงม</p>
+<p>ยกตัวอย่าง E2E Testing ส่วนที่ซ้ำกันมากๆคือการเลือก UI Element เพื่ออ่านค่า หรือเซ็ตค่าต่างๆ ซึ่งจะต้องมีการใส่ Wait และเช็ค Condition ให้ดีว่า Element นั้นโผล่ขึ้นมาบนหน้าจอแล้ว ก่อนที่จะอ่านค่า</p>
+<p>พอเวลาผ่านไป เทสต์จะแก้ไขยากมาก ตัวอย่างเช่น ถ้า UI Element นั้นเกิดเปลี่ยนชื่อขึ้นมา เราจะต้องไปตามแก้ในทุกไฟล์เลย Search Replace กันระงม</p>
 <p>ถ้าไม่ได้เปลี่ยนชื่อ แต่เปลี่ยนชนิด (เช่น เปลี่ยนจาก Dropdown เป็น Typeahead) อันนี้ยิ่งอ้วกหนักกว่าเดิม</p>
 <p>กรณีของ Web UI มีเทคนิคที่เรียกว่า Page Object คืคือการแยกให้ตัว Test รู้แค่ Business Logic เท่านั้น แต่ไม่รู้ว่าเกิดอะไรขึ้นในการดึงข้อมูลจาก UI</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
 </span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Tests that use page object
-</span><span class="c1"></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">testSomething</span><span class="o">()</span> <span class="o">{</span>
-  <span class="c1">//... setup test
-</span><span class="c1"></span>  <span class="kt">int</span> <span class="n">noOfUsers</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="na">countUsers</span><span class="o">();</span>
-  <span class="n">List</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span> <span class="n">users</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="na">getUsers</span><span class="o">();</span>
-  <span class="c1">//... assertion...
-</span><span class="c1"></span><span class="o">}</span>
-<span class="c1">// Page Object (Knows about actual HTML Implementation)
-</span><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ListUserPage</span> <span class="o">{</span>
-  <span class="kd">public</span> <span class="kt">int</span> <span class="nf">countUsers</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">getUsers</span><span class="o">().</span><span class="na">size</span><span class="o">();</span>
-  <span class="o">}</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=c1>// Tests that use page object
+</span><span class=c1></span><span class=kd>public</span> <span class=kt>void</span> <span class=nf>testSomething</span><span class=o>()</span> <span class=o>{</span>
+  <span class=c1>//... setup test
+</span><span class=c1></span>  <span class=kt>int</span> <span class=n>noOfUsers</span> <span class=o>=</span> <span class=n>page</span><span class=o>.</span><span class=na>countUsers</span><span class=o>();</span>
+  <span class=n>List</span><span class=o>&lt;</span><span class=n>Users</span><span class=o>&gt;</span> <span class=n>users</span> <span class=o>=</span> <span class=n>page</span><span class=o>.</span><span class=na>getUsers</span><span class=o>();</span>
+  <span class=c1>//... assertion...
+</span><span class=c1></span><span class=o>}</span>
+<span class=c1>// Page Object (Knows about actual HTML Implementation)
+</span><span class=c1></span><span class=kd>public</span> <span class=kd>class</span> <span class=nc>ListUserPage</span> <span class=o>{</span>
+  <span class=kd>public</span> <span class=kt>int</span> <span class=nf>countUsers</span><span class=o>()</span> <span class=o>{</span>
+    <span class=k>return</span> <span class=n>getUsers</span><span class=o>().</span><span class=na>size</span><span class=o>();</span>
+  <span class=o>}</span>
 
-  <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span> <span class="nf">getUsers</span><span class="o">(){</span>
-    <span class="n">waitUntilUsersShown</span><span class="o">();</span>
-    <span class="k">return</span> <span class="n">findElementWithClass</span><span class="o">(</span><span class="err">&#39;</span><span class="n">user</span><span class="err">&#39;</span><span class="o">);</span>
-  <span class="o">}</span>
-<span class="o">}</span>
+  <span class=kd>public</span> <span class=n>List</span><span class=o>&lt;</span><span class=n>Users</span><span class=o>&gt;</span> <span class=nf>getUsers</span><span class=o>(){</span>
+    <span class=n>waitUntilUsersShown</span><span class=o>();</span>
+    <span class=k>return</span> <span class=n>findElementWithClass</span><span class=o>(</span><span class=err>&#39;</span><span class=n>user</span><span class=err>&#39;</span><span class=o>);</span>
+  <span class=o>}</span>
+<span class=o>}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>กรณีนี้ ถ้าเกิดตัว Business Logic ไม่เปลี่ยน (get/count users) เราก็สามารถไปแก้ที่ Page Object ที่เดียว เทสต์ที่เรียก Method พวกนี้ก็จะไม่ได้รับผลกระทบ ช่วยลดความเปราะ (Brittleness) ลงได้</p>
-<h1 id="5-ไมรอ-asynchornous-operation-ใหด">5. ไม่รอ Asynchornous Operation ให้ดี</h1>
+<h1 id=5-ไมรอ-asynchornous-operation-ใหด>5. ไม่รอ Asynchornous Operation ให้ดี</h1>
 <p>ใครที่เคยเขียนพวก UI Driver อย่าง Selenium น่าจะคุ้นเคยกับปัญหาเรื่องการรอ (Wait) เป็นอย่างดี โดยเฉพาะพวก Single Page Application</p>
 <p>ตัวอย่างเช่น เวลาคลิ๊กที่ปุ่ม Create จะทำการเปลี่ยนหน้าและแสดงฟอร์มในการสร้าง Record ใหม่ พอใส่ค่าในฟอร์มเสร็จและกด Submit</p>
 <p>ถ้าเราเขียนโค้ดว่า</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
 </span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Test code
-</span><span class="c1"></span><span class="n">page</span><span class="o">.</span><span class="na">createNewRecord</span><span class="o">()</span>
-<span class="n">page</span><span class="o">.</span><span class="na">fillForm</span><span class="o">()</span>
-<span class="n">page</span><span class="o">.</span><span class="na">submitForm</span><span class="o">()</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=c1>// Test code
+</span><span class=c1></span><span class=n>page</span><span class=o>.</span><span class=na>createNewRecord</span><span class=o>()</span>
+<span class=n>page</span><span class=o>.</span><span class=na>fillForm</span><span class=o>()</span>
+<span class=n>page</span><span class=o>.</span><span class=na>submitForm</span><span class=o>()</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>ถ้าไม่ทำการ Wait ให้ดี โค้ดนี้อาจจะมีปัญหา ได้ในช่วงระหว่าง <code>createNewRecord()</code> กับ <code>fillForm()</code></p>
-<p>เพราะการเปลี่ยนหน้าจอเพื่อแสดงฟอร์มนั้น อาจจะใช้เวลา 30 ms  แต่ตัว UI Driver อาจจะทำงานเร็วกว่า ทำให้จังหวะที่พยายามจะ <code>fillForm()</code> นั้น ตัวฟอร์มอาจจะยังโหลดขึ้นมาไม่เสร็จ</p>
+<p>เพราะการเปลี่ยนหน้าจอเพื่อแสดงฟอร์มนั้น อาจจะใช้เวลา 30 ms แต่ตัว UI Driver อาจจะทำงานเร็วกว่า ทำให้จังหวะที่พยายามจะ <code>fillForm()</code> นั้น ตัวฟอร์มอาจจะยังโหลดขึ้นมาไม่เสร็จ</p>
 <p>ปัญหาของการทำงานกับ UI พวกนี้ เกิดมาจากที่ UI ทำงานแบบ Asynchronous</p>
 <p>หลังจากเรากดปุ่น Create ไป เราไม่สามารถการันตีได้ว่าฟอร์มจะโผล่ขึ้นมาเมื่อไร ซึ่งทำให้เทสต์เกิดอาการรันผ่านบ้างไม่ผ่านบ้าง (Flakiness)</p>
 <p>เฟรมเวิร์คต่างๆก็จะมีวิธีแก้ไขต่างกันไป แต่ที่ผมเห็นบ่อยก็จะใช้วิธีการ Wait ตาม Condition ต่างๆ เพื่อให้การทำงานส่งผลเหมือน Synchronous เช่น</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
 </span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Test code
-</span><span class="c1"></span><span class="n">page</span><span class="o">.</span><span class="na">createNewRecord</span><span class="o">()</span>
-<span class="c1">//Keep finding Form element until it appears, but does not exceed reasonable threshold
-</span><span class="c1"></span><span class="n">page</span><span class="o">.</span><span class="na">waitUntilFormAppear</span><span class="o">()</span>
-<span class="n">page</span><span class="o">.</span><span class="na">fillForm</span><span class="o">()</span>
-<span class="n">page</span><span class="o">.</span><span class="na">submitForm</span><span class="o">()</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=c1>// Test code
+</span><span class=c1></span><span class=n>page</span><span class=o>.</span><span class=na>createNewRecord</span><span class=o>()</span>
+<span class=c1>//Keep finding Form element until it appears, but does not exceed reasonable threshold
+</span><span class=c1></span><span class=n>page</span><span class=o>.</span><span class=na>waitUntilFormAppear</span><span class=o>()</span>
+<span class=n>page</span><span class=o>.</span><span class=na>fillForm</span><span class=o>()</span>
+<span class=n>page</span><span class=o>.</span><span class=na>submitForm</span><span class=o>()</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>อันนี้ขอเน้นนิดนึง ว่าให้ Wait ตาม Condition อย่าไปใส่ Wait เป็นเวลาตายตัว เช่น ใส่ Thread.sleep(100) เฉยๆ เพราะวันดีคืนดีเกิดเครื่องช้าเกินจำนวนที่ Sleep ไว้ หรือเราอาจจะมีการเปลี่ยนโค้ดให้ดึงข้อมูลจาก Backend ทุกครั้งที่กด Create ทำให้เปลี่ยนหน้าช้าลง เทสต์ก็จะพังโดยมิได้นัดหมาย (Brittleness)</p>
-<p>จะให้ดีกว่า ทุก Method ใน Page Object  เราจะทำการ Wait() รอจน UI เปลี่ยนก่อน ถึงจะจบการทำงาน วิธีนี้จะทำให้เทสต์โค้ดอ่านง่ายขึ้น ไม่ต้องใส่ Wait มาคั่นหลายที่</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
+<p>จะให้ดีกว่า ทุก Method ใน Page Object เราจะทำการ Wait() รอจน UI เปลี่ยนก่อน ถึงจะจบการทำงาน วิธีนี้จะทำให้เทสต์โค้ดอ่านง่ายขึ้น ไม่ต้องใส่ Wait มาคั่นหลายที่</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
 </span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Test code
-</span><span class="c1"></span><span class="n">page</span><span class="o">.</span><span class="na">createNewRecordAndWait</span><span class="o">()</span>
-<span class="n">page</span><span class="o">.</span><span class="na">fillForm</span><span class="o">()</span>
-<span class="n">page</span><span class="o">.</span><span class="na">submitFormAndWait</span><span class="o">()</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=c1>// Test code
+</span><span class=c1></span><span class=n>page</span><span class=o>.</span><span class=na>createNewRecordAndWait</span><span class=o>()</span>
+<span class=n>page</span><span class=o>.</span><span class=na>fillForm</span><span class=o>()</span>
+<span class=n>page</span><span class=o>.</span><span class=na>submitFormAndWait</span><span class=o>()</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>ประโยชน์ของการดูแลโค้ดให้ดี อ่านง่าย คือทำให้การดีบั๊กง่ายขึ้น (ช่วยบรรเทาปัญหา Failure Isolation)</p>
 <blockquote>
-<p>เรื่องจะใส่ AndWait ไว้หลัง Method ดีรึเปล่า ก็แล้วแต่ทีมตกลงกันนะครับ ที่ผมใส่ไว้เพื่อให้อ่านแล้วเคลียร์ ในทางปฏิบัติ หากเรามีโค้ดเก่าที่ไม่ได้ Wait อัตโนมัติ แล้วเราแก้โค้ดให้ Wait หมดรวดเดียวไม่ได้ ก็ใส่ไว้เพื่อให้เพื่อนร่วมทีมเข้าใจชัดเจน ว่าอันไหน Wait  อันไหน ไม่ Wait</p>
+<p>เรื่องจะใส่ AndWait ไว้หลัง Method ดีรึเปล่า ก็แล้วแต่ทีมตกลงกันนะครับ ที่ผมใส่ไว้เพื่อให้อ่านแล้วเคลียร์ ในทางปฏิบัติ หากเรามีโค้ดเก่าที่ไม่ได้ Wait อัตโนมัติ แล้วเราแก้โค้ดให้ Wait หมดรวดเดียวไม่ได้ ก็ใส่ไว้เพื่อให้เพื่อนร่วมทีมเข้าใจชัดเจน ว่าอันไหน Wait อันไหน ไม่ Wait</p>
 </blockquote>
 <p>ส่วนคนที่ทำ API Test ถ้าตัว API ไม่ได้การันตีว่าเป็น Synchronous อาจจะต้องทำการรอและดึงข้อมูลซ้ำในทำนองเดียวกัน เช่น หากตัว Database ที่ใช้มีพฤติกรรมแนว Eventual Consistency (คือหลังจากแก้ข้อมูลแล้ว พออ่านใหม่ อาจจะยังได้ค่าเก่าแป๊บนึง ต้องรอสักพักค่าถึงจะเปลี่ยน)</p>
-<h1 id="6-ไมรบแก-flaky-tests-ตงแตเนนๆ">6. ไม่รีบแก้ Flaky Tests ตั้งแต่เนิ่นๆ</h1>
+<h1 id=6-ไมรบแก-flaky-tests-ตงแตเนนๆ>6. ไม่รีบแก้ Flaky Tests ตั้งแต่เนิ่นๆ</h1>
 <p>ผมบอกไปข้างต้นว่า SIT/E2E มักจะมีปัญหาหลักๆสี่อย่าง คือ Brittleness, Flakiness, Failure Isolation, และ Slowness</p>
 <p>ในบรรดาสี่อย่างนี้ ตัวที่ผมกลัวมากที่สุดคือ Flakiness เพราะมัน Reproduce ยาก และหาต้นเหตุยากโคตรๆ</p>
 <p>Flakiness อาจจะมาจากเรื่องของ Timing, Side effect, Starting condition, หรือ Unstable dependency ก็ได้</p>
@@ -407,159 +349,99 @@
 <p>หนึ่งในสิ่งที่ช่วยในการดีบั๊กเทสต์ในระดับนี้ คือ Log</p>
 <p>หากจะ Debug ข้าม Dependency ก็ต้องมี Universal ID ที่เอาไว้ใช้ไล่ Log ได้ข้าม Dependency ได้ ว่าเกิดอะไรขึ้น ตั้งแต่ระบบต้นน้ำไปยังปลายน้ำ</p>
 <p>อีกอย่างก็ที่เฟรมเวิร์คบางอันมีให้ก็คือการ Screenshot จังหวะที่เทสต์ล่ม อันนี้ก็จะทำให้ดีบั้กได้ง่ายขึ้นว่ามันเกิดข้อผิดพลาดอะไรขึ้น</p>
-<h1 id="7-เขยนเทสตมากไป-too-many-tests">7. เขียนเทสต์มากไป (Too Many Tests)</h1>
+<h1 id=7-เขยนเทสตมากไป-too-many-tests>7. เขียนเทสต์มากไป (Too Many Tests)</h1>
 <p>SIT/E2E เป็นเทสต์ที่ดูแลยาก ปัญหาเยอะ</p>
 <p>พอมีเยอะๆแล้วนอกจากเสียเวลาแล้วยังใช้เวลารันนานด้วย</p>
 <p>ถ้าถึงจุดที่ต้องรันหลายช.ม. อันนี้จะเริ่มบั่นทอน Productivity ของทีม เพราะ Feedback ที่ได้จาก Test จะช้ามาก พังทีไม่รู้ว่ามาจาก Commit ไหน คนในทีมจะต้องมีวินัยว่ารันเทสต์ที่เกี่ยวข้องและมีโอกาสพังให้ผ่านหมด ก่อนที่จะ Push ขึ้นไปรันบน CI Server ซึ่งควบคุมกันได้ยากมาก</p>
-<p>ส่วนตัว ผมจะให้เทสต์ระดับนี้มีแค่ประมาณ 10% ของเทสต์ทั้งหมด  ซึ่งจะทำอย่างนั้นได้ ทีมก็จะต้องมีข้อตกลงที่ชัดเจน ว่าจะเขียน SIT/E2E ในกรณีไหนบ้าง</p>
+<p>ส่วนตัว ผมจะให้เทสต์ระดับนี้มีแค่ประมาณ 10% ของเทสต์ทั้งหมด ซึ่งจะทำอย่างนั้นได้ ทีมก็จะต้องมีข้อตกลงที่ชัดเจน ว่าจะเขียน SIT/E2E ในกรณีไหนบ้าง</p>
 <p>บางทีมอาจจะตกลงว่าให้เขียนเฉพาะ Happy Flow (คือไม่ดักกรณี Error) บางทีมอาจจะตกลงว่าให้เขียน Sad Flow ที่ผู้ใช้เจอบ่อยด้วย</p>
 <p>แล้วพวกกรณีอื่นๆล่ะ?</p>
 <p>อันนี้ต้องผลักภาระลงไปเทสต์ระดับล่างๆ (Unit/Component) ทำแทน เพราะเทสต์พวกนี้เบา และรันได้เร็วกว่ามาก</p>
 <p>ท้ายที่สุดแล้ว ลองย้อนกลับมาคิดดูครับ ว่าเราเขียนเทสต์ไปเพื่ออะไร และเทสต์ที่เรากำลังจะเขียนเพิ่ม มีคุณค่าพอที่จะใช้เวลา Maintain มันไหม</p>
 <p>ตรงนี้ประสบการณ์จะช่วยได้ เพราะพอเห็นเยอะๆ ก็จะพอเดาได้ว่าเวลาที่ใช้ดูแลมันเยอะแค่ไหน และโอกาสป้องกันไม่ให้บั๊กหลุดไปได้มากแค่ไหน ทำให้ตัดสินใจได้ง่ายขึ้น</p>
-<h1 id="สรป">สรุป</h1>
+<h1 id=สรป>สรุป</h1>
 <p>เราเริ่มต้นด้วยนิยามของ SIT และ E2E Testing เพื่อให้เข้าใจตรงกัน ว่ามันมีลักษณะเด่นอะไร และปัญหาหลักๆของมันมีอะไรบ้าง</p>
 <p>หลังจากนั้น เราก็มาเจาะลึกถึงข้อผิดพลาด 7 แบบ ซึ่งทำให้เกิดปัญหาเหล่านี้ขึ้น พร้อมวิธีแก้ไข (หรือบรรเทา)</p>
 <p>ด้วย Tool กับ Practice ที่เรามีอยู่ปัจจุบันนี้ ส่วนตัวผมคิดว่า SIT/E2E เป็นเทสต์ที่ต่อให้วางแผนดีแค่ไหนก็มีปัญหา แค่มีปัญหาน้อยลงหน่อยเท่านั้นเอง</p>
 <p>หากทีมมีการทำ Code Review ก็ควรจะเคร่งส่วนนี้กันให้มาก ไม่งั้นทีมอาจจะเข้าไปอยู่ในอาการเทสต์ท่วมหัว เอาตัวไม่รอด เพราะรันช้า พังบ้างไม่พังบ้าง แถมแก้ทีนึงก็แดงเถือกวินาศสันตะโรหมด</p>
-
-
-      
-      <div  class="fb-page"
-            data-href="https://www.facebook.com/notaboutcode/"
-            data-tabs=""
-            data-small-header="false"
-            data-adapt-container-width="true"
-            data-hide-cover="false"
-            data-show-facepile="true">
-
-            <blockquote cite="https://www.facebook.com/notaboutcode/" class="fb-xfbml-parse-ignore">
-              <a href="https://www.facebook.com/notaboutcode/">Not about code</a>
-            </blockquote>
-      </div>
-
-    </div>
-
-    
-    <div id="fb-root"></div>
-
-    <div class="post-copyright">
-  <p class="copyright-item">
-    <span class="item-title"></span>
-    <span class="item-content">ijemmy</span>
-  </p>
-  <p class="copyright-item">
-    <span class="item-title"></span>
-    <span class="item-content">
-        2018-05-05
-        
-    </span>
-  </p>
-  
-  <p class="copyright-item">
-    <span class="item-title"></span>
-    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
-  </p>
+<div class=fb-page data-href=https://www.facebook.com/notaboutcode/ data-tabs data-small-header=false data-adapt-container-width=true data-hide-cover=false data-show-facepile=true>
+<blockquote cite=https://www.facebook.com/notaboutcode/ class=fb-xfbml-parse-ignore>
+<a href=https://www.facebook.com/notaboutcode/>Not about code</a>
+</blockquote>
 </div>
-<footer class="post-footer">
-      <div class="post-tags">
-          <a href="/tags/ci/">CI</a>
-          <a href="/tags/cd/">CD</a>
-          <a href="/tags/testing/">Testing</a>
-          </div>
-      <div class="fb-comments" data-numposts="5"></div>
-      
-      <nav class="post-nav">
-        <a class="prev" href="/post/24-catching-up-with-tech/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">วิ่งไล่ตามเทคโนโลยีไม่ทัน ทำยังไงดี</span>
-            <span class="prev-text nav-mobile"></span>
-          </a>
-        <a class="next" href="/post/22-design-to-scale/">
-            <span class="next-text nav-default">การออกแบบระบบให้รับ Request เยอะๆ</span>
-            <span class="next-text nav-mobile"></span>
-            <i class="iconfont icon-right"></i>
-          </a>
-      </nav>
-    </footer>
-  </article>
-        </div>
-        
-
-  
-
-  
-
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="social-links">
-      <a href="https://www.facebook.com/notaboutcode/" class="iconfont icon-facebook" title="facebook"></a>
-  <a href="https://www.notaboutcode.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-
-<div class="copyright">
-  <span class="power-by">
-    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
-  </span>
-  <span class="division">|</span>
-  <span class="theme-info">
-     - 
-    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
-  </span>
-
-  
-
-  <span class="copyright-year">
-    &copy; 
-    2017 - 
-    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
-  </span>
+<div id=fb-root></div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content>ijemmy</span>
+</p>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content>
+2018-05-05
+</span>
+</p>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
+</p>
 </div>
-
-    </footer>
-
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
-    </div>
-  </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-
-
-
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-108239205-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-
-
-
-
-
-
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/ci/>CI</a>
+<a href=/tags/cd/>CD</a>
+<a href=/tags/testing/>Testing</a>
+</div>
+<div class=fb-comments data-numposts=5></div>
+<nav class=post-nav>
+<a class=prev href=/post/24-catching-up-with-tech/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">วิ่งไล่ตามเทคโนโลยีไม่ทัน ทำยังไงดี</span>
+<span class="prev-text nav-mobile"></span>
+</a>
+<a class=next href=/post/22-design-to-scale/>
+<span class="next-text nav-default">การออกแบบระบบให้รับ Request เยอะๆ</span>
+<span class="next-text nav-mobile"></span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
+<a href=https://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+%!(EXTRA string=<a class=hexo-link href=https://gohugo.io>Hugo</a>)
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+-
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<span class=copyright-year>
+&copy;
+2017 -
+2025<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<script>(function(b,c,d){var a,e=b.getElementsByTagName(c)[0];if(b.getElementById(d))return;a=b.createElement(c),a.id=d,a.src='https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676',e.parentNode.insertBefore(a,e)})(document,'script','facebook-jssdk')</script>
 </body>
 </html>

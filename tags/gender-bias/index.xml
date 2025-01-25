@@ -1,27 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Gender Bias on Not About Code - Technical Leadership</title>
-    <link>https://www.notaboutcode.com/tags/gender-bias/</link>
-    <description>Recent content in Gender Bias on Not About Code - Technical Leadership</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>th</language>
-    <lastBuildDate>Sun, 25 Mar 2018 12:04:02 +0700</lastBuildDate><atom:link href="https://www.notaboutcode.com/tags/gender-bias/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Gender Bias ในวงการโปรแกรมเมอร์</title>
-      <link>https://www.notaboutcode.com/post/20-gender-bias/</link>
-      <pubDate>Sun, 25 Mar 2018 12:04:02 +0700</pubDate>
-      
-      <guid>https://www.notaboutcode.com/post/20-gender-bias/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/child-02.jpg&#34; alt=&#34;Photo by Brandon Day on Unsplash&#34;&gt;&lt;/p&gt;
-&lt;p&gt;เผอิญช่วงนี้กลับมาไทย ได้ไปร่วมงาน &lt;a href=&#34;https://djangogirls.org/bangkok/&#34;&gt;DjangoGirls Bangkok&lt;/a&gt;  มา และฟีดในเฟสบุ้คที่โผล่มาหาบ่อยที่สุดก็เป็นเรื่องที่เกี่ยวข้องพอดี&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&amp;ldquo;ต้องเชียร์โปรแกรมเมอร์หญิงที่จะไปเป็นไอดอลอย่างไร ให้ไม่เข้าข่ายเหยียดเพศครับ&amp;rdquo;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;กรณีไอดอลเนี่ย ผมเองก็ไม่รู้เหมือนกัน แต่เรื่องนี้ทำให้นึกถึงเรื่อง Gender Bias ที่จริงจังกันมากในต่างประเทศ&lt;/p&gt;
-&lt;p&gt;หลังจากนั่งอ่านคอมเม้นต์ในโพสต์นั้น, ได้ไปงาน DjangoGirls, รวมถึงเห็นกระแสของ&lt;a href=&#34;https://www.youtube.com/watch?v=TYHFLQtiq-M&#34;&gt;น้อง Turtle&lt;/a&gt; (น้องโปรแกรมเมอร์อินเทิร์นที่สมัคร BNK48) ผมรู้สึกว่าควรจะเขียนเรื่อง Gender Bias นี้ให้ได้อ่านกัน&lt;/p&gt;
-&lt;p&gt;บางคนอาจจะเห็นด้วย บางคนอาจจะไม่เห็นด้วย แต่การได้รับรู้ว่าเรามีประเด็นในเรื่องนี้อยู่ น่าจะมีประโยชน์ต่อวงการโปรแกรมเมอร์บ้านเรา&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Gender Bias on Not About Code - Technical Leadership</title><link>https://www.notaboutcode.com/tags/gender-bias/</link><description>Recent content in Gender Bias on Not About Code - Technical Leadership</description><generator>Hugo -- gohugo.io</generator><language>th</language><lastBuildDate>Sun, 25 Mar 2018 12:04:02 +0700</lastBuildDate><atom:link href="https://www.notaboutcode.com/tags/gender-bias/index.xml" rel="self" type="application/rss+xml"/><item><title>Gender Bias ในวงการโปรแกรมเมอร์</title><link>https://www.notaboutcode.com/post/20-gender-bias/</link><pubDate>Sun, 25 Mar 2018 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/20-gender-bias/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/child-02.jpg" alt="Photo by Brandon Day on Unsplash">&lt;/p>
+&lt;p>เผอิญช่วงนี้กลับมาไทย ได้ไปร่วมงาน &lt;a href="https://djangogirls.org/bangkok/">DjangoGirls Bangkok&lt;/a> มา และฟีดในเฟสบุ้คที่โผล่มาหาบ่อยที่สุดก็เป็นเรื่องที่เกี่ยวข้องพอดี&lt;/p>
+&lt;blockquote>
+&lt;p>&amp;ldquo;ต้องเชียร์โปรแกรมเมอร์หญิงที่จะไปเป็นไอดอลอย่างไร ให้ไม่เข้าข่ายเหยียดเพศครับ&amp;rdquo;&lt;/p>
+&lt;/blockquote>
+&lt;p>กรณีไอดอลเนี่ย ผมเองก็ไม่รู้เหมือนกัน แต่เรื่องนี้ทำให้นึกถึงเรื่อง Gender Bias ที่จริงจังกันมากในต่างประเทศ&lt;/p>
+&lt;p>หลังจากนั่งอ่านคอมเม้นต์ในโพสต์นั้น, ได้ไปงาน DjangoGirls, รวมถึงเห็นกระแสของ&lt;a href="https://www.youtube.com/watch?v=TYHFLQtiq-M">น้อง Turtle&lt;/a> (น้องโปรแกรมเมอร์อินเทิร์นที่สมัคร BNK48) ผมรู้สึกว่าควรจะเขียนเรื่อง Gender Bias นี้ให้ได้อ่านกัน&lt;/p>
+&lt;p>บางคนอาจจะเห็นด้วย บางคนอาจจะไม่เห็นด้วย แต่การได้รับรู้ว่าเรามีประเด็นในเรื่องนี้อยู่ น่าจะมีประโยชน์ต่อวงการโปรแกรมเมอร์บ้านเรา&lt;/p></description></item></channel></rss>

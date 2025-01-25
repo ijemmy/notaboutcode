@@ -1,35 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Deployment on Not About Code - Technical Leadership</title>
-    <link>https://www.notaboutcode.com/tags/deployment/</link>
-    <description>Recent content in Deployment on Not About Code - Technical Leadership</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>th</language>
-    <lastBuildDate>Sun, 10 Mar 2019 12:04:02 +0700</lastBuildDate><atom:link href="https://www.notaboutcode.com/tags/deployment/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Deploy ระบบอย่างไรไม่ให้ล่ม</title>
-      <link>https://www.notaboutcode.com/post/28-deployment-methods/</link>
-      <pubDate>Sun, 10 Mar 2019 12:04:02 +0700</pubDate>
-      
-      <guid>https://www.notaboutcode.com/post/28-deployment-methods/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/cars-01.jpg&#34; alt=&#34;Photo by rawpixel on Unsplash&#34;&gt;&lt;/p&gt;
-&lt;p&gt;สำหรับวีดีโอนี้ เราจะมาคุยกันเรื่องการ Deploy ระบบแบบให้มี High Availability คือผู้ใช้จะต้องสามารถใช้งานระบบของเราได้ตลอด และไม่ได้รับผลกระทบใดๆ เช่น ระบบช้าผิดปกติ หรือบาง Request ผิดพลาด&lt;/p&gt;
-&lt;p&gt;ส่วนแรกของวีดีโอจะคุยกันว่าระบบล่มเวลา Deploy ได้อย่างไร และส่วนที่สองจะอธิบายเรื่องการ Deploy แบบต่างๆและข้อดีข้อเสียของแต่ละแบบ&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>จะ Deploy Frontend หรือ Backend ก่อนดี</title>
-      <link>https://www.notaboutcode.com/post/19-deploy-order/</link>
-      <pubDate>Sun, 18 Feb 2018 12:04:02 +0700</pubDate>
-      
-      <guid>https://www.notaboutcode.com/post/19-deploy-order/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/child-01.jpg&#34; alt=&#34;Photo by Jelleke Vanooteghem on Unsplash&#34;&gt;&lt;/p&gt;
-&lt;p&gt;ความน่ารักของ Web Developer สมัยนี้คือมีการแยก Frontend กับ Backend ออกอย่างชัดเจน ถ้าใครย้อนกลับไปสมัยสิบปีก่อน เราไม่มีตำแหน่ง Frontend Developer ด้วยซ้ำ มีแต่เรียกรวมๆว่า Web Developer&lt;/p&gt;
-&lt;p&gt;การแยกกันของโค้ดสองส่วน ทำให้การ Deployment ทำแยกกันด้วย คำถามที่เกิดขึ้นคือ เวลาจะ Deploy เราจะเอา Frontend ขึ้นก่อน หรือ Backend ขึ้นก่อนดี&lt;/p&gt;
-&lt;p&gt;แม้จะเป็นคำถามง่ายๆ แต่รายละเอียดข้างในนั้นค่อนข้างเยอะ ถ้าไม่คิดให้ถี่ถ้วน อาจจะเจออาการเว็บพังขณะ Deploy เป็นประจำ&lt;/p&gt;
-&lt;p&gt;บทความนี้จะมาวิเคราะห์เจาะลึกกันในเรื่องนี้&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Deployment on Not About Code - Technical Leadership</title><link>https://www.notaboutcode.com/tags/deployment/</link><description>Recent content in Deployment on Not About Code - Technical Leadership</description><generator>Hugo -- gohugo.io</generator><language>th</language><lastBuildDate>Sun, 10 Mar 2019 12:04:02 +0700</lastBuildDate><atom:link href="https://www.notaboutcode.com/tags/deployment/index.xml" rel="self" type="application/rss+xml"/><item><title>Deploy ระบบอย่างไรไม่ให้ล่ม</title><link>https://www.notaboutcode.com/post/28-deployment-methods/</link><pubDate>Sun, 10 Mar 2019 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/28-deployment-methods/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/cars-01.jpg" alt="Photo by rawpixel on Unsplash">&lt;/p>
+&lt;p>สำหรับวีดีโอนี้ เราจะมาคุยกันเรื่องการ Deploy ระบบแบบให้มี High Availability คือผู้ใช้จะต้องสามารถใช้งานระบบของเราได้ตลอด และไม่ได้รับผลกระทบใดๆ เช่น ระบบช้าผิดปกติ หรือบาง Request ผิดพลาด&lt;/p>
+&lt;p>ส่วนแรกของวีดีโอจะคุยกันว่าระบบล่มเวลา Deploy ได้อย่างไร และส่วนที่สองจะอธิบายเรื่องการ Deploy แบบต่างๆและข้อดีข้อเสียของแต่ละแบบ&lt;/p></description></item><item><title>จะ Deploy Frontend หรือ Backend ก่อนดี</title><link>https://www.notaboutcode.com/post/19-deploy-order/</link><pubDate>Sun, 18 Feb 2018 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/19-deploy-order/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/child-01.jpg" alt="Photo by Jelleke Vanooteghem on Unsplash">&lt;/p>
+&lt;p>ความน่ารักของ Web Developer สมัยนี้คือมีการแยก Frontend กับ Backend ออกอย่างชัดเจน ถ้าใครย้อนกลับไปสมัยสิบปีก่อน เราไม่มีตำแหน่ง Frontend Developer ด้วยซ้ำ มีแต่เรียกรวมๆว่า Web Developer&lt;/p>
+&lt;p>การแยกกันของโค้ดสองส่วน ทำให้การ Deployment ทำแยกกันด้วย คำถามที่เกิดขึ้นคือ เวลาจะ Deploy เราจะเอา Frontend ขึ้นก่อน หรือ Backend ขึ้นก่อนดี&lt;/p>
+&lt;p>แม้จะเป็นคำถามง่ายๆ แต่รายละเอียดข้างในนั้นค่อนข้างเยอะ ถ้าไม่คิดให้ถี่ถ้วน อาจจะเจออาการเว็บพังขณะ Deploy เป็นประจำ&lt;/p>
+&lt;p>บทความนี้จะมาวิเคราะห์เจาะลึกกันในเรื่องนี้&lt;/p></description></item></channel></rss>

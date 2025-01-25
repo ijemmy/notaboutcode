@@ -1,201 +1,145 @@
-<!DOCTYPE html>
-<html lang="th">
+<!doctype html><html lang=th>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>จะ Deploy Frontend หรือ Backend ก่อนดี - Not About Code - Technical Leadership</title>
-  <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
-
-
-<meta name="author" content="ijemmy" /><meta name="description" content="ความน่ารักของ Web Developer สมัยนี้คือมีการแยก Frontend กับ Backend ออกอย่างชัดเจน ถ้าใครย้อนกลับไปสมัยสิบปีก่อน เราไม่มีตำแหน่ง Frontend Developer ด้วยซ้ำ มีแต่เรียกรวมๆว่า Web Developer
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>จะ Deploy Frontend หรือ Backend ก่อนดี - Not About Code - Technical Leadership</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="ijemmy"><meta name=description content="ความน่ารักของ Web Developer สมัยนี้คือมีการแยก Frontend กับ Backend ออกอย่างชัดเจน ถ้าใครย้อนกลับไปสมัยสิบปีก่อน เราไม่มีตำแหน่ง Frontend Developer ด้วยซ้ำ มีแต่เรียกรวมๆว่า Web Developer
 การแยกกันของโค้ดสองส่วน ทำให้การ Deployment ทำแยกกันด้วย คำถามที่เกิดขึ้นคือ เวลาจะ Deploy เราจะเอา Frontend ขึ้นก่อน หรือ Backend ขึ้นก่อนดี
 แม้จะเป็นคำถามง่ายๆ แต่รายละเอียดข้างในนั้นค่อนข้างเยอะ ถ้าไม่คิดให้ถี่ถ้วน อาจจะเจออาการเว็บพังขณะ Deploy เป็นประจำ
 บทความนี้จะมาวิเคราะห์เจาะลึกกันในเรื่องนี้
-" /><meta name="keywords" content="Hugo, theme, even" />
-
-
-
-
-
-
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
-
-
-<link rel="canonical" href="https://www.notaboutcode.com/post/19-deploy-order/" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-
-
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/custom.css">
-
-
-<meta property="og:title" content="จะ Deploy Frontend หรือ Backend ก่อนดี" />
+"><meta name=keywords content="Hugo,theme,even">
+<meta name=generator content="Hugo 0.89.4 with theme even">
+<link rel=canonical href=https://www.notaboutcode.com/post/19-deploy-order/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<link rel=stylesheet href=/css/custom.css>
+<meta property="og:title" content="จะ Deploy Frontend หรือ Backend ก่อนดี">
 <meta property="og:description" content="
 ความน่ารักของ Web Developer สมัยนี้คือมีการแยก Frontend กับ Backend ออกอย่างชัดเจน ถ้าใครย้อนกลับไปสมัยสิบปีก่อน เราไม่มีตำแหน่ง Frontend Developer ด้วยซ้ำ มีแต่เรียกรวมๆว่า Web Developer
 การแยกกันของโค้ดสองส่วน ทำให้การ Deployment ทำแยกกันด้วย คำถามที่เกิดขึ้นคือ เวลาจะ Deploy เราจะเอา Frontend ขึ้นก่อน หรือ Backend ขึ้นก่อนดี
 แม้จะเป็นคำถามง่ายๆ แต่รายละเอียดข้างในนั้นค่อนข้างเยอะ ถ้าไม่คิดให้ถี่ถ้วน อาจจะเจออาการเว็บพังขณะ Deploy เป็นประจำ
-บทความนี้จะมาวิเคราะห์เจาะลึกกันในเรื่องนี้" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.notaboutcode.com/post/19-deploy-order/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2018-02-18T12:04:02+07:00" />
-<meta property="article:modified_time" content="2018-02-18T12:04:02+07:00" />
-
-<meta itemprop="name" content="จะ Deploy Frontend หรือ Backend ก่อนดี">
-<meta itemprop="description" content="
+บทความนี้จะมาวิเคราะห์เจาะลึกกันในเรื่องนี้">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.notaboutcode.com/post/19-deploy-order/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2018-02-18T12:04:02+07:00">
+<meta property="article:modified_time" content="2018-02-18T12:04:02+07:00">
+<meta itemprop=name content="จะ Deploy Frontend หรือ Backend ก่อนดี">
+<meta itemprop=description content="
 ความน่ารักของ Web Developer สมัยนี้คือมีการแยก Frontend กับ Backend ออกอย่างชัดเจน ถ้าใครย้อนกลับไปสมัยสิบปีก่อน เราไม่มีตำแหน่ง Frontend Developer ด้วยซ้ำ มีแต่เรียกรวมๆว่า Web Developer
 การแยกกันของโค้ดสองส่วน ทำให้การ Deployment ทำแยกกันด้วย คำถามที่เกิดขึ้นคือ เวลาจะ Deploy เราจะเอา Frontend ขึ้นก่อน หรือ Backend ขึ้นก่อนดี
 แม้จะเป็นคำถามง่ายๆ แต่รายละเอียดข้างในนั้นค่อนข้างเยอะ ถ้าไม่คิดให้ถี่ถ้วน อาจจะเจออาการเว็บพังขณะ Deploy เป็นประจำ
-บทความนี้จะมาวิเคราะห์เจาะลึกกันในเรื่องนี้"><meta itemprop="datePublished" content="2018-02-18T12:04:02+07:00" />
-<meta itemprop="dateModified" content="2018-02-18T12:04:02+07:00" />
-<meta itemprop="wordCount" content="644">
-<meta itemprop="keywords" content="CD,Deployment,Frontend," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="จะ Deploy Frontend หรือ Backend ก่อนดี"/>
-<meta name="twitter:description" content="
+บทความนี้จะมาวิเคราะห์เจาะลึกกันในเรื่องนี้"><meta itemprop=datePublished content="2018-02-18T12:04:02+07:00">
+<meta itemprop=dateModified content="2018-02-18T12:04:02+07:00">
+<meta itemprop=wordCount content="644">
+<meta itemprop=keywords content="CD,Deployment,Frontend,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="จะ Deploy Frontend หรือ Backend ก่อนดี">
+<meta name=twitter:description content="
 ความน่ารักของ Web Developer สมัยนี้คือมีการแยก Frontend กับ Backend ออกอย่างชัดเจน ถ้าใครย้อนกลับไปสมัยสิบปีก่อน เราไม่มีตำแหน่ง Frontend Developer ด้วยซ้ำ มีแต่เรียกรวมๆว่า Web Developer
 การแยกกันของโค้ดสองส่วน ทำให้การ Deployment ทำแยกกันด้วย คำถามที่เกิดขึ้นคือ เวลาจะ Deploy เราจะเอา Frontend ขึ้นก่อน หรือ Backend ขึ้นก่อนดี
 แม้จะเป็นคำถามง่ายๆ แต่รายละเอียดข้างในนั้นค่อนข้างเยอะ ถ้าไม่คิดให้ถี่ถ้วน อาจจะเจออาการเว็บพังขณะ Deploy เป็นประจำ
-บทความนี้จะมาวิเคราะห์เจาะลึกกันในเรื่องนี้"/>
-
-<!--[if lte IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
-<![endif]-->
-
-<!--[if lt IE 9]>
-  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
-
-
-
+บทความนี้จะมาวิเคราะห์เจาะลึกกันในเรื่องนี้"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
 </head>
 <body>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/" class="logo">Not About Code</a>
-  </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Not About Code</a>
 </div>
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    <a href="/">
-        <li class="mobile-menu-item">Home</li>
-      </a><a href="/post/">
-        <li class="mobile-menu-item">Archives</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">Tags</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
-      </a><a href="/about/">
-        <li class="mobile-menu-item">About</li>
-      </a>
-  </ul>
-
-  
-
-
-</nav>
-
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
-  <a href="/" class="logo">Not About Code</a>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
 </div>
-
-
-
-
-
-<nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
-        <a class="menu-item-link" href="/">Home</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/post/">Archives</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">Tags</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/about/">About</a>
-      </li>
-  </ul>
-
-  
-  <a href="https://webring.wonderful.software#notaboutcode.com" title="วงแหวนเว็บ">
-    <img
-        alt="วงแหวนเว็บ"
-        width="32"
-        height="32"
-        src="https://webring.wonderful.software/webring.black.svg"
-    />
-  </a>
-</nav>
-
-
-
-
-    </header>
-
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">จะ Deploy Frontend หรือ Backend ก่อนดี</h1>
-
-      <div class="post-meta">
-        <span class="post-time"> 2018-02-18 </span>
-        <div class="post-category">
-            <a href="/categories/continuous-delivery/"> Continuous Delivery </a>
-            </div>
-        
-      </div>
-    </header>
-
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title"></h2>
-  <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#ทำความเขาใจปญหา">ทำความเข้าใจปัญหา</a></li>
-    <li><a href="#ถาลง-frontend-กอนมปญหา-กลง-backend-กอนส">ถ้าลง Frontend ก่อนมีปัญหา ก็ลง Backend ก่อนสิ</a></li>
-    <li><a href="#ถาเราลงทง-frontend-และ-backend-พรอมๆกนละ">ถ้าเราลงทั้ง Frontend และ Backend พร้อมๆกันล่ะ?</a></li>
-    <li><a href="#ทำ-backend-ใหเปน-backward-compatible-แลวลง-backend-กอน">ทำ Backend ให้เป็น Backward Compatible แล้วลง Backend ก่อน</a></li>
-    <li><a href="#ถาทำ-frontend-ใหเปน-backward-compatible-ละ">ถ้าทำ Frontend ให้เป็น Backward-Compatible ล่ะ?</a></li>
-    <li><a href="#ถาเกด-frontend-เปน-single-page-application-spa-ทผใชเปดทงไวนานๆละ">ถ้าเกิด Frontend เป็น Single Page Application (SPA) ที่ผู้ใช้เปิดทิ้งไว้นานๆล่ะ?</a></li>
-    <li><a href="#สรป">สรุป</a></li>
-  </ul>
-</nav>
-  </div>
 </div>
-    <div class="post-content">
-      <p><img src="/img/covers/child-01.jpg" alt="Photo by Jelleke Vanooteghem on Unsplash"></p>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+<a href=https://webring.wonderful.software#notaboutcode.com title=วงแหวนเว็บ>
+<img alt=วงแหวนเว็บ width=32 height=32 src=https://webring.wonderful.software/webring.black.svg>
+</a>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>จะ Deploy Frontend หรือ Backend ก่อนดี</h1>
+<div class=post-meta>
+<span class=post-time> 2018-02-18 </span>
+<div class=post-category>
+<a href=/categories/continuous-delivery/> Continuous Delivery </a>
+</div>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title></h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#ทำความเขาใจปญหา>ทำความเข้าใจปัญหา</a></li>
+<li><a href=#ถาลง-frontend-กอนมปญหา-กลง-backend-กอนส>ถ้าลง Frontend ก่อนมีปัญหา ก็ลง Backend ก่อนสิ</a></li>
+<li><a href=#ถาเราลงทง-frontend-และ-backend-พรอมๆกนละ>ถ้าเราลงทั้ง Frontend และ Backend พร้อมๆกันล่ะ?</a></li>
+<li><a href=#ทำ-backend-ใหเปน-backward-compatible-แลวลง-backend-กอน>ทำ Backend ให้เป็น Backward Compatible แล้วลง Backend ก่อน</a></li>
+<li><a href=#ถาทำ-frontend-ใหเปน-backward-compatible-ละ>ถ้าทำ Frontend ให้เป็น Backward-Compatible ล่ะ?</a></li>
+<li><a href=#ถาเกด-frontend-เปน-single-page-application-spa-ทผใชเปดทงไวนานๆละ>ถ้าเกิด Frontend เป็น Single Page Application (SPA) ที่ผู้ใช้เปิดทิ้งไว้นานๆล่ะ?</a></li>
+<li><a href=#สรป>สรุป</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p><img src=/img/covers/child-01.jpg alt="Photo by Jelleke Vanooteghem on Unsplash"></p>
 <p>ความน่ารักของ Web Developer สมัยนี้คือมีการแยก Frontend กับ Backend ออกอย่างชัดเจน ถ้าใครย้อนกลับไปสมัยสิบปีก่อน เราไม่มีตำแหน่ง Frontend Developer ด้วยซ้ำ มีแต่เรียกรวมๆว่า Web Developer</p>
 <p>การแยกกันของโค้ดสองส่วน ทำให้การ Deployment ทำแยกกันด้วย คำถามที่เกิดขึ้นคือ เวลาจะ Deploy เราจะเอา Frontend ขึ้นก่อน หรือ Backend ขึ้นก่อนดี</p>
 <p>แม้จะเป็นคำถามง่ายๆ แต่รายละเอียดข้างในนั้นค่อนข้างเยอะ ถ้าไม่คิดให้ถี่ถ้วน อาจจะเจออาการเว็บพังขณะ Deploy เป็นประจำ</p>
 <p>บทความนี้จะมาวิเคราะห์เจาะลึกกันในเรื่องนี้</p>
-<h1 id="ทำความเขาใจปญหา">ทำความเข้าใจปัญหา</h1>
-<p><img src="/img/diagrams/19-deploy-order/case-01.jpg" alt="มี Static File Server แยกต่างหาก"></p>
+<h1 id=ทำความเขาใจปญหา>ทำความเข้าใจปัญหา</h1>
+<p><img src=/img/diagrams/19-deploy-order/case-01.jpg alt="มี Static File Server แยกต่างหาก"></p>
 <p>จากรูปแรก สมมติว่าเรามี Static File Server แยกไปต่างหาก การ Deploy Frontend กับ Backend ของเราจะแยกกันชัดเจน (JavaScript/CSS/HTML ไปเซอร์เวอร์กลุ่มหนึ่ง ส่วน Backend Code ก็ไปอีกกลุ่มหนึ่ง)</p>
 <blockquote>
 <p>สำหรับใครที่ใช้ Cloud และแยก Static File ไปใส่ไว้ในอีก Service หนึ่ง อันนี้ก็จะหน้าตาคล้ายกัน แค่่ Request ของผู้ใช้ไม่ได้ผ่าน Reverse Proxy ของเรา แต่ตรงเข้า Cloud เลย</p>
@@ -205,74 +149,74 @@
 <p>หากขั้นตอนการ Deploy ของเราเร็วมาก ช่วงเวลาที่มีปัญหานี้อาจจะไม่ถึง 1 นาที สำหรับเว็บส่วนใหญ่ที่ไม่ได้ซีเรียสเรื่อง Availability มาก ก็ถือว่ายอมรับได้ เอาความง่ายแลกกับ Error ช่วงสั้นๆ</p>
 <p>แต่หากนึกภาพว่าเรา Deploy บ่อยๆ หลายครั้งต่อวัน แล้วการ Deploy แต่ละครั้งใช้เวลา 5-10 นาที อันนี้รับไม่ได้แน่นอน (นึกภาพว่าเรามี Server 10 ตัว ที่ต้องค่อยๆ Deploy ทีละ 2 ตัว เพราะจะปิดหมดแล้ว Deploy รวดเดียวไม่ได้ เพราะจะมี Server ทำงานไม่พอต่อจำนวน Request)</p>
 <p>คำถามคือ จะแก้ไขอย่างไร?</p>
-<h1 id="ถาลง-frontend-กอนมปญหา-กลง-backend-กอนส">ถ้าลง Frontend ก่อนมีปัญหา ก็ลง Backend ก่อนสิ</h1>
+<h1 id=ถาลง-frontend-กอนมปญหา-กลง-backend-กอนส>ถ้าลง Frontend ก่อนมีปัญหา ก็ลง Backend ก่อนสิ</h1>
 <p>เราสามารถแก้ปัญหาแบบกำปั้นทุบดิน ด้วยการ Deploy Backend ก่อน</p>
 <p>สมมติว่า Change ที่เราจะทำการ Deploy เราได้มีการเปลี่ยน API ให้ Return data ในรูปแบบใหม่ เช่น ตัวอย่าง Todo List Application</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
 </span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// Old format
-</span><span class="c1"></span><span class="p">{</span>
-  <span class="nx">todos</span><span class="o">:</span> <span class="p">[</span>
-    <span class="s2">&#34;Fix bug #1278&#34;</span><span class="p">,</span>
-    <span class="s2">&#34;Develop feature #1279&#34;</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=c1>// Old format
+</span><span class=c1></span><span class=p>{</span>
+  <span class=nx>todos</span><span class=o>:</span> <span class=p>[</span>
+    <span class=s2>&#34;Fix bug #1278&#34;</span><span class=p>,</span>
+    <span class=s2>&#34;Develop feature #1279&#34;</span>
+  <span class=p>]</span>
+<span class=p>}</span>
 
-<span class="c1">// New format: มีการใส่ชื่อคนที่ต้องทำงานนั้นๆขึ้นมา
-</span><span class="c1"></span><span class="p">{</span>
-  <span class="nx">todos</span><span class="o">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="nx">task</span><span class="o">:</span> <span class="s2">&#34;Fix bug #1278&#34;</span><span class="p">,</span>
-      <span class="nx">owner</span><span class="o">:</span> <span class="s2">&#34;Suthee&#34;</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="nx">task</span><span class="o">:</span> <span class="s2">&#34;Develop feature #1279&#34;</span><span class="p">,</span>
-      <span class="nx">owner</span><span class="o">:</span> <span class="s2">&#34;Aruj&#34;</span>
-    <span class="p">},</span>
+<span class=c1>// New format: มีการใส่ชื่อคนที่ต้องทำงานนั้นๆขึ้นมา
+</span><span class=c1></span><span class=p>{</span>
+  <span class=nx>todos</span><span class=o>:</span> <span class=p>[</span>
+    <span class=p>{</span>
+      <span class=nx>task</span><span class=o>:</span> <span class=s2>&#34;Fix bug #1278&#34;</span><span class=p>,</span>
+      <span class=nx>owner</span><span class=o>:</span> <span class=s2>&#34;Suthee&#34;</span>
+    <span class=p>},</span>
+    <span class=p>{</span>
+      <span class=nx>task</span><span class=o>:</span> <span class=s2>&#34;Develop feature #1279&#34;</span><span class=p>,</span>
+      <span class=nx>owner</span><span class=o>:</span> <span class=s2>&#34;Aruj&#34;</span>
+    <span class=p>},</span>
 
-  <span class="p">]</span>
-<span class="p">}</span>
+  <span class=p>]</span>
+<span class=p>}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>ผู้ใช้ที่โหลด JavaScript ไปแล้ว และกำลังใช้งาน Application อยู่ก็จะทำงานไม่ได้ทันที เพราะโค้ด Frontend เก่าไม่ได้ถูกออกแบบให้ทำงานกับ data รูปแบบใหม่</p>
 <p>สังเกตว่าเราอยู่ในสถานการณ์ &ldquo;ไก่กับไข่&rdquo; คือ ไม่ว่าอะไรเกิดก่อน อีกอันนึงก็ต้องเกิดพร้อมกันด้วยอยู่ดี</p>
-<h1 id="ถาเราลงทง-frontend-และ-backend-พรอมๆกนละ">ถ้าเราลงทั้ง Frontend และ Backend พร้อมๆกันล่ะ?</h1>
+<h1 id=ถาเราลงทง-frontend-และ-backend-พรอมๆกนละ>ถ้าเราลงทั้ง Frontend และ Backend พร้อมๆกันล่ะ?</h1>
 <p>&ldquo;ทำได้ด้วยเหรอ?&rdquo;</p>
 <p>&ldquo;ทำได้สิ ก็เอาทุกอย่างใส่บน Server แล้ว Deploy พร้อมๆกันรวดเดียวเลยไง ดูนะ&rdquo;</p>
-<p><img src="/img/diagrams/19-deploy-order/case-02.jpg" alt="ใส่ทุกอย่างลงบนเซอร์เวอร์เดียว"></p>
+<p><img src=/img/diagrams/19-deploy-order/case-02.jpg alt=ใส่ทุกอย่างลงบนเซอร์เวอร์เดียว></p>
 <p>อันนี้ดูเผินๆ อาจจะรอดจากปัญหา &ldquo;ไก่กับไข่&rdquo; ไปได้ เพราะหากเปลี่ยนทุกอย่างพร้อมกัน ผู้ใช้ที่เข้าเว็บก็จะได้ไฟล์ JavaScript ใหม่ แล้วเรียกใช้ API อันใหม่ได้เลย</p>
 <p>แต่เดี๋ยวก่อนนนน มันยังมีช่องว่างอยู่</p>
 <ol>
 <li>ถ้าหากผู้ใช้โหลด JavaScript เก่าไปแล้ว ก่อนเราทำการ Deploy พอดีล่ะ?</li>
 <li>หากเรามี Backend Server สัก 10 เครื่อง เราจะไม่สามารถลงทุกเครื่องพร้อมกันได้ ในช่วงเวลาที่เรา Deploy อยู่นั้น หากผู้ใช้เข้าเว็บแล้วได้ JavaScript ไฟล์แล้วได้เวอร์ชั่นเก่า แล้ว Request ถัดมาเพื่อดึงข้อมูลจาก /api/data ดันไปตกเครื่องเวอร์ชั่นใหม่ (หรือกลับกัน) เราก็จะยังเจอปัญหาเดิม</li>
 </ol>
-<p>ถึงจุดนี้ ผมจะขอสรุปว่า <strong>เราไม่มีทางการันตีได้ว่า Frontend กับ Backend จะเป็นเวอร์ชั่นที่ตรงกัน</strong> หากจะแก้ปัญหานี้ เราต้อง&hellip;</p>
-<h1 id="ทำ-backend-ใหเปน-backward-compatible-แลวลง-backend-กอน">ทำ Backend ให้เป็น Backward Compatible แล้วลง Backend ก่อน</h1>
-<p>แม้จะเราจะคุม Caching ดีเพียงใด (เซ็ต HTTP Header Expires/Cache-Control ให้ดีแล้ว + ทำ Cache Busting)  แต่ก็เป็นไปได้ว่าผู้ใช้อาจจะยังไม่ได้ Refresh หน้าจอเป็นระยะเวลานาน ซึ่งทำให้มี Request จากเวอร์ชั่นเก่าๆหลงมาอยู่ดี</p>
+<p>ถึงจุดนี้ ผมจะขอสรุปว่า <strong>เราไม่มีทางการันตีได้ว่า Frontend กับ Backend จะเป็นเวอร์ชั่นที่ตรงกัน</strong> หากจะแก้ปัญหานี้ เราต้อง&mldr;</p>
+<h1 id=ทำ-backend-ใหเปน-backward-compatible-แลวลง-backend-กอน>ทำ Backend ให้เป็น Backward Compatible แล้วลง Backend ก่อน</h1>
+<p>แม้จะเราจะคุม Caching ดีเพียงใด (เซ็ต HTTP Header Expires/Cache-Control ให้ดีแล้ว + ทำ Cache Busting) แต่ก็เป็นไปได้ว่าผู้ใช้อาจจะยังไม่ได้ Refresh หน้าจอเป็นระยะเวลานาน ซึ่งทำให้มี Request จากเวอร์ชั่นเก่าๆหลงมาอยู่ดี</p>
 <p>ดังนั้น ให้ตั้งสมมติฐานไว้ก่อนเลยว่า Frontend ยังไงก็ต้องมีเวอร์ชั่นเก่าแน่นอน</p>
 <p>จากสมมติฐานนี้ ยังไงเราก็ต้องเขียน Backend ให้ Backward-Compatible อย่างเลี่ยงไม่ได้</p>
 <p>พอ Backend เป็น Backward-Compatible แล้ว เราก็สามารถลง Backend ก่อนได้เลยโดยไม่ต้องกังวล</p>
@@ -323,10 +267,10 @@
 </table>
 <p>เป็นอันเสร็จสิ้นกระบวนการ ระหว่าง Deployment ก็จะไม่มีปัญหาเรื่องนี้อีก</p>
 <p>ส่วนตัวผมแนะนำวิธีนี้ แต่อยากให้ลองคิดต่อกันถึงกรณีอื่นๆกัน</p>
-<h1 id="ถาทำ-frontend-ใหเปน-backward-compatible-ละ">ถ้าทำ Frontend ให้เป็น Backward-Compatible ล่ะ?</h1>
+<h1 id=ถาทำ-frontend-ใหเปน-backward-compatible-ละ>ถ้าทำ Frontend ให้เป็น Backward-Compatible ล่ะ?</h1>
 <p>คราวนี้ลองมาคิดกันต่อ ว่าเราจะทำแบบอื่นได้หรือเปล่า</p>
 <p>ถ้าสมมติเราทำกลับกันล่ะ คือทำ Frontend ให้เป็น Backward-Compatible แล้วลง Frontend ก่อน</p>
-<p>ตัวอย่างเช่นในกรณี Todo List เราอาจจะเขียนให้โค้ดเราสามารถรับ Todo ที่เป็นทั้ง String หรือ Object  ซึ่งถ้าหากเป็น String ก็จะใส่ค่า Owner ให้เป็น Empty String แล้วก็ไม่ Render ส่วนที่แสดง Owner หากไม่มีค่า</p>
+<p>ตัวอย่างเช่นในกรณี Todo List เราอาจจะเขียนให้โค้ดเราสามารถรับ Todo ที่เป็นทั้ง String หรือ Object ซึ่งถ้าหากเป็น String ก็จะใส่ค่า Owner ให้เป็น Empty String แล้วก็ไม่ Render ส่วนที่แสดง Owner หากไม่มีค่า</p>
 <p>พอ Deploy กลับกัน เราจะได้ตารางหน้าตาแบบนี้</p>
 <table>
 <thead>
@@ -371,9 +315,9 @@
 </tr>
 </tbody>
 </table>
-<p>จะเห็นได้ว่า เนื่องจากเราควบคุมเวอร์ชั่นของฝั่ง Frontend ไม่ได้ 100%  ทำให้ยังมี Version เก่าหลุดมา พอ Backend ไม่เป็น Backward-compatible ก็จะมีปัญหากรณีที่ Frontend เก่าดันส่ง Request มาเข้า Backend ใหม่</p>
+<p>จะเห็นได้ว่า เนื่องจากเราควบคุมเวอร์ชั่นของฝั่ง Frontend ไม่ได้ 100% ทำให้ยังมี Version เก่าหลุดมา พอ Backend ไม่เป็น Backward-compatible ก็จะมีปัญหากรณีที่ Frontend เก่าดันส่ง Request มาเข้า Backend ใหม่</p>
 <p>นี่คือสาเหตุที่ผมแนะนำให้ลง Backend ก่อนครับ เพราะไม่ว่ายังไง เราก็ต้องทำให้ Backend เป็น Backward-Compatible อยู่ดี</p>
-<h1 id="ถาเกด-frontend-เปน-single-page-application-spa-ทผใชเปดทงไวนานๆละ">ถ้าเกิด Frontend เป็น Single Page Application (SPA) ที่ผู้ใช้เปิดทิ้งไว้นานๆล่ะ?</h1>
+<h1 id=ถาเกด-frontend-เปน-single-page-application-spa-ทผใชเปดทงไวนานๆละ>ถ้าเกิด Frontend เป็น Single Page Application (SPA) ที่ผู้ใช้เปิดทิ้งไว้นานๆล่ะ?</h1>
 <p>ปัจจุบัน Frontend ซับซ้อนขึ้นมาก ไม่ได้ใช่แค่แสดงหน้าเว็บเพจอย่างเดียว ตัวอย่างง่ายๆก็พวก Messaging Service ที่บางคนเปิดไว้แทบจะถาวรเลย</p>
 <p>กรณีนี้จะมีความซับซ้อนเพิ่มขึ้น เพราะ Frontend อาจจะมีเวอร์ชั่นเก่าเป็นชาติค้างอยู่ ดังตารางนี้</p>
 <table>
@@ -412,152 +356,92 @@
 <p>กรณีนี้ เรามีทางเลือกสองทาง</p>
 <ol>
 <li>เลิกทำ Backward-Compatible ของเวอร์ชั่นที่เก่ามากๆ และให้ผู้ใช้ Refresh หน้าจอเอง</li>
-<li>ออกแบบ Frontend ให้บังคับ User ให้  Refresh page หาก Major Version</li>
+<li>ออกแบบ Frontend ให้บังคับ User ให้ Refresh page หาก Major Version</li>
 </ol>
 <p>แม้กรณี 1 จะดูไร้ความรับผิดชอบไปหน่อย แต่ในทางปฏิบัติ หากเรามี Metric เพื่อใช้เช็คเวอร์ชั่นของผู้ใช้ในระบบ เราจะสามารถเช็คได้ว่าคนที่ใช้ 1.1 อยู่มีเยอะแค่ไหน หากมีน้อยมาก ก็น่าจะถือว่ายอมรับได้</p>
 <p>กรณีที่ 2 เป็นทางเลือกที่ดีมาก แต่ต้องออกแบบ Application ทั้งสองฝั่งให้มีฟีเจอร์นี้ตั้งแต่แรก ซึ่งเอาเข้าจริง ผมไม่เคยเห็นใครคิดเรื่องนี้ตั้งแต่แรกเลย เพราะช่วง Release แรกๆ มี Feature ที่สำคัญกว่าอีกเยอะให้ทำ</p>
-<h1 id="สรป">สรุป</h1>
+<h1 id=สรป>สรุป</h1>
 <p>เว็บปัจจุบันมีการแยก Frontend กับ Backend ออกจากชัดเจน ทำให้เกิดปัญหาเรื่องของ Incompatible Version ระหว่างทั้งสองส่วน โดยเฉพาะอย่างยิ่งในช่วงเวลาที่ทำการ Deploy อยู่</p>
 <p>บทความนี้ยกตัวอย่างให้เห็นว่า เราไม่สามารถการันตีให้ Frontend กับ Backend จะอยู่บนเวอร์ชั่นเดียวกันได้ 100%</p>
 <p>ทางแก้ ผมแนะนำให้ใส่ Backward-Compatible ในส่วนของ Backend และ Deploy ฝั่ง Backend ก่อน เพราะยังไงก็จะต้องมี Frontend ที่ผู้ใช้โหลดไปแล้วในเวอร์ชั่นเก่าๆอยู่ วิธีนี้จะทำให้ไม่ต้องกังวลเรื่องทำฝั่ง Frontend ให้เป็น Backward-Compatible ด้วย</p>
-
-
-      
-      <div  class="fb-page"
-            data-href="https://www.facebook.com/notaboutcode/"
-            data-tabs=""
-            data-small-header="false"
-            data-adapt-container-width="true"
-            data-hide-cover="false"
-            data-show-facepile="true">
-
-            <blockquote cite="https://www.facebook.com/notaboutcode/" class="fb-xfbml-parse-ignore">
-              <a href="https://www.facebook.com/notaboutcode/">Not about code</a>
-            </blockquote>
-      </div>
-
-    </div>
-
-    
-    <div id="fb-root"></div>
-
-    <div class="post-copyright">
-  <p class="copyright-item">
-    <span class="item-title"></span>
-    <span class="item-content">ijemmy</span>
-  </p>
-  <p class="copyright-item">
-    <span class="item-title"></span>
-    <span class="item-content">
-        2018-02-18
-        
-    </span>
-  </p>
-  
-  <p class="copyright-item">
-    <span class="item-title"></span>
-    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
-  </p>
+<div class=fb-page data-href=https://www.facebook.com/notaboutcode/ data-tabs data-small-header=false data-adapt-container-width=true data-hide-cover=false data-show-facepile=true>
+<blockquote cite=https://www.facebook.com/notaboutcode/ class=fb-xfbml-parse-ignore>
+<a href=https://www.facebook.com/notaboutcode/>Not about code</a>
+</blockquote>
 </div>
-<footer class="post-footer">
-      <div class="post-tags">
-          <a href="/tags/cd/">CD</a>
-          <a href="/tags/deployment/">Deployment</a>
-          <a href="/tags/frontend/">Frontend</a>
-          </div>
-      <div class="fb-comments" data-numposts="5"></div>
-      
-      <nav class="post-nav">
-        <a class="prev" href="/post/20-gender-bias/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Gender Bias ในวงการโปรแกรมเมอร์</span>
-            <span class="prev-text nav-mobile"></span>
-          </a>
-        <a class="next" href="/post/18-test-properties/">
-            <span class="next-text nav-default">คุณสมบัติของเทสต์ในการกำหนด Testing Strategy</span>
-            <span class="next-text nav-mobile"></span>
-            <i class="iconfont icon-right"></i>
-          </a>
-      </nav>
-    </footer>
-  </article>
-        </div>
-        
-
-  
-
-  
-
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="social-links">
-      <a href="https://www.facebook.com/notaboutcode/" class="iconfont icon-facebook" title="facebook"></a>
-  <a href="https://www.notaboutcode.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-
-<div class="copyright">
-  <span class="power-by">
-    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
-  </span>
-  <span class="division">|</span>
-  <span class="theme-info">
-     - 
-    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
-  </span>
-
-  
-
-  <span class="copyright-year">
-    &copy; 
-    2017 - 
-    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
-  </span>
+<div id=fb-root></div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content>ijemmy</span>
+</p>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content>
+2018-02-18
+</span>
+</p>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
+</p>
 </div>
-
-    </footer>
-
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
-    </div>
-  </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-
-
-
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-108239205-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-
-
-
-
-
-
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/cd/>CD</a>
+<a href=/tags/deployment/>Deployment</a>
+<a href=/tags/frontend/>Frontend</a>
+</div>
+<div class=fb-comments data-numposts=5></div>
+<nav class=post-nav>
+<a class=prev href=/post/20-gender-bias/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">Gender Bias ในวงการโปรแกรมเมอร์</span>
+<span class="prev-text nav-mobile"></span>
+</a>
+<a class=next href=/post/18-test-properties/>
+<span class="next-text nav-default">คุณสมบัติของเทสต์ในการกำหนด Testing Strategy</span>
+<span class="next-text nav-mobile"></span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
+<a href=https://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+%!(EXTRA string=<a class=hexo-link href=https://gohugo.io>Hugo</a>)
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+-
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<span class=copyright-year>
+&copy;
+2017 -
+2025<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<script>(function(b,c,d){var a,e=b.getElementsByTagName(c)[0];if(b.getElementById(d))return;a=b.createElement(c),a.id=d,a.src='https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676',e.parentNode.insertBefore(a,e)})(document,'script','facebook-jssdk')</script>
 </body>
 </html>

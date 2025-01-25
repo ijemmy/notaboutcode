@@ -1,45 +1,17 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>scalability on Not About Code - Technical Leadership</title>
-    <link>https://www.notaboutcode.com/tags/scalability/</link>
-    <description>Recent content in scalability on Not About Code - Technical Leadership</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>th</language>
-    <lastBuildDate>Sat, 19 Feb 2022 12:04:02 +0700</lastBuildDate><atom:link href="https://www.notaboutcode.com/tags/scalability/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>จะสเกลระบบหลักล้านด้วย Cache ต้องพิจารณาอะไรบ้าง</title>
-      <link>https://www.notaboutcode.com/post/31-caching/</link>
-      <pubDate>Sat, 19 Feb 2022 12:04:02 +0700</pubDate>
-      
-      <guid>https://www.notaboutcode.com/post/31-caching/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/desk-01.png&#34; alt=&#34;Photo by Wonderlane(@wonderlane) on Unsplash&#34;&gt;&lt;/p&gt;
-&lt;p&gt;แคช(Cache)เป็นหนึ่งในตัวเลือกที่ถูกใช้บ่อยมากในการสเกลระบบให้สามารถรับโหลดได้เยอะๆ ถ้าใครไปสัมภาษณ์งานแล้วเจอคำถามว่าระบบมีคนใช้หลักล้าน และเป็นการอ่านข้อมูลเป็นหลัก (Read-intensive) ตอบได้เลยว่าใช้แคช แต่รายละเอียดของคำตอบว่าจะใช้ยังไง ต้องพิจารณาเรื่องไหนบ้าง เราจะมาคุยกันในบทความนี้ครับ&lt;/p&gt;
-&lt;p&gt;ชี้แจงก่อนว่า เราจะคุยกันในมุมของการออกแบบระบบ (System Design) ซึ่งจะเป็นการใช้แคชในระดับของ Backend services เพราะแนวคิดของแคชนั้นถูกใช้ในทุกระดับ ยกตัวอย่างเช่น&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>ปัญหาของ Sticky Session</title>
-      <link>https://www.notaboutcode.com/post/08-sticky-session/</link>
-      <pubDate>Thu, 02 Nov 2017 12:04:02 +0700</pubDate>
-      
-      <guid>https://www.notaboutcode.com/post/08-sticky-session/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://www.notaboutcode.com/img/covers/traffic-01.jpg&#34; alt=&#34;Photo by Denys Nevozhai, from Unsplash.com&#34;&gt;&lt;/p&gt;
-&lt;p&gt;ใครที่เคยใช้ Load Balancer (LB) คงจะเคยได้ยินคำว่า Sticky Session (หรือ Session Affinity) กันมาบ้าง&lt;/p&gt;
-&lt;p&gt;แนวคิดของ Sticky Session คือการให้ LB ส่ง Request ที่มาจากผู้ใช้ (Client) คนเดียวยัง ไปยังเซอร์เวอร์ตัวเดียวกันตลอด&lt;/p&gt;
-&lt;p&gt;ตัวอย่างเช่น เรามีเซอร์เวอร์ 3 ตัว ชื่อว่า S1, S2, และ S3 วางอยู่ข้างหลัง LB  แล้วมีผู้ใช้ส่ง Request เข้ามายังเว็บเรา&lt;/p&gt;
-&lt;figure class=&#34;center&#34; &gt;
-  &lt;img  src=&#34;https://www.notaboutcode.com/img/diagrams/loadbalancer.png&#34;
-        alt=&#34;Load Balancer with 3 servers&#34;
-        &gt;
-  &lt;figcaption&gt;
-    Load Balancer with 3 servers
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-&lt;p&gt;ในครั้งแรก Request ถูกส่งไปให้ S1 แต่พอผู้ใช้ส่ง Request ถัดๆไป LB อาจส่ง Request นั้นไปยัง S2 หรือ S3 แทน&lt;/p&gt;
-&lt;p&gt;แต่หากเราเปิด Sticky Session แล้วล่ะก็ ตัว LB จะส่ง Request จากผู้ใช้คนเดิมไปยัง S1 ตลอด โดยไม่ส่งไปที่ S2 หรือ S3 เลย&lt;/p&gt;
-&lt;p&gt;ในบทความนี้ เราจะมาทำความเข้าใจว่า Sticky Session ให้ละเอียดยิ่งขึ้น และอธิบายถึงปัญหาที่มักจะเกิดขึ้นในการใช้ Sticky Session&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>scalability on Not About Code - Technical Leadership</title><link>https://www.notaboutcode.com/tags/scalability/</link><description>Recent content in scalability on Not About Code - Technical Leadership</description><generator>Hugo -- gohugo.io</generator><language>th</language><lastBuildDate>Sat, 19 Feb 2022 12:04:02 +0700</lastBuildDate><atom:link href="https://www.notaboutcode.com/tags/scalability/index.xml" rel="self" type="application/rss+xml"/><item><title>จะสเกลระบบหลักล้านด้วย Cache ต้องพิจารณาอะไรบ้าง</title><link>https://www.notaboutcode.com/post/31-caching/</link><pubDate>Sat, 19 Feb 2022 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/31-caching/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/desk-01.png" alt="Photo by Wonderlane(@wonderlane) on Unsplash">&lt;/p>
+&lt;p>แคช(Cache)เป็นหนึ่งในตัวเลือกที่ถูกใช้บ่อยมากในการสเกลระบบให้สามารถรับโหลดได้เยอะๆ ถ้าใครไปสัมภาษณ์งานแล้วเจอคำถามว่าระบบมีคนใช้หลักล้าน และเป็นการอ่านข้อมูลเป็นหลัก (Read-intensive) ตอบได้เลยว่าใช้แคช แต่รายละเอียดของคำตอบว่าจะใช้ยังไง ต้องพิจารณาเรื่องไหนบ้าง เราจะมาคุยกันในบทความนี้ครับ&lt;/p>
+&lt;p>ชี้แจงก่อนว่า เราจะคุยกันในมุมของการออกแบบระบบ (System Design) ซึ่งจะเป็นการใช้แคชในระดับของ Backend services เพราะแนวคิดของแคชนั้นถูกใช้ในทุกระดับ ยกตัวอย่างเช่น&lt;/p></description></item><item><title>ปัญหาของ Sticky Session</title><link>https://www.notaboutcode.com/post/08-sticky-session/</link><pubDate>Thu, 02 Nov 2017 12:04:02 +0700</pubDate><guid>https://www.notaboutcode.com/post/08-sticky-session/</guid><description>&lt;p>&lt;img src="https://www.notaboutcode.com/img/covers/traffic-01.jpg" alt="Photo by Denys Nevozhai, from Unsplash.com">&lt;/p>
+&lt;p>ใครที่เคยใช้ Load Balancer (LB) คงจะเคยได้ยินคำว่า Sticky Session (หรือ Session Affinity) กันมาบ้าง&lt;/p>
+&lt;p>แนวคิดของ Sticky Session คือการให้ LB ส่ง Request ที่มาจากผู้ใช้ (Client) คนเดียวยัง ไปยังเซอร์เวอร์ตัวเดียวกันตลอด&lt;/p>
+&lt;p>ตัวอย่างเช่น เรามีเซอร์เวอร์ 3 ตัว ชื่อว่า S1, S2, และ S3 วางอยู่ข้างหลัง LB แล้วมีผู้ใช้ส่ง Request เข้ามายังเว็บเรา&lt;/p>
+&lt;figure class="center" >
+&lt;img src="https://www.notaboutcode.com/img/diagrams/loadbalancer.png"
+alt="Load Balancer with 3 servers"
+>
+&lt;figcaption>
+Load Balancer with 3 servers
+&lt;/figcaption>
+&lt;/figure>
+&lt;p>ในครั้งแรก Request ถูกส่งไปให้ S1 แต่พอผู้ใช้ส่ง Request ถัดๆไป LB อาจส่ง Request นั้นไปยัง S2 หรือ S3 แทน&lt;/p>
+&lt;p>แต่หากเราเปิด Sticky Session แล้วล่ะก็ ตัว LB จะส่ง Request จากผู้ใช้คนเดิมไปยัง S1 ตลอด โดยไม่ส่งไปที่ S2 หรือ S3 เลย&lt;/p>
+&lt;p>ในบทความนี้ เราจะมาทำความเข้าใจว่า Sticky Session ให้ละเอียดยิ่งขึ้น และอธิบายถึงปัญหาที่มักจะเกิดขึ้นในการใช้ Sticky Session&lt;/p></description></item></channel></rss>
