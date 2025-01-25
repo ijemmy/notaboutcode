@@ -1,15 +1,13 @@
 ---
-title: "What Got You Here Won't Get You There / อย่าคิดว่าทำแบบเดิมแล้วจะสำเร็จไปตลอด"
-date: 2022-03-06T15:05:28+01:00
+title: "Technical decision on ambiguity/ ตัดสินใจบนความกำกวม"
+date: 2022-03-11T15:05:28+01:00
 lastmod: 2025-01-25T15:06:41+01:00
 draft: false
 tags: ["career", "mindset"]
-categories: ["thoughts"]
+categories: ["software engineering"]
 ---
 
-
-![Photo by Szabo Viktor on Unsplash](/img/covers/pool-stair-01.png)
-
+![Photo by Towfiqu barbhuiya on Unsplash](/img/covers/question-mark-01.png)
 
 เมื่อวานก่อนบังเอิญเจอเพื่อนร่วมงานเก่าที่ไม่ได้เจอกันสองปีกว่า เค้าบอกว่าพรุ่งนี้จะบินไปทำงานที่ ​US แล้ว
 .
