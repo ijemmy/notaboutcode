@@ -91,6 +91,27 @@
 <section id=posts class=posts>
 <article class=post>
 <header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/14-technical-interview/>วิธีการวัด Technical Skill ในการสัมภาษณ์งาน</a></h1>
+<div class=post-meta>
+<span class=post-time> 2017-12-09 </span>
+<div class=post-category>
+<a href=/categories/technical-leadership/> Technical Leadership </a>
+</div>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+<p>ใน<a href=/post/13-behavioral-interview/>บทความที่แล้ว</a> เราคุยกันในเรื่อง Soft skill ของผู้สมัครด้วย Behavioral Interview</p>
+<p>บทความนี้จะพูดถึงรูปแบบในการวัด Technical Skill กันบ้าง โดยผมจะยกตัวอย่างวิธีการวัด Technical Skill ต่างๆที่ผมเคยเจอมา ซึ่งแต่ละแบบก็จะมีข้อดีข้อเสียแตกต่างกัน</p>
+<p><img src=/img/covers/meeting-03.jpg alt="Photo by Helloquence on Unsplash"></p>
+</div>
+<div class=read-more>
+<a href=/post/14-technical-interview/ class=read-more-link></a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
 <h1 class=post-title><a class=post-link href=/post/13-behavioral-interview/>สัมภาษณ์งานด้วย Behavioral Interview</a></h1>
 <div class=post-meta>
 <span class=post-time> 2017-12-03 </span>
@@ -184,37 +205,6 @@
 </div>
 <div class=read-more>
 <a href=/post/10-throttle/ class=read-more-link></a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/08-sticky-session/>ปัญหาของ Sticky Session</a></h1>
-<div class=post-meta>
-<span class=post-time> 2017-11-02 </span>
-<div class=post-category>
-<a href=/categories/system-design/> System Design </a>
-</div>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-<p><img src=/img/covers/traffic-01.jpg alt="Photo by Denys Nevozhai, from Unsplash.com"></p>
-<p>ใครที่เคยใช้ Load Balancer (LB) คงจะเคยได้ยินคำว่า Sticky Session (หรือ Session Affinity) กันมาบ้าง</p>
-<p>แนวคิดของ Sticky Session คือการให้ LB ส่ง Request ที่มาจากผู้ใช้ (Client) คนเดียวยัง ไปยังเซอร์เวอร์ตัวเดียวกันตลอด</p>
-<p>ตัวอย่างเช่น เรามีเซอร์เวอร์ 3 ตัว ชื่อว่า S1, S2, และ S3 วางอยู่ข้างหลัง LB แล้วมีผู้ใช้ส่ง Request เข้ามายังเว็บเรา</p>
-<figure class=center>
-<img src=/img/diagrams/loadbalancer.png alt="Load Balancer with 3 servers">
-<figcaption>
-Load Balancer with 3 servers
-</figcaption>
-</figure>
-<p>ในครั้งแรก Request ถูกส่งไปให้ S1 แต่พอผู้ใช้ส่ง Request ถัดๆไป LB อาจส่ง Request นั้นไปยัง S2 หรือ S3 แทน</p>
-<p>แต่หากเราเปิด Sticky Session แล้วล่ะก็ ตัว LB จะส่ง Request จากผู้ใช้คนเดิมไปยัง S1 ตลอด โดยไม่ส่งไปที่ S2 หรือ S3 เลย</p>
-<p>ในบทความนี้ เราจะมาทำความเข้าใจว่า Sticky Session ให้ละเอียดยิ่งขึ้น และอธิบายถึงปัญหาที่มักจะเกิดขึ้นในการใช้ Sticky Session</p>
-</div>
-<div class=read-more>
-<a href=/post/08-sticky-session/ class=read-more-link></a>
 </div>
 </div>
 </article>
