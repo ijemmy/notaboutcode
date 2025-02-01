@@ -91,9 +91,81 @@
 <section id=posts class=posts>
 <article class=post>
 <header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/12-interviewer-bad-practices/>ปัญหาในการสัมภาษณ์งานโปรแกรมเมอร์</a></h1>
+<h1 class=post-title><a class=post-link href=/post/17-cap-theorem/>บริษัทสุธีการจำ, CAP Theorem, และ Eventual Consistency</a></h1>
 <div class=post-meta>
-<span class=post-time> 2017-11-18 </span>
+<span class=post-time> 2018-01-07 </span>
+<div class=post-category>
+<a href=/categories/system-design/> System Design </a>
+</div>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+<p><img src=/img/covers/photo-01.jpg alt="Photo by Joanna Kosinska on Unsplash"></p>
+<p>หัวข้อด้าน Distributed System เป็นอะไรที่สนุก แต่เข้าใจยากมาก</p>
+<p>หนึ่งในเรื่องที่ผมอ่านหลายรอบกว่าจะเก็ต ก็คือเรื่องของ CAP Theorem ซึ่งเป็นแนวคิดในการ Trade-off คุณสมบัติของ Distributed System ที่เราออกแบบ</p>
+<p>&ldquo;CAP&rdquo; เป็นตัวย่อจาก Consistency, Availability, Partition Tolerant โดย Theorem นี้ได้กล่าวไว้ว่า คุณไม่มีทางที่่จะออกแบบระบบโดยมีคุณสมบัติ 3 ข้อนี้ พร้อมกัน อย่างเก่งก็ได้แค่ 2 ใน 3</p>
+<p>แต่ทำไมถึงเป็นอย่างนั้นล่ะ?</p>
+<p>วันนี้เราจะมาทำความเข้าใจกับเจ้า Theorem นี้กัน ผ่านการเรื่องราวของบริษัท &ldquo;สุธีการจำ&rdquo; !!</p>
+</div>
+<div class=read-more>
+<a href=/post/17-cap-theorem/>Read More</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/16-idempotent/>การออกแบบ Service API ให้เป็น Idempotent</a></h1>
+<div class=post-meta>
+<span class=post-time> 2017-12-26 </span>
+<div class=post-category>
+<a href=/categories/system-design/> System Design </a>
+</div>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+<p><img src=/img/covers/pay-01.jpg alt="Photo by William Iven on Unsplash"></p>
+<p>ใครเคยเรียกใช้งานเซอร์วิซครั้งเดียว (เช่น การโอนเงิน สั่งซื้อของ ฯลฯ) แล้วเจอ Transaction ตัดซ้ำสองครั้งไหมครับ?</p>
+<p>ถ้าใช่ คุณเจอปัญหาเรื่อง Idempotent เข้าให้แล้วล่ะ</p>
+<p>เราเคยคุยกันในเรื่องของ<a href=/post/05-retry/>Retry</a>ไปแล้ว ว่าอาจจะถล่มเซอร์วิซตัวเองได้ หากไม่จัดการให้ดี</p>
+<p>มานั่งตรึกตรองดูอีกที จริงๆแล้วผมลืมอีกคอนเซ็บหนึ่งที่สำคัญมากเวลาเราใช้ Retry นั่นก็คือเรื่อง Idempotent ซึ่งเป็นที่มาของ เคส Transaction เกิดขึ้นสองที</p>
+<p>บทความนี้จะเริ่มต้นจากต้นตอของปัญหานี้ก่อน เพื่ออธิบายให้เห็นภาพว่าเกิดอะไรขึ้น และเสนอวิธีการแก้ปัญหาในตอนท้ายครับ</p>
+</div>
+<div class=read-more>
+<a href=/post/16-idempotent/>Read More</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/15-service-api-versioning/>การออกแบบ Service API ให้ Backward-Compatible</a></h1>
+<div class=post-meta>
+<span class=post-time> 2017-12-15 </span>
+<div class=post-category>
+<a href=/categories/system-design/> System Design </a>
+</div>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+<p><img src=/img/covers/lego-01.jpg alt="Photo by Iker Urteaga on Unsplash"></p>
+<blockquote>
+<p>&ldquo;APIs, like diamonds, are forever&rdquo; &ndash; Xebia Essentials</p>
+</blockquote>
+<p>เรานิยมเลือกใช้เพชรในแหวนแต่งงาน เพื่อแสดงความเป็นนิรันดร์</p>
+<p>เวลาออกแบบ Service API ผมแนะนำให้ใส่ความโรแมนติกนี้ลงไปหน่อย ลองคิดว่านี่แหละคือแหวนแต่งงาน ระหว่างคุณและผู้ใช้เซอร์วิซของคุณ ที่จะอยู่ต่อไปตลอดจนชั่วเซอร์วิซสลาย</p>
+</div>
+<div class=read-more>
+<a href=/post/15-service-api-versioning/>Read More</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/14-technical-interview/>วิธีการวัด Technical Skill ในการสัมภาษณ์งาน</a></h1>
+<div class=post-meta>
+<span class=post-time> 2017-12-09 </span>
 <div class=post-category>
 <a href=/categories/technical-leadership/> Technical Leadership </a>
 </div>
@@ -101,120 +173,36 @@
 </header>
 <div class=post-content>
 <div class=post-summary>
-<p><img src=/img/covers/meeting-01.jpg alt="Photo by Nik MacMillan on Unsplash"></p>
-<p>ผมมีงานอันน่าท้าทายมาให้ทุกคนลองทำครับ</p>
-<p>ผมจะให้คุณคุยกับคนแปลกหน้าเป็นเวลา 1 ชั่วโมง</p>
-<p>หลังจากนั้นคุณจะต้องตัดสินใจว่า คุณอยากจะใช้เวลาร่วมกับคนคนนี้ 8 ชั่วโมงต่อวัน เป็นระยะเวลาอย่างต่ำ 1 ปี หรือไม่</p>
-<p>ฟังดูยากไหมครับ?</p>
-<p>งานนี้เรียกว่า &ldquo;การสัมภาษณ์งาน&rdquo;</p>
+<p>ใน<a href=/post/13-behavioral-interview/>บทความที่แล้ว</a> เราคุยกันในเรื่อง Soft skill ของผู้สมัครด้วย Behavioral Interview</p>
+<p>บทความนี้จะพูดถึงรูปแบบในการวัด Technical Skill กันบ้าง โดยผมจะยกตัวอย่างวิธีการวัด Technical Skill ต่างๆที่ผมเคยเจอมา ซึ่งแต่ละแบบก็จะมีข้อดีข้อเสียแตกต่างกัน</p>
+<p><img src=/img/covers/meeting-03.jpg alt="Photo by Helloquence on Unsplash"></p>
 </div>
 <div class=read-more>
-<a href=/post/12-interviewer-bad-practices/ class=read-more-link></a>
+<a href=/post/14-technical-interview/>Read More</a>
 </div>
 </div>
 </article>
 <article class=post>
 <header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/11-bulkhead/>ปกป้องระบบไม่ให้ล่มหมดด้วย Bulkhead</a></h1>
+<h1 class=post-title><a class=post-link href=/post/13-behavioral-interview/>สัมภาษณ์งานด้วย Behavioral Interview</a></h1>
 <div class=post-meta>
-<span class=post-time> 2017-11-12 </span>
+<span class=post-time> 2017-12-03 </span>
 <div class=post-category>
-<a href=/categories/system-design/> System Design </a>
+<a href=/categories/technical-leadership/> Technical Leadership </a>
 </div>
 </div>
 </header>
 <div class=post-content>
 <div class=post-summary>
-<p><img src=/img/covers/ship-01.jpg alt="Photo by Abraham Wiebe, from Unsplash.com"></p>
-<p>Bulkhead เป็นเทคนิคการออกแบบที่เหมาะกับ Critical System คือ ถ้าล่มปุ๊บ คนในองค์กรจะไม่สามารถทำงานต่อได้เลย</p>
-<p>ถ้าใครเปิดดิกดู ศัพท์นี้จริงๆใช้เรียกการออกแบบพาหนะครับ</p>
-<blockquote>
-<p>Bulkhead (n.) a dividing wall or barrier between separate compartments inside a ship, aircraft, or other vehicle.</p>
-</blockquote>
-<p>ไอเดียของ Bulkhead คือการออกแบบให้พาหนะแยกออกเป็นส่วนๆ (Compartmentalisation) หากมีส่วนใดส่วนหนึ่งมีปัญหา ผลกระทบจะต้องไม่รุนแรงจนทำให้ทั้งพาหนะล่มหมด</p>
-<p>ยกตัวอย่างเช่น สมมติว่าเรือของเรามีจุดรั่วจุดหนึ่ง หากเราไม่ได้มีการแบ่งโซนเป็นส่วน น้ำจะกระจายไปทั่วท้องเรือ เรือก็จะจมแน่นอน</p>
-<p>การใช้ Bulkhead คือการกั้นส่วนท้องเรือออกเป็นส่วนๆ หากน้ำรั่วขึ้นมา น้ำก็จะเข้ามาจนเต็มแค่ส่วนหนึ่งๆ โดยไม่หนักพอทำให้เรือล่มทั้งลำ (ถ้ายังนึกภาพไม่ออก ลองดู<a href="https://www.google.nl/search?dcr=0&biw=1832&bih=989&tbm=isch&sa=1&q=bulkhead&oq=bulkhead">ภาพในกูเกิ้ล</a>ครับ)</p>
+<p><img src=/img/covers/meeting-02.jpg alt="Photo by Alejandro Escamilla on Unsplash"></p>
+<p>ในบทความที่แล้ว เราคุยกันไปในเรื่องกระบวนการสัมภาษณ์งานโดยรวม (Process)</p>
+<p>สำหรับบทความนี้ เราจะมาเจาะลึกลงไปในเรื่องการถามคำถามกัน</p>
+<p>โดยหลักๆแล้ว คำถามในการสัมภาษณ์งานโปรแกรมเมอร์ จะวัดเกณฑ์สองด้าน คือ Technical skill
+และ Soft skill</p>
+<p>บทความนี้จะคุยกันเรื่องการวัด Soft skill ด้วยเทคนิคที่เรียกว่า Behavioral Interview ครับ</p>
 </div>
 <div class=read-more>
-<a href=/post/11-bulkhead/ class=read-more-link></a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/10-throttle/>ปกป้องเซอร์วิซจากผู้ใช้มักมากด้วย Throttling</a></h1>
-<div class=post-meta>
-<span class=post-time> 2017-11-09 </span>
-<div class=post-category>
-<a href=/categories/system-design/> System Design </a>
-</div>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-<p><img src=/img/covers/limit-01.jpg alt="Photo by Ksenia Kudelkina, from Unsplash.com"></p>
-<p>ลองนึกภาพว่าเรามีระบบที่ถูกออกแบบเป็น Service-Oriented Architecture (SOA)</p>
-<p>ในบรรดาเซอร์วิซทั้งหมด จะมีบางเซอร์วิซทีเป็น Dependency ของเซอร์วิซอื่นๆ ผมจะเรียกเซอร์วิซนี้ว่าเซอร์วิซ A</p>
-<p>ถ้าเซอร์วิซ A พังขึ้นมา เซอร์วิซอื่นที่ต้องเรียกใช้ข้อมูลนี้ทั้งหมดก็จะทำงานไม่ได้</p>
-<p>ตัวอย่างเช่นในภาพข้างล่าง หากเซอร์วิซ A พัง เซอร์วิซ B, และ C จะทำงานไม่ได้</p>
-</div>
-<div class=read-more>
-<a href=/post/10-throttle/ class=read-more-link></a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/08-sticky-session/>ปัญหาของ Sticky Session</a></h1>
-<div class=post-meta>
-<span class=post-time> 2017-11-02 </span>
-<div class=post-category>
-<a href=/categories/system-design/> System Design </a>
-</div>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-<p><img src=/img/covers/traffic-01.jpg alt="Photo by Denys Nevozhai, from Unsplash.com"></p>
-<p>ใครที่เคยใช้ Load Balancer (LB) คงจะเคยได้ยินคำว่า Sticky Session (หรือ Session Affinity) กันมาบ้าง</p>
-<p>แนวคิดของ Sticky Session คือการให้ LB ส่ง Request ที่มาจากผู้ใช้ (Client) คนเดียวยัง ไปยังเซอร์เวอร์ตัวเดียวกันตลอด</p>
-<p>ตัวอย่างเช่น เรามีเซอร์เวอร์ 3 ตัว ชื่อว่า S1, S2, และ S3 วางอยู่ข้างหลัง LB แล้วมีผู้ใช้ส่ง Request เข้ามายังเว็บเรา</p>
-<figure class=center>
-<img src=/img/diagrams/loadbalancer.png alt="Load Balancer with 3 servers">
-<figcaption>
-Load Balancer with 3 servers
-</figcaption>
-</figure>
-<p>ในครั้งแรก Request ถูกส่งไปให้ S1 แต่พอผู้ใช้ส่ง Request ถัดๆไป LB อาจส่ง Request นั้นไปยัง S2 หรือ S3 แทน</p>
-<p>แต่หากเราเปิด Sticky Session แล้วล่ะก็ ตัว LB จะส่ง Request จากผู้ใช้คนเดิมไปยัง S1 ตลอด โดยไม่ส่งไปที่ S2 หรือ S3 เลย</p>
-<p>ในบทความนี้ เราจะมาทำความเข้าใจว่า Sticky Session ให้ละเอียดยิ่งขึ้น และอธิบายถึงปัญหาที่มักจะเกิดขึ้นในการใช้ Sticky Session</p>
-</div>
-<div class=read-more>
-<a href=/post/08-sticky-session/ class=read-more-link></a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/07-career-start-non-technical/>โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี (ภาค 2)</a></h1>
-<div class=post-meta>
-<span class=post-time> 2017-10-31 </span>
-<div class=post-category>
-<a href=/categories/career/> Career </a>
-</div>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-<p><img src=/img/covers/career-02.jpg alt="Photo by Olu Eletu, from Unsplash.com"></p>
-<p>ใน<a href=/post/06-career-start/>ภาคแรก</a>เราคุยกันในเรื่องของ Technical Skills ทีเป็นพื้นฐานไว้ใช้ในระยะยาว</p>
-<p>สำหรับภาคนี้ เราจะมาโฟกัสในส่วนของ Non-technical กันบ้าง ซึ่งเป็นครอบคลุมค่อนข้างหลากหลายเรื่อง โดยผมคัดเฉพาะหัวข้อที่ผมคิดว่าสำคัญๆ เพื่อไม่ให้ยาวเกินไป</p>
-<p>บทความนี้มีความคิดเห็นส่วนตัวเยอะมาก ผมเลยแยกออกมาจากภาคแรก</p>
-<p>ใครที่มีความเห็นแตกต่าง หรืออ่านแล้วรู้สึกจี้ด ไม่เห็นด้วยมากๆ ลองมาแลกเปลี่ยนความเห็นกันใน<a href=https://www.facebook.com/notaboutcode/>เฟสบุ้คเพจ</a>ได้ครับ เผื่อบทความนี้อาจจะมีภาค3 ผมเองก็อยากเก็บรายละเอียด ให้ได้มากที่สุด เพราะบล็อคนี้ตั้งใจจะเขียนทิ้งไว้นาน</p>
-<p>สำหรับโปรแกรมเมอร์มือใหม่ที่ยังไม่มีความคิดเห็น อ่านแล้วก็ฟังหูไว้หู ใช้เป็นแนวทางแต่อย่ายึดมั่นกับมันมาก ยังมีคนที่เก่งกว่าผมอีกมากที่ใช้แนวทางอื่นในการพัฒนาตนเอง</p>
-</div>
-<div class=read-more>
-<a href=/post/07-career-start-non-technical/ class=read-more-link></a>
+<a href=/post/13-behavioral-interview/>Read More</a>
 </div>
 </div>
 </article>

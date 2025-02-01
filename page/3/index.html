@@ -91,9 +91,76 @@
 <section id=posts class=posts>
 <article class=post>
 <header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/27-hiring-a-programmer/>เขียนโปรแกรมไม่เป็น แต่ต้องคัดเลือกโปรแกรมเมอร์เข้าทีม</a></h1>
+<h1 class=post-title><a class=post-link href=/post/32-code-slowly-to-be-fast/>เขียนโค้ดให้เหมือนเต่า จะไปได้เร็วกว่ากระต่าย</a></h1>
 <div class=post-meta>
-<span class=post-time> 2018-09-16 </span>
+<span class=post-time> 2022-02-26 </span>
+<div class=post-category>
+<a href=/categories/software-engineering/> software engineering </a>
+</div>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+<p><img src=/img/covers/turtle-01.png alt="Photo by Tanguy Sauvin on Unsplash"></p>
+<p>สำหรับคนที่พึ่งเขียนโค้ดใหม่ๆ ผมแนะนำว่าให้พยายามเขียนโค้ดทีละนิด อย่าเขียนรวดเดียวครับ</p>
+<p>ผมสังเกตว่าคนที่เขียนโค้ดได้ดี จะมีพฤติกรรมหลายอย่างคล้ายๆกัน หนึ่งในพฤติกรรมที่ผมเห็นบ่อย คือเค้าจะแก้โค้ดทีละนิด แล้วค่อยๆรันดูว่าทำงานถูกต้องตามที่คิดไว้ไหม พอทำถูกแล้ว ก็จะค่อยเติมโค้ดเข้าไปต่อ</p>
+<p>แต่ละรอบ เค้าจะแก้โค้ดแค่ไม่เกินห้าบรรทัด</p>
+<p>ตัวอย่างเช่น ผมอยากจะเขียน API เพื่อรับค่าจาก Array มาคำนวนแล้วส่งค่า Sum กลับไป ผมจะเขียนแต่ละรอบดังนี้</p>
+</div>
+<div class=read-more>
+<a href=/post/32-code-slowly-to-be-fast/>Read More</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/31-caching/>จะสเกลระบบหลักล้านด้วย Cache ต้องพิจารณาอะไรบ้าง</a></h1>
+<div class=post-meta>
+<span class=post-time> 2022-02-19 </span>
+<div class=post-category>
+<a href=/categories/system-design/> system design </a>
+</div>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+<p><img src=/img/covers/desk-01.png alt="Photo by Wonderlane(@wonderlane) on Unsplash"></p>
+<p>แคช(Cache)เป็นหนึ่งในตัวเลือกที่ถูกใช้บ่อยมากในการสเกลระบบให้สามารถรับโหลดได้เยอะๆ ถ้าใครไปสัมภาษณ์งานแล้วเจอคำถามว่าระบบมีคนใช้หลักล้าน และเป็นการอ่านข้อมูลเป็นหลัก (Read-intensive) ตอบได้เลยว่าใช้แคช แต่รายละเอียดของคำตอบว่าจะใช้ยังไง ต้องพิจารณาเรื่องไหนบ้าง เราจะมาคุยกันในบทความนี้ครับ</p>
+<p>ชี้แจงก่อนว่า เราจะคุยกันในมุมของการออกแบบระบบ (System Design) ซึ่งจะเป็นการใช้แคชในระดับของ Backend services เพราะแนวคิดของแคชนั้นถูกใช้ในทุกระดับ ยกตัวอย่างเช่น</p>
+</div>
+<div class=read-more>
+<a href=/post/31-caching/>Read More</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/30-structured-logging/>Structured Logging คืออะไร ทำไมถึงเป็นที่นิยม</a></h1>
+<div class=post-meta>
+<span class=post-time> 2022-02-12 </span>
+<div class=post-category>
+<a href=/categories/devops/> devops </a>
+</div>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+<p><img src=/img/covers/log-01.png alt="Photo by Atlas Kadrów(@atlaskadrow) on Unsplash"></p>
+<p>เมื่อ 6 ปีที่แล้ว สมัยผมยังทำงาน Operation คู่กับงาน Dev อยู่ หนึ่งในสิ่งที่ผมไม่ชอบมากๆคือการนั่งไล่ Log เพื่อหาว่าบั้คมันมาจากไหน</p>
+<p>สมัยก่อนก็ไม่เคยคิดครับว่าทำไมการไล่ Log มันถึงทรมานมาก พอเวลาผ่านไป เห็น Practice ใหม่ๆมากขึ้นถึงเข้าใจ ว่าปัญหามันมาตั้งแต่การออกแบบ Log Format และวิธีการเก็บ</p>
+<p>ปัจจุบันนี้ เวลาผมให้คำปรึกษาลูกค้า ผมจะบอกให้ทำ สิ่งที่เรียกว่า Structured Logging ซึ่งทำให้ชีวิตของการไล่ Log มันดีขึ้นมาก เวลามีบั้คก็หาต้นตอกันเร็วขึ้น</p>
+<p>วันนี้เราจะมาคุยเรื่องนี้กัน ผมจะเริ่มเล่าให้ฟังถึงวิธีการเก็บ Log ในสมัยก่อน ชี้ให้เห็นถึงปัญหาว่าทำไมมันทำให้ไล่ยาก และจบด้วยตัวอย่างการใช้ Structured Logging ที่มาช่วยแก้ปัญหานี้ครับ</p>
+</div>
+<div class=read-more>
+<a href=/post/30-structured-logging/>Read More</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/29-technical-conflict-resolution/>เถียงเรื่อง Technical Design กันไม่จบซักที ทำไงดี?</a></h1>
+<div class=post-meta>
+<span class=post-time> 2020-06-11 </span>
 <div class=post-category>
 <a href=/categories/technical-leadership/> Technical Leadership </a>
 </div>
@@ -101,111 +168,37 @@
 </header>
 <div class=post-content>
 <div class=post-summary>
-<p><img src=/img/covers/interview-01.jpg alt="Photo by rawpixel on Unsplash"></p>
-<p>เมื่อวันก่อนมีน้องที่เป็น Project Manager โทรมาขอคำแนะนำเรื่องจะจ้างโปรแกรมเมอร์ใหม่เข้าทีม</p>
-<p>แต่ความท้าทายคือในทีมไม่มีใครที่มีประสบการณ์เรื่องเขียนโปรแกรมเลย จะคัดเลือกคนยังไงดี</p>
-<p>หลังจากคุยเสร็จ ก็รู้สึกว่านี่เป็นปัญหาสากลที่น่าจะมีหลายๆคนเจออยู่ แม้แต่คนที่เขียนโปรแกรมเป็น ถ้าต้องคัดเลือกคนที่ในด้านที่เราไม่มีทักษะทางด้านนั้นๆ (เช่น เขียน Frontend เป็นหลัก แต่ต้องช่วยทีมจ้าง Backend Developer หรือ Infra) เรื่องนี้ก็น่าจะยากอยู่ ยิ่งถ้านึกภาพว่าผมต้องไปสัมภาษณ์งานเพื่อคัดเลือกจ้าง Project Manager ผมเองก็คงไปไม่ถูกเหมือนกัน</p>
-<p>ผมเอาเรื่องนี้มานั่งตกตะกอนอยู่หลายวัน แทนที่จะมานั่งลิสต์เป็นข้อๆแห้งๆ รู้สึกว่าถ้ายกเคสของน้องเค้ามาเลยน่าจะทำให้เข้าใจวิธีคิดได้ง่ายกว่า เนื่องจากโจทย์ประเภทนี้ไม่ได้มีคำถามและคำตอบที่ตายตัว หากเข้าใจวิธีคิด ก็น่าจะเอาไปประยุกต์กับกรณีของตัวเองได้</p>
-<p>ก็เลยเป็นที่มาของบทความนี้ครับ</p>
+<p><img src=/img/covers/fight-01.png alt="Photo by rawpixel on Unsplash"></p>
+<p>เคยตกอยู่ในสถานการณ์ที่คนในห้องประชุมเถียงเรื่องเดียวกันติดต่อเป็นระยะเวลา 30 นาทีแล้วไม่ไปไหนไหมครับ?</p>
+<p>ส่วนใหญ่ที่ผมเจอ มักจะเป็นเรื่องของ Technical Design ว่าจะไปในทิศทางไหนดี ซึ่งเราก็รู้กันว่าการ Design มันเป็นเรื่องของการ Trade-off หลายๆครั้งมันยากมากที่จะตอบว่าแบบไหนดีกว่า</p>
+<p>การตัดสินใจเรื่องนี้ส่งผลกระทบในระยะยาว จึงต้องพิจารณาให้รอบคอบ แต่บางครั้ง เราก็จะเจอสถานการที่คนสองคน(หรือทีมแตกเป็นสองฝ่าย)เถียงกันไม่จบเสียที วนกลับมาประเด็นเดิมซ้ำๆ แย้งกันไปมา ไม่ไปไหน</p>
+<p>ยิ่งถ้าประชุมก่อนพักเที่ยง ผมจะหิวข้าว ไปกินข้าวสายนี่ไม่โอเคเลย เรื่องกินเรื่องใหญ่</p>
+<p>วันนี้ผมมีวิธีมานำเสนอ ไม่รับประกันว่าได้ผลตลอด แต่เท่าที่ใช้มานี่ได้ผลดีมาก ช่วยให้ผมไม่ต้องไปกินข้าวสายได้หลายครั้ง</p>
 </div>
 <div class=read-more>
-<a href=/post/27-hiring-a-programmer/ class=read-more-link></a>
+<a href=/post/29-technical-conflict-resolution/>Read More</a>
 </div>
 </div>
 </article>
 <article class=post>
 <header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/26-serverless-architecture/>มาทำความรู้จักกับ Serverless กัน</a></h1>
+<h1 class=post-title><a class=post-link href=/post/28-deployment-methods/>Deploy ระบบอย่างไรไม่ให้ล่ม</a></h1>
 <div class=post-meta>
-<span class=post-time> 2018-09-01 </span>
+<span class=post-time> 2019-03-10 </span>
 <div class=post-category>
-<a href=/categories/software-engineering/> Software Engineering </a>
+<a href=/categories/devops/> DevOps </a>
+<a href=/categories/deployment/> Deployment </a>
 </div>
 </div>
 </header>
 <div class=post-content>
 <div class=post-summary>
-<p><img src=/img/covers/aurora-01.jpg alt="Photo by Nicolas J Leclercq on Unsplash"></p>
-<p>ช่วงสองปีที่ผ่านมา แนวคิดหนึ่งที่ผมจับตาดูอยู่คือเรื่องของ Serverless</p>
-<p>ตามชื่อเลย Serverless คือไม่มีเซอร์เวอร์ ซึ่งจริงๆแล้วเซอร์เวอร์ก็ไม่ได้หายไปไหน เพียงแต่ทีมพัฒนาไม่ต้องสนใจมันเหมือนแต่ก่อนแล้ว</p>
-<p>แนวคิดเรื่องนี้ยังถือว่าค่อนข้างใหม่ เมื่อสองปีที่แล้วผมทดลองใช้ครั้งแรกเพื่อดูว่าเอาไปใช้ทำโปรเจ็คจริงได้รึเปล่า ก็ค้นพบว่าพวก Tool และ Practices ต่างๆยังไม่พร้อมเท่าไร</p>
-<p>ผ่านมาสองปี รู้สึกว่าเริ่มเข้าที่เข้าทางมากขึ้น จึงพึ่งได้เอามาใช้ทำโปรเจ็คจริง เลยเอามาเล่าสู่กันฟังครับ เผื่อใครอยากจะลองเอาไปใช้กัน</p>
+<p><img src=/img/covers/cars-01.jpg alt="Photo by rawpixel on Unsplash"></p>
+<p>สำหรับวีดีโอนี้ เราจะมาคุยกันเรื่องการ Deploy ระบบแบบให้มี High Availability คือผู้ใช้จะต้องสามารถใช้งานระบบของเราได้ตลอด และไม่ได้รับผลกระทบใดๆ เช่น ระบบช้าผิดปกติ หรือบาง Request ผิดพลาด</p>
+<p>ส่วนแรกของวีดีโอจะคุยกันว่าระบบล่มเวลา Deploy ได้อย่างไร และส่วนที่สองจะอธิบายเรื่องการ Deploy แบบต่างๆและข้อดีข้อเสียของแต่ละแบบ</p>
 </div>
 <div class=read-more>
-<a href=/post/26-serverless-architecture/ class=read-more-link></a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/25-advices-for-adopting-agile/>การนำ Agile มาใช้ในองค์กร</a></h1>
-<div class=post-meta>
-<span class=post-time> 2018-06-23 </span>
-<div class=post-category>
-<a href=/categories/software-engineering/> Software Engineering </a>
-</div>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-<p><img src=/img/covers/collaboration-01.jpg alt="Photo by rawpixel on Unsplash"></p>
-<p>ผมรู้จักกับ Agile (อไจล์) เมื่อสิบกว่าปีที่แล้ว ตอนนั้นก็ไม่รู้หรอกว่ามันจะป๊อบขนาดนี้ สมัยนั้นอย่าพูดถึงอไจล์เลย ทีมไหนทำ Unit Testing ก็ถือว่าหรูแล้ว</p>
-<blockquote>
-<p>ฝั่ง UK จะออกเสียงว่า อา-ไจล์, ฝั่ง US จะอ่านออกเสียว่า แอ-ไจล์ ในบทความนี้จะขอใช้ทับศัพท์ว่าอไจล์ซึ่งเป็นที่นิยมใช้กันนะครับ &ndash; <a href=https://dictionary.cambridge.org/pronunciation/english/agile>https://dictionary.cambridge.org/pronunciation/english/agile</a></p>
-</blockquote>
-<p>ด้วยความที่คลุกคลีอยู่กับเรื่องนี้ตั้งแต่ยุคที่อไจล์เข้ามาแรกๆ เลยได้เห็นการเปลี่ยนแปลงตั้งแต่สมัยที่ผู้บริหารรู้สึกว่าทีมที่ทำอไจล์คือการก่อกบฏ จนถึงปัจจุบันนี้ ถ้าทีมไหนไม่ทำอไจล์แล้วจะกลายเป็นกบฏแทน</p>
-<p>ผมเชื่อว่าผู้บริหารระดับสูงที่กล้าจะเลือกใช้อไจล์นั้นมีวิสัยทัศน์ที่ดี แต่เวลาปฏิบัติจริง ผมกลับเห็นว่าหลายที่ได้ผลลัพธ์เละเทะมาก สุดท้ายก็มาจบลงที่ว่าอไจล์ไม่ดี หรือไม่เหมาะกับองค์กร (ซึ่งก็อาจจะเป็นไปได้) หรือบางที่ก็เลือกที่จะซุกปัญหาไว้ใต้พรม แล้วทำ KPI ให้ดูสวยๆว่าผลลัพธ์ออกมาดี</p>
-<p>สุดท้ายกลายเป็นตราบาปให้กับอไจล์ เป็นแผลเป็นให้กับพนักงานในบริษัท ที่ขยาดทุกครั้งที่ได้ยินคำนี้</p>
-<p>ผมเลยอยากเขียนบทความนี้ไว้ให้ผู้บริหาร และหัวหน้าทีมพัฒนา (Technical Lead/ Team Lead) เพราะทัศนคติที่ถูกต้องต่ออไจล์จะส่งผลกระทบต่อการรับอไจล์เข้ามาในองค์กรมาก</p>
-<p>บทความนี้จะพูดถึงข้อแนะนำ และตัวอย่างกรณีที่ดี/ไม่ดีแบบต่างๆ ในการนำอไจล์เข้ามาในองค์กร โดยผู้เขียนอนุมานว่าผู้อ่านรู้จักอไจล์และ Scrum แล้ว หากใครที่ยังไม่เข้าใจคำพวกนี้ แนะนำให้อ่านบทความอื่นก่อนครับ</p>
-</div>
-<div class=read-more>
-<a href=/post/25-advices-for-adopting-agile/ class=read-more-link></a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/24-catching-up-with-tech/>วิ่งไล่ตามเทคโนโลยีไม่ทัน ทำยังไงดี</a></h1>
-<div class=post-meta>
-<span class=post-time> 2018-06-16 </span>
-<div class=post-category>
-<a href=/categories/career/> Career </a>
-</div>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-<p><img src=/img/covers/run-01.jpg alt="Photo by Andy Beales on Unsplash"></p>
-<p>พอโปรแกรมเมอร์มีประสบการณ์มากขึ้น ก็จะค้นพบว่าตัวเองมีสิ่งที่ยังไม่รู้มากขึ้น</p>
-<p>ผมคิดว่าหลายๆคนก็คงคล้ายผม คือจะอยากอ่าน อยากรู้ และอยากลองไปซะทุกอย่าง</p>
-<p>ในอดีต อาจจะทำแบบนี้ได้ เพราะเทคโนโลยีแต่ก่อนไม่ได้เติบโตเร็วแบบทุกวันนี้</p>
-<p>ผมเองเป็นคนนึงที่พยายามตามเทคโนโลยีให้ได้มากที่สุด แต่พอถึงจุดนึงก็ต้องยอมรับ ว่าปัจจุบันเทคโนโลยีที่วิ่งเร็วกว่าเรามาก</p>
-<p>ถ้าตามแบบไม่มีหลักอะไรเลย ตามยังไงก็ไม่ไหว</p>
-</div>
-<div class=read-more>
-<a href=/post/24-catching-up-with-tech/ class=read-more-link></a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/23-karma-from-bad-tests2/>เขียนเทสต์อย่างไรให้ไม่บาป (ฉบับที่ 2 System Integration Tests/End-to-End Tests)</a></h1>
-<div class=post-meta>
-<span class=post-time> 2018-05-05 </span>
-<div class=post-category>
-<a href=/categories/continuous-delivery/> Continuous Delivery </a>
-</div>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-<p><img src=/img/covers/test-01.jpg alt="Photo by Chris Liverani on Unsplash"></p>
-<p>จากประสบการณ์ส่วนตัว End-to-End(E2E) Tests เป็นตัวที่สร้างความปวดหัวให้กับผมอันดับที่หนึ่งเลย รองลงมาก็ System Integration Tests ตอนเขียนบทความนี้ฉบับแรก เลยตัดสินใจแยกเทสต์สองประเภทนี้ออกมาเขียนแยกออกมา จะได้ลงรายละเอียดได้</p>
-<p>บทความนี้ก็เหมือนบทความที่แล้วครับ คือทำผิดมาเยอะ จนพอจะสรุปข้อผิดพลาดที่เคยทำไว้มาแชร์กัน ผู้อ่านจะได้หลบเลี่ยงกันได้</p>
-</div>
-<div class=read-more>
-<a href=/post/23-karma-from-bad-tests2/ class=read-more-link></a>
+<a href=/post/28-deployment-methods/>Read More</a>
 </div>
 </div>
 </article>

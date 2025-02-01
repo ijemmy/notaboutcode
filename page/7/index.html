@@ -91,71 +91,9 @@
 <section id=posts class=posts>
 <article class=post>
 <header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/06-career-start/>โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี ภาค 1</a></h1>
+<h1 class=post-title><a class=post-link href=/post/12-interviewer-bad-practices/>ปัญหาในการสัมภาษณ์งานโปรแกรมเมอร์</a></h1>
 <div class=post-meta>
-<span class=post-time> 2017-10-19 </span>
-<div class=post-category>
-<a href=/categories/career/> Career </a>
-</div>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-<p><img src=/img/covers/career-01.jpg alt="Photo by Jake Hills, from Unsplash.com"></p>
-<p>ความยากลำบากของโปรแกรมเมอร์สมัยนี้คือมีเรื่องที่ต้องเรียนรู้เยอะมาก&mldr;</p>
-<p>มากจนไม่รู้ว่าจะเริ่มต้นที่ไหนดี</p>
-<p>บทความนี้รวมสิ่งที่ผมคิดว่าสำหรับโปรแกรมเมอร์มือใหม่ ควรจะเรียนรู้เอาไว้ ไม่ว่าจะเป็นสาย Frontend, Backend, หรือ Fullstack เรื่องพวกนี้ได้ใช้แน่ๆ และได้ใช้นานด้วย</p>
-<p>ผมเชื่อว่าความรู้พวกนี้ ในอีก 20 ปีข้างหน้า โปรแกรมเมอร์ยุคนั้นก็ยังต้องรู้กัน (ถ้าไม่โดน AI แย่งงานไปก่อน)</p>
-<p>แทนที่จะเอาเวลาไปเรียนรู้พวกเฟรมเวิร์ค ภาษา หรือไลบรารี่ที่เปลี่ยนใหม่ทุกๆ 3-5 ปี เรียนรู้พวกนี้ดีกว่าครับ เรียนรอบเดียว ใช้ยาว</p>
-<p>มาดูกันครับว่ามีอะไรบ้าง</p>
-</div>
-<div class=read-more>
-<a href=/post/06-career-start/ class=read-more-link></a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/05-retry/>Retry ยังไงให้ปลอดภัย</a></h1>
-<div class=post-meta>
-<span class=post-time> 2017-10-14 </span>
-<div class=post-category>
-<a href=/categories/system-design/> System Design </a>
-</div>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-<p><img src=/img/covers/spiral-stairs-01.jpg alt="Photo by Nick Morris, from Unsplash.com"></p>
-<p>วันนี้นั่งคุยกับเพื่อนเรื่อง Retry รู้สึกว่าเป็นหัวข้อที่น่าสนใจดี</p>
-<p>โจทย์คือเรามี External service ที่ไม่ค่อยสเถียรเท่าไร เวลาส่ง Request ไป วันดีคืนดีก็อาจจะ:</p>
-<ol>
-<li>พังแบบส่งสาเหตุการพังกลับมาให้ เช่น 5xx พร้อม error code</li>
-<li>พังแบบไม่มีอะไรตอบกลับมา ซึ่งสาเหตุอาจจะมาจากที่ระบบนั้นเดี้ยงไประหว่างการทำงาน หรือเน็ตเวิร์คเน่า</li>
-</ol>
-<p>กรณีนี้ เรามีหลายทางเลือก</p>
-<ol>
-<li>
-<p>เลือกที่จะจบการทำงาน แล้วแสดงผลให้ฝั่งผู้ใช้ของเรา (Client) รู้ว่าระบบมีปัญหา พร้อม Error code ซึ่งก็ถือว่ายอมรับได้ เพราะหากเราจำเป็นต้องการใช้ข้อมูลจาก External Service ยังไงก็ทำอะไรไม่ได้</p>
-</li>
-<li>
-<p>ทำการ Retry คือการส่ง Request ซ้ำโดยอัตโนมัติ หากเกิดข้อผิดพลาดในฝั่งของ External service ที่เราเรียกใช้</p>
-</li>
-<li>
-<p>Decouple ให้สองระบบเรียกกับแบบ Asynchronous โดยเอา Request ที่ไม่สำเร็จของเราไปเก็บไว้ใน Queue แล้ว Retry ใหม่ในภายหลัง</p>
-</li>
-</ol>
-</div>
-<div class=read-more>
-<a href=/post/05-retry/ class=read-more-link></a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/04-choosing-language/>ขึ้นโปรเจ็คใหม่ ใช้ภาษาอะไรดี</a></h1>
-<div class=post-meta>
-<span class=post-time> 2017-10-13 </span>
+<span class=post-time> 2017-11-18 </span>
 <div class=post-category>
 <a href=/categories/technical-leadership/> Technical Leadership </a>
 </div>
@@ -163,57 +101,120 @@
 </header>
 <div class=post-content>
 <div class=post-summary>
-<p><img src=/img/covers/new-project-01.jpg alt="Photo by Nick Morris, from Unsplash.com"></p>
-<p>เมื่อวันก่อน นั่งคุยกับน้องคนหนึ่งที่กำลังจะขึ้นโปรเจ็คใหม่ แต่ลังเลว่าจะใช้ภาษาอะไรดี</p>
-<p>เป็นเรื่องน่าปวดหัวของโปรแกรมเมอร์สมัยใหม่ครับ เพราะมีตัวเลือกเยอะไป สมัยก่อน ตัวเลือกไม่เยอะ อย่างเก่งก็แค่ C#, Java, PHP, C แต่เดี๋ยวโผล่มาพรึ่บพรั่บกันหมด</p>
-<p>พอคุยๆกันกับน้องเค้าไปสักพัก ก็มีชื่อ Python + Django, Ruby on Rail, JavaScript + NodeJS, Go, Kotlin, Scala, TypeScript, Closure อะไรไม่รู้เต็มไปหมด</p>
-<p>ตัวผมเอง เคยเขียนแค่สี่ห้าภาษา แถมยังไม่ได้ลงลึกด้วย ก็พอแต่แนะนำไกด์ไลน์ไปคร่าวๆ ว่าภาษาไหนมีจุดเด่นอะไร</p>
+<p><img src=/img/covers/meeting-01.jpg alt="Photo by Nik MacMillan on Unsplash"></p>
+<p>ผมมีงานอันน่าท้าทายมาให้ทุกคนลองทำครับ</p>
+<p>ผมจะให้คุณคุยกับคนแปลกหน้าเป็นเวลา 1 ชั่วโมง</p>
+<p>หลังจากนั้นคุณจะต้องตัดสินใจว่า คุณอยากจะใช้เวลาร่วมกับคนคนนี้ 8 ชั่วโมงต่อวัน เป็นระยะเวลาอย่างต่ำ 1 ปี หรือไม่</p>
+<p>ฟังดูยากไหมครับ?</p>
+<p>งานนี้เรียกว่า &ldquo;การสัมภาษณ์งาน&rdquo;</p>
 </div>
 <div class=read-more>
-<a href=/post/04-choosing-language/ class=read-more-link></a>
+<a href=/post/12-interviewer-bad-practices/>Read More</a>
 </div>
 </div>
 </article>
 <article class=post>
 <header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/02-inside-ci-static-check/>การนำ Static Code Analysis มาใช้ในทีม</a></h1>
+<h1 class=post-title><a class=post-link href=/post/11-bulkhead/>ปกป้องระบบไม่ให้ล่มหมดด้วย Bulkhead</a></h1>
 <div class=post-meta>
-<span class=post-time> 2017-10-07 </span>
+<span class=post-time> 2017-11-12 </span>
 <div class=post-category>
-<a href=/categories/continuous-delivery/> Continuous Delivery </a>
+<a href=/categories/system-design/> System Design </a>
 </div>
 </div>
 </header>
 <div class=post-content>
 <div class=post-summary>
-<p><img src=/img/covers/code-01.jpg alt="Photo by Ilya Pavlov, from Unsplash.com"></p>
-<p>สืบเนื่องจาก<a href=/post/01-ci-journey/>บันทึกที่แล้ว</a> ผมได้อธิบายไว้ ว่าหลังจากทีมเริ่มมี CI Server แล้ว ทีมก็มักจะเริ่มใส่เครื่องมือหลายๆอย่างลงไปเพื่อทำการ Automation และควบคุมคุณภาพของโค้ด</p>
-<p>ในบันทึกฉบับนี้ ผมจะแนะนำเครื่องมือจำพวก Static code analysis ครับ (จากนี้ไปจะเรียกย่อๆว่า SCA)</p>
+<p><img src=/img/covers/ship-01.jpg alt="Photo by Abraham Wiebe, from Unsplash.com"></p>
+<p>Bulkhead เป็นเทคนิคการออกแบบที่เหมาะกับ Critical System คือ ถ้าล่มปุ๊บ คนในองค์กรจะไม่สามารถทำงานต่อได้เลย</p>
+<p>ถ้าใครเปิดดิกดู ศัพท์นี้จริงๆใช้เรียกการออกแบบพาหนะครับ</p>
+<blockquote>
+<p>Bulkhead (n.) a dividing wall or barrier between separate compartments inside a ship, aircraft, or other vehicle.</p>
+</blockquote>
+<p>ไอเดียของ Bulkhead คือการออกแบบให้พาหนะแยกออกเป็นส่วนๆ (Compartmentalisation) หากมีส่วนใดส่วนหนึ่งมีปัญหา ผลกระทบจะต้องไม่รุนแรงจนทำให้ทั้งพาหนะล่มหมด</p>
+<p>ยกตัวอย่างเช่น สมมติว่าเรือของเรามีจุดรั่วจุดหนึ่ง หากเราไม่ได้มีการแบ่งโซนเป็นส่วน น้ำจะกระจายไปทั่วท้องเรือ เรือก็จะจมแน่นอน</p>
+<p>การใช้ Bulkhead คือการกั้นส่วนท้องเรือออกเป็นส่วนๆ หากน้ำรั่วขึ้นมา น้ำก็จะเข้ามาจนเต็มแค่ส่วนหนึ่งๆ โดยไม่หนักพอทำให้เรือล่มทั้งลำ (ถ้ายังนึกภาพไม่ออก ลองดู<a href="https://www.google.nl/search?dcr=0&biw=1832&bih=989&tbm=isch&sa=1&q=bulkhead&oq=bulkhead">ภาพในกูเกิ้ล</a>ครับ)</p>
 </div>
 <div class=read-more>
-<a href=/post/02-inside-ci-static-check/ class=read-more-link></a>
+<a href=/post/11-bulkhead/>Read More</a>
 </div>
 </div>
 </article>
 <article class=post>
 <header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/01-ci-journey/>การเดินทางสู่ CI (Continuous Integration)</a></h1>
+<h1 class=post-title><a class=post-link href=/post/10-throttle/>ปกป้องเซอร์วิซจากผู้ใช้มักมากด้วย Throttling</a></h1>
 <div class=post-meta>
-<span class=post-time> 2017-10-02 </span>
+<span class=post-time> 2017-11-09 </span>
 <div class=post-category>
-<a href=/categories/continuous-delivery/> Continuous Delivery </a>
+<a href=/categories/system-design/> System Design </a>
 </div>
 </div>
 </header>
 <div class=post-content>
 <div class=post-summary>
-<p><img src=/img/covers/walk-desert-01.jpg alt="Photo by Jeremy Cai, from Unsplash"></p>
-<p>ผมเคยคิดว่าการทำ CI เป็นเรื่องง่ายๆ และเป็นเบสิคของทุกทีมที่ต้องปฏิบัติกัน แต่ในความเป็นจริง น้อยทีมมากที่จะทำออกมาได้ดี เพราะมันมีรายละเอียดยุ่บยั่บที่มากกว่าแค่เรื่องทางเทคนิค</p>
-<p>ในบันทึกฉบับนี้ เราจะมาดูรายละเอียดยุ่บยั่บเหล่านี้กัน โดยผมจะนำเสนอด้วยวิธีการเล่าเรื่อง ตั้งแต่ทีมเริ่มต้นทำ CI ง่ายๆ ไปจนถึงจุดทีเป็น CI ที่สมบูรณ์มากขึ้น</p>
-<p>โดยเราสมมติว่ามีทีมทีมหนึ่ง เริ่มต้นจากที่ไม่มีอะไรนอกจากเลยนอกจาก Version Control แล้วลองผิดลองถูก ทำการปรับปรุงกระบวนการ เรื่อยๆ จนมาถึงจุดที่เป็น CI ที่สมบูรณ์มากขึ้น</p>
+<p><img src=/img/covers/limit-01.jpg alt="Photo by Ksenia Kudelkina, from Unsplash.com"></p>
+<p>ลองนึกภาพว่าเรามีระบบที่ถูกออกแบบเป็น Service-Oriented Architecture (SOA)</p>
+<p>ในบรรดาเซอร์วิซทั้งหมด จะมีบางเซอร์วิซทีเป็น Dependency ของเซอร์วิซอื่นๆ ผมจะเรียกเซอร์วิซนี้ว่าเซอร์วิซ A</p>
+<p>ถ้าเซอร์วิซ A พังขึ้นมา เซอร์วิซอื่นที่ต้องเรียกใช้ข้อมูลนี้ทั้งหมดก็จะทำงานไม่ได้</p>
+<p>ตัวอย่างเช่นในภาพข้างล่าง หากเซอร์วิซ A พัง เซอร์วิซ B, และ C จะทำงานไม่ได้</p>
 </div>
 <div class=read-more>
-<a href=/post/01-ci-journey/ class=read-more-link></a>
+<a href=/post/10-throttle/>Read More</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/08-sticky-session/>ปัญหาของ Sticky Session</a></h1>
+<div class=post-meta>
+<span class=post-time> 2017-11-02 </span>
+<div class=post-category>
+<a href=/categories/system-design/> System Design </a>
+</div>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+<p><img src=/img/covers/traffic-01.jpg alt="Photo by Denys Nevozhai, from Unsplash.com"></p>
+<p>ใครที่เคยใช้ Load Balancer (LB) คงจะเคยได้ยินคำว่า Sticky Session (หรือ Session Affinity) กันมาบ้าง</p>
+<p>แนวคิดของ Sticky Session คือการให้ LB ส่ง Request ที่มาจากผู้ใช้ (Client) คนเดียวยัง ไปยังเซอร์เวอร์ตัวเดียวกันตลอด</p>
+<p>ตัวอย่างเช่น เรามีเซอร์เวอร์ 3 ตัว ชื่อว่า S1, S2, และ S3 วางอยู่ข้างหลัง LB แล้วมีผู้ใช้ส่ง Request เข้ามายังเว็บเรา</p>
+<figure class=center>
+<img src=/img/diagrams/loadbalancer.png alt="Load Balancer with 3 servers">
+<figcaption>
+Load Balancer with 3 servers
+</figcaption>
+</figure>
+<p>ในครั้งแรก Request ถูกส่งไปให้ S1 แต่พอผู้ใช้ส่ง Request ถัดๆไป LB อาจส่ง Request นั้นไปยัง S2 หรือ S3 แทน</p>
+<p>แต่หากเราเปิด Sticky Session แล้วล่ะก็ ตัว LB จะส่ง Request จากผู้ใช้คนเดิมไปยัง S1 ตลอด โดยไม่ส่งไปที่ S2 หรือ S3 เลย</p>
+<p>ในบทความนี้ เราจะมาทำความเข้าใจว่า Sticky Session ให้ละเอียดยิ่งขึ้น และอธิบายถึงปัญหาที่มักจะเกิดขึ้นในการใช้ Sticky Session</p>
+</div>
+<div class=read-more>
+<a href=/post/08-sticky-session/>Read More</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/07-career-start-non-technical/>โปรแกรมเมอร์มือใหม่ เรียนรู้อะไรดี (ภาค 2)</a></h1>
+<div class=post-meta>
+<span class=post-time> 2017-10-31 </span>
+<div class=post-category>
+<a href=/categories/career/> Career </a>
+</div>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+<p><img src=/img/covers/career-02.jpg alt="Photo by Olu Eletu, from Unsplash.com"></p>
+<p>ใน<a href=/post/06-career-start/>ภาคแรก</a>เราคุยกันในเรื่องของ Technical Skills ทีเป็นพื้นฐานไว้ใช้ในระยะยาว</p>
+<p>สำหรับภาคนี้ เราจะมาโฟกัสในส่วนของ Non-technical กันบ้าง ซึ่งเป็นครอบคลุมค่อนข้างหลากหลายเรื่อง โดยผมคัดเฉพาะหัวข้อที่ผมคิดว่าสำคัญๆ เพื่อไม่ให้ยาวเกินไป</p>
+<p>บทความนี้มีความคิดเห็นส่วนตัวเยอะมาก ผมเลยแยกออกมาจากภาคแรก</p>
+<p>ใครที่มีความเห็นแตกต่าง หรืออ่านแล้วรู้สึกจี้ด ไม่เห็นด้วยมากๆ ลองมาแลกเปลี่ยนความเห็นกันใน<a href=https://www.facebook.com/notaboutcode/>เฟสบุ้คเพจ</a>ได้ครับ เผื่อบทความนี้อาจจะมีภาค3 ผมเองก็อยากเก็บรายละเอียด ให้ได้มากที่สุด เพราะบล็อคนี้ตั้งใจจะเขียนทิ้งไว้นาน</p>
+<p>สำหรับโปรแกรมเมอร์มือใหม่ที่ยังไม่มีความคิดเห็น อ่านแล้วก็ฟังหูไว้หู ใช้เป็นแนวทางแต่อย่ายึดมั่นกับมันมาก ยังมีคนที่เก่งกว่าผมอีกมากที่ใช้แนวทางอื่นในการพัฒนาตนเอง</p>
+</div>
+<div class=read-more>
+<a href=/post/07-career-start-non-technical/>Read More</a>
 </div>
 </div>
 </article>

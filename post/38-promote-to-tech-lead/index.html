@@ -1,0 +1,250 @@
+<!doctype html><html lang=th>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>เมื่อต้องขยับไปเป็นเทคลีด (From an engineer to a technical lead) - Not About Code - Technical Leadership</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="ijemmy"><meta name=description content="พอถึงจุดนึงในชีวิต หัวหน้าจะเลื่อนขั้นคุณ แต่อย่าด่วนดีใจไป เพราะการเลื่อนขั้นมักจะมาพร้อมกับภาระหน้าที่ที่เพิ่มขึ้น (ส่วนจะขึ้นเงินเดือนให้รึเปล่านี่อีกเรื่องนึง)
+สำหรับคนที่ไม่ได้อยากทำสาย People Management (เช่น ไปเป็น Engineering manager) ส่วนใหญ่ก็มักจะได้รับการเลื่อนตำแหน่งให้เป็น Technical lead (หรือบางที่ก็เรียกว่า Project lead) ที่คอยดูแลภาพรวมของโปรเจ็คหรือโปรดักต์ และคอยกระจายงานให้กับคนในทีม
+จากประสบการณ์ส่วนตัว การขยับไปเทคลีดมักจะไม่ได้มีการเตรียมพร้อมกันให้ดี ส่วนใหญ่มักจะเกิดขึ้นเพราะมีเทคลีดคนเก่าออก หรือไม่ก็ค้นพบว่าทิศทางมันมั่วมาก ควรจะมีใครสักคนคอยดูแลเรื่องนี้
+ถ้าเทียบกับตอนเริ่มทำงานใหม่ๆ อย่างน้อยคุณก็จะมีเมนเตอร์หรือพี่เลี้ยงในทีมคอยช่วย แต่พอเลื่อนทำแหน่งเป็นเทคลีด หัวหน้ามักจะคิดว่าคุณทำได้ทันทีโดยไม่ต้องมีพี่เลี้ยงหรือชั่วโมงทดลองบิน ซึ่งก็มักจะนำมาซึ่งความฉิบหายในโปรเจ็คแรกๆ ก่อนที่จะเข้าที่เข้าทาง (อันนี้ผมเองเลย)
+บทความนี้เสนอข้อแนะนำ 3 ข้อ สำหรับเทคลีดมือใหม่ครับ
+"><meta name=keywords content="Hugo,theme,even">
+<meta name=generator content="Hugo 0.89.4 with theme even">
+<link rel=canonical href=https://www.notaboutcode.com/post/38-promote-to-tech-lead/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<link rel=stylesheet href=/css/custom.css>
+<meta property="og:title" content="เมื่อต้องขยับไปเป็นเทคลีด (From an engineer to a technical lead)">
+<meta property="og:description" content="
+พอถึงจุดนึงในชีวิต หัวหน้าจะเลื่อนขั้นคุณ แต่อย่าด่วนดีใจไป เพราะการเลื่อนขั้นมักจะมาพร้อมกับภาระหน้าที่ที่เพิ่มขึ้น (ส่วนจะขึ้นเงินเดือนให้รึเปล่านี่อีกเรื่องนึง)
+สำหรับคนที่ไม่ได้อยากทำสาย People Management (เช่น ไปเป็น Engineering manager) ส่วนใหญ่ก็มักจะได้รับการเลื่อนตำแหน่งให้เป็น Technical lead (หรือบางที่ก็เรียกว่า Project lead) ที่คอยดูแลภาพรวมของโปรเจ็คหรือโปรดักต์ และคอยกระจายงานให้กับคนในทีม
+จากประสบการณ์ส่วนตัว การขยับไปเทคลีดมักจะไม่ได้มีการเตรียมพร้อมกันให้ดี ส่วนใหญ่มักจะเกิดขึ้นเพราะมีเทคลีดคนเก่าออก หรือไม่ก็ค้นพบว่าทิศทางมันมั่วมาก ควรจะมีใครสักคนคอยดูแลเรื่องนี้
+ถ้าเทียบกับตอนเริ่มทำงานใหม่ๆ อย่างน้อยคุณก็จะมีเมนเตอร์หรือพี่เลี้ยงในทีมคอยช่วย แต่พอเลื่อนทำแหน่งเป็นเทคลีด หัวหน้ามักจะคิดว่าคุณทำได้ทันทีโดยไม่ต้องมีพี่เลี้ยงหรือชั่วโมงทดลองบิน ซึ่งก็มักจะนำมาซึ่งความฉิบหายในโปรเจ็คแรกๆ ก่อนที่จะเข้าที่เข้าทาง (อันนี้ผมเองเลย)
+บทความนี้เสนอข้อแนะนำ 3 ข้อ สำหรับเทคลีดมือใหม่ครับ">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.notaboutcode.com/post/38-promote-to-tech-lead/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2022-05-27T15:05:28+01:00">
+<meta property="article:modified_time" content="2025-01-25T15:06:41+01:00">
+<meta itemprop=name content="เมื่อต้องขยับไปเป็นเทคลีด (From an engineer to a technical lead)">
+<meta itemprop=description content="
+พอถึงจุดนึงในชีวิต หัวหน้าจะเลื่อนขั้นคุณ แต่อย่าด่วนดีใจไป เพราะการเลื่อนขั้นมักจะมาพร้อมกับภาระหน้าที่ที่เพิ่มขึ้น (ส่วนจะขึ้นเงินเดือนให้รึเปล่านี่อีกเรื่องนึง)
+สำหรับคนที่ไม่ได้อยากทำสาย People Management (เช่น ไปเป็น Engineering manager) ส่วนใหญ่ก็มักจะได้รับการเลื่อนตำแหน่งให้เป็น Technical lead (หรือบางที่ก็เรียกว่า Project lead) ที่คอยดูแลภาพรวมของโปรเจ็คหรือโปรดักต์ และคอยกระจายงานให้กับคนในทีม
+จากประสบการณ์ส่วนตัว การขยับไปเทคลีดมักจะไม่ได้มีการเตรียมพร้อมกันให้ดี ส่วนใหญ่มักจะเกิดขึ้นเพราะมีเทคลีดคนเก่าออก หรือไม่ก็ค้นพบว่าทิศทางมันมั่วมาก ควรจะมีใครสักคนคอยดูแลเรื่องนี้
+ถ้าเทียบกับตอนเริ่มทำงานใหม่ๆ อย่างน้อยคุณก็จะมีเมนเตอร์หรือพี่เลี้ยงในทีมคอยช่วย แต่พอเลื่อนทำแหน่งเป็นเทคลีด หัวหน้ามักจะคิดว่าคุณทำได้ทันทีโดยไม่ต้องมีพี่เลี้ยงหรือชั่วโมงทดลองบิน ซึ่งก็มักจะนำมาซึ่งความฉิบหายในโปรเจ็คแรกๆ ก่อนที่จะเข้าที่เข้าทาง (อันนี้ผมเองเลย)
+บทความนี้เสนอข้อแนะนำ 3 ข้อ สำหรับเทคลีดมือใหม่ครับ"><meta itemprop=datePublished content="2022-05-27T15:05:28+01:00">
+<meta itemprop=dateModified content="2025-01-25T15:06:41+01:00">
+<meta itemprop=wordCount content="314">
+<meta itemprop=keywords content="career,mindset,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="เมื่อต้องขยับไปเป็นเทคลีด (From an engineer to a technical lead)">
+<meta name=twitter:description content="
+พอถึงจุดนึงในชีวิต หัวหน้าจะเลื่อนขั้นคุณ แต่อย่าด่วนดีใจไป เพราะการเลื่อนขั้นมักจะมาพร้อมกับภาระหน้าที่ที่เพิ่มขึ้น (ส่วนจะขึ้นเงินเดือนให้รึเปล่านี่อีกเรื่องนึง)
+สำหรับคนที่ไม่ได้อยากทำสาย People Management (เช่น ไปเป็น Engineering manager) ส่วนใหญ่ก็มักจะได้รับการเลื่อนตำแหน่งให้เป็น Technical lead (หรือบางที่ก็เรียกว่า Project lead) ที่คอยดูแลภาพรวมของโปรเจ็คหรือโปรดักต์ และคอยกระจายงานให้กับคนในทีม
+จากประสบการณ์ส่วนตัว การขยับไปเทคลีดมักจะไม่ได้มีการเตรียมพร้อมกันให้ดี ส่วนใหญ่มักจะเกิดขึ้นเพราะมีเทคลีดคนเก่าออก หรือไม่ก็ค้นพบว่าทิศทางมันมั่วมาก ควรจะมีใครสักคนคอยดูแลเรื่องนี้
+ถ้าเทียบกับตอนเริ่มทำงานใหม่ๆ อย่างน้อยคุณก็จะมีเมนเตอร์หรือพี่เลี้ยงในทีมคอยช่วย แต่พอเลื่อนทำแหน่งเป็นเทคลีด หัวหน้ามักจะคิดว่าคุณทำได้ทันทีโดยไม่ต้องมีพี่เลี้ยงหรือชั่วโมงทดลองบิน ซึ่งก็มักจะนำมาซึ่งความฉิบหายในโปรเจ็คแรกๆ ก่อนที่จะเข้าที่เข้าทาง (อันนี้ผมเองเลย)
+บทความนี้เสนอข้อแนะนำ 3 ข้อ สำหรับเทคลีดมือใหม่ครับ"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+<a href=https://webring.wonderful.software#notaboutcode.com title=วงแหวนเว็บ>
+<img alt=วงแหวนเว็บ width=32 height=32 src=https://webring.wonderful.software/webring.black.svg>
+</a>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>เมื่อต้องขยับไปเป็นเทคลีด (From an engineer to a technical lead)</h1>
+<div class=post-meta>
+<span class=post-time> 2022-05-27 </span>
+<div class=post-category>
+<a href=/categories/career/> career </a>
+</div>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title></h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents></nav>
+</div>
+</div>
+<div class=post-content>
+<p><img src=/img/covers/meeting-01.png alt="Photo by Sebastian Herrmann on Unsplash"></p>
+<p>พอถึงจุดนึงในชีวิต หัวหน้าจะเลื่อนขั้นคุณ แต่อย่าด่วนดีใจไป เพราะการเลื่อนขั้นมักจะมาพร้อมกับภาระหน้าที่ที่เพิ่มขึ้น (ส่วนจะขึ้นเงินเดือนให้รึเปล่านี่อีกเรื่องนึง)</p>
+<p>สำหรับคนที่ไม่ได้อยากทำสาย People Management (เช่น ไปเป็น Engineering manager) ส่วนใหญ่ก็มักจะได้รับการเลื่อนตำแหน่งให้เป็น Technical lead (หรือบางที่ก็เรียกว่า Project lead) ที่คอยดูแลภาพรวมของโปรเจ็คหรือโปรดักต์ และคอยกระจายงานให้กับคนในทีม</p>
+<p>จากประสบการณ์ส่วนตัว การขยับไปเทคลีดมักจะไม่ได้มีการเตรียมพร้อมกันให้ดี ส่วนใหญ่มักจะเกิดขึ้นเพราะมีเทคลีดคนเก่าออก หรือไม่ก็ค้นพบว่าทิศทางมันมั่วมาก ควรจะมีใครสักคนคอยดูแลเรื่องนี้</p>
+<p>ถ้าเทียบกับตอนเริ่มทำงานใหม่ๆ อย่างน้อยคุณก็จะมีเมนเตอร์หรือพี่เลี้ยงในทีมคอยช่วย แต่พอเลื่อนทำแหน่งเป็นเทคลีด หัวหน้ามักจะคิดว่าคุณทำได้ทันทีโดยไม่ต้องมีพี่เลี้ยงหรือชั่วโมงทดลองบิน ซึ่งก็มักจะนำมาซึ่งความฉิบหายในโปรเจ็คแรกๆ ก่อนที่จะเข้าที่เข้าทาง (อันนี้ผมเองเลย)</p>
+<p>บทความนี้เสนอข้อแนะนำ 3 ข้อ สำหรับเทคลีดมือใหม่ครับ</p>
+<ol>
+<li>เลือก Scope, Time, และ Quality ใหม่เหมาะสม</li>
+</ol>
+<p>ไม่ว่าคุณจะมี Project manager ประกบหรือไม่ หน้าที่ของเทคลีดคือเป็นกันชนให้กับคนในทีม ไม่ให้ทีมต้องรับงานที่ต้องปั่นกันจนไม่ได้หลับไม่ได้นอน</p>
+<p>โปรเจ็คส่วนใหญ่ เกือบ 80% มันไม่ทันตั้งแต่ตอนเริ่มแล้ว เพราะ Scope ไม่ชัดเจน หรือใหญ่เกินไป เวลาก็จำกัด แถมบางทีจะเอาโค้ดที่คุณภาพดีๆอีก หน้าที่สำคัญของเทคลีดคือการเจรจากับลูกค้า (หรือ PM) ว่า อันนี้ไม่ทันหรอก ต้องตัดบางฟีเจอร์ออกไป ไม่ก็ต้องรอนานกว่านี้</p>
+<p>อย่าหวังว่า PM หรือ System analyst จะคิดเรื่องนี้ให้คุณ อย่ารับงานมาดื้อๆโดยไม่เจรจา เพราะคนพวกนั้นไม่ได้เขียนโค้ดเอง เค้าไม่มีทางกะแม่นได้เท่ากับทีมคุณ และเค้าไม่ต้องมาอดนอนปั่นงานกับคุณ .
+2. จัดการกับ Stakeholder ให้เหมาะสม</p>
+<p>หนึ่งในปัญหาของคนที่เป็นทีมลีดใหม่ๆ คือไม่เข้าใจ(อย่างถ่องแท้)ว่านี่เป็นหน้าที่และบทบาทใหม่ จะทำแบบเดิมไม่ได้</p>
+<p>ทำแบบเดิมคือโฟกัสแค่เรื่องเทคนิคัลอย่างเดียว ในตำแหน่งนี้ คุณต้องจัดการกคนที่คุณต้องทำงานด้วยในอีกรูปแบบ ยกตัวอย่างสองตำแหน่ง</p>
+<p>2.1 หัวหน้า - สมัยก่อน หัวหน้าอาจจะคุยกับคุณแค่รายละเอียดงานส่วนที่คุณทำอยู่ หรือเรื่อง Career path</p>
+<p>แต่พอเป็นเทคลีด คุณต้องคุยถึงภาพรวมของโปรเจ็คทั้งหมดด้วย อาจจะต้องคุยเรื่องคนหรือโปรเซสภายในทีม ว่าต้องมีการพัฒนาทักษะตรงจุดไหน เพื่อให้มีประสิทธิภาพมากขึ้น</p>
+<p>ตัวอย่างเช่น พอเป็นเทคลีด ผมเริ่มต้องเสนอว่ามีโค้ดส่วนไหนที่เราใช้ซ้ำบ่อยๆในหลายๆโปรเจ็ค เอามาทำเป็นไลบรารี่เพื่อประหยัดเวลาได้, เสนอมาตรฐานในการทำ ​Continuous Delivery Pipeline อย่างไร ส่วนไหนบ้างที่ใช้ซ้ำกันได้ทุกโปรเจ็คหรือทุกทีม, เสนอว่ามีปัญหาไหนที่เกิดขึ้นเป็นประจำแทบทุกโปรเจ็ค พร้อมเสนอวิธีแก้ไข</p>
+<p>2.2 ลูกค้า - หลักๆของลูกค้าคือตกลงเรื่องเวลาส่งมอบ คุณภาพ และสโคปให้ชัดเจน หลายๆครั้งลูกค้าไม่มีความรู้ด้านเทคนิคัล อาจจะขออะไรที่ทำยากมาก แต่ไม่ได้ต้องการจริงๆ เทคลีดที่ดีจึงต้องทำความเข้าใจความต้องการของลูกค้าให้ชัดเจน และช่วยให้ข้อมูลกับลูกค้าในการตัดสินใจ</p>
+<p>ตัวอย่างเช่น โปรเจ็คนึงบรีฟตอนแรกคืออยากทำดาต้าเลคเพื่อเอาข้อมูลมาประมวลผล ต้องทำ Integration กับระบบที่มีเพื่อดูดข้อมูล, ต้องคลีนดาต้าแล้วก็เอาเข้าดาต้าเลคอัตโนมัติ, แล้วก็มี API ให้ดึงข้อมูลด้วย พร้อมโมไบล์แอพ (iOS, Android) เพื่อดูสรุปข้อมูลบนนั้น มีเวลาให้หนึ่งเดือน เลื่อนไม่ได้</p>
+<p>คุยไปคุยมา ปรากฏว่าลูกค้าแค่อยากทำ Proof of concept ไปเสนอให้CTOอนุมัติในอีกหนึ่งเดือนข้างหน้า หลักๆคืออยากให้เห็นว่าข้อมูลส่วนนี้มีมูลค่ามาก สามารถเอาไปทำอะไรได้หลายอย่าง ส่วนที่สำคัญที่สุดคือโมไบล์แอพ ซึ่งเป็นของ iOS หรือ Android ก็ได้ จะได้เอาไปเดโม่ให้ CTO</p>
+<p>ส่วนที่อยากได้ดาต้าเลคคือได้ยินแผนกข้างๆเค้าทำอยู่ เลยอยากลองทำบ้าง .
+อันนี้เป็นตัวอย่างที่ค่อนข้าง Extreme (อ้างอิงจากโปรเจ็คชีวิตจริงผมเอง) เรื่องของเรื่องคือ กว่าที่ Requirement จะมาถึงเรา พวกบริบทมันหายไปในการสื่อสารระหว่างทางเยอะมาก อย่างเคสนี้ ถ้าไม่ได้ไปนั่งคุยกับลูกค้า มองแค่ Requirement อย่างเดียว โปรเจ็คมันเป็นไปไม่ได้เลยใน 1 เดือน แต่พอไปคุยรายละเอียด เราจะพบว่าไอ้ Technical requirement หลายๆอย่าง จริงๆแล้วมันไม่ได้จำเป็นเลย ลูกค้าสามารถตัดออกได้ หรืออาจจะมีวิธีอื่นที่ดีกว่าด้วยซ้ำ
+ 3. มี Definition of Done กับ Acceptance criteria ที่ชัดเจนให้กับคนในทีม</p>
+<p>สำหรับคนในทีม เราต้องสื่อสารให้ชัดเจน ว่าเราต้องการอะไรจากเขา</p>
+<p>ปกติเทคลีดจะเป็นคนวางดีไซน์ภาพรวมของระบบจาก Requirement แล้วก็แตกงาน (Task) ย่อยๆออกมา หลังจากนั้นก็กระจายงานให้กับคนในทีม</p>
+<p>แต่ละคนก็มีเทคนิคต่างกันไป วิธีที่ผมชอบทำ คือดึง Engineer เข้ามาช่วยประเมิน Scope ให้มากที่สุด และให้ทุกคนช่วยกันเขียน Acceptance criteria ในแต่ละ Task ด้วย วิธีนี้จะทำให้ทุกคนมีความรู้สึกว่าเป็นเจ้าของงาน และเข้าใจขอบเขตของงานแต่ละชิ้นตรงกัน</p>
+<p>Acceptance criteria คือเส้นชัยของาน ต้องกำหนดให้ชัดเจนว่าอะไรอยู่ในขอบเขตของงานนี้ อะไรที่ไม่อยู่ พวกนี้ต้องเขียนให้เคลียร์มากๆ ไม่งั้นจะเข้าใจไม่ตรงกันแล้วออกทะเล หรือทำมาเสร็จแบบลวกๆ (เช่น ไม่เช็ค Edge case, ไม่ Catch error, ไม่มี metrics ไว้เช็คบนโปรดักชั่นว่าพังรึเปล่า)</p>
+<p>อีกอันคือ Definition of Done เป็นข้อกำหนดที่ใช้กับทุกงานโดยอัตโนมัติ เช่น ต้องมี Unit test ที่ Coverage เกิน 90%, ต้องรันผ่าน Linting tool, ต้องรันผ่าน Integration tests ใน Dev Environment ก่อนปิด Task พวกนี้ผมจะให้มีเช็คลิสต์ตอบทำพวก Pull request/Code review เพราะคนมักจะลืมกัน</p>
+<p>สำหรับคนที่ Junior มากๆ บางทีผมจะลงไปนั่งช่วย Design พวกคลาสให้ก่อนเลย ว่า Interface ต้องเป็นประมาณไหน ต้องมี Test cases อะไรบ้าง ส่วน Engineer ที่ผมเชื่อมือแล้ว ผมจะพยายามไปยุ่งกับเค้าให้น้อยที่สุด แต่จะมีกำหนดคุยกันเป็นระยะๆเพื่อให้ชัวร์ว่าเข้าใจตรงกัน</p>
+<hr>
+<p>สรุป คนที่เป็นเทคลีดใหม่ๆ ต้องเข้าใจว่านี่คืองานใหม่ที่ Job description คล้ายงานเก่า (เพราะยังต้องดีไซน์และเขียนโค้ดด้วย) แต่เนื้องานจริงๆต่างจากงานเดิมเยอะมาก โปรเจ็คแรกๆเลยมักจะสะดุดหกล้ม เจ็บกันเยอะ</p>
+<p>ผู้อ่านท่านใดมีประสบการณ์ด้านนี้ และมีข้อแนะนำอื่น เพิ่มเติมกันในคอมเม้นต์ได้นะครับ</p>
+<br>
+---
+<blockquote>
+<p>ติดตามบทความสำหรับโปรแกรมเมอร์ทั้งด้านได้ที่ Facebook page <a href=http://facebook.com/notaboutcode>Not about code</a> หรือ Twitter <a href=https://twitter.com/notaboutcode/>@notaboutcode</a> บทความของเพจจะเน้นเนื้อหาที่นำไปใช้ได้กับชีวิตจริง แต่ไม่ยึดติดกับเทคโนโลยีหรือภาษา เช่น System Design, Continuous Delivery, Testing, Career, etc.
+<br>
+<br>
+สำหรับท่านที่อยากสนับสนุนผู้เขียน รบกวนช่วยแชร์โพสต์ในเฟสบุ้คให้กับเพื่อนๆที่น่าจะสนใจหัวข้อพวกนี้ด้วยครับ</p>
+</blockquote>
+<div class=fb-page data-href=https://www.facebook.com/notaboutcode/ data-tabs data-small-header=false data-adapt-container-width=true data-hide-cover=false data-show-facepile=true>
+<blockquote cite=https://www.facebook.com/notaboutcode/ class=fb-xfbml-parse-ignore>
+<a href=https://www.facebook.com/notaboutcode/>Not about code</a>
+</blockquote>
+</div>
+</div>
+<div id=fb-root></div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content>ijemmy</span>
+</p>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content>
+2025-01-25
+</span>
+</p>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/career/>career</a>
+<a href=/tags/mindset/>mindset</a>
+</div>
+<div class=fb-comments data-numposts=5></div>
+<nav class=post-nav>
+<a class=prev href=/post/39-bloem-filter-01/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">จากหลักล้านสู่หลักหน่วย ด้วยความรู้ด้าน Data structure (ตอน 1)</span>
+<span class="prev-text nav-mobile"></span>
+</a>
+<a class=next href=/post/37-terminal-job-level/>
+<span class="next-text nav-default">Terminal job level ใน FAANG (Facebook, Amazon, Apple, Netflix, และ Google)</span>
+<span class="next-text nav-mobile"></span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
+<a href=https://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+%!(EXTRA string=<a class=hexo-link href=https://gohugo.io>Hugo</a>)
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+-
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<span class=copyright-year>
+&copy;
+2017 -
+2025<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<script>(function(b,c,d){var a,e=b.getElementsByTagName(c)[0];if(b.getElementById(d))return;a=b.createElement(c),a.id=d,a.src='https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676',e.parentNode.insertBefore(a,e)})(document,'script','facebook-jssdk')</script>
+</body>
+</html>

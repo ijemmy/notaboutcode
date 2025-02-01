@@ -1,0 +1,339 @@
+<!doctype html><html lang=th>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>Estimate มาเท่าไร ใส่เข้าไปเพิ่มอีกเท่า - Not About Code - Technical Leadership</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="ijemmy"><meta name=description content="ผมลีดโปรเจ็คครั้งแรกตอนทำงานไปได้ปีนึง
+โปรเจ็คนั้นทำงานกับคอนซัลท์ (ที่ปรึกษา) อีกคน ชื่อว่าแคลวิน
+แคลวินเป็นชาวสิงค์โปร์เชื้อสายจีน อายุประมาณสี่สิบ เป็นคนเก่ง ใจเย็น และรับความกดดันได้ดี สมเป็นคอนซัลท์
+สมัยนั้นทุกอย่างเป็น Waterfall หมด
+คอนซัลท์จะทำหน้าที่ Requirement Gathering ไปเก็บความต้องการของลูกค้ามาให้ก่อน
+หลังจากหายไปเดือนกว่า แคลวินกลับมาพร้อมกับเอกสารโปรเจ็คประมาณ 40+ หน้า หนามาก
+"><meta name=keywords content="Hugo,theme,even">
+<meta name=generator content="Hugo 0.89.4 with theme even">
+<link rel=canonical href=https://www.notaboutcode.com/post/41-double-that-estimate/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<link rel=stylesheet href=/css/custom.css>
+<meta property="og:title" content="Estimate มาเท่าไร ใส่เข้าไปเพิ่มอีกเท่า">
+<meta property="og:description" content="
+ผมลีดโปรเจ็คครั้งแรกตอนทำงานไปได้ปีนึง
+โปรเจ็คนั้นทำงานกับคอนซัลท์ (ที่ปรึกษา) อีกคน ชื่อว่าแคลวิน
+แคลวินเป็นชาวสิงค์โปร์เชื้อสายจีน อายุประมาณสี่สิบ เป็นคนเก่ง ใจเย็น และรับความกดดันได้ดี สมเป็นคอนซัลท์
+สมัยนั้นทุกอย่างเป็น Waterfall หมด
+คอนซัลท์จะทำหน้าที่ Requirement Gathering ไปเก็บความต้องการของลูกค้ามาให้ก่อน
+หลังจากหายไปเดือนกว่า แคลวินกลับมาพร้อมกับเอกสารโปรเจ็คประมาณ 40+ หน้า หนามาก">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.notaboutcode.com/post/41-double-that-estimate/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2022-07-16T15:05:28+01:00">
+<meta property="article:modified_time" content="2025-01-25T15:06:41+01:00">
+<meta itemprop=name content="Estimate มาเท่าไร ใส่เข้าไปเพิ่มอีกเท่า">
+<meta itemprop=description content="
+ผมลีดโปรเจ็คครั้งแรกตอนทำงานไปได้ปีนึง
+โปรเจ็คนั้นทำงานกับคอนซัลท์ (ที่ปรึกษา) อีกคน ชื่อว่าแคลวิน
+แคลวินเป็นชาวสิงค์โปร์เชื้อสายจีน อายุประมาณสี่สิบ เป็นคนเก่ง ใจเย็น และรับความกดดันได้ดี สมเป็นคอนซัลท์
+สมัยนั้นทุกอย่างเป็น Waterfall หมด
+คอนซัลท์จะทำหน้าที่ Requirement Gathering ไปเก็บความต้องการของลูกค้ามาให้ก่อน
+หลังจากหายไปเดือนกว่า แคลวินกลับมาพร้อมกับเอกสารโปรเจ็คประมาณ 40+ หน้า หนามาก"><meta itemprop=datePublished content="2022-07-16T15:05:28+01:00">
+<meta itemprop=dateModified content="2025-01-25T15:06:41+01:00">
+<meta itemprop=wordCount content="573">
+<meta itemprop=keywords content="estimate,project-management,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Estimate มาเท่าไร ใส่เข้าไปเพิ่มอีกเท่า">
+<meta name=twitter:description content="
+ผมลีดโปรเจ็คครั้งแรกตอนทำงานไปได้ปีนึง
+โปรเจ็คนั้นทำงานกับคอนซัลท์ (ที่ปรึกษา) อีกคน ชื่อว่าแคลวิน
+แคลวินเป็นชาวสิงค์โปร์เชื้อสายจีน อายุประมาณสี่สิบ เป็นคนเก่ง ใจเย็น และรับความกดดันได้ดี สมเป็นคอนซัลท์
+สมัยนั้นทุกอย่างเป็น Waterfall หมด
+คอนซัลท์จะทำหน้าที่ Requirement Gathering ไปเก็บความต้องการของลูกค้ามาให้ก่อน
+หลังจากหายไปเดือนกว่า แคลวินกลับมาพร้อมกับเอกสารโปรเจ็คประมาณ 40+ หน้า หนามาก"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+<a href=https://webring.wonderful.software#notaboutcode.com title=วงแหวนเว็บ>
+<img alt=วงแหวนเว็บ width=32 height=32 src=https://webring.wonderful.software/webring.black.svg>
+</a>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>Estimate มาเท่าไร ใส่เข้าไปเพิ่มอีกเท่า</h1>
+<div class=post-meta>
+<span class=post-time> 2022-07-16 </span>
+<div class=post-category>
+<a href=/categories/software-engineering/> software-engineering </a>
+</div>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title></h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#ทำไม-estimate-ถงไมเคยตรง>ทำไม Estimate ถึงไม่เคยตรง</a>
+<ul>
+<li><a href=#1-ม-technical-problem-ทไมไดคาดคดเกดขน>1. มี Technical problem ที่ไม่ได้คาดคิดเกิดขึ้น</a></li>
+<li><a href=#2-requirement-ในหวแตละคนไมเหมอนกน>2. Requirement ในหัวแต่ละคนไม่เหมือนกัน</a></li>
+<li><a href=#3-scope-creep-ลกคาขอเปลยน-หรออยากไดนนนดนหนอยเพมเขาไป>3. Scope creep: ลูกค้าขอเปลี่ยน หรืออยากได้นู่นนิดนี่หน่อยเพิ่มเข้าไป</a></li>
+<li><a href=#4-คน-estimate-ไมใชคนทำ-คนทำไมได-estimate>4. คน Estimate ไม่ใช่คนทำ คนทำไม่ได้ Estimate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p><img src=/img/covers/horror-01.png alt="Photo by Sebastian Herrmann on Unsplash"></p>
+<p>ผมลีดโปรเจ็คครั้งแรกตอนทำงานไปได้ปีนึง</p>
+<p>โปรเจ็คนั้นทำงานกับคอนซัลท์ (ที่ปรึกษา) อีกคน ชื่อว่าแคลวิน</p>
+<p>แคลวินเป็นชาวสิงค์โปร์เชื้อสายจีน อายุประมาณสี่สิบ เป็นคนเก่ง ใจเย็น และรับความกดดันได้ดี สมเป็นคอนซัลท์</p>
+<p>สมัยนั้นทุกอย่างเป็น Waterfall หมด</p>
+<p>คอนซัลท์จะทำหน้าที่ Requirement Gathering ไปเก็บความต้องการของลูกค้ามาให้ก่อน</p>
+<p>หลังจากหายไปเดือนกว่า แคลวินกลับมาพร้อมกับเอกสารโปรเจ็คประมาณ 40+ หน้า หนามาก</p>
+<p>ผมปริ้นท์ออกมานั่งอ่านอยู่สองวัน</p>
+<p>กลับไปบอกว่าน่าจะใช้เวลาประมาณ 45 Man-day</p>
+<p>แคลวินฟังเสร็จ ก็ตอบทันว่า</p>
+<p>“I have a tip for you”
+(ไอมีทิปจะแนะนำ)</p>
+<p>ผมเงียบไปพักนึง งงว่าอยู่ดีๆทำไมถึงเปลี่ยนเรื่องไว แต่ด้วยประสบการณ์ที่ต่างกันมาก ผมก็ฟังไว้ก่อน</p>
+<p>“Whanever you estimate, double it before telling your Project Manager (PM)”
+(เมื่อไรที่ Estimate ได้มาเท่าไร ใส่เพิ่มอีกเท่าตัว แล้วค่อยไปบอกโปรเจ็คเมเนอเจอร์)</p>
+<p>ผมในวัยใส (พึ่งทำงานมาได้ปีนึง) อึ้งไปเลยกับประโยคนี้</p>
+<p>ตอนแรกนึกว่าพูดเล่น แต่พี่แกจริงจัง</p>
+<p>เฮ้ย มันจะดีเหรอแคลวิน เดี๋ยว PM ก็กินหัวผมหรอก</p>
+<p>“If PM isn’t ok with it, she’ll say so. Then we negotiate”
+(ถ้าโปรเจ็คเมเนเจอร์ ไม่โอเคกับตัวเลข เดี๋ยวเค้าก็จะบอกเอง แล้วเราค่อยต่อรองกัน)</p>
+<p>ผมไม่ค่อยมั่นใจกับคำแนะนำนี้เท่าไร แคลวินเองเป็นคอนซัลท์ ถ้าโปรเจ็คยิ่งลากยาว เค้ายิ่งได้ค่าตัวเพิ่มเป็นรายชั่วโมง</p>
+<p>ตอนนั้นผมเลยเพิ่ม Estimate ไปแค่ 50%</p>
+<p>ส่งตัวเลขไปให้ PM ทางนั้นก็ไม่ได้ว่า</p>
+<p>หลังจากนั้นเราก็พัฒนาโปรแกรมกันไปตามประสา</p>
+<p>สรุปโปรเจ็คนั้นใช้เวลาทั้งสิ้น 6 เดือนตั้งแต่ต้นจนจบ หลังปิดโปรเจ็ค ผมกลับมานั่งนับวัน</p>
+<p>…ใช้ไปประมาณ 90 กว่า Man-day…</p>
+<p>ใกล้เคียงกับสองเท่าของที่ประมาณไว้ตอนแรก (45 Man-day)…</p>
+<p>ตอนนั้น หน้าแคลวินก็ลอยขึ้นมา ยักคิ้วให้ แล้วพูดว่า</p>
+<p>“See la? Trust me now la?” “เป็นไง เชื่อไอรึยัง”</p>
+<h2 id=ทำไม-estimate-ถงไมเคยตรง>ทำไม Estimate ถึงไม่เคยตรง</h2>
+<p>ผ่านมาสิบกว่าปี ผมอายุใกล้แคลวินมากขึ้น แต่สิ่งที่ไม่เปลี่ยนเลยคือไม่มีโปรเจ็คไหนที่ผม Estimate แล้วตรงตามที่กะไว้ตอนแรกเลย</p>
+<p>พอประสบการณ์มากขึ้น ผมเริ่มเดาได้ว่าโปรเจ็คจะต้องเลทตั้งแต่ต้น แม้จะอธิบายไม่ค่อยได้ว่าทำไม (ทั้งที่ทุกอย่างยังดูไปได้สวย) ทำให้ผมกะได้แม่นขึ้น ด้วยการใส่เวลาเพิ่มไปตามสัญชาตญาณ</p>
+<p>บางครั้งก็เพิ่มไป 50% บางครั้งก็เพิ่มไปเท่าตัวแบบที่แคลวินทำ</p>
+<p>วันนี้ลองมานั่งสรุปดู ว่าทำไม Estimate ไม่เคยตรงเลย สรุปที่เจอบ่อยๆมา 4 อย่าง</p>
+<h3 id=1-ม-technical-problem-ทไมไดคาดคดเกดขน>1. มี Technical problem ที่ไม่ได้คาดคิดเกิดขึ้น</h3>
+<p>ตัวอย่างของหัวข้อนี้คือ</p>
+<p>“รันบนเครื่องยังได้อยู่เลย ทำไม Deploy แล้วใช้ไม่ได้”</p>
+<p>“ทำไมยูนิทเทสต์อยู่ดีๆก็พัง เกิดอะไรขึ้น เมื่อวานยังรันได้อยู่เลย”</p>
+<p>“Dependency เวอร์ชั่นนี้พังซะงั้น นั่งดีบั้กอยู่ตั้งครึ่งวัน สุดท้ายแค่เปลี่ยนเวอร์ชั่นกลับก็หายแล้ว”</p>
+<p>“อ้าว ใช้ Node 16 รันหรอกเหรอ มิน่าล่ะ เรานั่งรันเท่าไรก็ไม่ติด เราใช้ Node 8 อยู่”</p>
+<p>หัวข้อนี้มักจะเป็นอะไรที่กินเวลาตั้งแต่ชั่วโมง ไปจนถึง 2-3 วัน</p>
+<p>แทนที่จะได้เขียนตัวโปรแกรมจริงๆ เราต้องมานั่งแก้พวก Technical problem นี้ให้เสร็จก่อน</p>
+<p>อยากให้สังเกตด้วยนะครับ ว่าปัญหาทั้งหมดที่อยู่ในหมวดนี้ มักจะป้องกัน หรือแก้ไขได้</p>
+<p>พวก ​Senior จะมี Technical problem ที่ไม่คาดไว้น้อยกว่า</p>
+<p>หรือพอมีปุ๊บก็พอจะเดาได้ทันทีว่าต้องแก้ที่ไหน</p>
+<p>ดังนั้นปัญหาพวกนี้ ถ้าคิดไม่ออก ติดสักสองชั่วโมง ลองไปถามคนอื่นใน อาจจะได้คำตอบเร็วมาก เพราะเคยโดนมาก่อนแล้ว</p>
+<p>ถ้าทีมที่แข็งและอยู่มานาน ก็มักจะมีโปรเซสหรือ Tool ที่คอยช่วยป้องกันปัญหาพวกนี้ให้มากที่สุด เช่น</p>
+<ul>
+<li>ใช้ Container เป็นหลักเพื่อลดปัญหารันบนเครื่องตัวเองได้ แต่ Deploy ไม่ได้</li>
+<li>มีการ Freeze dependency ไว้ ไม่ Install latest major/minor เวอร์ชั่นอัตโนมัติ</li>
+<li>Revert กันทันทีถ้า Unit test พังม ใช้ Mock ให้เหมาะสม</li>
+<li>ใน Onboarding process มีการให้ลง NVM และคอมมิต .nvmrc ไว้ใน Repository (เพื่อบังคับให้สลับ Node Version อัตโนมัติ)</li>
+</ul>
+<p>แต่ทั้งนี้ทั้งนั้น เราไม่มีทางป้องกันปัญหาในหมวดนี้ได้ 100% ครับ</p>
+<p>ต้องเข้าใจว่า การเขียนโปรแกรมไม่ใช่ Repeatable process</p>
+<p>ทุกครั้งที่เราขึ้นโปรเจ็คใหม่ ต่อให้คล้ายกันแค่ไหน มันก็จะมีส่วนที่เราคาดไม่ถึงอยู่ (ไม่งั้นก็ใช้โค้ดของโปรเจ็คเดิมได้เลย จบ)</p>
+<p>ทุกครั้งที่ทำโปรเจ็ค เราก็จะเจอปัญหาใหม่ๆที่ไม่คาดการ และต้องใช้เวลาเรียนรู้เพิ่มอยู่เสมอ ซึ่งเวลาตรงส่วนนี้ มักจะหลุดหายไปใน Estimate ครับ</p>
+<h3 id=2-requirement-ในหวแตละคนไมเหมอนกน>2. Requirement ในหัวแต่ละคนไม่เหมือนกัน</h3>
+<p>ตัวอย่างในหัวข้อนี้ มีตั้งแต่ระดับ Technical ด้วยกันเอง</p>
+<p>“อ้าว ต้องใส่ Metrics กับ Log แล้วทำ Operation dashboard ด้วยเหรอ ไม่ได้บอกไว้”</p>
+<p>“Unit test ต้อง branch coverage 80% เชียวเหรอ ตอน Estimate ไม่ได้กะเอาไว้”</p>
+<p>ไล่ไปจนถึงระดับ Functional กับ Non-functional requirement</p>
+<p>“ตอนแรกคิดว่าแค่ดึงข้อมูลธรรมดา นึกว่าแค่ select * จึ้กเดียว ไม่เห็นรู้เลยว่าต้องดึงเป็นล้าน Record”</p>
+<p>“โทษทีนะ พึ่งไปคุยกับลูกค้ามา มันต้องซัพพอร์ทั้งภาษาไทยและภาษาอังกฤษ พี่ไม่ได้ถามลูกค้า ลูกค้าก็ลืมบอกตอนแรก เพิ่มอีกภาษาไม่น่าจะเป็นไรนะ…”</p>
+<p>กลับไปโปรเจ็คของผมกับแคลวิน</p>
+<p>หนึ่งในสาเหตุหลักที่ทำให้ใช้เวลานานกว่าที่กะไว้ คือ Requirement ที่อยู่ในหัวลูกค้า หัวแคลวิน และหัวผม มันไม่ตรงกันเลย !!</p>
+<p>เอกสารของแคลวินละเอียดก็จริง แต่มีหลายๆจุดที่แม้แต่ลูกค้า(หลายคน)ก็ลืมไปตอนนั่งคุย แคลวินก็ไม่มีทางถามได้หมด เพราะแกไม่ใช่ผู้ใช้จริง</p>
+<p>ส่วนผมที่อ่านเอกสารของแคลวินอีกต่อ ก็มีจินตนาการอีกแบบ</p>
+<p>พอถึงจุดที่เริ่มเทสต์กับข้อมูลจริง ตัวเลขออกมาคนละเรื่องกับที่คิดเอาไว้ ทุกอย่างเลยต้องวนลูปได้คุยและแก้เพิ่มอีกสองรอบ กว่าจะได้ Requirement ที่ถูกต้อง</p>
+<p>ยังไม่รวมถึง Non-functional requirement ที่ขาดไป ผมไม่รู้ว่าข้อมูลบัญชีของบริษัทมันมีเป็นล้าน Record</p>
+<p>ดึงตรงๆไม่ไหว ต้องสร้าง Batch job มา Preprocess เพื่อลดจำนวนและไปเก็บไว้อีก Table นึง</p>
+<p>เทียบกับ Technical problem ในกรณีแรกแล้ว ปัญหาแนวนี้มักจะกินเวลาทำเพิ่มนานมาก บางทีเป็นหลักหลายสัปดาห์ หรือเดือน</p>
+<p>แต่ก็ต้องยอมรับความจริง ว่าเวลาเรา Estimate เราทำแค่กับสิ่งที่เราเห็นแล้ว แต่สิ่งที่เรามองข้ามไป เราไม่ได้ Estimate</p>
+<p>เราจึงต้องเผื่อเวลาตรงส่วนนี้ไว้ด้วย จะเท่าไร ก็แล้วแต่ลักษณะของระบบ และประสบการณ์เราว่าเคยพัฒนาระบบแนวนี้มามากแค่ไหน</p>
+<h3 id=3-scope-creep-ลกคาขอเปลยน-หรออยากไดนนนดนหนอยเพมเขาไป>3. Scope creep: ลูกค้าขอเปลี่ยน หรืออยากได้นู่นนิดนี่หน่อยเพิ่มเข้าไป</h3>
+<p>อันนี้ไม่ต้องมีตัวอย่าง น่าจะโดนกันมาหมดแล้ว ผมมี Quote แถมให้</p>
+<p>“ลูกค้าส่วนใหญ่ 80% ไม่รู้ว่าต้องการอะไร
+ส่วนอีก 20% รู้ว่าต้องการอะไร แต่เปลี่ยนใจทีหลัง” – Not about code</p>
+<p>เวลาเริ่มโปรเจ็ค ไปคุยกับลูกค้าหรือผู้ใช้ ผมจะ Assume the worst ไว้ก่อน ว่าลูกค้าอยู่ในหมวด 80% นี้แหละ</p>
+<p>ที่สำคัญ ผมจะพยายามไม่คิดให้ลูกค้า เพราะถึงแม้จะคุยจบเร็ว แต่มันมีโอกาสต้องมาเปลี่ยนทีหลังสูงกว่า</p>
+<p>โปรเจ็คไหนที่เห็นชัดเลยว่าลูกค้าไม่มั่นใจว่าจะได้อะไร ผมเสนอให้บังคับทำ Workshop (เอา Stakeholders มานั่งรวมกันเพื่อเขียน Business process ให้ชัดเจนตั้งแต่ต้นจนจบ), เขียน Wireframe, Mockup, หรือ Prototype</p>
+<p>เอาให้ชัวร์ในระดับหนึ่งก่อนค่อยเริ่ม เจอตอนแรกมันคุ้มกว่ามาแก้ตอนท้ายๆ</p>
+<h3 id=4-คน-estimate-ไมใชคนทำ-คนทำไมได-estimate>4. คน Estimate ไม่ใช่คนทำ คนทำไม่ได้ Estimate</h3>
+<p>บางบริษัท เค้าจะให้ลีดเป็นคน Estimate (หรือแย่กว่า คือเอา PM มา Estimate)</p>
+<p>ในมุมมองคนภายนอก มันเมคเซนส์นะ ถ้าผมจะสร้างบ้าน ผมก็จะเอาวิศวกรอาวุโสมาประเมิน ไม่ใช่ให้คนก่ออิฐมาประเมิน</p>
+<p>แต่ในเชิงของซอฟท์แวร์ มันไม่ใช่ เอา ​Senior ประสบการณ์สิบปีมาประเมิน เค้าอาจจะเห็นความซับซ้อนที่ Junior ปีเดียวมามองไม่เห็น หรือเค้าอาจจะเคยทำอะไรแนวนี้มาแล้ว คิดว่าทำแล้วใช้เวลาเร็วกว่า</p>
+<p>เวลาที่ใช้จริงมันมักจะเป็นเวลาที่คนทำจริงๆทำ เพราะงั้น ใครทำส่วนไหน ให้เค้าประเมินส่วนนั้น</p>
+<p>ถ้าทำไม่ได้ในทางปฏิบัติ คนประเมินต้องเข้าใจความสามารถของคนทำด้วย ว่าไม่ใช่ทุกคนที่มีประสบการณ์เท่าเรา จะทำได้เร็วหรือละเอียดเท่าเรา ซึ่งอันนี้พูดตามตรง มันยากมาก เดาไม่ได้หรอก</p>
+<p>บางที่ แก้ปัญหานี้ด้วยการพยายามให้ทุกคนในทีม Estimate</p>
+<p>อันนี้ก็ต้องระวังหน่อย ที่ผมเคยเจอคือ Senior จะ Estimate ออกมาไล่ๆกัน ส่วน Junior จะแตกแยกออกมาคนละข้าง แล้วคุยสักพักทุกคนก็จะยอม Senior</p>
+<p>แต่สุดท้าย คนทำงานนั้นคือ Junior</p>
+<p>—</p>
+<p>สรุปแล้ว ผมต้องยอมรับว่าแคลวินถูกนะ ถึงผมไม่เพิ่มเท่าตัวตลอด แต่ส่วนใหญ่ก็เพิ่มในระดับหนึ่ง</p>
+<p>การ Estimate ของเรามันมีส่วนที่เรามองไม่เห็นและคาดไม่ถึงเยอะมาก ดังนั้น จงระวังให้ดี <strong>หาก Estimate ของคุณจะต้องกลายเป็น ​Promise ในการส่งมอบให้กับลูกค้า</strong></p>
+<p>ส่วนตัว ผมให้ทีม Estimate ประจำ ผมรู้สึกว่ากระบวนการในการ Estimate มันทำให้คนคิดละเอียด และพอเวลามันเลท เค้าจะได้พิจารณาว่ามองข้ามอะไรไป คราวหน้าจะได้วางแผนได้ดีขึ้น เพราะบางอย่างถ้าไม่คิดหรือวางไว้ก่อนใน Software Design จะกินเวลาแก้ทีหลังมากๆ</p>
+<p>เวลาคุยกับลูกค้า ผมจะเผื่อด้วยการบอกเป็น Range (best case -> worst case) เพื่อให้อีกฝั่งเห็นภาพ ผมมองว่าหน้าที่ผมคือการให้ความรู้ลูกค้าด้วย ว่าการพัฒนาซอฟท์แวร์มันไม่มีเป๊ะขนาดนั้น ทีมพัฒนาไม่ใช่สายพานการผลิต</p>
+<p>แต่ที่ต้องไม่ทำคือการลงโทษ(ทั้งทางตรงและทางอ้อม) เวลาที่ Estimate ของใครผิด ทุกคนต้องเข้าใจว่านี่เป็น Nature ของงาน และเรายังไม่มีเทคนิคอะไรที่สามารถทำให้ Estimate มันเป๊ะได้</p>
+<p>บางบริษัท โดยเฉพาะ Tech companies ก็สามารถใช้แนวคิด #NoEstimate เลย</p>
+<p>แต่ก็ต้องยอมรับว่าไม่ใช่ทุกบริษัทที่จะโอเคกับไอเดียนี้ เพราะฝั่ง Business เองก็ต้องการ Timeline เพื่อที่ฝั่งเค้าจะวางแผนได้ถูก</p>
+<p>ในบางองค์กรที่ฝั่ง Business ไม่ได้เข้าใจถึงการพัฒนาซอฟท์แวร์ และเราไม่มีอำนาจในการต่อรองเลย</p>
+<p>เราก็ไม่มีทางเลือกนอกจากเผื่อเอาไว้ก่อน ไม่งั้นอาจจะได้พาทีมโต้รุ่งกัน</p>
+<p>ที่น่ากลัวที่สุดไม่ใช่การโต้รุ่งอย่างเดียว แต่ทีมต้อง Compromise กับเรื่องของ Code Quality</p>
+<p>คราวนี้ล่ะ โปรเจ็คจบ แต่พอ Maintain นี่งานงอกยาวเลย เสีย Productivity โดยรวมอีก เพราะต้องมาชดใช้หนี้กันบน Production กันไปอีกหลายปี</p>
+<br>
+---
+<blockquote>
+<p>ติดตามบทความสำหรับโปรแกรมเมอร์ทั้งด้านได้ที่ Facebook page <a href=http://facebook.com/notaboutcode>Not about code</a> หรือ Twitter <a href=https://twitter.com/notaboutcode/>@notaboutcode</a> บทความของเพจจะเน้นเนื้อหาที่นำไปใช้ได้กับชีวิตจริง แต่ไม่ยึดติดกับเทคโนโลยีหรือภาษา เช่น System Design, Continuous Delivery, Testing, Career, etc.
+<br>
+<br>
+สำหรับท่านที่อยากสนับสนุนผู้เขียน รบกวนช่วยแชร์โพสต์ในเฟสบุ้คให้กับเพื่อนๆที่น่าจะสนใจหัวข้อพวกนี้ด้วยครับ</p>
+</blockquote>
+<div class=fb-page data-href=https://www.facebook.com/notaboutcode/ data-tabs data-small-header=false data-adapt-container-width=true data-hide-cover=false data-show-facepile=true>
+<blockquote cite=https://www.facebook.com/notaboutcode/ class=fb-xfbml-parse-ignore>
+<a href=https://www.facebook.com/notaboutcode/>Not about code</a>
+</blockquote>
+</div>
+</div>
+<div id=fb-root></div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content>ijemmy</span>
+</p>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content>
+2025-01-25
+</span>
+</p>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/estimate/>estimate</a>
+<a href=/tags/project-management/>project-management</a>
+</div>
+<div class=fb-comments data-numposts=5></div>
+<nav class=post-nav>
+<a class=prev href=/post/42-being-lovable-boss-favorite/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">เป็นลูกรักของหัวหน้าอย่างไรให้สมศักดิ์ศรี (ฉบับโปรแกรมเมอร์)</span>
+<span class="prev-text nav-mobile"></span>
+</a>
+<a class=next href=/post/40-more-work-with-less-time/>
+<span class="next-text nav-default">ทำงานให้เร็วขึ้น ในเวลาที่น้อยลง (ในบริบทของโปรแกรมเมอร์)</span>
+<span class="next-text nav-mobile"></span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
+<a href=https://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+%!(EXTRA string=<a class=hexo-link href=https://gohugo.io>Hugo</a>)
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+-
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<span class=copyright-year>
+&copy;
+2017 -
+2025<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<script>(function(b,c,d){var a,e=b.getElementsByTagName(c)[0];if(b.getElementById(d))return;a=b.createElement(c),a.id=d,a.src='https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676',e.parentNode.insertBefore(a,e)})(document,'script','facebook-jssdk')</script>
+</body>
+</html>

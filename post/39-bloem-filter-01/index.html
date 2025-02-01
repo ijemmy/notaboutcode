@@ -1,0 +1,279 @@
+<!doctype html><html lang=th>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>จากหลักล้านสู่หลักหน่วย ด้วยความรู้ด้าน Data structure (ตอน 1) - Not About Code - Technical Leadership</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="ijemmy"><meta name=description content="ถ้าใครเคยสัมภาษณ์งานตำแหน่ง Software Engineer ในองค์กรเทคระดับโลก (เช่น Google, Amazon, Facebook, Apple, Netflix) จะรู้ว่าทุกบริษัทจะเช็คความรู้ด้าน Data structure หมด
+สาเหตุเพราะนี่ความรู้ที่สำคัญมากในการทำงานเสกลใหญ่ๆ ที่มีจำนวนข้อมูล หรือผุ้ใช้หลักล้านขึ้นไป
+สำคัญมากนี่คือแค่ไหน?
+ในบทความนี้ ผมจะยกตัวอย่างโจทย์ง่ายๆ ที่เกิดขึ้นในเว็บบราวเซอร์ที่เราใช้ทุกวัน และแสดงให้เห็นว่า โปรแกรมสามารถทำงานเร็วต่างกัน ชนิดราวฟ้ากับเหว (จากคำนวนล้านครั้งเหลือแค่ไม่ถึงสิบครั้ง) ถ้าคนเขียนรู้จักใช้ Data structure ที่เหมาะสม
+"><meta name=keywords content="Hugo,theme,even">
+<meta name=generator content="Hugo 0.89.4 with theme even">
+<link rel=canonical href=https://www.notaboutcode.com/post/39-bloem-filter-01/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<link rel=stylesheet href=/css/custom.css>
+<meta property="og:title" content="จากหลักล้านสู่หลักหน่วย ด้วยความรู้ด้าน Data structure (ตอน 1)">
+<meta property="og:description" content="
+ถ้าใครเคยสัมภาษณ์งานตำแหน่ง Software Engineer ในองค์กรเทคระดับโลก (เช่น Google, Amazon, Facebook, Apple, Netflix) จะรู้ว่าทุกบริษัทจะเช็คความรู้ด้าน Data structure หมด
+สาเหตุเพราะนี่ความรู้ที่สำคัญมากในการทำงานเสกลใหญ่ๆ ที่มีจำนวนข้อมูล หรือผุ้ใช้หลักล้านขึ้นไป
+สำคัญมากนี่คือแค่ไหน?
+ในบทความนี้ ผมจะยกตัวอย่างโจทย์ง่ายๆ ที่เกิดขึ้นในเว็บบราวเซอร์ที่เราใช้ทุกวัน และแสดงให้เห็นว่า โปรแกรมสามารถทำงานเร็วต่างกัน ชนิดราวฟ้ากับเหว (จากคำนวนล้านครั้งเหลือแค่ไม่ถึงสิบครั้ง) ถ้าคนเขียนรู้จักใช้ Data structure ที่เหมาะสม">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.notaboutcode.com/post/39-bloem-filter-01/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2022-06-29T15:05:28+01:00">
+<meta property="article:modified_time" content="2025-01-25T15:06:41+01:00">
+<meta itemprop=name content="จากหลักล้านสู่หลักหน่วย ด้วยความรู้ด้าน Data structure (ตอน 1)">
+<meta itemprop=description content="
+ถ้าใครเคยสัมภาษณ์งานตำแหน่ง Software Engineer ในองค์กรเทคระดับโลก (เช่น Google, Amazon, Facebook, Apple, Netflix) จะรู้ว่าทุกบริษัทจะเช็คความรู้ด้าน Data structure หมด
+สาเหตุเพราะนี่ความรู้ที่สำคัญมากในการทำงานเสกลใหญ่ๆ ที่มีจำนวนข้อมูล หรือผุ้ใช้หลักล้านขึ้นไป
+สำคัญมากนี่คือแค่ไหน?
+ในบทความนี้ ผมจะยกตัวอย่างโจทย์ง่ายๆ ที่เกิดขึ้นในเว็บบราวเซอร์ที่เราใช้ทุกวัน และแสดงให้เห็นว่า โปรแกรมสามารถทำงานเร็วต่างกัน ชนิดราวฟ้ากับเหว (จากคำนวนล้านครั้งเหลือแค่ไม่ถึงสิบครั้ง) ถ้าคนเขียนรู้จักใช้ Data structure ที่เหมาะสม"><meta itemprop=datePublished content="2022-06-29T15:05:28+01:00">
+<meta itemprop=dateModified content="2025-01-25T15:06:41+01:00">
+<meta itemprop=wordCount content="283">
+<meta itemprop=keywords content="career,mindset,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="จากหลักล้านสู่หลักหน่วย ด้วยความรู้ด้าน Data structure (ตอน 1)">
+<meta name=twitter:description content="
+ถ้าใครเคยสัมภาษณ์งานตำแหน่ง Software Engineer ในองค์กรเทคระดับโลก (เช่น Google, Amazon, Facebook, Apple, Netflix) จะรู้ว่าทุกบริษัทจะเช็คความรู้ด้าน Data structure หมด
+สาเหตุเพราะนี่ความรู้ที่สำคัญมากในการทำงานเสกลใหญ่ๆ ที่มีจำนวนข้อมูล หรือผุ้ใช้หลักล้านขึ้นไป
+สำคัญมากนี่คือแค่ไหน?
+ในบทความนี้ ผมจะยกตัวอย่างโจทย์ง่ายๆ ที่เกิดขึ้นในเว็บบราวเซอร์ที่เราใช้ทุกวัน และแสดงให้เห็นว่า โปรแกรมสามารถทำงานเร็วต่างกัน ชนิดราวฟ้ากับเหว (จากคำนวนล้านครั้งเหลือแค่ไม่ถึงสิบครั้ง) ถ้าคนเขียนรู้จักใช้ Data structure ที่เหมาะสม"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Not About Code</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+<a href=https://webring.wonderful.software#notaboutcode.com title=วงแหวนเว็บ>
+<img alt=วงแหวนเว็บ width=32 height=32 src=https://webring.wonderful.software/webring.black.svg>
+</a>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>จากหลักล้านสู่หลักหน่วย ด้วยความรู้ด้าน Data structure (ตอน 1)</h1>
+<div class=post-meta>
+<span class=post-time> 2022-06-29 </span>
+<div class=post-category>
+<a href=/categories/career/> career </a>
+</div>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title></h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href=#โจทย>โจทย์</a></li>
+<li><a href=#วธท-1-เกบลานคาแบบโงๆ-กตองจายคาโงดวยการตรวจลานครง>วิธีที่ 1: เก็บล้านค่าแบบโง่ๆ ก็ต้องจ่ายค่าโง่ด้วยการตรวจล้านครั้ง</a></li>
+<li><a href=#วธท-2จากหลกลานสหลกสบ-โดยเรยงขอมลเปน-sorted-array>วิธีที่ 2:จากหลักล้านสู่หลักสิบ โดยเรียงข้อมูลเป็น Sorted array</a></li>
+</ul>
+</li>
+<li><a href=#big-o-notation>Big O Notation</a></li>
+<li><a href=#แตเดยวกอน-มนยงเรวและเลกไดกวานน>แต่เดี๋ยวก่อน&mldr; มันยังเร็วและเล็กได้กว่านั้น</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p><img src=/img/covers/surprised-kid-01.png alt="Photo by Xavi Cabrera on Unsplash"></p>
+<p>ถ้าใครเคยสัมภาษณ์งานตำแหน่ง Software Engineer ในองค์กรเทคระดับโลก (เช่น Google, Amazon, Facebook, Apple, Netflix) จะรู้ว่าทุกบริษัทจะเช็คความรู้ด้าน Data structure หมด</p>
+<p>สาเหตุเพราะนี่ความรู้ที่สำคัญมากในการทำงานเสกลใหญ่ๆ ที่มีจำนวนข้อมูล หรือผุ้ใช้หลักล้านขึ้นไป</p>
+<p>สำคัญมากนี่คือแค่ไหน?</p>
+<p>ในบทความนี้ ผมจะยกตัวอย่างโจทย์ง่ายๆ ที่เกิดขึ้นในเว็บบราวเซอร์ที่เราใช้ทุกวัน และแสดงให้เห็นว่า โปรแกรมสามารถทำงานเร็วต่างกัน ชนิดราวฟ้ากับเหว (จากคำนวนล้านครั้งเหลือแค่ไม่ถึงสิบครั้ง) ถ้าคนเขียนรู้จักใช้ Data structure ที่เหมาะสม</p>
+<h3 id=โจทย>โจทย์</h3>
+<p>สมมติว่าคุณเป็นนักพัฒนาเว็บบราวเซอร์ และได้รับมอบหมายให้เขียนฟีเจอร์ตรวจเช็คว่า domain ที่ผู้ใช้ใส่เข้ามา อยู่ในรายชื่อของเว็บไซต์ที่อันตรายหรือไม่ (เช่นมี Malware หรือ เป็น Scam)</p>
+<p>คุณมีรายชื่อของ domain ที่เป็นอันตรายอยู่แล้ว โดยรายชื่อมีอยู่ 1 ล้านโดเมน</p>
+<p>คุณจะเขียนฟีเจอร์นี้ยังไงครับ?</p>
+<h3 id=วธท-1-เกบลานคาแบบโงๆ-กตองจายคาโงดวยการตรวจลานครง>วิธีที่ 1: เก็บล้านค่าแบบโง่ๆ ก็ต้องจ่ายค่าโง่ด้วยการตรวจล้านครั้ง</h3>
+<p>ถ้าเราไม่คิดมาก เราสามารถเอาเว็บไซต์พวกนี้ใส่เข้าไปใน Array ทุกครั้งที่มีการพิมพ์ URL คุณสามารถหยิบ domain ใน URL มาวน Loop เช็คทุกค่า</p>
+<p>แต่ปัญหาคือ รายชื่อเว็บไซต์พวกนี้นั้นมีเยอะมาก มีเป็นล้านเว็บไซต์ การจะวน Loop เทียบ URLเป็นล้านครั้ง ทำให้ทุกครั้งที่กด Enter ใน URL เว็บบราวเซอร์จะกระตุกนิดนึง เพราะต้องรอวนลูบให้เสร็จ โดยเฉพาะในกรณีที่เว็บไซต์นั้นไม่อยู่ในรายชื่อ</p>
+<h3 id=วธท-2จากหลกลานสหลกสบ-โดยเรยงขอมลเปน-sorted-array>วิธีที่ 2:จากหลักล้านสู่หลักสิบ โดยเรียงข้อมูลเป็น Sorted array</h3>
+<p>ทางเลือกที่ดีกว่าคือใช้ Data structure อันอื่นในการเก็บค่า เช่น Sorted array, Hashtable, Tries ซึ่งพวกนี้จะสามารถทำการค้นหาได้เร็วกว่า Array</p>
+<p>ถามว่าเร็วกว่าเท่าไร เปรียบเทียบคร่าวๆว่าจากเดิมจะต้องเทียบล้านครั้ง เราสามารถเทียบแค่ประมาณ 20 ครั้งเท่านั้น!</p>
+<p>ทำไมถึงเร็วขึ้นขนาดนั้น?</p>
+<p>ผมขอยกตัวอย่างกรณี Sorted Array</p>
+<p>ใน Sorted Array, ข้อมูล domain ทั้งหมดมีการเรียงไว้ก่อนแล้วแล้ว เช่น</p>
+<p>a.com
+aa.com
+abc.com
+abc.org
+abcd.com
+b.com
+..
+ไปเรื่อยจนจบที่ zzzz.com ทั้งหมด 1,000,000 ตัว</p>
+<p>สมมติว่าเราต้องการเช็คว่า cat.com อยู่ในรายการนี้หรือไม่</p>
+<p>แทนที่จะไล่ตั้งแต่ต้น เราสามารถเริ่มเทียบจากตัวตรงกลาง (ตำแหน่งที่ 500,001) สมมติให้ ค่านี้คือ middle.com</p>
+<p>เราจะรู้ได้ทันทีว่าค่า cat.com ต้องมาก่อนต้องอยู่ใน 500,000 ตัวแรกแน่นอน</p>
+<p>เพราะ cat.com มาก่อน middle.com</p>
+<p>ดังนั้น domain ที่อยู่หลังตัวที่ 500,001 จะต้องไม่มี cat.com แน่นอน</p>
+<p>จากค่าที่ต้องค้นตอนแรกทั้งหมด 1,000,000 ตัว ก็จะเหลือแค่ 500,000 ตัว จากการเทียบแค่ครั้งเดียว</p>
+<p>หลังจากนั้น เราสามารถเช็ค cat.com เทียบกับค่าตำแหน่งที่ 250,001 และตัดรายการ domain ที่ต้องค้นหาออกทีละครึ่งไปเรื่อยๆ</p>
+<p>ถ้าทำต่อไปเรื่อยๆ จำนวนข้อมูลที่ต้องเช็คจะลดลงไปแบบนี้</p>
+<p>1,000,000 -> 500,000 -> 250,000 -> 125,000 ->..</p>
+<p>ทำซ้ำแบบนี้ไป 20 ครั้ง เราจะเหลือตัวที่ต้องเช็คอยู่แค่เพียง 1 ตัว ทำให้เรารู้ได้ทีว่าเว็บไซต์ cat.com อยู่ในลิสต์ของเว็บไซต์อันตรายรึเปล่า</p>
+<p>มหัศจรรย์ไหมครับ? จากล้านเหลือแค่ 20</p>
+<p>เทคนิคนี้เรียกว่า Binary search ครับ</p>
+<h2 id=big-o-notation>Big O Notation</h2>
+<p>ศัพท์ทาง Computer science เราจะแสดงค่าความเร็วด้วยสิ่งที่เรียกว่า Big O Notation</p>
+<p>การเก็บค่าแบบโง่ๆที่ต้องเทียบล้านครั้ง ถูกเรียกว่า O(n) (บิ๊ก-โอ-เอ็น)</p>
+<p>ความเร็ว Binary search เมื่อครู่ O(lg(n)) (บิ๊ก-โอ-ล็อค-เอ็น)</p>
+<p>ถ้าเรามีค่า 1,000,000 ค่า เราจะต้องเปรียบเทียบ 1,000,000 ครั้งใน O(n)</p>
+<p>แต่ถ้าเราใช้วิธีที่มีความเร็วแบบ O(lg(n)) เราจะเปรียบเทียบแค่ ประมาณ 20 ครั้ง (lg(1,000,000) ~= 20)</p>
+<p>(lg = Log ฐาน 2)</p>
+<h2 id=แตเดยวกอน-มนยงเรวและเลกไดกวานน>แต่เดี๋ยวก่อน&mldr; มันยังเร็วและเล็กได้กว่านั้น</h2>
+<p>ถึงจุดนี้ เราคงเห็นแล้วแค่เปลี่ยนวิธีเก็บข้อมูลแค่นิดเดียว จะทำให้โปรแกรมของเราลดการทำงานไปได้มหาศาล</p>
+<p>ในตอนหน้า เราจะมาคุยกันเกี่ยวกับเรื่อง Data structure อีกตัวหนึ่ง ซึ่งสามารถแก้ปัญหานี้ได้ด้วยความเร็ว O(1) ด้วย Hash table</p>
+<p>O(1) หมายถึงเวลาการทำงานเป็นค่าคงที่ ไม่ว่าจะมีข้อมูลเยอะแค่ไหน ก็ใช้เวลาเท่ากัน (ลองนึกภาพข้อมูลระดับพันล้าน หมื่นล้าน ที่บริษัทใหญ่ๆต้องใช้กัน)</p>
+<p>หลังจากนั้นเราจะหาวิธีลดจำนวนการเก็บข้อมูล แทนที่จะต้องเก็บข้อมูลล้านค่า ให้เหลือแค่เพียงไม่กี่ไบต์ ด้วยการเปลี่ยนไปใช้ Data structure ที่เรียกว่า Bloom filter แทน</p>
+<br>
+---
+<blockquote>
+<p>ติดตามบทความสำหรับโปรแกรมเมอร์ทั้งด้านได้ที่ Facebook page <a href=http://facebook.com/notaboutcode>Not about code</a> หรือ Twitter <a href=https://twitter.com/notaboutcode/>@notaboutcode</a> บทความของเพจจะเน้นเนื้อหาที่นำไปใช้ได้กับชีวิตจริง แต่ไม่ยึดติดกับเทคโนโลยีหรือภาษา เช่น System Design, Continuous Delivery, Testing, Career, etc.
+<br>
+<br>
+สำหรับท่านที่อยากสนับสนุนผู้เขียน รบกวนช่วยแชร์โพสต์ในเฟสบุ้คให้กับเพื่อนๆที่น่าจะสนใจหัวข้อพวกนี้ด้วยครับ</p>
+</blockquote>
+<div class=fb-page data-href=https://www.facebook.com/notaboutcode/ data-tabs data-small-header=false data-adapt-container-width=true data-hide-cover=false data-show-facepile=true>
+<blockquote cite=https://www.facebook.com/notaboutcode/ class=fb-xfbml-parse-ignore>
+<a href=https://www.facebook.com/notaboutcode/>Not about code</a>
+</blockquote>
+</div>
+</div>
+<div id=fb-root></div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content>ijemmy</span>
+</p>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content>
+2025-01-25
+</span>
+</p>
+<p class=copyright-item>
+<span class=item-title></span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/career/>career</a>
+<a href=/tags/mindset/>mindset</a>
+</div>
+<div class=fb-comments data-numposts=5></div>
+<nav class=post-nav>
+<a class=prev href=/post/40-more-work-with-less-time/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">ทำงานให้เร็วขึ้น ในเวลาที่น้อยลง (ในบริบทของโปรแกรมเมอร์)</span>
+<span class="prev-text nav-mobile"></span>
+</a>
+<a class=next href=/post/38-promote-to-tech-lead/>
+<span class="next-text nav-default">เมื่อต้องขยับไปเป็นเทคลีด (From an engineer to a technical lead)</span>
+<span class="next-text nav-mobile"></span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=https://www.facebook.com/notaboutcode/ class="iconfont icon-facebook" title=facebook></a>
+<a href=https://www.notaboutcode.com/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+%!(EXTRA string=<a class=hexo-link href=https://gohugo.io>Hugo</a>)
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+-
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<span class=copyright-year>
+&copy;
+2017 -
+2025<span class=heart><i class="iconfont icon-heart"></i></span><span>ijemmy</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-108239205-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<script>(function(b,c,d){var a,e=b.getElementsByTagName(c)[0];if(b.getElementById(d))return;a=b.createElement(c),a.id=d,a.src='https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=255719911200676',e.parentNode.insertBefore(a,e)})(document,'script','facebook-jssdk')</script>
+</body>
+</html>
